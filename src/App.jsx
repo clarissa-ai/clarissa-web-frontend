@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core";
 import './App.css';
 
@@ -15,7 +15,7 @@ const App = () => {
       <ThemeProvider>
         <Router>
           <Switch>
-            <Route exact path="/" render={(props) => { <p>This is the landing page!</p> }}></Route>
+            <Route exact path="/" render={(props) => <p>This is the landing page!</p> }></Route>
           </Switch>
         </Router>
       </ThemeProvider>
