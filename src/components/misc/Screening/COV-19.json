@@ -1,0 +1,199 @@
+{
+    "title": "COVID-19 Screening App",
+    "description": "This tool is here to help you understand what to do next about COVID-19.",
+    "root": "q1",
+    "questions": [
+        {
+            "id": "q1",
+            "type": "one",
+            "title": "Is this an emergency?",
+            "description": "Stop and call 911 if you have:",
+            "options": [
+                {
+                    "title": "Severe, constant chest pain or pressure",
+                    "next": "q2"
+                },
+                {
+                    "title": "Extreme difficulty breathing",
+                    "next": "q2"
+                },
+                {
+                    "title": "Lightheadedness",
+                    "next": "q2"
+                },
+                {
+                    "title": "Disorientation or unresponsiveness",
+                    "next": "q2"
+                }
+            ]
+        },
+        {
+            "id": "q2",
+            "type": "one",
+            "title": "How old are you?",
+            "description": "",
+            "options": [
+                {
+                    "title": "Under 18",
+                    "next": "q3"
+                },
+                {
+                    "title": "Between 18-64",
+                    "next": "q3"
+                },
+                {
+                    "title": "Above 64",
+                    "next": "q3"
+                }
+            ]
+        },
+        {
+            "id": "q3",
+            "type": "all",
+            "title": "Have you recently experienced any of the following symptoms?",
+            "description": "Select all that you are experiencing",
+            "options": [
+                {
+                    "title": "Fever or chills",
+                    "next": "q4"
+                },
+                {
+                    "title": "Mild or moderate difficulty breathing",
+                    "next": "q4"
+                },
+                {
+                    "title": "Dry cough",
+                    "next": "q4"
+                },
+                {
+                    "title": "Sustained loss of smell",
+                    "next": "q4"
+                },
+                {
+                    "title": "Sore throat",
+                    "next": "q4"
+                },
+                {
+                    "title": "Vomitting",
+                    "next": "q4"
+                },
+                {
+                    "title": "Diarrhea",
+                    "next": "q4"
+                },
+                {
+                    "title": "Body aches",
+                    "next": "q4"
+                }
+            ]
+        },
+        {
+            "id": "q4",
+            "type": "one",
+            "title": "In the past 14 days have you:",
+            "description": "Select all that apply",
+            "options": [
+                {
+                    "title": "Traveled internationally",
+                    "next": "q5"
+                },
+                {
+                    "title": "Traveled out of state",
+                    "next": "q5"
+                },
+                {
+                    "title": "Been close to someone who has COVID-19",
+                    "next": "q5"
+                }
+            ]
+        },
+        {
+            "id": "q5",
+            "type": "all",
+            "title": "Do any of the following apply to you?",
+            "description": "",
+            "options": [
+                {
+                    "title": "Moderate to severe asthma or chronic respiratory illness",
+                    "next": "q6"
+                },
+                {
+                    "title": "Cancer treatment or medicines causing immune suppression",
+                    "next": "q6"
+                },
+                {
+                    "title": "Inherited immune system deficiencies or HIV",
+                    "next": "q6"
+                },
+                {
+                    "title": "Serious heart conditions (Ex. Heart failure or attack)",
+                    "next": "q6"
+                },
+                {
+                    "title": "Diabetes with complications",
+                    "next": "q6"
+                },
+                {
+                    "title": "Kidney failure that needs dialysis",
+                    "next": "q6"
+                },
+                {
+                    "title": "Cirrhosis of the liver",
+                    "next": "q6"
+                },
+                {
+                    "title": "Extreme obesity",
+                    "next": "q6"
+                },
+                {
+                    "title": "Pregnancy",
+                    "next": "q6"
+                }
+            ]
+        },
+        {
+            "id": "q6",
+            "type": "all",
+            "title": "In the last 14 days, have you been in an area where COVID-19 is widespread?",
+            "description": "",
+            "options": [
+                {
+                    "title": "I live in an area where COVID-19 is widespread",
+                    "next": "q7"
+                },
+                {
+                    "title": "I have visited an area where COVID-19 is widspread",
+                    "next": "q7"
+                },
+                {
+                    "title": "I don't know",
+                    "next": "q7"
+                }
+            ]
+        },
+        {
+            "id": "q7",
+            "type": "one",
+            "title": "Do you work in a medical facility?",
+            "description": "",
+            "options": [
+                {
+                    "title": "I have worked in a hospital or other facility in the past 14 days",
+                    "next": "q8"
+                },
+                {
+                    "title": "I plan to work in a hospital or other facility in the next 14 days",
+                    "next": "q8"
+                }
+            ]
+        },
+        {
+            "id": "q8",
+            "type": "dropdown",
+            "title": "Which state are you in?",
+            "description": "",
+            "options": [
+            ]
+        }
+    ]
+}
