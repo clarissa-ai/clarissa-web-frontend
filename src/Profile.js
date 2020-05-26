@@ -1,18 +1,17 @@
 class Profile {
-
     /**
      * Profile representiation.
      * @constructor
      */
     constructor() {
-        //Set authentiaction to false.
+        // Set authentiaction to false.
         this.authenticated = false;
-        //We check here to see if there does exist tokens stored in cookies. If so, we can automatically retrieve user data without having them log in again.
+        // We check here to see if there does exist tokens stored in cookies. If so, we can automatically retrieve user data without having them log in again.
         // TOOD: Implement the check stated above ^.
-        //Function binds.
-        this.Login = this.Login.bind(this);
-        this.Register = this.Register.bind(this);
-        this.Retrieve = this.Retrieve.bind(this);
+        // Function binds.
+        this.login = this.login.bind(this);
+        this.register = this.register.bind(this);
+        this.retrieve = this.retrieve.bind(this);
     }
 
     /**
@@ -21,29 +20,29 @@ class Profile {
      * @param {String} password The password that the user logs in with.
      * @param {Function} callback Function should have parameters: String message. If successful, no message should be passed in on callback.
      */
-    Login = (email, password, callback) => {
-        fetch("/api/login", {
-            method: "POST",
+    login(email, password, callback) {
+        fetch('/api/login', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 email: email,
-                password: password
-            })
+                password: password,
+            }),
         }).then((response) => {
-            if(!response.ok) {
-                callback("Internal Error. Please contact support.");
+            if (!response.ok) {
+                callback('Internal Error. Please contact support.');
                 return;
             }
             response.json().then((data) => {
-                let { status, message } = data;
+                const {status, message} = data;
                 if (status) {
-                    let { access_token, refresh_token } = data;
-                    this.access_token = access_token;
-                    this.refresh_token = refresh_token;
+                    const {access_token: accessToken, refresh_token: refreshToken} = data;
+                    this.accessToken = accessToken;
+                    this.refreshToken = refreshToken;
                     this.authenticated = true;
-                    this.Retrieve(callback);
+                    this.retrieve(callback);
                 } else {
                     callback(message);
                 }
@@ -58,31 +57,31 @@ class Profile {
      * @param {String} password The password that the user registers with.
      * @param {Function} callback function should have parameters: String message. If successful, no message should be passed in on callback.
      */
-    Register = (firstName, age, email, password, callback) => {
-        fetch("/api/registration", {
-            method: "POST",
+    register(firstName, age, email, password, callback) {
+        fetch('/api/registration', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 first_name: firstName,
                 age: age,
                 email: email,
-                password: password
-            })
+                password: password,
+            }),
         }).then((response) => {
-            if(!response.ok) {
-                callback("Internal Error. Please contact support.");
+            if (!response.ok) {
+                callback('Internal Error. Please contact support.');
                 return;
             }
             response.json().then((data) => {
-                let { status, message } = data;
+                const {status, message} = data;
                 if (status) {
-                    let { access_token, refresh_token } = data;
-                    this.access_token = access_token;
-                    this.refresh_token = refresh_token;
+                    const {access_token: accessToken, refresh_token: refreshToken} = data;
+                    this.accessToken = accessToken;
+                    this.refreshToken = refreshToken;
                     this.authenticated = true;
-                    this.Retrieve(callback);
+                    this.retrieve(callback);
                 } else {
                     callback(message);
                 }
@@ -93,21 +92,21 @@ class Profile {
      * This method retrieves user data using the access token.
      * @param {Function} callback function should have parameters: String message. If successful, no message should be passed in on callback.
      */
-    Retrieve = (callback) => {
-        console.log(this.access_token + " ");
-        fetch("/api/dashboard", {
-            method: "GET",
+    retrieve(callback) {
+        console.log(this.accessToken + ' ');
+        fetch('/api/dashboard', {
+            method: 'GET',
             headers: {
-                "Authorization": "Bearer " + this.access_token
-            }
+                'Authorization': 'Bearer ' + this.accessToken,
+            },
         }).then((response) => {
             if (!response.ok) {
-                callback("Interal Error. Please contact support.");
+                callback('Interal Error. Please contact support.');
                 return;
             }
             response.json().then((data) => {
-                let { current_user, reports, symptoms } = data;
-                this.userInfo = current_user;
+                const {current_user: currentUser, reports, symptoms} = data;
+                this.userInfo = currentUser;
                 this.reports = reports;
                 this.sypmtoms = symptoms;
                 callback();
