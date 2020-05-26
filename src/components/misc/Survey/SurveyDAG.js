@@ -25,11 +25,7 @@ class SurveyDAG {
         this.next = this.next.bind(this);
         this.prev = this.prev.bind(this);
     }
-
-    getRoot = () => {
-        return this.root;
-    }
-
+    
     start = () => {
         this.currentQuestion = this.root;
     }
@@ -78,7 +74,7 @@ class EndingNode {
      * @constructor
      */
     constructor() {
-        
+
     }
 }
 
