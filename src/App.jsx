@@ -6,6 +6,8 @@ import './App.css';
 import Profile from 'Profile.js';
 // import SurveyDAG from 'components/misc/Survey/SurveyDAG';
 
+import Login from 'components/authentication/login/Login';
+
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
 // const survey = new SurveyDAG();
@@ -20,6 +22,7 @@ const App = () => {
                 <Router>
                     <Switch>
                         <Route exact path="/" render={(props) => <p>This is the landing page!</p> }></Route>
+                        <Route exact path="/login" render={(props) => <Login/>} />
                     </Switch>
                 </Router>
             </ThemeProvider>
@@ -27,3 +30,5 @@ const App = () => {
     );
 };
 export default App;
+export {ProfileContext};
+
