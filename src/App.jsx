@@ -11,23 +11,28 @@ import Login from 'components/authentication/login/Login';
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
 // const survey = new SurveyDAG();
-
+const contrastText = '#2C3C56';
 let theme = createMuiTheme({
     palette: {
         primary: {
             main: '#306DDF',
+            contrastText: contrastText,
         },
         secondary: {
             main: '#FEAD18',
+            contrastText: contrastText,
         },
         error: {
             main: '#F46D66',
+            contrastText: contrastText,
         },
         info: {
             main: '#7064D0',
+            contrastText: contrastText,
         },
         success: {
             main: '#47C594',
+            contrastText: contrastText,
         },
     },
     typography: {
