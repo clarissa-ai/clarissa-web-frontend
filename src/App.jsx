@@ -1,6 +1,6 @@
 import React, {createContext} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {ThemeProvider, createMuiTheme, CssBaseline, responsiveFontSizes, Typography} from '@material-ui/core';
+import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
 import './App.css';
 
 import Profile from 'Profile.js';
