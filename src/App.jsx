@@ -34,6 +34,11 @@ let theme = createMuiTheme({
             main: '#47C594',
             contrastText: contrastText,
         },
+        background: '#F5F8FF',
+        text: {
+            primary: '#FEAD18',
+            secondary: '#47C594',
+        },
     },
     typography: {
         fontFamily: 'Poppins',
