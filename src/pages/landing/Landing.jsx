@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, AppBar, Toolbar, Link, Button, Typography, useTheme, Paper, GridList, GridListTile, Card, CardHeader, CardContent} from '@material-ui/core';
+import {Grid, AppBar, Toolbar, Link, Button, Typography, useTheme, Paper, GridList, GridListTile, Card, CardHeader, CardContent, Checkbox} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import {Link as RouterLink} from 'react-router-dom';
@@ -10,6 +10,7 @@ import {ReactComponent as Logo} from './Logo.svg';
 import {ReactComponent as Illustration1} from './Illustration1.svg';
 import {ReactComponent as Illustration2} from './Illustration2.svg';
 import {ReactComponent as Illustration3} from './Illustration3.svg';
+import {ReactComponent as Illustration4} from './Illustration4.svg';
 import {ReactComponent as Laptop} from './Laptop.svg';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,8 +29,6 @@ const useStyles = makeStyles((theme) => ({
     },
     appbarButtons: {
         margin: theme.spacing(2),
-        // paddingTop: theme.spacing(1),
-        // paddingBottom: theme.spacing(1),
         paddingLeft: theme.spacing(4),
         paddingRight: theme.spacing(4),
         borderRadius: 35,
@@ -47,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
+    },
+    buttonLabel: {
+        justifyContent: 'start',
     },
 }));
 
@@ -226,7 +228,12 @@ const Landing = () => {
                         <Laptop />
                     </Grid>
                 </Grid>
+                <Button disableRipple variant='outlined' style={{width: '300px'}} classes={{label: classes.buttonLabel}}>
+                    <Checkbox disableRipple></Checkbox>
+                    <Typography>This is short</Typography>
+                </Button>
             </Grid>
+            <Illustration4 />
         </div>
     );
 };
