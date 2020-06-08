@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Grid, AppBar, Toolbar, Link, Button, Typography, useTheme, Paper, GridList, GridListTile, Card, CardHeader, CardContent, Checkbox} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
@@ -10,12 +10,20 @@ import {ReactComponent as Logo} from './Logo.svg';
 import {ReactComponent as Illustration1} from './Illustration1.svg';
 import {ReactComponent as Illustration2} from './Illustration2.svg';
 import {ReactComponent as Illustration3} from './Illustration3.svg';
-import {ReactComponent as Illustration4} from './Illustration4.svg';
 import {ReactComponent as Laptop} from './Laptop.svg';
+import {ReactComponent as Magnify} from './Magnify.svg';
+import {ReactComponent as Monitor} from './Monitor.svg';
+import {ReactComponent as Book} from './Book.svg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: theme.palette.background,
+    },
+    surveyBar: {
+        backgroundColor: 'red',
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: 'white',
     },
     appbar: {
         paddingTop: theme.spacing(2),
@@ -47,8 +55,12 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
     },
-    buttonLabel: {
-        justifyContent: 'start',
+    featuresRow: {
+        marginTop: theme.spacing(6),
+        marginBottom: theme.spacing(6),
+    },
+    featuresTitle: {
+        marginBottom: theme.spacing(4),
     },
 }));
 
@@ -114,17 +126,39 @@ LandingCards.propTypes = {
     heading: PropTypes.string,
 };
 
+const FeatureBadge = (props) => {
+    return (
+        <svg width="50" height="50" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g>
+                <circle opacity="0.15" cx="37.5" cy="37.5" r="37.5" fill={props.color}/>
+                <text x="50%" y="72%" fill={props.color} textAnchor="middle" fontFamily="Poppins" fontSize="3em">{props.number}</text>
+            </g>
+        </svg>
+    );
+};
+
+FeatureBadge.propTypes = {
+    color: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+};
+
 const Landing = () => {
+    const [mainSurvey, setMainSurvey] = useState(true);
     const theme = useTheme();
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <AppBar className={classes.appbar} position='absolute' elevation={0} color='transparent'>
+            {mainSurvey && <div className={classes.surveyBar}>
+                <Link component={RouterLink} to='/covid19' underline='none'>
+                    <Typography className={classes.surveyBar}>Covid-19 Screening Tool now available for free. Click here to get started.</Typography>
+                </Link>
+            </div>}
+            <AppBar className={classes.appbar} position='relative' elevation={0} color='transparent'>
                 <Toolbar>
-                    <Grid container={true} direction='row' justify='center'>
+                    <Grid container={true} direction='row' alignItems='center' justify='center'>
                         <Grid item={true} xs={10}>
                             <Grid container={true} direction='row' justify='space-between'>
-                                <Grid item={true}>
+                                <Grid item={true} xs={1}>
                                     <Logo/>
                                 </Grid>
                                 <Grid item={true}>
@@ -140,7 +174,7 @@ const Landing = () => {
                     </Grid>
                 </Toolbar>
             </AppBar>
-            <div className={classes.toolbar}/>
+            {/* <div className={classes.toolbar}/> */}
             <Grid container={true} direction='column' alignItems='center' justify='space-between'>
                 <Grid className={classes.landingRows} item={true} xs={10}>
                     <Grid container={true} direction='row' alignItems='center' justify='center' spacing={10}>
@@ -224,16 +258,79 @@ const Landing = () => {
                             </Grid>
                         </Grid>
                     </div>
-                    <Grid container={true} direction='column'>
-                        <Laptop />
+                    <Grid container={true} direction='column' alignItems='center'>
+                        <Grid className={classes.featuresRow} container={true} direction='row' alignItems='center' justify='space-evenly'>
+                            <Grid item={true} xs={4}>
+                                <Grid container={true} direction='row' justify='space-evenly'>
+                                    <Grid item>
+                                        <FeatureBadge color={theme.palette.info.main} number='01' />
+                                    </Grid>
+                                    <Grid item xs={10}>
+                                        <Typography className={classes.featuresTitle} variant='h4'>Symptom Tracking</Typography>
+                                        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item={true}>
+                                <Laptop />
+                            </Grid>
+                        </Grid>
+                        <Grid className={classes.featuresRow} container={true} direction='row' alignItems='center' justify='space-evenly'>
+                            <Grid item={true}>
+                                <Magnify />
+                            </Grid>
+                            <Grid item={true} xs={4}>
+                                <Grid container={true} direction='row' justify='space-evenly'>
+                                    <Grid item>
+                                        <FeatureBadge color={theme.palette.secondary.main} number='02' />
+                                    </Grid>
+                                    <Grid item xs={10}>
+                                        <Typography className={classes.featuresTitle} variant='h4'>{'Analysis & Diagnosis'}</Typography>
+                                        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid className={classes.featuresRow} container={true} direction='row' alignItems='center' justify='space-evenly'>
+                            <Grid item={true} xs={4}>
+                                <Grid container={true} direction='row' justify='space-evenly'>
+                                    <Grid item>
+                                        <FeatureBadge color={theme.palette.error.main} number='03' />
+                                    </Grid>
+                                    <Grid item xs={10}>
+                                        <Typography className={classes.featuresTitle} variant='h4'>Connect You to a Doctor</Typography>
+                                        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item={true}>
+                                <Monitor />
+                            </Grid>
+                        </Grid>
+                        <Grid className={classes.featuresRow} container={true} direction='row' alignItems='center' justify='space-evenly'>
+                            <Grid item={true}>
+                                <Book />
+                            </Grid>
+                            <Grid item={true} xs={4}>
+                                <Grid container={true} direction='row' justify='space-evenly'>
+                                    <Grid item>
+                                        <FeatureBadge color={theme.palette.primary.main} number='04' />
+                                    </Grid>
+                                    <Grid item xs={10}>
+                                        <Typography className={classes.featuresTitle} variant='h4'>Keep Track of Your History</Typography>
+                                        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <Button disableRipple variant='outlined' style={{width: '300px'}} classes={{label: classes.buttonLabel}}>
-                    <Checkbox disableRipple></Checkbox>
-                    <Typography>This is short</Typography>
-                </Button>
+                <Grid className={classes.landingRows} item={true} xs={10}>
+                    <Grid container={true} direction='row' alignItems='center' justify='space-evenly'>
+                        <Typography>{'2020 © All rights reserved by clarissa.ai'}</Typography>
+                    </Grid>
+                </Grid>
             </Grid>
-            <Illustration4 />
         </div>
     );
 };
