@@ -1,3 +1,4 @@
+/* poppins-regular - latin */
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
@@ -10,7 +11,6 @@
        url('fonts/poppins-v9-latin/poppins-v9-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
        url('fonts/poppins-v9-latin/poppins-v9-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
 }
-
 .App {
   text-align: center;
 }
