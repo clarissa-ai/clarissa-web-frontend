@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import {Grid, AppBar, Toolbar, Link, Button, Typography, useTheme, Paper, GridList, GridListTile, Card, CardHeader, CardContent, Checkbox} from '@material-ui/core';
+import {Grid, AppBar, Toolbar, Link, Button, Typography, useTheme, Paper, GridList, GridListTile, Card, CardHeader, CardContent, Checkbox, Box} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core';
-import {ArrowRightAlt} from '@material-ui/icons';
+import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import {Link as RouterLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -52,8 +52,6 @@ const useStyles = makeStyles((theme) => ({
     },
     landingCards: {
         backgroundColor: 'white',
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
     },
     featuresRow: {
         marginTop: theme.spacing(6),
@@ -153,7 +151,7 @@ const Landing = () => {
                     <Typography className={classes.surveyBar}>Covid-19 Screening Tool now available for free. Click here to get started.</Typography>
                 </Link>
             </div>}
-            <AppBar className={classes.appbar} position='relative' elevation={0} color='transparent'>
+            <AppBar className={classes.appbar} position='static' elevation={0} color='transparent'>
                 <Toolbar>
                     <Grid container={true} direction='row' alignItems='center' justify='center'>
                         <Grid item={true} xs={10}>
@@ -175,26 +173,26 @@ const Landing = () => {
                 </Toolbar>
             </AppBar>
             {/* <div className={classes.toolbar}/> */}
-            <Grid container={true} direction='column' alignItems='center' justify='space-between'>
+            <Grid container={true} direction='column' alignContent='center' justify='space-between'>
                 <Grid className={classes.landingRows} item={true} xs={10}>
-                    <Grid container={true} direction='row' alignItems='center' justify='center' spacing={10}>
-                        <Grid item={true} xs={5}>
+                    <Grid container={true} direction='row' alignItems='center' justify='space-between'>
+                        <Grid item={true} xs={6}>
                             <Typography color='textPrimary' variant='h4'>Clarissa</Typography>
                             <Typography color='textSecondary' variant='h3'>Your Personal Intelligent Medical Companion</Typography>
                             <Typography variant='h6' style={{marginTop: theme.spacing(4), marginBottom: theme.spacing(2)}}>Personalized health tracking powered by AI, with no hidden fees.</Typography>
                             <LandingButton color={theme.palette.success.main}><Typography variant='h6'>Ask Clarissa</Typography></LandingButton>
                         </Grid>
-                        <Grid item={true}>
-                            <Illustration1 />
+                        <Grid item={true} xs={5}>
+                            <Illustration1 style={{maxWidth: '100%', maxHeight: '100%'}} />
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid className={classes.landingRows} item={true} xs={10}>
-                    <Grid container={true} direction='row' alignItems='center' justify='center' spacing={10}>
-                        <Grid item={true}>
-                            <Illustration2 />
-                        </Grid>
+                    <Grid container={true} direction='row' alignItems='center' justify='space-between'>
                         <Grid item={true} xs={5}>
+                            <Illustration2 style={{maxWidth: '100%', maxHeight: '100%'}} />
+                        </Grid>
+                        <Grid item={true} xs={6}>
                             <Typography color='primary' variant='h5'>Why?</Typography>
                             <Typography color='textPrimary' variant='h3'>Clarissa</Typography>
                             <Typography variant='h6' style={{marginTop: theme.spacing(2), marginBottom: theme.spacing(2)}}>Clarissa is designed to be at your side whenever you need her. She uses natural language processing to find out what you are really feeling, helps track your systems, give recommendations on you diagnosis, and connects you to a doctor near you.</Typography>
@@ -213,18 +211,18 @@ const Landing = () => {
                         </Grid>
                     </div>
                     <Grid container={true} direction='row' alignItems='center' justify='space-between' style={{marginTop: theme.spacing(4)}}>
-                        <Grid item={true} xs={9} style={{padding: 0}}>
-                            <Paper elevation={6} style={{backgroundColor: 'white', padding: 0}}>
+                        <Grid item={true} xs={10}>
+                            <Paper elevation={6} style={{backgroundColor: 'white'}}>
                                 <Typography variant='h6' style={{color: 'black', padding: theme.spacing(1)}}>I have a cough, a sore throat, and body aches.</Typography>
                             </Paper>
                         </Grid>
-                        <Grid item={true} xs={1}>
+                        <Grid item={true}>
                             <Button variant='contained' size='large' style={{backgroundColor: theme.palette.success.main}}><Typography variant='h6' className={classes.landingButtons}>Evaluate!</Typography></Button>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item={true} xs={12} style={{marginBottom: theme.spacing(10)}}>
-                    <Grid container={true} direction='row' alignItems='center' justify='center'>
+                <Grid item={true} xs={10} style={{marginBottom: theme.spacing(10)}}>
+                    <Grid container={true} direction='row' alignItems='center' justify='space-between'>
                         <Grid item={true} xs={3}>
                             <LandingCards color={theme.palette.text.primary} heading='Common Cold' />
                         </Grid>
@@ -237,16 +235,20 @@ const Landing = () => {
                     </Grid>
                 </Grid>
                 <Grid className={classes.landingRows} item={true} xs={10}>
-                    <div style={{textAlign: 'center'}}>
-                        <Typography color='error' variant='h4'>Identifying</Typography>
-                        <Typography variant='h3' style={{color: 'black'}}>Symptoms</Typography>
-                        <Grid container={true} direction='row' alignItems='center' justify='center'>
-                            <Grid item={true} xs={7}>
-                                <Typography>Clarissa will make sure that you can easily identify the symptoms that are bothering you, and tell you what they mean.</Typography>
-                            </Grid>
+                    <Grid container={true} direction='column' alignContent='center' justify='center'>
+                        <Grid item xs={12}>
+                            <div style={{textAlign: 'center'}}>
+                                <Typography color='error' variant='h4'>Identifying</Typography>
+                                <Typography variant='h3' style={{color: 'black'}}>Symptoms</Typography>
+                                <Grid container={true} direction='row' alignItems='center' justify='center'>
+                                    <Grid item={true} xs={7}>
+                                        <Typography>Clarissa will make sure that you can easily identify the symptoms that are bothering you, and tell you what they mean.</Typography>
+                                    </Grid>
+                                </Grid>
+                            </div>
+                            <Illustration3 style={{maxWidth: '100%', maxHeight: '100%'}} />
                         </Grid>
-                    </div>
-                    <Illustration3 />
+                    </Grid>
                 </Grid>
                 <Grid className={classes.landingRows} item={true} xs={10}>
                     <div style={{textAlign: 'center'}}>
@@ -260,65 +262,65 @@ const Landing = () => {
                     </div>
                     <Grid container={true} direction='column' alignItems='center'>
                         <Grid className={classes.featuresRow} container={true} direction='row' alignItems='center' justify='space-evenly'>
-                            <Grid item={true} xs={4}>
+                            <Grid item={true} xs={5}>
                                 <Grid container={true} direction='row' justify='space-evenly'>
                                     <Grid item>
                                         <FeatureBadge color={theme.palette.info.main} number='01' />
                                     </Grid>
                                     <Grid item xs={10}>
                                         <Typography className={classes.featuresTitle} variant='h4'>Symptom Tracking</Typography>
-                                        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
+                                        <Typography variant='h6'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item={true}>
+                            <Grid item={true} xs={4}>
                                 <Laptop />
                             </Grid>
                         </Grid>
                         <Grid className={classes.featuresRow} container={true} direction='row' alignItems='center' justify='space-evenly'>
-                            <Grid item={true}>
+                            <Grid item={true} xs={4}>
                                 <Magnify />
                             </Grid>
-                            <Grid item={true} xs={4}>
+                            <Grid item={true} xs={5}>
                                 <Grid container={true} direction='row' justify='space-evenly'>
                                     <Grid item>
                                         <FeatureBadge color={theme.palette.secondary.main} number='02' />
                                     </Grid>
                                     <Grid item xs={10}>
                                         <Typography className={classes.featuresTitle} variant='h4'>{'Analysis & Diagnosis'}</Typography>
-                                        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
+                                        <Typography variant='h6'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
                         <Grid className={classes.featuresRow} container={true} direction='row' alignItems='center' justify='space-evenly'>
-                            <Grid item={true} xs={4}>
+                            <Grid item={true} xs={5}>
                                 <Grid container={true} direction='row' justify='space-evenly'>
                                     <Grid item>
                                         <FeatureBadge color={theme.palette.error.main} number='03' />
                                     </Grid>
                                     <Grid item xs={10}>
                                         <Typography className={classes.featuresTitle} variant='h4'>Connect You to a Doctor</Typography>
-                                        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
+                                        <Typography variant='h6'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item={true}>
+                            <Grid item={true} xs={4}>
                                 <Monitor />
                             </Grid>
                         </Grid>
                         <Grid className={classes.featuresRow} container={true} direction='row' alignItems='center' justify='space-evenly'>
-                            <Grid item={true}>
+                            <Grid item={true} xs={4}>
                                 <Book />
                             </Grid>
-                            <Grid item={true} xs={4}>
+                            <Grid item={true} xs={5}>
                                 <Grid container={true} direction='row' justify='space-evenly'>
                                     <Grid item>
                                         <FeatureBadge color={theme.palette.primary.main} number='04' />
                                     </Grid>
                                     <Grid item xs={10}>
                                         <Typography className={classes.featuresTitle} variant='h4'>Keep Track of Your History</Typography>
-                                        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
+                                        <Typography variant='h6'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue dolor at lacus tempor vulputate. Etiam et dui vel augue convallis posuere sit amet nec tellus. Nunc in nunc diam. Aliquam vestibulum, urna ut fermentum elementum, sapien nisi lacinia felis, non imperdiet nisi sapien vitae enim.</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
