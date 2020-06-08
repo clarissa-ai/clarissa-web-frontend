@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Grid, AppBar, Toolbar, Link, Button, Typography, useTheme, Paper, GridList, GridListTile, Card, CardHeader, CardContent, Checkbox} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core';
-import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
+import {ArrowRightAlt} from '@material-ui/icons';
 import {Link as RouterLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
