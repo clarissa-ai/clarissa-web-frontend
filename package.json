@@ -5,6 +5,7 @@
   "homepage": "https://clarissa-ai.github.io/clarissa-ai.github.io",
   "dependencies": {
     "@material-ui/core": "^4.10.1",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -22,7 +23,7 @@
     "lint": "eslint src/**",
     "lint:fix": "eslint src/** --fix",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
