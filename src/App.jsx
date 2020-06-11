@@ -1,5 +1,5 @@
-import React, {createContext} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import React, {createContext, useEffect, useState} from 'react';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
 import './App.css';
 import Profile from 'Profile.js';
@@ -43,16 +43,46 @@ theme = responsiveFontSizes(theme);
 const App = () => {
     // We create a new profile object. It should automatically be populated if the user has already logged in.
     const profile = new Profile();
+    // State to control custom routing.
+    const [routes, setRoutes] = useState(null);
     console.log(process.env.REACT_APP_ENDPOINT_BASE);
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
+            if (!response.ok) {
+                console.log('Internal Error. Please contact support.');
+                return;
+            }
+            response.json().then((data) => {
+                const {status, message} = data;
+                if (status === 'success') {
+                    setRoutes(data.routes);
+                } else {
+                    console.log(message);
+                }
+            });
+        });
+    }, []);
+
+    const redirect = [];
+    if (routes) {
+        Object.keys(routes).forEach((key) => redirect.push(<Redirect from={key} to={routes[key]} />));
+    };
 
     return (
         <ProfileContext.Provider value={profile}>
             <ThemeProvider theme={theme}>
                 <Router>
                     <Switch>
-                        <Route exact path="/" render={(props) => <Typography>This is the landing page!</Typography> }></Route>
+                        <Route exact path="/" render={(props) => <Typography>This is the landing page!</Typography> } />
                         <Route exact path="/login" render={(props) => <Login/>} />
-                        <Route exact path="/covid" render={(props) => <ScreeningStart/>} />
+                        {redirect}
+                        <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>
                 </Router>
             </ThemeProvider>
@@ -61,4 +91,3 @@ const App = () => {
 };
 export default App;
 export {ProfileContext};
-
