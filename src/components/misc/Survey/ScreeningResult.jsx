@@ -23,6 +23,8 @@ const ScreeningResult = (props) => {
         // eslint-disable-next-line no-var
         var displayImage = <img src={apiLink + data.summaries[summIndex].image_url}/>;
         // eslint-disable-next-line no-var
+        var displayDescription = data.summaries[summIndex].description;
+        // eslint-disable-next-line no-var
         var displayTitle = data.summaries[summIndex].title;
         // eslint-disable-next-line no-var
         var displaySummary = data.summaries[summIndex].info_groups.map((data, index) => {
@@ -73,7 +75,7 @@ const ScreeningResult = (props) => {
                         {displayImage}
                     </Grid>
                     <Grid container>
-                        <Typography variant="body1" paragraph>Recommendation</Typography>
+                        <Typography variant="body1" paragraph>{displayDescription}</Typography>
                     </Grid>
                     <Grid container>
                         <Typography variant="h4" color="primary" paragraph>{displayTitle}</Typography>

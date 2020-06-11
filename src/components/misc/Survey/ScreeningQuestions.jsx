@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         float: 'right',
     },
     labelButton: {
-        textTransform: 'capitalize',
+        textTransform: 'none',
         justifyContent: 'start',
     },
     space: {
@@ -231,7 +231,7 @@ const ScreeningQuestions = (props) => {
         choices[questionIndex] = check;
         setChecked(check);
         setChoice(choices);
-        // console.log(weights);
+        console.log(weights);
     };
 
     // Handles Next button

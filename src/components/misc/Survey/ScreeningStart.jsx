@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
     wordWrap: {
         wordWrap: 'break-word',
-        width: '40rem',
+        maxWidth: '40rem',
         textAlign: 'center',
     },
     rootButton: {
@@ -42,12 +42,14 @@ const ScreeningStart = () => {
             return (
                 <Grid item xs={6} key={index}>
                     <Link underline="none" href={data.link}>
-                        <Grid container justify="center">
-                            <Grid item xs={2}>
+                        <Grid container spacing={1} justify="center">
+                            <Grid item>
                                 <img src={apiLink + data.image_url}/>
                             </Grid>
                             <Grid item xs={9}>
-                                <Typography variant="body1">{data.title}</Typography>
+                                <Link underline="always" href={data.link}>
+                                    <Typography variant="body1">{data.title}</Typography>
+                                </Link>
                                 <Typography variant="body1" color="textPrimary">{data.description}</Typography>
                             </Grid>
                         </Grid>
