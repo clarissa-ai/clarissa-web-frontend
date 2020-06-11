@@ -6,7 +6,6 @@ import Profile from 'Profile.js';
 // import SurveyDAG from 'components/misc/Survey/SurveyDAG';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/Survey/ScreeningStart';
-import ScreeningQuestions from 'components/misc/Survey/ScreeningQuestions';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
