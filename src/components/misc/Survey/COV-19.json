@@ -1,199 +1,323 @@
 {
-    "title": "COVID-19 Screening App",
-    "description": "This tool is here to help you understand what to do next about COVID-19.",
-    "root": "q1",
+    "title": "COVID-19 Screening Tool",
+    "description": "Understand the next steps you can take to protect yourself and others against COVID-19. This short screening provides a recommendation to keep you healthy.",
+    "desc": [
+        {
+            "desc":"Understand the next steps you can take to protect yourself and others against COVID-19."
+        },
+        {
+            "desc": "This short screening provides a recommendation to keep you healthy." 
+        }
+    ],
+    "time": "10 Minutes",
+    "links": [
+        {
+            "title": "Disinfect Surfaces",
+            "description": "Information about hand-washing, physical distancing, isolating from others, and more.",
+            "link": ""
+        },
+        {
+            "title": "Wear A Mask",
+            "description": "Information about hand-washing, physical distancing, isolating from others, and more.",
+            "link": ""
+        },
+        {
+            "title": "Wash your Hands",
+            "description": "Information about hand-washing, physical distancing, isolating from others, and more.",
+            "link": ""
+        },
+        {
+            "title": "Adhere to Social Distancing",
+            "description": "Information about hand-washing, physical distancing, isolating from others, and more.",
+            "link": ""
+        }
+    ],
+    "root": 2,
+    "question_count": 8,
     "questions": [
         {
-            "id": "q1",
-            "type": "one",
+            "id": 2,
+            "type": "multiple_select",
             "title": "Is this an emergency?",
             "description": "Stop and call 911 if you have:",
+            "default_next": 1,
             "options": [
                 {
                     "title": "Severe, constant chest pain or pressure",
-                    "next": "q2"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Extreme difficulty breathing",
-                    "next": "q2"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Lightheadedness",
-                    "next": "q2"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Disorientation or unresponsiveness",
-                    "next": "q2"
+                    "summary_id": 1,
+                    "summary_weight": 5
+                },
+                {
+                    "title": "None",
+                    "summary_id": 1,
+                    "summary_weight": 5
                 }
             ]
         },
         {
-            "id": "q2",
-            "type": "one",
+            "id": 1,
+            "type": "single_select",
             "title": "How old are you?",
             "description": "",
             "options": [
                 {
                     "title": "Under 18",
-                    "next": "q3"
+                    "next_id": 3,
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Between 18-64",
-                    "next": "q3"
+                    "next_id": 3,
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Above 64",
-                    "next": "q3"
+                    "next_id": 3,
+                    "summary_id": 1,
+                    "summary_weight": 5
                 }
             ]
         },
         {
-            "id": "q3",
-            "type": "all",
+            "id": 3,
+            "type": "multiple_select",
             "title": "Have you recently experienced any of the following symptoms?",
             "description": "Select all that you are experiencing",
+            "default_next": 4,
             "options": [
                 {
                     "title": "Fever or chills",
-                    "next": "q4"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
-                    "title": "Mild or moderate difficulty breathing",
-                    "next": "q4"
+                    "title": "Difficulty breathing",
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Dry cough",
-                    "next": "q4"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Sustained loss of smell",
-                    "next": "q4"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Sore throat",
-                    "next": "q4"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Vomitting",
-                    "next": "q4"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Diarrhea",
-                    "next": "q4"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Body aches",
-                    "next": "q4"
+                    "summary_id": 1,
+                    "summary_weight": 5
+                },
+                {
+                    "title": "None",
+                    "summary_id": 2,
+                    "summary_weight": 10
                 }
             ]
         },
         {
-            "id": "q4",
-            "type": "one",
+            "id": 4,
+            "type": "single_select",
             "title": "In the past 14 days have you:",
             "description": "Select all that apply",
             "options": [
                 {
                     "title": "Traveled internationally",
-                    "next": "q5"
+                    "next_id": 5,
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Traveled out of state",
-                    "next": "q5"
+                    "next_id": 5,
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Been close to someone who has COVID-19",
-                    "next": "q5"
+                    "next_id": 5,
+                    "summary_id": 1,
+                    "summary_weight": 5
                 }
             ]
         },
         {
-            "id": "q5",
-            "type": "all",
+            "id": 5,
+            "type": "multiple_select",
             "title": "Do any of the following apply to you?",
             "description": "",
+            "default_next": 6,
             "options": [
                 {
                     "title": "Moderate to severe asthma or chronic respiratory illness",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Cancer treatment or medicines causing immune suppression",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Inherited immune system deficiencies or HIV",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Serious heart conditions (Ex. Heart failure or attack)",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Diabetes with complications",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Kidney failure that needs dialysis",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Cirrhosis of the liver",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Extreme obesity",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "Pregnancy",
-                    "next": "q6"
+                    "summary_id": 1,
+                    "summary_weight": 5
+                },
+                {
+                    "title": "None",
+                    "summary_id": 2,
+                    "summary_weight": 10
                 }
             ]
         },
         {
-            "id": "q6",
-            "type": "all",
+            "id": 6,
+            "type": "single_select",
             "title": "In the last 14 days, have you been in an area where COVID-19 is widespread?",
             "description": "",
+            "default_next": 7,
             "options": [
                 {
                     "title": "I live in an area where COVID-19 is widespread",
-                    "next": "q7"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "I have visited an area where COVID-19 is widspread",
-                    "next": "q7"
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "I don't know",
-                    "next": "q7"
+                    "summary_id": 1,
+                    "summary_weight": 0
                 }
             ]
         },
         {
-            "id": "q7",
-            "type": "one",
+            "id": 7,
+            "type": "single_select",
             "title": "Do you work in a medical facility?",
             "description": "",
             "options": [
                 {
                     "title": "I have worked in a hospital or other facility in the past 14 days",
-                    "next": "q8"
+                    "next_id": 8,
+                    "summary_id": 1,
+                    "summary_weight": 5
                 },
                 {
                     "title": "I plan to work in a hospital or other facility in the next 14 days",
-                    "next": "q8"
+                    "next_id": 8,
+                    "summary_id": 1,
+                    "summary_weight": 5
+                },
+                {
+                    "title": "I will not work in hospital or other facility in the next 14 days",
+                    "next_id": 8,
+                    "summary_id": 1,
+                    "summary_weight": 5
                 }
             ]
         },
         {
-            "id": "q8",
+            "id": 8,
             "type": "dropdown",
             "title": "Which state are you in?",
             "description": "",
+            "default_next": -1,
             "options": [
+                {
+                    "title": "VA",
+                    "summary_id": 1,
+                    "summary_weight": 5
+                },
+                {
+                    "title": "NJ",
+                    "summary_id": 1,
+                    "summary_weight": 5
+                }
             ]
+        }
+    ],
+    "summaries": [
+        {
+          "id": 1,
+          "title": "Get Help",
+          "description": "Recommendation",
+          "image_url": "/api/images/get_image/survey_1_summary_1_image_Virus_Icon.png",
+          "info_groups": []
+        },
+        {
+          "id": 2,
+          "title": "Self-Isolate for 14 days",
+          "description": "Recommendation",
+          "image_url": "/api/images/get_image/survey_1_summary_1_image_Virus_Icon.png",
+          "info_groups": []
         }
     ]
 }

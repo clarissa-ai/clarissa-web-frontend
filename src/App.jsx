@@ -2,10 +2,11 @@ import React, {createContext} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
 import './App.css';
-
 import Profile from 'Profile.js';
 // import SurveyDAG from 'components/misc/Survey/SurveyDAG';
 import Login from 'components/authentication/login/Login';
+import ScreeningStart from 'components/misc/Survey/ScreeningStart';
+import ScreeningQuestions from 'components/misc/Survey/ScreeningQuestions';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
@@ -15,7 +16,7 @@ let theme = createMuiTheme({
     palette: {
         primary: {
             main: '#306DDF',
-            contrastText: contrastText,
+            contrastText: '#ffff',
         },
         secondary: {
             main: '#FEAD18',
@@ -52,6 +53,7 @@ const App = () => {
                     <Switch>
                         <Route exact path="/" render={(props) => <Typography>This is the landing page!</Typography> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
+                        <Route exact path="/covid" render={(props) => <ScreeningStart/>} />
                     </Switch>
                 </Router>
             </ThemeProvider>
