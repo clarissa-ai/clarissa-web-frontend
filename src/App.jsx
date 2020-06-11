@@ -5,6 +5,7 @@ import './App.css';
 
 import Profile from 'Profile.js';
 // import SurveyDAG from 'components/misc/Survey/SurveyDAG';
+import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
@@ -32,6 +33,11 @@ let theme = createMuiTheme({
         success: {
             main: '#47C594',
             contrastText: contrastText,
+        },
+        background: '#F5F8FF',
+        text: {
+            primary: '#FEAD18',
+            secondary: '#47C594',
         },
     },
     typography: {
