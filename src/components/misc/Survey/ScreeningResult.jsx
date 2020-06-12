@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     spacing: {
         paddingTop: '3rem',
     },
+    mainDescription: {
+        paddingBottom: '3rem',
+    },
     underline: {
         textDecoration: 'underline',
     },
@@ -54,10 +57,10 @@ const ScreeningResult = (props) => {
                     {displayImage}
                 </Grid>
                 <Grid container>
-                    <Typography variant="body1" paragraph>{displayDescription}</Typography>
+                    <Typography variant="h4" color="primary">{displayTitle}</Typography>
                 </Grid>
                 <Grid container>
-                    <Typography variant="h4" color="primary" paragraph>{displayTitle}</Typography>
+                    <Typography variant="body1" className={classes.mainDescription}>{displayDescription}</Typography>
                 </Grid>
                 <Grid container spacing={6} direction="row">
                     {displaySummary}

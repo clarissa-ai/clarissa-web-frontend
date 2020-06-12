@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     underline: {
         textDecoration: 'underline',
     },
+    belowMinutes: {
+        paddingBottom: '1rem',
+    },
 }));
 
 const ScreeningStart = (props) => {
@@ -103,7 +106,9 @@ const ScreeningStart = (props) => {
                         </Button>
                     </Grid>
                     <Grid container justify="center">
-                        <Typography paragraph variant="body2" color="textSecondary">Approximately {data.question_count/2} Minutes</Typography>
+                        <Typography paragraph variant="body2" color="textSecondary" className={classes.belowMinutes}>
+                            Approximately {data.question_count/2} Minutes
+                        </Typography>
                     </Grid>
                     <Grid container spacing={6}>
                         {displayLinks}
