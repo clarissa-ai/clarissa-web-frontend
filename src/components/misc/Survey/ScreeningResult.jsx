@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {Typography, Grid, makeStyles, Container} from '@material-ui/core';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Typography, Grid, makeStyles, Container, Link} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     start: {
@@ -9,83 +10,60 @@ const useStyles = makeStyles((theme) => ({
     spacing: {
         paddingTop: '3rem',
     },
+    underline: {
+        textDecoration: 'underline',
+    },
 }));
 
 const ScreeningResult = (props) => {
     const classes = useStyles();
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [data, setData] = useState([]);
-    const apiLink = 'http://dev.clarissa.ai:5000';
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const summIndex = props.idx;
+    const data = props.data;
 
-    if (data.summaries) {
-        // eslint-disable-next-line no-var
-        var displayImage = <img src={apiLink + data.summaries[summIndex].image_url}/>;
-        // eslint-disable-next-line no-var
-        var displayDescription = data.summaries[summIndex].description;
-        // eslint-disable-next-line no-var
-        var displayTitle = data.summaries[summIndex].title;
-        // eslint-disable-next-line no-var
-        var displaySummary = data.summaries[summIndex].info_groups.map((data, index) => {
-            return (
-                <Grid item xs={6} key={index}>
-                    <Grid container>
-                        <Grid item>
-                            <Typography color="primary" variant="body1">{data.title}</Typography>
+    ScreeningResult.propTypes = {
+        idx: PropTypes.number,
+        data: PropTypes.object,
+    };
+
+    const displayImage = <img src={apiLink + data.summaries[summIndex].image_url}/>;
+    const displayDescription = data.summaries[summIndex].description;
+    const displayTitle = data.summaries[summIndex].title;
+
+    const displaySummary = data.summaries[summIndex].info_groups.map((data, index) => {
+        return (
+            <Grid item xs={6} key={index}>
+                <Grid container>
+                    <Grid item>
+                        <Link underline="none" href={data.link_URL}>
+                            <Typography color="primary" variant="body1" className={classes.underline}>{data.title}</Typography>
                             {data.details.map((data, index) => {
                                 return <Typography variant="body1" color="textPrimary" key={index}>- {data}</Typography>;
                             })}
-                        </Grid>
+                        </Link>
                     </Grid>
                 </Grid>
-            );
-        });
-    }
-
-    useEffect(() => {
-        fetch('http://dev.clarissa.ai:5000/api/survey/get_survey_by_id', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({'id': 1}),
-        }).then((res) => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setData(result.survey);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                },
-            );
-    }, []);
-
-    if (error) {
-        return <div>{error.message}</div>;
-    } else if (!isLoaded) {
-        return <div></div>;
-    } else {
-        return (
-            <Container>
-                <Grid container>
-                    <Grid container className={classes.start}>
-                        {displayImage}
-                    </Grid>
-                    <Grid container>
-                        <Typography variant="body1" paragraph>{displayDescription}</Typography>
-                    </Grid>
-                    <Grid container>
-                        <Typography variant="h4" color="primary" paragraph>{displayTitle}</Typography>
-                    </Grid>
-                    <Grid container spacing={6} direction="row">
-                        {displaySummary}
-                    </Grid>
-                </Grid>
-            </Container>
+            </Grid>
         );
-    }
+    });
+
+    return (
+        <Container>
+            <Grid container>
+                <Grid container className={classes.start}>
+                    {displayImage}
+                </Grid>
+                <Grid container>
+                    <Typography variant="body1" paragraph>{displayDescription}</Typography>
+                </Grid>
+                <Grid container>
+                    <Typography variant="h4" color="primary" paragraph>{displayTitle}</Typography>
+                </Grid>
+                <Grid container spacing={6} direction="row">
+                    {displaySummary}
+                </Grid>
+            </Grid>
+        </Container>
+    );
 };
 export default ScreeningResult;

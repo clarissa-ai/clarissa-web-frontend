@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rootButton: {
         width: '17.75rem',
-        height: '5.75rem',
+        minHeight: '5.75rem',
         textAlign: 'left',
         paddingLeft: '0',
         borderRadius: 6,
@@ -370,7 +370,7 @@ const ScreeningQuestions = (props) => {
     const displayChoices =
     (data.questions[questionIndex].options).map((data, index) => {
         return (
-            <Grid item xs={6} key={index}>
+            <Grid item key={index}>
                 <Button
                     color={changeButtonColor(index)} disableRipple
                     variant={variantClicked(index)}

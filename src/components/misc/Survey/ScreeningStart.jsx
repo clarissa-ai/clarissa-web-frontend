@@ -21,15 +21,18 @@ const useStyles = makeStyles((theme) => ({
     labelButton: {
         textTransform: 'capitalize',
     },
+    underline: {
+        textDecoration: 'underline',
+    },
 }));
 
-const ScreeningStart = () => {
+const ScreeningStart = (props) => {
     const classes = useStyles();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [data, setData] = useState([]);
     const [clicked, setClicked] = useState(false);
-    const apiLink = 'http://dev.clarissa.ai:5000';
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -47,9 +50,7 @@ const ScreeningStart = () => {
                                 <img src={apiLink + data.image_url}/>
                             </Grid>
                             <Grid item xs={9}>
-                                <Link underline="always" href={data.link}>
-                                    <Typography variant="body1">{data.title}</Typography>
-                                </Link>
+                                <Typography variant="body1" className={classes.underline}>{data.title}</Typography>
                                 <Typography variant="body1" color="textPrimary">{data.description}</Typography>
                             </Grid>
                         </Grid>
@@ -60,12 +61,12 @@ const ScreeningStart = () => {
     }
 
     useEffect(() => {
-        fetch('http://dev.clarissa.ai:5000/api/survey/get_survey_by_id', {
+        fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/survey/get_survey_by_id`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'id': 1}),
+            body: JSON.stringify({'id': parseInt(props.location.pathname.replace(props.match.path, '').substring(1))}),
         }).then((res) => res.json())
             .then(
                 (result) => {

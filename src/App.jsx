@@ -71,7 +71,7 @@ const App = () => {
 
     const redirect = [];
     if (routes) {
-        Object.keys(routes).forEach((key) => redirect.push(<Redirect from={key} to={routes[key]} />));
+        Object.keys(routes).forEach((key) => redirect.push(<Redirect key={key} from={key} to={routes[key]} />));
     };
 
     return (
@@ -81,6 +81,7 @@ const App = () => {
                     <Switch>
                         <Route exact path="/" render={(props) => <Typography>This is the landing page!</Typography> } />
                         <Route exact path="/login" render={(props) => <Login/>} />
+                        <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         {redirect}
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>
