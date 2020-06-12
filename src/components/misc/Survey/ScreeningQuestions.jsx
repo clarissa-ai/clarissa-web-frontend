@@ -125,6 +125,7 @@ theme = responsiveFontSizes(theme);
 const ScreeningQuestions = (props) => {
     const classes = useStyles();
     const data = props.data;
+    // Gets question index
     const processQuestion = (qNum) => {
         let qIndex = 0;
         let i = 0;
@@ -136,16 +137,17 @@ const ScreeningQuestions = (props) => {
         }
         return qIndex;
     };
+    // Gets summary index
     const processSummary = (sNum) => {
-        let qIndex = 0;
+        let sIndex = 0;
         let i = 0;
         while (i < data.summaries.length) {
             if (sNum === data.summaries[i].id) {
-                qIndex = i;
+                sIndex = i;
             }
             i++;
         }
-        return qIndex;
+        return sIndex;
     };
 
     // Question index

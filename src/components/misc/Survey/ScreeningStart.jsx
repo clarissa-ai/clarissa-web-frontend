@@ -36,6 +36,7 @@ const ScreeningStart = (props) => {
     const [data, setData] = useState([]);
     const [clicked, setClicked] = useState(false);
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
+    const idNum = parseInt(props.location.pathname.replace(props.match.path, '').substring(1));
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -64,12 +65,12 @@ const ScreeningStart = (props) => {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/survey/get_survey_by_id`, {
+        fetch(`${apiLink}/api/survey/get_survey_by_id`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'id': parseInt(props.location.pathname.replace(props.match.path, '').substring(1))}),
+            body: JSON.stringify({'id': idNum}),
         }).then((res) => res.json())
             .then(
                 (result) => {
