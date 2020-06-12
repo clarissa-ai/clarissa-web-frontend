@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left',
         paddingLeft: '0',
         borderRadius: 6,
+        borderWidth: 1.25,
     },
     rootPrev: {
         height: '4rem',
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'start',
     },
     space: {
-        padding: '0.5rem',
+        padding: '1rem',
     },
     formControl: {
         width: 400,
@@ -52,6 +53,25 @@ const useStyles = makeStyles((theme) => ({
         'height': 20,
         'borderStyle': 'solid',
         'borderColor': 'rgba(0, 0, 0, 0.2)',
+        'borderWidth': '1px',
+        'backgroundColor': '#ffff',
+        'backgroundImage':
+            'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
+        '$root.Mui-focusVisible &': {
+            outline: '1px auto rgba(19,124,189,.6)',
+            outlineOffset: 1,
+        },
+        'input:disabled ~ &': {
+            boxShadow: 'none',
+            background: 'rgba(206,217,224,.5)',
+        },
+    },
+    circleNoneIcon: {
+        'borderRadius': 20,
+        'width': 20,
+        'height': 20,
+        'borderStyle': 'solid',
+        'borderColor': '#FF6496',
         'borderWidth': '1px',
         'backgroundColor': '#ffff',
         'backgroundImage':
@@ -91,6 +111,9 @@ let theme = createMuiTheme({
         secondary: {
             main: '#FF6496',
             contrastText: '#ffff',
+        },
+        text: {
+            primary: 'rgba(0, 0, 0, 0.3)',
         },
     },
     typography: {
@@ -354,6 +377,9 @@ const ScreeningQuestions = (props) => {
         if (checked[index] && (data.questions[questionIndex].options[index].title === 'None' ||
             data.questions[questionIndex].options[index].title === 'None of the above')) {
             return 'secondary';
+        } else if (!checked[index] && (data.questions[questionIndex].options[index].title === 'None' ||
+                    data.questions[questionIndex].options[index].title === 'None of the above')) {
+            return 'secondary';
         } else if (checked[index]) {
             return 'primary';
         } else return 'default';
@@ -364,6 +390,14 @@ const ScreeningQuestions = (props) => {
         if (questOrder.length === 1) {
             return <PrevIconDisable/>;
         } else return <PrevIconActive/>;
+    };
+
+    // Styling change for none
+    const changeNone = (index) => {
+        if (data.questions[questionIndex].options[index].title === 'None' ||
+            data.questions[questionIndex].options[index].title === 'None of the above') {
+            return <span className={classes.circleNoneIcon} />;
+        } else return <span className={classes.circleIcon} />;
     };
 
     // Displays choices for choice questions
@@ -383,7 +417,7 @@ const ScreeningQuestions = (props) => {
                         disableRipple
                         color="default"
                         checkedIcon={<span className={clsx(classes.circleIcon, classes.checkedIcon)} />}
-                        icon={<span className={classes.circleIcon} />}
+                        icon={changeNone(index)}
                         inputProps={{'aria-label': 'decorative checkbox'}}
                     />
                     <Typography>{data.title}</Typography>
@@ -435,13 +469,13 @@ const ScreeningQuestions = (props) => {
                 >
                     <Grid item xs={6}>
                         <Grid style={{paddingLeft: '.65em'}}>
-                            <Typography variant="body2" color='textPrimary'>
+                            <Typography variant="body1" paragraph>
                                 {'Question '+(questOrder.length)+'/'+data.question_count}
                             </Typography>
-                            <Typography variant="h4">
+                            <Typography variant="h4" paragraph>
                                 {data.questions[questionIndex].title}
                             </Typography>
-                            <Typography variant="body1" paragraph>
+                            <Typography component='div'>
                                 {data.questions[questionIndex].description}
                             </Typography>
                         </Grid>
@@ -451,13 +485,13 @@ const ScreeningQuestions = (props) => {
                                 onClick={() => handlePrev()} color='primary'
                             >
                                 {changePrevIcon()}
-                                <Typography className={classes.space}>Prev</Typography>
+                                <Typography variant='h5' className={classes.space}>Prev</Typography>
                             </Button>
                             <Button disabled={activateNext()} size='large'
                                 classes={{root: classes.rootNext, label: classes.labelButton}}
                                 onClick={() => handleNext()} color='primary'
                             >
-                                <Typography className={classes.space}>Next</Typography>
+                                <Typography variant='h5' className={classes.space}>Next</Typography>
                                 {changeNextIcon()}
                             </Button>
                         </Grid>
