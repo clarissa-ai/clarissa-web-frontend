@@ -469,7 +469,7 @@ const ScreeningQuestions = (props) => {
                 >
                     <Grid item xs={6}>
                         <Grid style={{paddingLeft: '.65em'}}>
-                            <Typography variant="body1" paragraph>
+                            <Typography variant="subtitle1" paragraph>
                                 {'Question '+(questOrder.length)+'/'+data.question_count}
                             </Typography>
                             <Typography variant="h4" paragraph>

@@ -4,7 +4,7 @@ import {Typography, Grid, makeStyles, Container, Link} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     start: {
-        paddingTop: '5rem',
+        paddingTop: '4rem',
         paddingBottom: '1rem',
     },
     spacing: {
@@ -39,7 +39,7 @@ const ScreeningResult = (props) => {
                 <Grid container>
                     <Grid item>
                         <Link underline="none" href={data.link_URL}>
-                            <Typography color="primary" variant="body1" className={classes.underline}>{data.title}</Typography>
+                            <Typography color="primary" variant="h6">{data.title}</Typography>
                             {data.details.map((data, index) => {
                                 return <Typography variant="body1" color="textPrimary" key={index}>- {data}</Typography>;
                             })}
