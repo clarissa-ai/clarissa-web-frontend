@@ -65,12 +65,12 @@ const ScreeningStart = (props) => {
     }
 
     useEffect(() => {
-        fetch(`${apiLink}/api/survey/get_survey_by_id`, {
+        fetch(`http://161.35.113.165:5000/api/survey/get_survey_by_id`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'id': idNum}),
+            body: JSON.stringify({'id': 1}),
         }).then((res) => res.json())
             .then(
                 (result) => {
