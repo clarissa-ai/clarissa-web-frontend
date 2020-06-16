@@ -5,10 +5,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import {ReactComponent as NextIconDisable} from './Icons/DisableNext.svg';
-import {ReactComponent as PrevIconDisable} from './Icons/DisablePrev.svg';
-import {ReactComponent as NextIconActive} from './Icons/ActiveNext.svg';
-import {ReactComponent as PrevIconActive} from './Icons/ActivePrev.svg';
+import {ReactComponent as NextIconDisable} from './icons/DisableNext.svg';
+import {ReactComponent as PrevIconDisable} from './icons/DisablePrev.svg';
+import {ReactComponent as NextIconActive} from './icons/ActiveNext.svg';
+import {ReactComponent as PrevIconActive} from './icons/ActivePrev.svg';
 // import data from './COV-19.json';
 import ScreeningResult from './ScreeningResult';
 
