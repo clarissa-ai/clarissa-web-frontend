@@ -82,7 +82,7 @@ const ScreeningStart = (props) => {
                     setError(error);
                 },
             );
-    }, []);
+    }, [apiLink, idNum]);
 
     if (error) {
         return <div>{error.message}</div>;

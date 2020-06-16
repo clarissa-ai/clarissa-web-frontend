@@ -144,7 +144,9 @@ const Landing = () => {
     const [mainSurvey, setMainSurvey] = useState(true);
     const theme = useTheme();
     const classes = useStyles();
-    setMainSurvey(true);
+    if (false) {
+        setMainSurvey(true);
+    }
     return (
         <div className={classes.root}>
             {mainSurvey && <div className={classes.surveyBar}>
