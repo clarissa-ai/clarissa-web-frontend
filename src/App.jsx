@@ -2,10 +2,11 @@ import React, {createContext, useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
 import './App.css';
-
 import Profile from 'Profile.js';
 // import SurveyDAG from 'components/misc/Survey/SurveyDAG';
+import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
+import ScreeningStart from 'components/misc/survey/ScreeningStart';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
@@ -15,7 +16,7 @@ let theme = createMuiTheme({
     palette: {
         primary: {
             main: '#306DDF',
-            contrastText: contrastText,
+            contrastText: '#ffff',
         },
         secondary: {
             main: '#FEAD18',
@@ -32,6 +33,11 @@ let theme = createMuiTheme({
         success: {
             main: '#47C594',
             contrastText: contrastText,
+        },
+        background: '#F5F8FF',
+        text: {
+            primary: '#FEAD18',
+            secondary: '#47C594',
         },
     },
     typography: {
@@ -71,11 +77,7 @@ const App = () => {
 
     const redirect = [];
     if (routes) {
-        Object.keys(routes).forEach((key) => {
-            redirect.push(<Redirect key={key} strict from={key} to={routes[key]} />);
-            console.log(redirect);
-        });
-        console.log(routes);
+        Object.keys(routes).forEach((key) => redirect.push(<Redirect key={key} from={key} to={routes[key]} />));
     };
 
     return (
@@ -83,11 +85,11 @@ const App = () => {
             <ThemeProvider theme={theme}>
                 <Router>
                     <Switch>
-                        {redirect}
-                        <Route exact path="/" render={(props) => <Typography>This is the landing page!</Typography> } />
+                        <Route exact path="/" render={(props) => <Landing/> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
-                        <Route path='/survey' render={(props) => <Typography>{props.location.pathname}</Typography>} />
-                        {routes ? <Route render={(props) => <Typography>This is the 404 page.</Typography>} /> : []}
+                        <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
+                        {redirect}
+                        <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>
                 </Router>
             </ThemeProvider>
