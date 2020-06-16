@@ -51,7 +51,7 @@ const ScreeningStart = (props) => {
                     <Link underline="none" href={data.link}>
                         <Grid container spacing={1} justify="center">
                             <Grid item>
-                                <img src={apiLink + data.image_url}/>
+                                <img alt='linkImage' src={apiLink + data.image_url}/>
                             </Grid>
                             <Grid item xs={9}>
                                 <Typography variant="body1" className={classes.underline}>{data.title}</Typography>
@@ -65,12 +65,12 @@ const ScreeningStart = (props) => {
     }
 
     useEffect(() => {
-        fetch(`http://161.35.113.165:5000/api/survey/get_survey_by_id`, {
+        fetch(`${apiLink}/api/survey/get_survey_by_id`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'id': 1}),
+            body: JSON.stringify({'id': idNum}),
         }).then((res) => res.json())
             .then(
                 (result) => {
@@ -93,7 +93,7 @@ const ScreeningStart = (props) => {
             <Container>
                 <Grid container justify="center">
                     <Grid container justify="center" className={classes.start}>
-                        <img src={apiLink + data.image_url}/>
+                        <img alt='centerImage' src={apiLink + data.image_url}/>
                     </Grid>
                     <Grid container justify="center">
                         <Typography variant="h4" color="primary" paragraph>{data.title}</Typography>

@@ -29,7 +29,7 @@ const ScreeningResult = (props) => {
         data: PropTypes.object,
     };
 
-    const displayImage = <img src={apiLink + data.summaries[summIndex].image_url}/>;
+    const displayImage = <img alt='displayImage' src={apiLink + data.summaries[summIndex].image_url}/>;
     const displayDescription = data.summaries[summIndex].description;
     const displayTitle = data.summaries[summIndex].title;
 
