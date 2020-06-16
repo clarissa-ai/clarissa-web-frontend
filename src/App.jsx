@@ -50,7 +50,7 @@ const App = () => {
             <ThemeProvider theme={theme}>
                 <Router>
                     <Switch>
-                        <Route exact path="/" render={(props) => <Typography>{process.env.NODE_ENV}</Typography> }></Route>
+                        <Route exact path="/" render={(props) => <Typography>{process.env.REACT_APP_ENDPOINT_BASE}</Typography> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
                     </Switch>
                 </Router>
