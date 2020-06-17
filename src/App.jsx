@@ -8,7 +8,7 @@ import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import SymptomCard from 'components/dashboard/SymptomCard';
-import SymptomLog from 'components/dashboard/SymptomLog'
+import SymptomLog from 'components/dashboard/SymptomLog';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);

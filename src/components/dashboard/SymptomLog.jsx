@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, TextField, Box, Card, Typography, Grid, CardContent} from '@material-ui/core';
+import {Button, Box, Card, Typography, Grid, CardContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 
@@ -10,7 +10,6 @@ const styles = {
     },
     textInput: {
         margin: '1em 0',
-    
     },
     submitBtn: {
         backgroundColor: '#47C594',
@@ -20,10 +19,6 @@ const styles = {
 };
 
 class SymptomLog extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {classes} = this.props;
         return <div>
