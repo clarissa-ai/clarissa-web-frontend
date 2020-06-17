@@ -5,10 +5,17 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+<<<<<<< HEAD
+import {ReactComponent as NextIconDisable} from './Icons/DisableNext.svg';
+import {ReactComponent as PrevIconDisable} from './Icons/DisablePrev.svg';
+import {ReactComponent as NextIconActive} from './Icons/ActiveNext.svg';
+import {ReactComponent as PrevIconActive} from './Icons/ActivePrev.svg';
+=======
 import {ReactComponent as NextIconDisable} from './icons/DisableNext.svg';
 import {ReactComponent as PrevIconDisable} from './icons/DisablePrev.svg';
 import {ReactComponent as NextIconActive} from './icons/ActiveNext.svg';
 import {ReactComponent as PrevIconActive} from './icons/ActivePrev.svg';
+>>>>>>> preprod
 // import data from './COV-19.json';
 import ScreeningResult from './ScreeningResult';
 
@@ -19,11 +26,18 @@ const useStyles = makeStyles((theme) => ({
     },
     rootButton: {
         width: '17.75rem',
+<<<<<<< HEAD
+        height: '5.75rem',
+        textAlign: 'left',
+        paddingLeft: '0',
+        borderRadius: 6,
+=======
         minHeight: '5.75rem',
         textAlign: 'left',
         paddingLeft: '0',
         borderRadius: 6,
         borderWidth: 1.25,
+>>>>>>> preprod
     },
     rootPrev: {
         height: '4rem',
@@ -37,7 +51,11 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'start',
     },
     space: {
+<<<<<<< HEAD
+        padding: '0.5rem',
+=======
         padding: '1rem',
+>>>>>>> preprod
     },
     formControl: {
         width: 400,
@@ -66,6 +84,8 @@ const useStyles = makeStyles((theme) => ({
             background: 'rgba(206,217,224,.5)',
         },
     },
+<<<<<<< HEAD
+=======
     circleNoneIcon: {
         'borderRadius': 20,
         'width': 20,
@@ -85,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
             background: 'rgba(206,217,224,.5)',
         },
     },
+>>>>>>> preprod
     checkedIcon: {
         'backgroundColor': 'rgba(255, 255, 255, 0.4)',
         'backgroundImage':
@@ -112,9 +133,12 @@ let theme = createMuiTheme({
             main: '#FF6496',
             contrastText: '#ffff',
         },
+<<<<<<< HEAD
+=======
         text: {
             primary: 'rgba(0, 0, 0, 0.3)',
         },
+>>>>>>> preprod
     },
     typography: {
         fontFamily: 'Poppins',
@@ -125,7 +149,10 @@ theme = responsiveFontSizes(theme);
 const ScreeningQuestions = (props) => {
     const classes = useStyles();
     const data = props.data;
+<<<<<<< HEAD
+=======
     // Gets question index
+>>>>>>> preprod
     const processQuestion = (qNum) => {
         let qIndex = 0;
         let i = 0;
@@ -137,6 +164,18 @@ const ScreeningQuestions = (props) => {
         }
         return qIndex;
     };
+<<<<<<< HEAD
+    const processSummary = (sNum) => {
+        let qIndex = 0;
+        let i = 0;
+        while (i < data.summaries.length) {
+            if (sNum === data.summaries[i].id) {
+                qIndex = i;
+            }
+            i++;
+        }
+        return qIndex;
+=======
     // Gets summary index
     const processSummary = (sNum) => {
         let sIndex = 0;
@@ -148,6 +187,7 @@ const ScreeningQuestions = (props) => {
             i++;
         }
         return sIndex;
+>>>>>>> preprod
     };
 
     // Question index
@@ -379,9 +419,12 @@ const ScreeningQuestions = (props) => {
         if (checked[index] && (data.questions[questionIndex].options[index].title === 'None' ||
             data.questions[questionIndex].options[index].title === 'None of the above')) {
             return 'secondary';
+<<<<<<< HEAD
+=======
         } else if (!checked[index] && (data.questions[questionIndex].options[index].title === 'None' ||
                     data.questions[questionIndex].options[index].title === 'None of the above')) {
             return 'secondary';
+>>>>>>> preprod
         } else if (checked[index]) {
             return 'primary';
         } else return 'default';
@@ -394,6 +437,8 @@ const ScreeningQuestions = (props) => {
         } else return <PrevIconActive/>;
     };
 
+<<<<<<< HEAD
+=======
     // Styling change for none
     const changeNone = (index) => {
         if (data.questions[questionIndex].options[index].title === 'None' ||
@@ -402,11 +447,16 @@ const ScreeningQuestions = (props) => {
         } else return <span className={classes.circleIcon} />;
     };
 
+>>>>>>> preprod
     // Displays choices for choice questions
     const displayChoices =
     (data.questions[questionIndex].options).map((data, index) => {
         return (
+<<<<<<< HEAD
+            <Grid item xs={6} key={index}>
+=======
             <Grid item key={index}>
+>>>>>>> preprod
                 <Button
                     color={changeButtonColor(index)} disableRipple
                     variant={variantClicked(index)}
@@ -419,7 +469,11 @@ const ScreeningQuestions = (props) => {
                         disableRipple
                         color="default"
                         checkedIcon={<span className={clsx(classes.circleIcon, classes.checkedIcon)} />}
+<<<<<<< HEAD
+                        icon={<span className={classes.circleIcon} />}
+=======
                         icon={changeNone(index)}
+>>>>>>> preprod
                         inputProps={{'aria-label': 'decorative checkbox'}}
                     />
                     <Typography>{data.title}</Typography>
@@ -471,6 +525,15 @@ const ScreeningQuestions = (props) => {
                 >
                     <Grid item xs={6}>
                         <Grid style={{paddingLeft: '.65em'}}>
+<<<<<<< HEAD
+                            <Typography variant="body2" color='textPrimary'>
+                                {'Question '+(questOrder.length)+'/'+data.question_count}
+                            </Typography>
+                            <Typography variant="h4">
+                                {data.questions[questionIndex].title}
+                            </Typography>
+                            <Typography variant="body1" paragraph>
+=======
                             <Typography variant="subtitle1" paragraph>
                                 {'Question '+(questOrder.length)+'/'+data.question_count}
                             </Typography>
@@ -478,6 +541,7 @@ const ScreeningQuestions = (props) => {
                                 {data.questions[questionIndex].title}
                             </Typography>
                             <Typography component='div'>
+>>>>>>> preprod
                                 {data.questions[questionIndex].description}
                             </Typography>
                         </Grid>
@@ -487,13 +551,21 @@ const ScreeningQuestions = (props) => {
                                 onClick={() => handlePrev()} color='primary'
                             >
                                 {changePrevIcon()}
+<<<<<<< HEAD
+                                <Typography className={classes.space}>Prev</Typography>
+=======
                                 <Typography variant='h5' className={classes.space}>Prev</Typography>
+>>>>>>> preprod
                             </Button>
                             <Button disabled={activateNext()} size='large'
                                 classes={{root: classes.rootNext, label: classes.labelButton}}
                                 onClick={() => handleNext()} color='primary'
                             >
+<<<<<<< HEAD
+                                <Typography className={classes.space}>Next</Typography>
+=======
                                 <Typography variant='h5' className={classes.space}>Next</Typography>
+>>>>>>> preprod
                                 {changeNextIcon()}
                             </Button>
                         </Grid>
