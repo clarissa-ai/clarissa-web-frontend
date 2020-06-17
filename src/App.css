@@ -49,3 +49,10 @@
     transform: rotate(360deg);
   }
 }
+
+.symptomCard {
+  width: '30em';
+  background: '#FFFFFF';
+  box-shadow: '0px 2px 10px rgba(0, 0, 0, 0.08)';
+  border-radius: '4px';
+}

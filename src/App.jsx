@@ -7,6 +7,8 @@ import Profile from 'Profile.js';
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
+import SymptomCard from 'components/dashboard/SymptomCard';
+import SymptomLog from 'components/dashboard/SymptomLog'
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
@@ -27,7 +29,7 @@ let theme = createMuiTheme({
             contrastText: contrastText,
         },
         info: {
-            main: '#7064D0',
+            main: '#2C3C56',
             contrastText: contrastText,
         },
         success: {
@@ -36,12 +38,13 @@ let theme = createMuiTheme({
         },
         background: '#F5F8FF',
         text: {
-            primary: '#FEAD18',
-            secondary: '#47C594',
+            primary: '#AEAEAE',
+            secondary: '#4C5862',
         },
     },
     typography: {
         fontFamily: 'Poppins',
+        fontSize: 12,
     },
 });
 theme = responsiveFontSizes(theme);
@@ -86,6 +89,7 @@ const App = () => {
                 <Router>
                     <Switch>
                         <Route exact path="/" render={(props) => <Landing/> }></Route>
+                        <Route exact path="/preview" render={(props) => <div><SymptomCard /><SymptomLog /></div> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         {redirect}
