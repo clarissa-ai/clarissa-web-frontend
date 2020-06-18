@@ -29,7 +29,7 @@ let theme = createMuiTheme({
             contrastText: contrastText,
         },
         info: {
-            main: '#2C3C56',
+            main: '#7064D0',
             contrastText: contrastText,
         },
         success: {
@@ -38,13 +38,12 @@ let theme = createMuiTheme({
         },
         background: '#F5F8FF',
         text: {
-            primary: '#AEAEAE',
-            secondary: '#4C5862',
+            primary: '#FEAD18',
+            secondary: '#47C594',
         },
     },
     typography: {
         fontFamily: 'Poppins',
-        fontSize: 12,
     },
 });
 theme = responsiveFontSizes(theme);
