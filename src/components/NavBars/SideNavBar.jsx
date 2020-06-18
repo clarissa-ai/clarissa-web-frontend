@@ -11,28 +11,11 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
 
-const contrastText = '#2C3C56';
 let theme = createMuiTheme({
     palette: {
         primary: {
             main: '#306DDF',
             contrastText: '#ffff',
-        },
-        secondary: {
-            main: '#FEAD18',
-            contrastText: contrastText,
-        },
-        error: {
-            main: '#F46D66',
-            contrastText: contrastText,
-        },
-        info: {
-            main: '#7064D0',
-            contrastText: contrastText,
-        },
-        success: {
-            main: '#47C594',
-            contrastText: contrastText,
         },
         background: '#F5F8FF',
         text: {
@@ -52,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         flexShrink: 0,
     },
     name: {
-        marginTop: theme.spacing(1),
+        marginTop: theme.spacing(.5),
     },
     logo: {
         marginLeft: theme.spacing(3),
@@ -122,6 +105,7 @@ const extraRoutes = [
 const SideNavBar = (props) => {
     const classes = useStyles();
 
+    // use input from props later on for user information
     const user = {
         name: 'Teo Nys',
         email: 'teo@nys.name',
@@ -136,7 +120,7 @@ const SideNavBar = (props) => {
                     <Grid item>
                         <Avatar alt={user.name} src={user.img} className={classes.avatarSize}/>
                     </Grid>
-                    <Grid item>
+                    <Grid item className={classes.name}>
                         <Typography className={classes.bold}>{user.name}</Typography>
                         <Typography paragraph color='textSecondary' variant='caption'>{user.email}</Typography>
                     </Grid>

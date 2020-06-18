@@ -8,9 +8,6 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(2),
         fontWeight: 600,
     },
-    all: {
-        marginLeft: theme.spacing(1),
-    },
     icon: {
         color: theme.palette.text.secondary,
         alignItems: 'center',
@@ -26,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'start',
         textTransform: 'none',
         width: '100%',
+        paddingLeft: theme.spacing(1),
     },
 }));
 
@@ -49,10 +47,10 @@ const RenderRoutes = (props) => {
     return (
         <List>
             {routes.map((route, index) => (
-                <ListItem key={index} className={classes.all}>
+                <ListItem key={index}>
                     <Button activeClassName={classes.active} className={classes.button} component={ConstructRoutes} to={route.link}>
                         <div className={classes.icon}>{route.icon}</div>
-                        <Typography className={classes.name}>{route.title}</Typography>
+                        <Typography variant='body2' className={classes.name}>{route.title}</Typography>
                     </Button>
                 </ListItem>
             ))}
