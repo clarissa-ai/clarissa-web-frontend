@@ -1,6 +1,5 @@
 import React from 'react';
-import {Box, Card, Typography, Grid, CardContent, useTheme, makeStyles} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
+import {Box, Card, Typography, Grid, CardContent, makeStyles} from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +27,6 @@ const SymptomCard = (props) => {
         year: PropTypes.string.isRequired,
         data: PropTypes.string.isRequired,
     };
-    const theme = useTheme();
     const classes = useStyles();
     return <Card className={classes.symptomCard}>
         <CardContent>

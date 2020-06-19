@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Box, Card, Typography, Grid, CardContent, makeStyles} from '@material-ui/core';
+import {Button, Card, Typography, Grid, CardContent, makeStyles} from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles((theme) => ({
