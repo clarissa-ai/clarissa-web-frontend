@@ -3,14 +3,17 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
 import './App.css';
 import Profile from 'Profile.js';
-// import SurveyDAG from 'components/misc/Survey/SurveyDAG';
+import LoaderClass from 'components/navigation/loader/LoaderClass';
+
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
+import Loader from 'components/navigation/loader/Loader';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
-// const survey = new SurveyDAG();
+// We create a loader context as well, to pass down the object to all components who need to load something.
+const LoaderContext = createContext(null);
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
     palette: {
@@ -49,11 +52,13 @@ theme = responsiveFontSizes(theme);
 const App = () => {
     // We create a new profile object. It should automatically be populated if the user has already logged in.
     const profile = new Profile();
+    // We create a new loaderclass object. This should handle all initial loads.
+    const loaderClass = new LoaderClass();
     // State to control custom routing.
     const [routes, setRoutes] = useState(null);
-    console.log(process.env.REACT_APP_ENDPOINT_BASE);
 
     useEffect(() => {
+        const id = loaderClass.request();
         fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
             method: 'GET',
             headers: {
@@ -66,6 +71,7 @@ const App = () => {
             }
             response.json().then((data) => {
                 const {status, message} = data;
+                loaderClass.resolve(id);
                 if (status === 'success') {
                     setRoutes(data.routes);
                 } else {
@@ -82,19 +88,23 @@ const App = () => {
 
     return (
         <ProfileContext.Provider value={profile}>
-            <ThemeProvider theme={theme}>
-                <Router>
-                    <Switch>
-                        <Route exact path="/" render={(props) => <Landing/> }></Route>
-                        <Route exact path="/login" render={(props) => <Login/>} />
-                        <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
-                        {redirect}
-                        <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
-                    </Switch>
-                </Router>
-            </ThemeProvider>
+            <LoaderContext.Provider value={loaderClass}>
+                <ThemeProvider theme={theme}>
+                    <Loader>
+                        <Router>
+                            <Switch>
+                                <Route exact path="/" render={(props) => <Landing/> }></Route>
+                                <Route exact path="/login" render={(props) => <Login/>} />
+                                <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
+                                {redirect}
+                                <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
+                            </Switch>
+                        </Router>
+                    </Loader>
+                </ThemeProvider>
+            </LoaderContext.Provider>
         </ProfileContext.Provider>
     );
 };
 export default App;
-export {ProfileContext};
+export {ProfileContext, LoaderContext};
