@@ -33,18 +33,18 @@ const SymptomCard = (props) => {
             <Grid container direction="row" spacing={1}>
                 <Grid item xs={1.5}><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.symptom}Fever</Box></Typography></Grid>
                 <Grid item xs={9}><Typography color='error'><Box fontWeight="fontWeightBold">{props.severity}102.8F</Box></Typography></Grid>
-                <Grid item xs={1}><Typography className={classes.cardLabel}><Box fontWeight={500}>Edit</Box></Typography></Grid>
+                <Grid item xs={1}><Typography variant='subtitle2' className={classes.cardLabel}><Box fontWeight={500}>Edit</Box></Typography></Grid>
             </Grid>
             <Grid container direction="row" spacing={1}>
-                <Grid item><Typography className={classes.cardLabel}>Date Logged: </Typography></Grid>
-                <Grid item><Typography className={classes.content}>{props.month} {props.day} {props.year} December 23, 2018</Typography></Grid>
+                <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Date Logged: </Typography></Grid>
+                <Grid item><Typography variant='subtitle2' className={classes.content}>{props.month} {props.day} {props.year} December 23, 2018</Typography></Grid>
             </Grid>
             <Grid container direction="row" spacing={1}>
-                <Grid item><Typography className={classes.cardLabel}>Data: {props.data} </Typography></Grid>
-                <Grid item><Typography className={classes.content}>102.8F</Typography></Grid>
+                <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Data: {props.data} </Typography></Grid>
+                <Grid item><Typography variant='subtitle2' className={classes.content}>102.8F</Typography></Grid>
             </Grid>
         </CardContent>
     </Card>;
-}
+};
 
 export default SymptomCard;

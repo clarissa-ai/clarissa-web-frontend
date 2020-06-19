@@ -9,7 +9,7 @@ import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import SymptomCard from 'components/dashboard/SymptomCard';
 import SymptomLog from 'components/dashboard/SymptomLog';
-import SymptomHistory from 'components/dashboard/SymtomHistory';
+import SymptomHistory from 'components/dashboard/SymptomHistory';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
