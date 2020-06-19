@@ -7,7 +7,6 @@ import Profile from 'Profile.js';
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
-import SymptomCard from 'components/dashboard/SymptomCard';
 import SymptomLog from 'components/dashboard/SymptomLog';
 import SymptomHistory from 'components/dashboard/SymptomHistory';
 import PrescriptionCard from 'components/dashboard/PrescriptionCard';
