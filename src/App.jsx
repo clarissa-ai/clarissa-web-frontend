@@ -7,6 +7,7 @@ import Profile from 'Profile.js';
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
+import CurrentIllness from 'components/dashboard/current-illness/CurrentIllness';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
@@ -36,8 +37,8 @@ let theme = createMuiTheme({
         },
         background: '#F5F8FF',
         text: {
-            primary: '#FEAD18',
-            secondary: '#47C594',
+            primary: '#2C3C56',
+            secondary: '#AEAEAE',
         },
     },
     typography: {
@@ -87,6 +88,7 @@ const App = () => {
                     <Switch>
                         <Route exact path="/" render={(props) => <Landing/> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
+                        <Route exact path="/ci" render={(props) => <CurrentIllness/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         {redirect}
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
