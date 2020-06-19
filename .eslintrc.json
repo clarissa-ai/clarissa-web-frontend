@@ -7,7 +7,7 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "google"
+        "eslint-config-netlify"
     ],
     "globals": {
         "Atomics": "readonly",
