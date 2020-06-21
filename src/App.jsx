@@ -8,8 +8,9 @@ import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import SymptomLog from 'components/dashboard/SymptomLog';
-import SymptomHistory from 'components/dashboard/SymptomHistory';
-import PrescriptionCard from 'components/dashboard/PrescriptionCard';
+import SymptomTile from 'components/dashboard/SymptomTile';
+import PrescriptionTile from 'components/dashboard/PrescriptionTile';
+import AppointmentTile from 'components/dashboard/AppointmentTile';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
@@ -89,7 +90,7 @@ const App = () => {
                 <Router>
                     <Switch>
                         <Route exact path="/" render={(props) => <Landing/> }></Route>
-                        <Route exact path="/preview" render={(props) => <div><SymptomLog /><SymptomHistory /><PrescriptionCard /></div> }></Route>
+                        <Route exact path="/preview" render={(props) => <div><SymptomLog /><SymptomTile /><PrescriptionTile /><AppointmentTile/></div> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         {redirect}
