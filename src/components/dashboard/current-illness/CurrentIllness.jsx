@@ -28,7 +28,7 @@ const healthRecc = [
         title: 'Wash hands with soap and water',
     },
     {
-        title: 'Eat nutriotious food',
+        title: 'Eat nutritious food',
     },
     {
         title: 'Keep hydrated',
@@ -39,7 +39,7 @@ const healthRecc = [
 ];
 
 const dataNum = [60, 15, 25];
-const diseases = ['Common Cold', 'Strep', 'Pnumonia'];
+const diseases = ['Common Cold', 'Strep', 'Pneumonia'];
 const displayDiseases = [
     {
         title: 'Common Cold',
@@ -50,7 +50,7 @@ const displayDiseases = [
         percent: 15,
     },
     {
-        title: 'Pnumonia',
+        title: 'Pneumonia',
         percent: 25,
     },
 ];
@@ -83,7 +83,7 @@ const CurrentIllness = (props) => {
                                     <Box style={{color: `${colors[index]}`, borderWidth: 3, marginTop: 4}} border={1} borderRadius={10} width={4} height={4}/>
                                     <Box width={9} height={4}/>
                                     <Typography color='textPrimary' variant='caption'>{disease.title}</Typography>
-                                    <Box width={24} height={4}/>
+                                    <Box width={22} height={4}/>
                                 </Grid>
                             </Grid>
                         </div>
