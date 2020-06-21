@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, makeStyles, CardHeader, Divider, CardContent, Link, Grid} from '@material-ui/core';
+import {Card, makeStyles, CardHeader, Divider, CardContent} from '@material-ui/core';
 import PrescriptionCard from './PrescriptionCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +49,7 @@ const PrescriptionTile = (props) => {
         <Card className={classes.card}>
             <CardHeader title='Prescriptions' classes={{title: classes.title}}/>
             <Divider variant='middle' classes={{middle: classes.divider}}/>
-            <CardContent classes={{root: classes.cardContent}}>
+            <CardContent classes={{root: classes.cardContent}} >
                 <PrescriptionCard/>
                 <PrescriptionCard/>
                 <PrescriptionCard/>
@@ -57,7 +57,6 @@ const PrescriptionTile = (props) => {
                 <PrescriptionCard/>
                 <PrescriptionCard/>
             </CardContent>
-            <Grid container><Link variant='subtitle2' href='' className={classes.link}>View More</Link></Grid>
         </Card>
     );
 };

@@ -3,9 +3,10 @@ import {Box, Card, Typography, Grid, CardContent, makeStyles} from '@material-ui
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
-    symptomCard: {
+    card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         width: '23em',
+        marginBottom: '0.5em',
     },
     heading: {
         color: '#334D6E',
@@ -30,7 +31,7 @@ const PrescriptionCard = (props) => {
         refillYear: PropTypes.string,
     };
     const classes = useStyles();
-    return <Card className={classes.symptomCard}>
+    return <Card className={classes.card}>
         <CardContent>
             <Grid container direction="row" justify='space-between' spacing={1}>
                 <Grid item direction="row" spacing={1}>
