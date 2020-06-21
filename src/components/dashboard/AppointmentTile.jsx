@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardHeader, Divider, Avatar, Box, Card, Typography, Grid, CardContent, makeStyles} from '@material-ui/core';
+import {CardHeader, Divider, Card, Grid, makeStyles} from '@material-ui/core';
 import DoctorCard from './DoctorCard';
 
 const useStyles = makeStyles((theme) => ({
