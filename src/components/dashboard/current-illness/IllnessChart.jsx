@@ -6,7 +6,8 @@ import {useTheme} from '@material-ui/core';
 const IllnessChart = (props) => {
     const theme = useTheme();
 
-    const dataNum = [60, 15, 25];
+    const dataNum = props.dataNum;
+    const diseases = props.diseases;
     const max = Math.max(...dataNum);
     const indexMax = dataNum.indexOf(max);
     const colors = [
@@ -20,6 +21,8 @@ const IllnessChart = (props) => {
 
     IllnessChart.propTypes = {
         className: PropTypes.string,
+        dataNum: PropTypes.array,
+        diseases: PropTypes.array,
     };
 
     const data = {
@@ -30,7 +33,7 @@ const IllnessChart = (props) => {
                 hoverBackgroundColor: colors,
             },
         ],
-        labels: ['Common Cold', 'Strep', 'Pnumonia'],
+        labels: diseases,
         text: `${max}%`,
     };
 
@@ -50,11 +53,16 @@ const IllnessChart = (props) => {
             mode: 'index',
             intersect: false,
         },
+        elements: {
+            arc: {
+                borderWidth: 0,
+            },
+        },
     };
 
     const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
     Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
-        draw: function() {
+        draw: function(ease) {
             originalDoughnutDraw.apply(this);
 
             const chart = this.chart.chart;
@@ -62,8 +70,8 @@ const IllnessChart = (props) => {
             const width = chart.width;
             const height = chart.height;
 
-            const fontSize = (height / 100);
-            ctx.font = fontSize + 'em Verdana';
+            const fontSize = (height / 80);
+            ctx.font = '500 ' + fontSize + 'em Poppins';
             ctx.textBaseline = 'middle';
             ctx.fillStyle = colors[indexMax];
 
@@ -72,6 +80,36 @@ const IllnessChart = (props) => {
             const textY = height / 2;
 
             ctx.fillText(text, textX, textY);
+
+            const easingDecimal = ease || 1;
+            const arcs = this.getMeta().data;
+            Chart.helpers.each(arcs, function(arc, i) {
+                arc.transition(easingDecimal).draw();
+
+                const pArc = arcs[i === 0 ? arcs.length - 1 : i - 1];
+                const pColor = pArc._view.backgroundColor;
+
+                const vm = arc._view;
+                const radius = (vm.outerRadius + vm.innerRadius) / 2;
+                const thickness = (vm.outerRadius - vm.innerRadius) / 2;
+                const startAngle = Math.PI - vm.startAngle - Math.PI / 2;
+                const angle = Math.PI - vm.endAngle - Math.PI / 2;
+
+                ctx.save();
+                ctx.translate(vm.x, vm.y);
+
+                ctx.fillStyle = i === 0 ? vm.backgroundColor : pColor;
+                ctx.beginPath();
+                ctx.arc(radius * Math.sin(startAngle), radius * Math.cos(startAngle), thickness, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.fillStyle = vm.backgroundColor;
+                ctx.beginPath();
+                ctx.arc(radius * Math.sin(angle), radius * Math.cos(angle), thickness, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.restore();
+            });
         },
     });
 
