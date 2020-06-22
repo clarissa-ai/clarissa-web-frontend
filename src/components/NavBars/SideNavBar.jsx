@@ -38,9 +38,11 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(.5),
     },
     logo: {
-        marginLeft: theme.spacing(3),
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(5),
+        marginLeft: theme.spacing(2.5),
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(2),
+        width: 120,
+        height: 70,
         flexShrink: 0,
     },
     user: {
