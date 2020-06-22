@@ -1,12 +1,11 @@
 import React from 'react';
-import {Button, Card, CardHeader, Grid, CardContent, makeStyles, Typography} from '@material-ui/core';
+import {Button, Card, CardHeader, Grid, CardContent, makeStyles} from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         width: '47.5vw',
-        height: '18vh',
     },
     textInput: {
         color: '#AEAEAE',

@@ -1,6 +1,5 @@
 import React from 'react';
-import {CardHeader, Divider, Card, Grid, makeStyles} from '@material-ui/core';
-import DoctorCard from './DoctorCard';
+import {Card, makeStyles, CardHeader, Divider, CardContent} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -32,20 +31,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const AppointmentTile = (props) => {
+const SymptomPopUp = (props) => {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
-            <Grid container direction='row' justify='space-between' alignItem='center' alignContent='center'>
-                <Grid item><CardHeader title='Upcoming Appointment' classes={{title: classes.title}}/></Grid>
-                <Grid item><CardHeader title='View More' className={classes.cardLabel} titleTypographyProps={{variant: 'subtitle2'}}/></Grid>
-            </Grid>
+            <CardHeader title='Symptoms Recognized' classes={{title: classes.title}}/>
             <Divider variant='middle' classes={{middle: classes.divider}}/>
-            <DoctorCard/>
-            <CardHeader title='Previous Appointment' classes={{title: classes.title}}/>
-            <Divider variant='middle' classes={{middle: classes.divider}}/>
-            <DoctorCard/>
+            <CardContent>
+                <p>Redesign in progress</p>
+            </CardContent>
         </Card>
     );
 };
-export default AppointmentTile;
+export default SymptomPopUp;

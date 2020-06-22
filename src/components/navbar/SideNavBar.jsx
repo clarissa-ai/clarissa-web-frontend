@@ -13,8 +13,11 @@ import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
 
 const useStyles = makeStyles((theme) => ({
     drawer: {
-        width: '16rem',
-        flexShrink: 0,
+        width: '18vw',
+        background: '#fff',
+        boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
+        border: 'none',
+        overflow: 'hidden',
     },
     name: {
         marginTop: '.25rem',
