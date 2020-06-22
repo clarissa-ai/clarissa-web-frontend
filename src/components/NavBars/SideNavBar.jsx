@@ -60,7 +60,7 @@ const routes = [
     {
         title: 'Dashboard',
         icon: <DashboardOutlinedIcon/>,
-        link: '/dasboard',
+        link: '/dashboard',
     },
     {
         title: 'Active Illness',
