@@ -31,7 +31,7 @@ const SymptomCard = (props) => {
     return <Card className={classes.symptomCard}>
         <CardContent>
             <Grid container direction="row" spacing={1}>
-                <Grid item xs={1.5}><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.symptom}Fever</Box></Typography></Grid>
+                <Grid item><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.symptom}Fever</Box></Typography></Grid>
                 <Grid item xs={9}><Typography color='error'><Box fontWeight="fontWeightBold">{props.severity}102.8F</Box></Typography></Grid>
                 <Grid item xs={1}><Typography variant='subtitle2' className={classes.cardLabel}><Box fontWeight={500}>Edit</Box></Typography></Grid>
             </Grid>

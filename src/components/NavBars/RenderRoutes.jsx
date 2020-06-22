@@ -1,7 +1,7 @@
 import React, {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import {List, ListItem, Typography, makeStyles, Button} from '@material-ui/core';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     name: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ConstructRoutes = forwardRef((props, ref) => (
     <div ref={ref} style={{flexGrow: 1}}>
-        <NavLink {...props}/>
+        <Link {...props}/>
     </div>
 ));
 

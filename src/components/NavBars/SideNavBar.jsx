@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, makeStyles, Typography, Drawer, Divider, Grid, createMuiTheme, responsiveFontSizes, ThemeProvider} from '@material-ui/core';
+import {Avatar, makeStyles, Typography, Drawer, Divider, Grid} from '@material-ui/core';
 import RenderRoutes from './RenderRoutes';
 import {ReactComponent as LogoWithName} from './logoWithName.svg';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
@@ -11,46 +11,28 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
 
-let theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#306DDF',
-            contrastText: '#ffff',
-        },
-        background: '#F5F8FF',
-        text: {
-            primary: '#2C3C56',
-            secondary: '#90A0B7',
-        },
-    },
-    typography: {
-        fontFamily: 'Poppins',
-    },
-});
-theme = responsiveFontSizes(theme);
-
 const useStyles = makeStyles((theme) => ({
     drawer: {
-        width: 256,
+        width: '16rem',
         flexShrink: 0,
     },
     name: {
-        marginTop: theme.spacing(.5),
+        marginTop: '.25rem',
     },
     logo: {
-        marginLeft: theme.spacing(2.5),
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(2),
-        width: 120,
-        height: 70,
+        marginLeft: '1.25rem',
+        marginTop: '.5rem',
+        marginBottom: '1rem',
+        width: '7.5rem',
+        height: '4.375rem',
         flexShrink: 0,
     },
     user: {
-        paddingLeft: theme.spacing(3),
+        paddingLeft: '1.5rem',
     },
     avatarSize: {
-        width: theme.spacing(6),
-        height: theme.spacing(6),
+        width: '3rem',
+        height: '3rem',
         fontWeight: 600,
     },
     bold: {
@@ -115,23 +97,21 @@ const SideNavBar = (props) => {
     };
 
     return (
-        <ThemeProvider theme={theme}>
-            <Drawer variant='permanent' anchor='left' classes={{paper: classes.drawer}}>
-                <LogoWithName className={classes.logo}/>
-                <Grid container spacing={2} className={classes.user}>
-                    <Grid item>
-                        <Avatar alt={user.name} src={user.img} className={classes.avatarSize}/>
-                    </Grid>
-                    <Grid item className={classes.name}>
-                        <Typography className={classes.bold}>{user.name}</Typography>
-                        <Typography paragraph color='textSecondary' variant='caption'>{user.email}</Typography>
-                    </Grid>
+        <Drawer variant='permanent' anchor='left' classes={{paper: classes.drawer}}>
+            <LogoWithName className={classes.logo}/>
+            <Grid container spacing={2} className={classes.user}>
+                <Grid item>
+                    <Avatar alt={user.name} src={user.img} className={classes.avatarSize}/>
                 </Grid>
-                <RenderRoutes routes={routes}/>
-                <Divider/>
-                <RenderRoutes routes={extraRoutes}/>
-            </Drawer>
-        </ThemeProvider>
+                <Grid item className={classes.name}>
+                    <Typography className={classes.bold}>{user.name}</Typography>
+                    <Typography paragraph color='textSecondary' variant='caption'>{user.email}</Typography>
+                </Grid>
+            </Grid>
+            <RenderRoutes routes={routes}/>
+            <Divider/>
+            <RenderRoutes routes={extraRoutes}/>
+        </Drawer>
     );
 };
 
