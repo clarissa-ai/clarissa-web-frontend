@@ -30,7 +30,7 @@ const DoctorCard = (props) => {
     };
     const classes = useStyles();
     return <Card className={classes.card}>
-        <CardContent className={classes.card}>
+        <CardContent className={classes.card} style={{paddingBottom: '0'}}>
             <Grid container direction='row' justify='space-between'>
                 {/* Avatar */}
                 <Grid item>

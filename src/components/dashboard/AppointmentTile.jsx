@@ -5,7 +5,8 @@ import DoctorCard from './DoctorCard';
 const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        width: '25em',
+        width: '23vw',
+        height: '34vh',
     },
     title: {
         color: '#334D6E',

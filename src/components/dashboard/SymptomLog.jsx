@@ -1,14 +1,14 @@
 import React from 'react';
-import {Button, Card, Typography, Grid, CardContent, makeStyles} from '@material-ui/core';
+import {Button, Card, CardHeader, Grid, CardContent, makeStyles, Typography} from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        width: '40em',
+        width: '47.5vw',
+        height: '18vh',
     },
     textInput: {
-        margin: '1em 0',
         color: '#AEAEAE',
     },
     submitBtn: {
@@ -16,33 +16,34 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
         textTransform: 'none',
     },
-    heading: {
-        fontFamily: 'Poppins',
+    title: {
         color: '#334D6E',
         fontWeight: 'bold',
-    }
+        fontSize: '1rem',
+        margin: 0,
+        paddingBottom: '0',
+    },
 }));
 
 const SymptomLog = (props) => {
     const classes = useStyles();
-    return (<div>
+    return (
         <Card className={classes.container}>
-            <CardContent>
-                {/* Heading */}
-                <Typography className={classes.heading}>Tell Clarissa how you are feeling.</Typography>
+            {/* Heading */}
+            <CardHeader title='Tell Clarissa how you are feeling.' classes={{root: classes.title, title: classes.title}}/>
+            <CardContent className={classes.content}>
                 {/* Symptom Input */}
                 <InputBase
                     className={classes.textInput}
                     placeholder="I have a fever, and a cough. I have also been feeling nauseous lately."
                     fullWidth
-                    style={{margin: '0.5em 0'}}
+                    margin='none'
                 />
                 <Grid container justify='flex-end'>
                     <Grid item><Button size='small' className={classes.submitBtn}>Submit</Button></Grid>
                 </Grid>
             </CardContent>
         </Card>
-    </div>
     );
 };
 export default SymptomLog;

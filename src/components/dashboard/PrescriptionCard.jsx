@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        width: '23em',
+        width: '21vw',
         marginBottom: '0.5em',
     },
     heading: {
@@ -33,9 +33,12 @@ const PrescriptionCard = (props) => {
     const classes = useStyles();
     return <Card className={classes.card}>
         <CardContent>
-            <Grid container direction="row" justify='space-between' spacing={1}>
-                <Grid item direction="row" spacing={1}>
-                    <Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.drugName}Amoxicillin {props.drugDose}500 Mg</Box></Typography>
+            <Grid container direction="row" justify='space-between'>
+                <Grid item>
+                    <Grid container direction='row' spacing={1}>
+                        <Grid item><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.drugName}Amoxicillin</Box></Typography></Grid>
+                        <Grid item><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.drugDose}500 Mg</Box></Typography></Grid>
+                    </Grid>
                 </Grid>
                 <Grid item><Typography variant='subtitle2' className={classes.cardLabel}><Box fontWeight={500}>Edit</Box></Typography></Grid>
             </Grid>

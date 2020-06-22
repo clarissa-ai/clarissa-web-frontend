@@ -5,7 +5,8 @@ import SymptomCard from './SymptomCard';
 const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        width: '25em',
+        width: '23vw',
+        height: '70vh',
     },
     title: {
         color: '#334D6E',
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
         margin: '0 auto',
         fontFamily: 'Poppins',
         fontWeight: 'bold',
+        paddingTop: '1em',
         paddingBottom: '1em',
     },
 }));
@@ -39,8 +41,6 @@ const SymptomTile = (props) => {
             <CardHeader title='Symptom History' classes={{title: classes.title}}/>
             <Divider variant='middle' classes={{middle: classes.divider}}/>
             <CardContent>
-                <SymptomCard />
-                <SymptomCard />
                 <SymptomCard />
                 <SymptomCard />
                 <SymptomCard />
