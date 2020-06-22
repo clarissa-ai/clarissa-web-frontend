@@ -37,8 +37,8 @@ let theme = createMuiTheme({
         },
         background: '#F5F8FF',
         text: {
-            primary: '#FEAD18',
-            secondary: '#47C594',
+            primary: '#2C3C56',
+            secondary: '#AEAEAE',
         },
     },
     typography: {
