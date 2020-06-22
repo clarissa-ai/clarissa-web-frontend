@@ -32,11 +32,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SymptomHistory = (props) => {
+const SymptomTile = (props) => {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
-            <CardHeader title='Symptom History' classes={{title: classes.title}}>Symptom History</CardHeader>
+            <CardHeader title='Symptom History' classes={{title: classes.title}}/>
             <Divider variant='middle' classes={{middle: classes.divider}}/>
             <CardContent>
                 <SymptomCard />
@@ -49,4 +49,4 @@ const SymptomHistory = (props) => {
         </Card>
     );
 };
-export default SymptomHistory;
+export default SymptomTile;
