@@ -57,6 +57,8 @@ const SymptomTile = (props) => {
                 <SymptomCard />
                 <SymptomCard />
                 <SymptomCard />
+                <SymptomCard />
+                <SymptomCard />
             </CardContent>
             <Grid container justify='center'><Link variant='subtitle2' href='' className={classes.link}>View More</Link></Grid>
         </Card>
