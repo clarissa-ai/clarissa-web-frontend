@@ -1,10 +1,11 @@
 import React from 'react';
-import {Card, makeStyles, CardHeader, Divider, CardContent} from '@material-ui/core';
+import {Card, makeStyles, CardHeader, CardContent} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        width: '23vw',
+        height: '100%',
+        backgroundColor: '#FFF',
     },
     title: {
         color: '#334D6E',
@@ -36,9 +37,7 @@ const SymptomPopUp = (props) => {
     return (
         <Card className={classes.card}>
             <CardHeader title='Symptoms Recognized' classes={{title: classes.title}}/>
-            <Divider variant='middle' classes={{middle: classes.divider}}/>
             <CardContent>
-                <p>Redesign in progress</p>
             </CardContent>
         </Card>
     );

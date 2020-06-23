@@ -1,11 +1,16 @@
 import React from 'react';
-import {CardHeader, Divider, Card, Grid, makeStyles} from '@material-ui/core';
+import {CardHeader, Divider, Card, Grid, makeStyles, CardContent} from '@material-ui/core';
 import DoctorCard from './DoctorCard';
 
 const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        width: '23vw',
+        height: '100%',
+        backgroundColor: '#FFF',
+    },
+    doctorCard: {
+        padding: '0',
+        margin: '0',
     },
     title: {
         color: '#334D6E',
@@ -41,10 +46,10 @@ const AppointmentTile = (props) => {
                 <Grid item><CardHeader title='View More' className={classes.cardLabel} titleTypographyProps={{variant: 'subtitle2'}}/></Grid>
             </Grid>
             <Divider variant='middle' classes={{middle: classes.divider}}/>
-            <DoctorCard/>
+            <CardContent className={classes.doctorCard}><DoctorCard/></CardContent>
             <CardHeader title='Previous Appointment' classes={{title: classes.title}}/>
             <Divider variant='middle' classes={{middle: classes.divider}}/>
-            <DoctorCard/>
+            <CardContent className={classes.doctorCard}><DoctorCard/></CardContent>
         </Card>
     );
 };

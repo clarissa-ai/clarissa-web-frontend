@@ -4,8 +4,9 @@ import IllnessChart from './IllnessChart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '23.5vw',
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
+        backgroundColor: '#FFF',
+        height: '100%',
     },
     divider: {
         height: 3,
@@ -22,11 +23,12 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(2),
     },
     link: {
-        margin: '0 auto',
         fontFamily: 'Poppins',
         fontWeight: 'bold',
         paddingTop: '1em',
         paddingBottom: '1em',
+        bottom: '1rem',
+        position: 'absolute',
     },
 }));
 
@@ -95,7 +97,7 @@ const CurrentIllness = (props) => {
 
             <CardHeader title='Health Recommendation' classes={{title: classes.title}}/>
             <Divider className={classes.divider} variant='middle'/>
-            <CardContent>
+            <CardContent className={classes.cardContent}>
                 <ul style={{margin: '0'}}>
                     {healthRecc.map((recc, index) => (
                         <li key={index}>
@@ -104,7 +106,7 @@ const CurrentIllness = (props) => {
                     ))}
                 </ul>
             </CardContent>
-            <Grid container><Link variant='subtitle2' href='' className={classes.link}>Manage</Link></Grid>
+            <Grid container justify='center'><Link variant='subtitle2' href='' className={classes.link}>Manage</Link></Grid>
         </Card>
     );
 };

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles((theme) => ({
     symptomCard: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        width: '21vw',
+        width: '100%',
         marginBottom: '0.5em',
     },
     heading: {

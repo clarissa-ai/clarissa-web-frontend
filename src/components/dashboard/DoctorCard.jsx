@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: 'none',
+        backgroundColor: '#FFF',
     },
     heading: {
         color: '#334D6E',
