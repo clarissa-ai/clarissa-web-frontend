@@ -118,7 +118,7 @@ const ScreeningStart = (props) => {
             </Container>
         );
     } else {
-        return <ScreeningQuestions data={data}/>;
+        return <ScreeningQuestions data={data} idNum={idNum} email={''}/>;
     }
 };
 export default ScreeningStart;

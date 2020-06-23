@@ -125,6 +125,9 @@ theme = responsiveFontSizes(theme);
 const ScreeningQuestions = (props) => {
     const classes = useStyles();
     const data = props.data;
+    const idNum = props.idNum;
+    const email = props.email;
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     // Gets question index
     const processQuestion = (qNum) => {
         let qIndex = 0;
@@ -265,6 +268,70 @@ const ScreeningQuestions = (props) => {
             setShowResult(true);
             const maxVal = Math.max(...sumWeight);
             setSummIdx(sumWeight.indexOf(maxVal));
+
+            // Creates and pushes JSON to endpoint
+            let stringJSON = '{';
+            let i = 0;
+            while (i < data.question_count) {
+                const index = questOrder.indexOf(data.questions[i].id);
+                stringJSON += `"${data.questions[i].id}": `;
+                if (index !== -1) {
+                    stringJSON += `[`;
+                    let j = 0;
+                    const optionLength = data.questions[i].options.length;
+                    let numTrue = 0;
+                    while (j < optionLength) {
+                        if (choice[i][j] === true) {
+                            numTrue++;
+                        }
+                        j++;
+                    };
+                    j = 0;
+                    while (j < optionLength) {
+                        if (choice[i][j] === true) {
+                            stringJSON += `"${data.questions[i].options[j].title}"`;
+                            numTrue--;
+                            if (numTrue !== 0) {
+                                stringJSON += `,`;
+                            }
+                        }
+                        j++;
+                    }
+                    stringJSON += `]`;
+                } else {
+                    stringJSON += `[]`;
+                }
+                if (i !== data.question_count - 1) {
+                    stringJSON += ',';
+                }
+                i++;
+            }
+            stringJSON += '}';
+
+            console.log((stringJSON));
+            console.log(JSON.parse(stringJSON));
+            let result;
+            // Check if email exists
+            if (email === '') {
+                result = {
+                    'survey_id': idNum,
+                    'json_body': JSON.parse(stringJSON),
+                };
+            } else {
+                result = {
+                    'survey_id': idNum,
+                    'user_email': email,
+                    'json_body': JSON.parse(stringJSON),
+                };
+            }
+            console.log(JSON.stringify(result));
+            fetch(`${apiLink}/api/survey/submit_response`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(result),
+            }).then((res) => res.json());
         } else {
             const order = [...questOrder];
             const choices = [...choice];
