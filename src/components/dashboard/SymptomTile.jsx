@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#334D6E',
     },
     divider: {
-        height: '3px',
+        height: 3,
     },
     link: {
         fontFamily: 'Poppins',

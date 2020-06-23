@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#334D6E',
     },
     divider: {
-        height: '0.2em',
+        height: 3,
     },
     link: {
         margin: '0 auto',
