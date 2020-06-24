@@ -271,12 +271,13 @@ const ScreeningQuestions = (props) => {
             // Creates and pushes JSON to endpoint
             const res = {};
             let i = 0;
+            let j;
             while (i < data.question_count) {
                 const index = questOrder.indexOf(data.questions[i].id);
                 const id = `${data.questions[i].id}`;
                 const answers = [];
                 if (index !== -1) {
-                    let j = 0;
+                    j = 0;
                     const optionLength = data.questions[i].options.length;
                     while (j < optionLength) {
                         if (choice[i][j] === true) {
