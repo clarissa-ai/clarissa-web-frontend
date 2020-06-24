@@ -125,6 +125,9 @@ theme = responsiveFontSizes(theme);
 const ScreeningQuestions = (props) => {
     const classes = useStyles();
     const data = props.data;
+    const idNum = props.idNum;
+    const email = props.email;
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     // Gets question index
     const processQuestion = (qNum) => {
         let qIndex = 0;
@@ -256,7 +259,6 @@ const ScreeningQuestions = (props) => {
         choices[questionIndex] = check;
         setChecked(check);
         setChoice(choices);
-        console.log(weights);
     };
 
     // Handles Next button
@@ -265,6 +267,49 @@ const ScreeningQuestions = (props) => {
             setShowResult(true);
             const maxVal = Math.max(...sumWeight);
             setSummIdx(sumWeight.indexOf(maxVal));
+
+            // Creates and pushes JSON to endpoint
+            const res = {};
+            let i = 0;
+            let j;
+            while (i < data.question_count) {
+                const index = questOrder.indexOf(data.questions[i].id);
+                const id = `${data.questions[i].id}`;
+                const answers = [];
+                if (index !== -1) {
+                    j = 0;
+                    const optionLength = data.questions[i].options.length;
+                    while (j < optionLength) {
+                        if (choice[i][j] === true) {
+                            answers.push(`${data.questions[i].options[j].title}`);
+                        }
+                        j++;
+                    }
+                }
+                res[id] = answers;
+                i++;
+            }
+
+            let result;
+            if (email === '') {
+                result = {
+                    'survey_id': idNum,
+                    'json_body': res,
+                };
+            } else {
+                result = {
+                    'survey_id': idNum,
+                    'user_email': email,
+                    'json_body': res,
+                };
+            }
+            fetch(`${apiLink}/api/survey/submit_response`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(result),
+            }).then((res) => res.json());
         } else {
             const order = [...questOrder];
             const choices = [...choice];
@@ -301,7 +346,6 @@ const ScreeningQuestions = (props) => {
 
     // Handles choosing options from a drop down
     const handleChooseDrop = (event, child) => {
-        console.log(nextQuestion[questionIndex]);
         setDropDownValue(event.target.value);
         const index = child.key;
         let next = child.props.next;
@@ -339,7 +383,6 @@ const ScreeningQuestions = (props) => {
         choices[questionIndex] = check;
         setChecked(check);
         setChoice(choices);
-        // console.log(weights);
     };
 
     // Activate/De-activate next button
