@@ -278,7 +278,6 @@ const ScreeningQuestions = (props) => {
                 if (index !== -1) {
                     let j = 0;
                     const optionLength = data.questions[i].options.length;
-                    j = 0;
                     while (j < optionLength) {
                         if (choice[i][j] === true) {
                             answers.push(`${data.questions[i].options[j].title}`);
