@@ -259,7 +259,6 @@ const ScreeningQuestions = (props) => {
         choices[questionIndex] = check;
         setChecked(check);
         setChoice(choices);
-        console.log(weights);
     };
 
     // Handles Next button
@@ -270,61 +269,40 @@ const ScreeningQuestions = (props) => {
             setSummIdx(sumWeight.indexOf(maxVal));
 
             // Creates and pushes JSON to endpoint
-            let stringJSON = '{';
+            const res = {};
             let i = 0;
             while (i < data.question_count) {
                 const index = questOrder.indexOf(data.questions[i].id);
-                stringJSON += `"${data.questions[i].id}": `;
+                const id = `${data.questions[i].id}`;
+                const answers = [];
                 if (index !== -1) {
-                    stringJSON += `[`;
                     let j = 0;
                     const optionLength = data.questions[i].options.length;
-                    let numTrue = 0;
-                    while (j < optionLength) {
-                        if (choice[i][j] === true) {
-                            numTrue++;
-                        }
-                        j++;
-                    };
                     j = 0;
                     while (j < optionLength) {
                         if (choice[i][j] === true) {
-                            stringJSON += `"${data.questions[i].options[j].title}"`;
-                            numTrue--;
-                            if (numTrue !== 0) {
-                                stringJSON += `,`;
-                            }
+                            answers.push(`${data.questions[i].options[j].title}`);
                         }
                         j++;
                     }
-                    stringJSON += `]`;
-                } else {
-                    stringJSON += `[]`;
                 }
-                if (i !== data.question_count - 1) {
-                    stringJSON += ',';
-                }
+                res[id] = answers;
                 i++;
             }
-            stringJSON += '}';
 
-            console.log((stringJSON));
-            console.log(JSON.parse(stringJSON));
             let result;
-            // Check if email exists
             if (email === '') {
                 result = {
                     'survey_id': idNum,
-                    'json_body': JSON.parse(stringJSON),
+                    'json_body': res,
                 };
             } else {
                 result = {
                     'survey_id': idNum,
                     'user_email': email,
-                    'json_body': JSON.parse(stringJSON),
+                    'json_body': res,
                 };
             }
-            console.log(JSON.stringify(result));
             fetch(`${apiLink}/api/survey/submit_response`, {
                 method: 'POST',
                 headers: {
@@ -368,7 +346,6 @@ const ScreeningQuestions = (props) => {
 
     // Handles choosing options from a drop down
     const handleChooseDrop = (event, child) => {
-        console.log(nextQuestion[questionIndex]);
         setDropDownValue(event.target.value);
         const index = child.key;
         let next = child.props.next;
@@ -406,7 +383,6 @@ const ScreeningQuestions = (props) => {
         choices[questionIndex] = check;
         setChecked(check);
         setChoice(choices);
-        // console.log(weights);
     };
 
     // Activate/De-activate next button
