@@ -265,11 +265,12 @@ const ScreeningQuestions = (props) => {
     const handleNext = () => {
         if (nextQuestion[questionIndex] === -1) {
             setShowResult(true);
-            const maxVal = Math.max(...sumWeight);
-            setSummIdx(sumWeight.indexOf(maxVal));
+            const maxWeight = Math.max(...sumWeight);
+            const summaryIndex = sumWeight.indexOf(maxWeight);
+            setSummIdx(summaryIndex);
 
             // Creates and pushes JSON to endpoint
-            const res = {};
+            const resQ = [];
             let i = 0;
             let j;
             while (i < data.question_count) {
@@ -286,7 +287,19 @@ const ScreeningQuestions = (props) => {
                         j++;
                     }
                 }
-                res[id] = answers;
+                resQ[i] = {
+                    'id': id,
+                    'choices': answers,
+                };
+                i++;
+            }
+
+            const resSumm = {};
+            i = 0;
+            let currID;
+            while (i < data.summaries.length) {
+                currID = `${data.summaries[i].id}`;
+                resSumm[currID] = sumWeight[i];
                 i++;
             }
 
@@ -294,15 +307,30 @@ const ScreeningQuestions = (props) => {
             if (email === '') {
                 result = {
                     'survey_id': idNum,
-                    'json_body': res,
+                    'json_body': {
+                        'questions': resQ,
+                        'summary': {
+                            'id': data.summaries[summaryIndex].id,
+                            'weight': maxWeight,
+                        },
+                        'final_weights': resSumm,
+                    },
                 };
             } else {
                 result = {
                     'survey_id': idNum,
                     'user_email': email,
-                    'json_body': res,
+                    'json_body': {
+                        'questions': resQ,
+                        'summary': {
+                            'id': data.summaries[summaryIndex].id,
+                            'weight': maxWeight,
+                        },
+                        'final_weights': resSumm,
+                    },
                 };
             }
+            console.log(result);
             fetch(`${apiLink}/api/survey/submit_response`, {
                 method: 'POST',
                 headers: {
