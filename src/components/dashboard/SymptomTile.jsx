@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, makeStyles, CardHeader, Divider, CardContent, Link, Grid} from '@material-ui/core';
 import SymptomCard from './SymptomCard';
+import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -47,18 +48,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SymptomTile = (props) => {
+    SymptomTile.propTypes = {
+        symptomModalFunction: propTypes.func,
+    };
     const classes = useStyles();
     return (
         <Card className={classes.card}>
             <CardHeader title='Symptom History' classes={{title: classes.title}}/>
             <Divider variant='middle' classes={{middle: classes.divider}}/>
             <CardContent className={classes.cardContent}>
-                <SymptomCard />
-                <SymptomCard />
-                <SymptomCard />
-                <SymptomCard />
-                <SymptomCard />
-                <SymptomCard />
+                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
+                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
+                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
+                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
+                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
+                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
             </CardContent>
             <Grid container justify='center'><Link variant='subtitle2' href='' className={classes.link}>View More</Link></Grid>
         </Card>

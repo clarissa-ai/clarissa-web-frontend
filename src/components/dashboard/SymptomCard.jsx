@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Card, Typography, Grid, CardContent, makeStyles} from '@material-ui/core';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     symptomCard: {
@@ -21,12 +21,13 @@ const useStyles = makeStyles((theme) => ({
 
 const SymptomCard = (props) => {
     SymptomCard.propTypes = {
-        symptom: PropTypes.string.isRequired,
-        severity: PropTypes.string.isRequired,
-        month: PropTypes.string.isRequired,
-        day: PropTypes.string.isRequired,
-        year: PropTypes.string.isRequired,
-        data: PropTypes.string.isRequired,
+        symptom: propTypes.string,
+        severity: propTypes.string,
+        month: propTypes.string,
+        day: propTypes.string,
+        year: propTypes.string,
+        data: propTypes.string,
+        symptomModalFunction: propTypes.func,
     };
     const classes = useStyles();
     return <Card className={classes.symptomCard}>
@@ -38,7 +39,7 @@ const SymptomCard = (props) => {
                         <Grid item><Typography color='error'><Box fontWeight="fontWeightBold">{props.severity}102.8F</Box></Typography></Grid>
                     </Grid>
                 </Grid>
-                <Grid item><Typography variant='subtitle2' className={classes.cardLabel}><Box fontWeight={500}>Edit</Box></Typography></Grid>
+                <Grid item onClick={props.symptomModalFunction}><Typography variant='subtitle2' className={classes.cardLabel}><Box fontWeight={500}>Edit</Box></Typography></Grid>
             </Grid>
             <Grid container direction="row" spacing={1}>
                 <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Date Logged: </Typography></Grid>
