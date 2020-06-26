@@ -1,25 +1,48 @@
 import React from 'react';
-import {Button, Grid, makeStyles, TextField} from '@material-ui/core';
+import {Button, Grid, makeStyles, TextField, ThemeProvider} from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import {createMuiTheme} from '@material-ui/core/styles';
 import propTypes from 'prop-types';
+
+// For overriding date picker background, it allows themes only
+const theme = createMuiTheme({
+    overrides: {
+        MuiPickersDay: {
+            backgroundColor: '#fff',
+        },
+    },
+});
 
 const useStyles = makeStyles((theme) => ({
     container: {
+        zIndex: '9999',
         position: 'fixed',
         background: 'rgba(0, 0, 0, 0.4)',
         width: '100vw',
         height: '100vh',
-        zIndex: '999',
     },
     formContainer: {
         background: '#fff',
-        width: '40vw',
-        padding: '4rem',
+        width: '30vw',
+        padding: '2rem',
         borderRadius: '4px',
     },
     date: {
         background: '#fff',
+        fontFamily: 'Poppins',
+    },
+    button: {
+        marginTop: '1rem',
+        textTransform: 'none',
+        backgroundColor: '#47C594',
+        bordeRadius: '4px',
+        color: '#fff',
+    },
+    close: {
+        textTransform: 'none',
+        width: 'fitContent',
+        marginBottom: '1rem',
     },
 }));
 
@@ -36,30 +59,36 @@ const SymptomModal = (props) => {
 
     const classes = useStyles();
     return (
-        <Grid container className={classes.container} justify='center' alignItems='center'> {console.log(props.closeModalFunction)}
-            <Grid container className={classes.formContainer} direction='column' spacing={1}>
-                <Grid container justify='flex-end'>
-                    <Grid item><Button onClick={props.closeModalFunction}>x Close</Button></Grid>
+        <Grid container className={classes.container} justify='center' alignItems='center'>
+            {/* Form contents */}
+            <Grid container className={classes.formContainer} direction='column' spacing={2}>
+                <Grid container justify='flex-end' >
+                    <Grid item><Button className={classes.close} onClick={props.closeModalFunction}>Close</Button></Grid>
                 </Grid>
-                <Grid item><TextField className={classes.close} id="outlined-basic" label="Symptom" variant="outlined" fullWidth/></Grid>
+                <Grid item><TextField id="outlined-basic" label="Symptom" variant="outlined" fullWidth/></Grid>
+                <Grid item><ThemeProvider theme={theme}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            className={classes.date}
+                            fullWidth
+                            disableToolbar
+                            variant="inline"
+                            inputVariant="outlined"
+                            format="MM/dd/yyyy"
+                            margin='none'
+                            id="date-picker-inline"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
+                </ThemeProvider></Grid>
                 <Grid item><TextField id="outlined-basic" label="Data" variant="outlined" fullWidth/></Grid>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="Date Logged"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                </MuiPickersUtilsProvider>
                 <Grid container justify='center'>
-                    <Grid item><Button onClick={console.log('save data placeholder')}>Save</Button></Grid>
+                    {/* NOTE TO SELF: POST CHANGES WHEN CONNECTING TO BACKEND */}
+                    <Grid item><Button className={classes.button} onClick={props.closeModalFunction}>Save</Button></Grid>
                 </Grid>
             </Grid>
         </Grid>
