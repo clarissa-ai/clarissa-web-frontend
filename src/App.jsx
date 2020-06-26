@@ -7,7 +7,7 @@ import Profile from 'Profile.js';
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
-import Dashboard from 'pages/dashboard/Dashboard.jsx';
+import Dashboard from 'pages/dashboard/DashboardPage';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
