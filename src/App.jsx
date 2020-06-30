@@ -1,6 +1,8 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
+import {connect, useDispatch} from 'react-redux';
+import {setProfile} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
 // import SurveyDAG from 'components/misc/Survey/SurveyDAG';
@@ -46,14 +48,14 @@ let theme = createMuiTheme({
 });
 theme = responsiveFontSizes(theme);
 
-const App = () => {
-    // We create a new profile object. It should automatically be populated if the user has already logged in.
-    const profile = new Profile();
+const App = (props) => {
     // State to control custom routing.
     const [routes, setRoutes] = useState(null);
     console.log(process.env.REACT_APP_ENDPOINT_BASE);
-
+    const dispatch = useDispatch(); // react-redux dispatch
     useEffect(() => {
+        const profile = new Profile();
+        dispatch(setProfile(profile));
         fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
             method: 'GET',
             headers: {
@@ -73,7 +75,7 @@ const App = () => {
                 }
             });
         });
-    }, []);
+    }, [dispatch]);
 
     const redirect = [];
     if (routes) {
@@ -81,7 +83,7 @@ const App = () => {
     };
 
     return (
-        <ProfileContext.Provider value={profile}>
+        <ProfileContext.Provider value={null}>
             <ThemeProvider theme={theme}>
                 <Router>
                     <Switch>
