@@ -5,14 +5,17 @@ import {connect, useDispatch} from 'react-redux';
 import {setProfile} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
-// import SurveyDAG from 'components/misc/Survey/SurveyDAG';
+import LoaderClass from 'components/navigation/loader/LoaderClass';
+
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
+import Loader from 'components/navigation/loader/Loader';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
-// const survey = new SurveyDAG();
+// We create a loader context as well, to pass down the object to all components who need to load something.
+const LoaderContext = createContext(null);
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
     palette: {
@@ -99,4 +102,4 @@ const App = (props) => {
     );
 };
 export default App;
-export {ProfileContext};
+export {ProfileContext, LoaderContext};
