@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import {Grid, TextField, Typography} from '@material-ui/core';
 import {useSelector} from 'react-redux';
-import {profileSelector} from 'redux/selectors';
+import {profileSelector, loaderSelector} from 'redux/selectors';
 
 import {ProfileContext} from 'App';
 
 const Login = (props) => {
-    console.log(useSelector((state) => state));
+    console.log(useSelector(profileSelector));
+    console.log(useSelector(state => state));
     return (
         <Grid container direction="column" alignItems="center" justify="center">
             <Grid item xs={6}>

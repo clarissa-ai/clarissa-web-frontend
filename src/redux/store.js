@@ -1,4 +1,4 @@
 import {createStore} from 'redux';
-import profileReducer from './reducers/profile';
+import rootReducer from './reducers';
 
-export default createStore(profileReducer);
+export default createStore(rootReducer);

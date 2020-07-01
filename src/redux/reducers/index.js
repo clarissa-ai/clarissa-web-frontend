@@ -1,5 +1,7 @@
 import {combineReducers} from 'redux';
-import profileReducer from './profile';
-import loaderReducer from './loader';
+import profile from './profile';
+import loader from './loader';
 
-export default combineReducers({profileReducer, loaderReducer});
+const rootReducer = combineReducers({profile, loader});
+
+export default rootReducer;

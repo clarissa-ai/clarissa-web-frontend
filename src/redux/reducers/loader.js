@@ -1,17 +1,15 @@
 /* eslint-disable require-jsdoc */
 import {SET_LOADER} from '../actionTypes';
 
-const loaderReducer = (state = {}, action) => {
+const loader = (state = {}, action) => {
+    console.log(action);
     switch (action.type) {
     case SET_LOADER: {
-        return {
-            ...state,
-            loader: action.payload,
-        };
+        return action.payload;
     }
     default:
         return state;
     }
 };
 
-export default loaderReducer;
+export default loader;

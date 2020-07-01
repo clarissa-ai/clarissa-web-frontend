@@ -1,8 +1,8 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
-import {connect, useDispatch} from 'react-redux';
-import {setProfile} from 'redux/actions';
+import {useDispatch} from 'react-redux';
+import {setProfile, setLoader} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
 import LoaderClass from 'components/navigation/loader/LoaderClass';
@@ -12,10 +12,6 @@ import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import Loader from 'components/navigation/loader/Loader';
 
-// Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
-const ProfileContext = createContext(null);
-// We create a loader context as well, to pass down the object to all components who need to load something.
-const LoaderContext = createContext(null);
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
     palette: {
@@ -59,6 +55,8 @@ const App = (props) => {
     useEffect(() => {
         const profile = new Profile();
         dispatch(setProfile(profile));
+        const loader = new LoaderClass();
+        dispatch(setLoader(loader));
         fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
             method: 'GET',
             headers: {
@@ -82,24 +80,24 @@ const App = (props) => {
 
     const redirect = [];
     if (routes) {
+        console.log(routes);
         Object.keys(routes).forEach((key) => redirect.push(<Redirect key={key} from={key} to={routes[key]} />));
     };
 
     return (
-        <ProfileContext.Provider value={null}>
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <Loader loading={routes ? false : true}>
                 <Router>
                     <Switch>
+                        {redirect}
                         <Route exact path="/" render={(props) => <Landing/> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
-                        {redirect}
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>
                 </Router>
-            </ThemeProvider>
-        </ProfileContext.Provider>
+            </Loader>
+        </ThemeProvider>
     );
 };
 export default App;
-export {ProfileContext, LoaderContext};

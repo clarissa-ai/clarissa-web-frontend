@@ -1,9 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Grid, CircularProgress} from '@material-ui/core';
-
-import {LoaderContext} from 'App.jsx';
-
 const LoadingPage = (props) => {
     return (
         <Grid container={true} direction='column' justify='center' alignItems='center'>
@@ -15,14 +12,8 @@ const LoadingPage = (props) => {
 };
 
 const Loader = (props) => {
-    const loaderClass = useContext(LoaderContext);
-    const [loading, setLoading] = useState(loaderClass.status());
-    useEffect(() => {
-        setLoading(loaderClass.status());
-    }, [setLoading]);
-
     return (
-        loading ? <LoadingPage /> : props.children
+        props.loading ? <LoadingPage /> : props.children
     );
 };
 Loader.propTypes = {
@@ -30,6 +21,7 @@ Loader.propTypes = {
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
     ]).isRequired,
+    loading: PropTypes.bool.isRequired,
 };
 export default Loader;
 
