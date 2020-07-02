@@ -1,0 +1,51 @@
+/* poppins-regular - latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/poppins-v9-latin/poppins-v9-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Poppins Regular'), local('Poppins-Regular'),
+       url('fonts/poppins-v9-latin/poppins-v9-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/poppins-v9-latin/poppins-v9-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/poppins-v9-latin/poppins-v9-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('fonts/poppins-v9-latin/poppins-v9-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/poppins-v9-latin/poppins-v9-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
