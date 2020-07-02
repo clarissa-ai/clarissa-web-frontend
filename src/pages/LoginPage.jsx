@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Fade, Grid} from '@material-ui/core';
 import LoginForm from 'components/authentication/login/Login';
 
