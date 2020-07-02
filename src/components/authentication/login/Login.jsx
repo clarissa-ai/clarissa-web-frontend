@@ -4,6 +4,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import {ProfileContext} from 'App';
 
+
 const useStyles = makeStyles((theme) => ({
     field: {
         width: '20rem',
@@ -39,6 +40,7 @@ const Login = () => {
     const [values, setValues] = React.useState({
         showPassword: false,
         password: '',
+        email: '',
         rememberMe: false,
     });
 
@@ -58,10 +60,34 @@ const Login = () => {
         setValues({...values, rememberMe: !values.rememberMe});
     };
 
+    const apiLink ='https://api.clarissa.ai/swagger.json';
+
+    const data = {
+        'email': '',
+        'password': '',
+    }
+
+    const handleSignIn = () => {
+        fetch(`${apiLink}/api/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log('Login Success:', data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
     return (
         <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
             <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign In</Typography></Grid>
-            <Grid item><Input id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
+            <Grid item><Input onChange={handleChange('password')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
             <Grid item>
                 <Input
                     className={classes.field}
@@ -98,7 +124,7 @@ const Login = () => {
             </Grid>
             <Grid item>
                 <Grid container justify='flex-end' direction='column' spacing={3}>
-                    <Grid item><Button className={classes.button}>Sign In</Button></Grid>
+                    <Grid item><Button className={classes.button} onClick={handleSignIn()}>Sign In</Button></Grid>
                     <Grid item><Typography><Link className={classes.link}>Forgot Password?</Link></Typography></Grid>
                     <Grid item><Typography>Don&apos;t have an account? <Link className={classes.link}>Sign Up</Link></Typography></Grid>
                 </Grid>
