@@ -330,7 +330,6 @@ const ScreeningQuestions = (props) => {
                     },
                 };
             }
-            console.log(result);
             fetch(`${apiLink}/api/survey/submit_response`, {
                 method: 'POST',
                 headers: {

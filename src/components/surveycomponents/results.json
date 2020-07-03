@@ -1,0 +1,21 @@
+{
+    "status": "success",
+    "message": "Successfully retrieved surveys results.",
+    "surveys": [
+      {
+        "title": "COVID-19 Screening Tool",
+        "description": "Understand the next steps you can take to protect yourself and others against COVID-19.This short screening provides a recommendation to keep you healthy.",
+        "cover_image_url": "/api/images/get_image/survey_cover/2.png",
+        "answered_questions": [
+          {
+            "title": "Hello",
+            "choices": [
+              "Direct to Summary"
+            ]
+          }
+        ],
+        "summary_title": "plss",
+        "summary_description": "pls"
+      }
+    ]
+  }

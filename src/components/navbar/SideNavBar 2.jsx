@@ -10,7 +10,6 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 
 const useStyles = makeStyles((theme) => ({
     drawer: {
@@ -75,11 +74,6 @@ const routes = [
         title: 'Patient Profile',
         icon: <ViewWeekOutlinedIcon/>,
         link: '/patient-profile',
-    },
-    {
-        title: 'Surveys',
-        icon: <CheckBoxOutlineBlankIcon/>,
-        link: '/surveys',
     },
 ];
 
