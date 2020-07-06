@@ -8,6 +8,9 @@ import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import Dashboard from 'pages/dashboard/DashboardPage';
+import MainSurvey from 'components/surveycomponents/MainSurvey';
+import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
+import ResultCard from 'components/surveycomponents/ResultCard';
 
 // Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
 const ProfileContext = createContext(null);
@@ -90,6 +93,7 @@ const App = () => {
                         <Route exact path="/login" render={(props) => <Login/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         <Route path="/dashboard" render={(props) => <Dashboard/>}/>
+                        <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
                         {redirect}
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>

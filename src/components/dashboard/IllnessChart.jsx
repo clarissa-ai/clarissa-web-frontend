@@ -71,7 +71,7 @@ const IllnessChart = (props) => {
             const height = chart.height;
 
             const fontSize = (height / 80);
-            ctx.font = '500 ' + fontSize + 'em Poppins';
+            ctx.font = fontSize + 'em Poppins';
             ctx.textBaseline = 'middle';
             ctx.fillStyle = colors[indexMax];
 
