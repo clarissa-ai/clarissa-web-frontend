@@ -3,7 +3,7 @@ import {Avatar, makeStyles, Typography, Divider, Grid, Card} from '@material-ui/
 import RenderRoutes from './RenderRoutes';
 import {ReactComponent as LogoWithName} from './logoWithName.svg';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
-import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+/* import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';*/
 import MailOutlineOutlinedIcon from '@material-ui/icons/MailOutlineOutlined';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -65,11 +65,11 @@ const routes = [
         icon: <PersonOutlineOutlinedIcon/>,
         link: '/medical-history',
     },
-    {
+    /* {
         title: 'Doctor Portal',
         icon: <ChatBubbleOutlineOutlinedIcon/>,
         link: '/doctor-portal',
-    },
+    },*/
     {
         title: 'Health Surveys',
         icon: <ViewWeekOutlinedIcon/>,
@@ -86,7 +86,7 @@ const extraRoutes = [
     {
         title: 'Logout',
         icon: <ExitToAppIcon/>,
-        link: '/logout',
+        link: '/login',
     },
 ];
 
@@ -95,7 +95,7 @@ const SideNavBar = (props) => {
 
     // use input from props later on for user information
     const user = {
-        name: 'Teo Nys',
+        name: 'Korra',
         email: 'teo@nys.name',
         img: 'img.png',
     };
