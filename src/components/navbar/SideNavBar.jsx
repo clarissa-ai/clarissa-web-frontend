@@ -71,9 +71,9 @@ const routes = [
         link: '/doctor-portal',
     },
     {
-        title: 'Patient Profile',
+        title: 'Health Surveys',
         icon: <ViewWeekOutlinedIcon/>,
-        link: '/patient-profile',
+        link: '/surveys',
     },
 ];
 
