@@ -50,7 +50,6 @@ theme = responsiveFontSizes(theme);
 const App = (props) => {
     // State to control custom routing.
     const [routes, setRoutes] = useState(null);
-    console.log(process.env.REACT_APP_ENDPOINT_BASE);
     const dispatch = useDispatch(); // react-redux dispatch
     useEffect(() => {
         const profile = new Profile();
@@ -80,7 +79,6 @@ const App = (props) => {
 
     const redirect = [];
     if (routes) {
-        console.log(routes);
         Object.keys(routes).forEach((key) => redirect.push(<Redirect key={key} from={key} to={routes[key]} />));
     };
 

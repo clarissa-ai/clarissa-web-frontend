@@ -2,7 +2,6 @@
 import {SET_PROFILE} from '../actionTypes';
 
 const profile = (state = {}, action) => {
-    console.log(action);
     switch (action.type) {
     case SET_PROFILE: {
         return action.payload;

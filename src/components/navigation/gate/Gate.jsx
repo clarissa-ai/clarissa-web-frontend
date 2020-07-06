@@ -8,7 +8,7 @@ import {profileSelector} from 'redux/selectors';
 const Gate = (props) => {
     const profile = useSelector(profileSelector);
     return (
-        profile.isAuthenticated ? props.children : <Redirect to='/login' />
+        profile.authenticated ? props.children : <Redirect to='/login' />
     );
 };
 

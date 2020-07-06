@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Grid, CircularProgress} from '@material-ui/core';
 const LoadingPage = (props) => {
