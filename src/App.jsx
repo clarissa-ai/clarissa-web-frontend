@@ -6,6 +6,7 @@ import {setProfile, setLoader} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
 import LoaderClass from 'components/navigation/loader/LoaderClass';
+import Loader from 'components/navigation/loader/Loader';
 
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
