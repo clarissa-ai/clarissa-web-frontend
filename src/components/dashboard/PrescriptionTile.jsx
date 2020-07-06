@@ -5,13 +5,14 @@ import PrescriptionCard from './PrescriptionCard';
 const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        width: '25em',
+        height: '100%',
+        backgroundColor: '#FFF',
     },
     cardContent: {
         'overflow': 'scroll',
-        'height': '15em',
+        'height': '60%',
         '&::-webkit-scrollbar': {
-            width: '0.4em',
+            width: '0.3em',
         },
         '&::-webkit-scrollbar-thumb': {
             backgroundColor: '#7064D0',
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#334D6E',
     },
     divider: {
-        height: '0.2em',
+        height: '3px',
     },
     link: {
         margin: '0 auto',

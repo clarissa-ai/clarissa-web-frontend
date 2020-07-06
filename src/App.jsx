@@ -10,7 +10,10 @@ import LoaderClass from 'components/navigation/loader/LoaderClass';
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
-import Loader from 'components/navigation/loader/Loader';
+import Dashboard from 'pages/dashboard/DashboardPage';
+import MainSurvey from 'components/surveycomponents/MainSurvey';
+import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
+import ResultCard from 'components/surveycomponents/ResultCard';
 
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
@@ -91,6 +94,9 @@ const App = (props) => {
                         <Route exact path="/" render={(props) => <Landing/> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
+                        <Route path="/dashboard" render={(props) => <Dashboard/>}/>
+                        <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
+                        {redirect}
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>
                 </Router>

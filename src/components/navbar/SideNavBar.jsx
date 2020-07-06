@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, makeStyles, Typography, Drawer, Divider, Grid} from '@material-ui/core';
+import {Avatar, makeStyles, Typography, Divider, Grid, Card} from '@material-ui/core';
 import RenderRoutes from './RenderRoutes';
 import {ReactComponent as LogoWithName} from './logoWithName.svg';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
@@ -13,8 +13,12 @@ import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
 
 const useStyles = makeStyles((theme) => ({
     drawer: {
-        width: '16rem',
-        flexShrink: 0,
+        background: '#fff',
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.08)',
+        border: 'none',
+        overflow: 'hidden',
+        height: '100%',
+        padding: '0px',
     },
     name: {
         marginTop: '.25rem',
@@ -67,9 +71,9 @@ const routes = [
         link: '/doctor-portal',
     },
     {
-        title: 'Patient Profile',
+        title: 'Health Surveys',
         icon: <ViewWeekOutlinedIcon/>,
-        link: '/patient-profile',
+        link: '/surveys',
     },
 ];
 
@@ -97,9 +101,9 @@ const SideNavBar = (props) => {
     };
 
     return (
-        <Drawer variant='permanent' anchor='left' classes={{paper: classes.drawer}}>
+        <Card className={classes.drawer}>
             <LogoWithName className={classes.logo}/>
-            <Grid container spacing={2} className={classes.user}>
+            <Grid container spacing={2} className={classes.user} >
                 <Grid item>
                     <Avatar alt={user.name} src={user.img} className={classes.avatarSize}/>
                 </Grid>
@@ -111,7 +115,7 @@ const SideNavBar = (props) => {
             <RenderRoutes routes={routes}/>
             <Divider/>
             <RenderRoutes routes={extraRoutes}/>
-        </Drawer>
+        </Card>
     );
 };
 

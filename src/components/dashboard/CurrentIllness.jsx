@@ -1,25 +1,34 @@
 import React from 'react';
-import {makeStyles, Card, Divider, Typography, Link, CardContent, CardActions, Grid, useTheme, Box} from '@material-ui/core';
+import {makeStyles, Card, Divider, Typography, Link, CardContent, Grid, useTheme, Box, CardHeader} from '@material-ui/core';
 import IllnessChart from './IllnessChart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '23rem',
-        height: '36.5rem',
+        boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
+        backgroundColor: '#FFF',
+        height: '100%',
     },
     divider: {
         height: 3,
     },
     title: {
-        padding: theme.spacing(2),
+        color: '#334D6E',
         fontWeight: 'bold',
+        fontSize: '1rem',
     },
     linkFont: {
         fontWeight: 'bold',
     },
     chart: {
-        paddingTop: theme.spacing(3),
-        paddingBottom: theme.spacing(3),
+        paddingTop: theme.spacing(2),
+    },
+    link: {
+        fontFamily: 'Poppins',
+        fontWeight: 'bold',
+        paddingTop: '1em',
+        paddingBottom: '1em',
+        bottom: '1rem',
+        position: 'absolute',
     },
 }));
 
@@ -32,9 +41,6 @@ const healthRecc = [
     },
     {
         title: 'Keep hydrated',
-    },
-    {
-        title: 'Stay well rested',
     },
 ];
 
@@ -69,13 +75,11 @@ const CurrentIllness = (props) => {
 
     return (
         <Card className={classes.root}>
+            <CardHeader title='Current Illness' classes={{title: classes.title}}/>
+            <Divider className={classes.divider} variant='middle'/>
+            <IllnessChart dataNum={dataNum} diseases={diseases} className={classes.chart}/>
             <CardContent>
-                <Typography className={classes.title}>Current Illness</Typography>
-                <Divider className={classes.divider} variant='middle'/>
-
-                <IllnessChart dataNum={dataNum} diseases={diseases} className={classes.chart}/>
-
-                <Grid container justify='center' style={{paddingBottom: 25}}>
+                <Grid container justify='center'>
                     {displayDiseases.map((disease, index) => (
                         <div key={index}>
                             <Grid item>
@@ -89,10 +93,12 @@ const CurrentIllness = (props) => {
                         </div>
                     ))}
                 </Grid>
+            </CardContent>
 
-                <Typography className={classes.title}>Health Recommendation</Typography>
-                <Divider className={classes.divider} variant='middle'/>
-                <ul>
+            <CardHeader title='Health Recommendation' classes={{title: classes.title}}/>
+            <Divider className={classes.divider} variant='middle'/>
+            <CardContent className={classes.cardContent}>
+                <ul style={{margin: '0'}}>
                     {healthRecc.map((recc, index) => (
                         <li key={index}>
                             <Typography variant='body2'>{recc.title}</Typography>
@@ -100,13 +106,7 @@ const CurrentIllness = (props) => {
                     ))}
                 </ul>
             </CardContent>
-            <CardActions style={{justifyContent: 'center'}}>
-                <Link underline='none' href='/active-illness'>
-                    <Typography className={classes.linkFont} variant='body2'>
-                        Manage
-                    </Typography>
-                </Link>
-            </CardActions>
+            <Grid container justify='center'><Link variant='subtitle2' href='' className={classes.link}>Manage</Link></Grid>
         </Card>
     );
 };
