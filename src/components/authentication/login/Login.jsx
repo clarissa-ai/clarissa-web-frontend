@@ -60,14 +60,15 @@ const Login = () => {
         setValues({...values, rememberMe: !values.rememberMe});
     };
 
-    const apiLink ='https://api.clarissa.ai/swagger.json';
-
-    const data = {
-        'email': '',
-        'password': '',
-    }
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
 
     const handleSignIn = () => {
+
+        const data = {
+            'email': values.email,
+            'password': values.password,
+        }
+
         fetch(`${apiLink}/api/login`, {
             method: 'POST',
             headers: {
@@ -87,7 +88,7 @@ const Login = () => {
     return (
         <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
             <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign In</Typography></Grid>
-            <Grid item><Input onChange={handleChange('password')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
+            <Grid item><Input onChange={handleChange('email')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
             <Grid item>
                 <Input
                     className={classes.field}
