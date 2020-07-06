@@ -1,9 +1,12 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
+import {useDispatch} from 'react-redux';
+import {setProfile, setLoader} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
-// import SurveyDAG from 'components/misc/Survey/SurveyDAG';
+import LoaderClass from 'components/navigation/loader/LoaderClass';
+
 import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
@@ -12,9 +15,6 @@ import MainSurvey from 'components/surveycomponents/MainSurvey';
 import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
 import ResultCard from 'components/surveycomponents/ResultCard';
 
-// Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
-const ProfileContext = createContext(null);
-// const survey = new SurveyDAG();
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
     palette: {
@@ -50,14 +50,15 @@ let theme = createMuiTheme({
 });
 theme = responsiveFontSizes(theme);
 
-const App = () => {
-    // We create a new profile object. It should automatically be populated if the user has already logged in.
-    const profile = new Profile();
+const App = (props) => {
     // State to control custom routing.
     const [routes, setRoutes] = useState(null);
-    console.log(process.env.REACT_APP_ENDPOINT_BASE);
-
+    const dispatch = useDispatch(); // react-redux dispatch
     useEffect(() => {
+        const profile = new Profile();
+        dispatch(setProfile(profile));
+        const loader = new LoaderClass();
+        dispatch(setLoader(loader));
         fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
             method: 'GET',
             headers: {
@@ -77,7 +78,7 @@ const App = () => {
                 }
             });
         });
-    }, []);
+    }, [dispatch]);
 
     const redirect = [];
     if (routes) {
@@ -85,10 +86,11 @@ const App = () => {
     };
 
     return (
-        <ProfileContext.Provider value={profile}>
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <Loader loading={routes ? false : true}>
                 <Router>
                     <Switch>
+                        {redirect}
                         <Route exact path="/" render={(props) => <Landing/> }></Route>
                         <Route exact path="/login" render={(props) => <Login/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
@@ -98,9 +100,8 @@ const App = () => {
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>
                 </Router>
-            </ThemeProvider>
-        </ProfileContext.Provider>
+            </Loader>
+        </ThemeProvider>
     );
 };
 export default App;
-export {ProfileContext};
