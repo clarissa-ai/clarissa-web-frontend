@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React /* ,{useState, useEffect}*/ from 'react';
 import {Typography, Grid, makeStyles, Link, Card, CardContent, Box, Avatar, Divider, useTheme} from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import datas from './results.json';
+import ResultModal from './ResultModal';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,10 +40,12 @@ const useStyles = makeStyles((theme) => ({
 
 const ActiveSurveys = (props) => {
     const classes = useStyles();
-    const [error, setError] = useState(null);
+    /* const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(true);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([]);*/
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
+    const error = false;
+    const isLoaded = true;
 
     const theme = useTheme();
     const colors = [theme.palette.primary.main, theme.palette.secondary.main,
@@ -111,6 +114,7 @@ const ActiveSurveys = (props) => {
                         </Card>
                     </Grid>
                 ))}
+                <ResultModal data={datas}/>
             </Grid>
         );
     }
