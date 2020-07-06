@@ -2,8 +2,7 @@ import React from 'react';
 import {Grid, Input, InputAdornment, IconButton, Button, Typography, Link, makeStyles, FormControlLabel, Checkbox} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import {ProfileContext} from 'App';
-
+// import {ProfileContext} from 'App';
 
 const useStyles = makeStyles((theme) => ({
     field: {
@@ -34,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-    const profile = ProfileContext;
-    console.log(profile);
+    // const profile = ProfileContext;
+    // console.log(profile);
     const classes = useStyles();
     const [values, setValues] = React.useState({
         showPassword: false,
@@ -130,6 +129,7 @@ const Login = () => {
                     <Grid item><Typography>Don&apos;t have an account? <Link className={classes.link}>Sign Up</Link></Typography></Grid>
                 </Grid>
             </Grid>
+            <Typography></Typography>
         </Grid>
     );
 };
