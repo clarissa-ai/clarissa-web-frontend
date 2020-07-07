@@ -4,7 +4,7 @@ import {SET_PROFILE} from '../actionTypes';
 const profile = (state = {}, action) => {
     switch (action.type) {
     case SET_PROFILE: {
-        return action.payload;
+        return {...action.payload};
     }
     default:
         return state;
