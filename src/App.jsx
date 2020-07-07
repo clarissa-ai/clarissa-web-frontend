@@ -2,13 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
-import {setProfile, setLoader} from 'redux/actions';
+import {setProfile} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
-import LoaderClass from 'components/navigation/loader/LoaderClass';
 import Loader from 'components/navigation/loader/Loader';
 
-import Landing from 'pages/landing/Landing';
+// import Landing from 'pages/landing/Landing';
 import Login from 'components/authentication/login/Login';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import Dashboard from 'pages/dashboard/DashboardPage';
@@ -58,8 +57,9 @@ const App = (props) => {
     useEffect(() => {
         const profile = new Profile();
         dispatch(setProfile(profile));
-        const loader = new LoaderClass();
-        dispatch(setLoader(loader));
+        profile.getUserInfo((newProfile) => {
+            dispatch(setProfile(newProfile));
+        });
         fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
             method: 'GET',
             headers: {
@@ -92,12 +92,11 @@ const App = (props) => {
                 <Router>
                     <Switch>
                         {redirect}
-                        <Route exact path="/" render={(props) => <Landing/> }></Route>
+                        <Redirect exact from='/' to='/dashboard' />
                         <Route exact path="/login" render={(props) => <Login/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         <Route path="/dashboard" render={(props) => <Dashboard/>}/>
                         <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
-                        {redirect}
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>
                 </Router>
