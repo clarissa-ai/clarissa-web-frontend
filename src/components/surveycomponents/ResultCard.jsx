@@ -8,19 +8,20 @@ const useStyles = makeStyles((theme) => ({
     root: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFF',
-        height: '340px',
-        width: '530px',
+        height: '17rem',
+        width: '25rem',
     },
     wrap: {
         wordWrap: 'break-word',
         maxWidth: '400px',
     },
     box: {
-        width: '530px',
-        height: '270px',
+        width: '25rem',
+        height: '13rem',
         backgroundColor: '#306CDF',
         color: 'white',
         textAlign: 'center',
+        padding: '1rem',
     },
     summTitle: {
         padding: '10px',
