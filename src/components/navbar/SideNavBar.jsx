@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, makeStyles, Typography, Divider, Grid, Card} from '@material-ui/core';
+import {Avatar, makeStyles, Typography, Divider, Grid, Card, Drawer} from '@material-ui/core';
 import RenderRoutes from './RenderRoutes';
 import {ReactComponent as LogoWithName} from './logoWithName.svg';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
@@ -11,14 +11,26 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
 
+const drawerWidth = 240;
+
 const useStyles = makeStyles((theme) => ({
+    // drawer: {
+    //     display: 'float',
+    //     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.08)',
+    //     border: 'none',
+    //     overflow: 'hidden',
+    //     height: '100vh',
+    //     padding: '0px',
+    //     width: '16rem',
+    //     marginRight: '1rem',
+    //   },
     drawer: {
+        width: '16rem',
+    },
+    drawerPaper: {
+        width: "inherit",
         background: '#fff',
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.08)',
-        border: 'none',
         overflow: 'hidden',
-        height: '100%',
-        padding: '0px',
     },
     name: {
         marginTop: '.25rem',
@@ -101,7 +113,7 @@ const SideNavBar = (props) => {
     };
 
     return (
-        <Card className={classes.drawer}>
+        <Drawer className={classes.drawer} variant='permanent' anchor='left' open className={classes.drawer} classes={{ paper: classes.drawerPaper }}>
             <LogoWithName className={classes.logo}/>
             <Grid container spacing={2} className={classes.user} >
                 <Grid item>
@@ -115,7 +127,7 @@ const SideNavBar = (props) => {
             <RenderRoutes routes={routes}/>
             <Divider/>
             <RenderRoutes routes={extraRoutes}/>
-        </Card>
+        </Drawer>
     );
 };
 
