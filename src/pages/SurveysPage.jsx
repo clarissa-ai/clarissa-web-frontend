@@ -51,6 +51,7 @@ value: PropTypes.any.isRequired,
 const SurveysPage = (props) => {  
 const classes = useStyles();
 const [value, setValue] = React.useState(0);
+const [showMain, setMain] = React.useState(true);
 
 const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -60,11 +61,15 @@ return<Fade in timeout={1000}>
     <Grid container direction='row'>
             <Grid item><SideNavBar/></Grid>
                 <Grid item className={classes.content}>
-                    <Typography variant='h5' style={{padding: '2rem 0'}}><Box fontWeight='bold'>Featured</Box></Typography>
-                    <MainSurvey/>
+                    {showMain ? 
+                    <div>
+                        <Typography variant='h5' style={{padding: '2rem 0'}}><Box fontWeight='bold'>Featured</Box></Typography>
+                        <MainSurvey/> 
+                    </div> : null}
+                    
                     <Tabs value={value} onChange={handleChange} classes={{indicator: classes.tabBorder}}>
-                        <Tab label={<p className={classes.tabs}>Active Surveys</p>}/>
-                        <Tab label={<p className={classes.tabs}>Survey Results</p>} />
+                        <Tab label={<p className={classes.tabs}>Active Surveys</p>} onClick={() => setMain(true)}/>
+                        <Tab label={<p className={classes.tabs}>Survey Results</p>} onClick={() => setMain(false)}/>
                     </Tabs>
 
                     <TabPanel value={value} index={0}>
