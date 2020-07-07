@@ -7,6 +7,9 @@ import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
 import ResultCard from 'components/surveycomponents/ResultCard';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        
+    },
     tabBorder: {
         backgroundColor: 'transparent',
     },
@@ -14,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
     },
     content: {
+        width: '80vw',
         marginLeft: '17rem',
-        width: 'auto',
     },
 }));
 

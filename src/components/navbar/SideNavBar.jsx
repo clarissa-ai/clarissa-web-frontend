@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, makeStyles, Typography, Divider, Grid, Card, Drawer} from '@material-ui/core';
+import {Avatar, makeStyles, Typography, Divider, Grid, Drawer} from '@material-ui/core';
 import RenderRoutes from './RenderRoutes';
 import {ReactComponent as LogoWithName} from './logoWithName.svg';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
@@ -10,8 +10,6 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     // drawer: {
