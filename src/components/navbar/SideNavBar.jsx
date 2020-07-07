@@ -14,8 +14,8 @@ import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
 const useStyles = makeStyles((theme) => ({
     // drawer: {
     //     display: 'float',
-    //     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.08)',
-    //     border: 'none',
+    //     
+    //     
     //     overflow: 'hidden',
     //     height: '100vh',
     //     padding: '0px',
@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
         width: '16rem',
     },
     drawerPaper: {
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.08)',
+        border: 'none',
         width: "inherit",
         background: '#fff',
         overflow: 'hidden',
