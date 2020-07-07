@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MainSurvey from 'components/surveycomponents/MainSurvey';
 import {Fade, Grid, Typography, Tab, makeStyles, Box, Tabs} from '@material-ui/core';
-import SideNavBar from 'components/navbar/SideNavBar';
 import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
 import ResultCard from 'components/surveycomponents/ResultCard';
-
+import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 const useStyles = makeStyles((theme) => ({
-    root: {
-        
+    wrapper: {
+        position: 'relative',
     },
     tabBorder: {
         backgroundColor: 'transparent',
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         width: '80vw',
-        marginLeft: '17rem',
+        padding: ' 1em 4em'
     },
 }));
 
@@ -57,31 +56,34 @@ const handleChange = (event, newValue) => {
     setValue(newValue);
 };
 
-return<Fade in timeout={1000}>
-    <Grid container direction='row'>
-            <Grid item><SideNavBar/></Grid>
-                <Grid item className={classes.content}>
-                    {showMain ? 
-                    <div>
-                        <Typography variant='h5' style={{padding: '2rem 0'}}><Box fontWeight='bold'>Featured</Box></Typography>
-                        <MainSurvey/> 
-                    </div> : null}
-                    
-                    <Tabs value={value} onChange={handleChange} classes={{indicator: classes.tabBorder}}>
-                        <Tab label={<p className={classes.tabs}>Active Surveys</p>} onClick={() => setMain(true)}/>
-                        <Tab label={<p className={classes.tabs}>Survey Results</p>} onClick={() => setMain(false)}/>
-                    </Tabs>
+return <div className={classes.wrapper}>
+    <Fade in timeout={1000}>
+        <Grid container direction='row' justify='center'>
+                {/* <Grid item><SideNavBar/></Grid> */}
+                <Grid item><ResponsiveDrawer/></Grid>
+                    <Grid item className={classes.content}>
+                        {showMain ? 
+                        <div>
+                            <Typography variant='h5' style={{padding: '2rem 0'}}><Box fontWeight='bold'>Featured</Box></Typography>
+                            <MainSurvey/> 
+                        </div> : null}
+                        
+                        <Tabs value={value} onChange={handleChange} classes={{indicator: classes.tabBorder}}>
+                            <Tab label={<p className={classes.tabs}>Active Surveys</p>} onClick={() => setMain(true)}/>
+                            <Tab label={<p className={classes.tabs}>Survey Results</p>} onClick={() => setMain(false)}/>
+                        </Tabs>
 
-                    <TabPanel value={value} index={0}>
-                        <ActiveSurveys/>
-                    </TabPanel>
+                        <TabPanel value={value} index={0}>
+                            <ActiveSurveys/>
+                        </TabPanel>
 
-                    <TabPanel value={value} index={1}>
-                        <ResultCard/>
-                    </TabPanel>
-                </Grid>
-    </Grid>
-</Fade>
+                        <TabPanel value={value} index={1}>
+                            <ResultCard/>
+                        </TabPanel>
+                    </Grid>
+        </Grid>
+    </Fade>
+</div>
 }
 
 export default SurveysPage;

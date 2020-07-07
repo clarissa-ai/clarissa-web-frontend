@@ -9,15 +9,15 @@ const useStyles = makeStyles((theme) => ({
     root: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFF',
-        height: '200px',
+        height: '12em',
     },
     wrap: {
         wordWrap: 'break-word',
         maxWidth: '400px',
     },
     box: {
-        width: '108px',
-        height: '200px',
+        width: '6em',
+        height: '12em',
         float: 'right',
         color: 'white',
         textAlign: 'center',

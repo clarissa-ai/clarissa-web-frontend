@@ -4,7 +4,7 @@ import AppointmentTile from 'components/dashboard/AppointmentTile';
 import CurrentIllness from 'components/dashboard/CurrentIllness';
 import SymptomTile from 'components/dashboard/SymptomTile';
 import SymptomLog from 'components/dashboard/SymptomLog';
-import SideNavBar from 'components/navbar/SideNavBar';
+import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import SymptomPopUp from 'components/dashboard/SymptomPopUp';
 import SymptomModal from 'components/dashboard/SymptomModal';
 import {Fade, Grid} from '@material-ui/core';
@@ -36,7 +36,7 @@ const Dashboard = (props) => {
 
                 {/* Nav Bar Item */}
                 <Grid item xs={2} style={{height: '100vh', padding: '0'}}>
-                    <SideNavBar/>
+                    <ResponsiveDrawer/>
                 </Grid>
                 {/* Dashboard Contents */}
                 <Grid item xs ={10}>
