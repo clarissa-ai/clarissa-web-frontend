@@ -9,7 +9,7 @@ import LoaderClass from 'components/navigation/loader/LoaderClass';
 import Loader from 'components/navigation/loader/Loader';
 import Landing from 'pages/landing/Landing';
 import Login from 'pages/LoginPage';
-import Signup from 'components/authentication/login/Signup';
+import Signup from 'pages/SignUpPage';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import Dashboard from 'pages/dashboard/DashboardPage';
 import MainSurvey from 'components/surveycomponents/MainSurvey';
