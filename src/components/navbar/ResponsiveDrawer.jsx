@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import {useTheme, CssBaseline, Hidden, Avatar, makeStyles, Typography, Divider, Grid, Drawer} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
