@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
         width: "inherit",
         background: '#fff',
         overflow: 'hidden',
+        position: 'fixed',
     },
     name: {
         marginTop: '.25rem',
@@ -111,7 +112,7 @@ const SideNavBar = (props) => {
     };
 
     return (
-        <Drawer className={classes.drawer} variant='permanent' anchor='left' open className={classes.drawer} classes={{ paper: classes.drawerPaper }}>
+        <Drawer className={classes.drawer} variant='permanent' anchor='left' open classes={{ paper: classes.drawerPaper }}>
             <LogoWithName className={classes.logo}/>
             <Grid container spacing={2} className={classes.user} >
                 <Grid item>
