@@ -1,29 +1,26 @@
-import React, { Children } from 'react';
-import {Grid, Paper, Typography, makeStyles, Box} from '@material-ui/core';
-import InfoCard from 'components/dashboard/InfoCard';
+import React from 'react';
+import {Grid, Typography, makeStyles, Box, Link} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         borderRadius: '4px',
         background: '#fff',
-    },
-    infoarea: {
         padding: '1rem',
+        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
     },
-    labels: {
-        margin: '1rem',
-    }
+    label: {
+        paddingBottom: '1rem',
+    },
 }));
 
 const RecentIllness = (props) => {
     const classes = useStyles();
-    return <Paper className={classes.container} > <Grid item><Typography variant='h6' className={classes.labels}><Box fontWeight='bold'>Recent Illness</Box></Typography></Grid>
-        <Grid container direction='column' spacing={4} className={classes.infoarea}>
-            {/* {Children} */}
-            <Grid item><InfoCard title='Test' date='1/20/20 - 2/01/20' status='Active' symptomcount='36'/></Grid>
-            <Grid item><InfoCard title='Test' date='1/20/20 - 2/01/20' status='Active' symptomcount='36'/></Grid>
-            <Grid item><InfoCard title='Test' date='1/20/20 - 2/01/20' status='Active' symptomcount='36'/></Grid>
+    return <Grid container className={classes.container} justify='center' direction='column'> 
+        <Grid item><Typography variant='h6' className={classes.label}><Box fontWeight='bold'>Recent Illness</Box></Typography></Grid>
+        <Grid item>{props.children}</Grid>
+        <Grid container justify='center'>
+            <Grid item><Typography variant='subtitle2' style={{opacity: '.4'}}><Box fontWeight='bold'>View More</Box></Typography></Grid>
         </Grid>
-    </Paper>
+    </Grid>
 }
 export default RecentIllness;
