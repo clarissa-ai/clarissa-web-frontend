@@ -1,6 +1,6 @@
 import React from 'react';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
-import {Grid, Fade, Button, makeStyles, Typography, Box, Hidden} from '@material-ui/core';
+import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
 import StatsCard from 'components/dashboard/StatsCard';
 import RecentIllness from 'components/dashboard/RecentIllness';
 import CompletedSurveyCard from 'components/dashboard/CompletedSurveyCard';
