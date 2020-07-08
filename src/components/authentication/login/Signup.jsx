@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormHelperText, FormControl, MenuItem, Select, Grid, Input, InputAdornment, IconButton, Button, Typography, Link, makeStyles, FormControlLabel, Checkbox} from '@material-ui/core';
+import {ThemeProvider, createMuiTheme, FormHelperText, FormControl, MenuItem, Select, Grid, Input, InputAdornment, IconButton, Button, Typography, Link, makeStyles, FormControlLabel, Checkbox} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import {
@@ -7,6 +7,16 @@ import {
     MuiPickersUtilsProvider
   } from '@material-ui/pickers';
   import DateFnsUtils from '@date-io/date-fns';
+
+  const materialTheme = createMuiTheme({
+    overrides: {
+        MuiPickersBasePicker: {
+            pickerView: {
+              background: '#fff',
+            },
+        },
+    },
+  });
 
 const useStyles = makeStyles((theme) => ({
     field: {
@@ -39,8 +49,10 @@ const useStyles = makeStyles((theme) => ({
     },
     pickers: {
         width: '9.5rem',
-    }
+    },
 }));
+
+
 
 const Signup = () => {
     const classes = useStyles();
@@ -128,6 +140,7 @@ const Signup = () => {
                     </Grid>
 
                     <Grid item>
+                    <ThemeProvider theme={materialTheme}>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
                             label='Date of Birth'
@@ -144,6 +157,7 @@ const Signup = () => {
                             className={classes.pickers}
                             />
                         </MuiPickersUtilsProvider>
+                    </ThemeProvider>
                     </Grid>
             </Grid>
             </Grid>
