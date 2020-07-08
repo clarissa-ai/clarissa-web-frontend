@@ -23,18 +23,18 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         color: '#fff',
     },
-  }));
+}));
 
 const DashboardPage = (props) => {
     const classes = useStyles();
 
     return <Fade in timeout={1000}>
     <div className={classes.container}>
-    <Grid container direction='row' spacing={2}>
+    <Grid container direction='row' spacing={0} justify='center'>
         <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}}>New Illness</Button></TopBar></Grid>
         <Grid item><ResponsiveDrawer/></Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} style={{marginLeft: '1rem'}}>
             <Grid container direction='column' spacing={2}>
                 <Grid item>
                     <div className={classes.greetingsContainer}>
@@ -55,7 +55,7 @@ const DashboardPage = (props) => {
             </Grid>
         </Grid>
 
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={3} style={{marginLeft: '1rem'}}>
             <Grid container direction='column' spacing={2}>
                 <Grid item><StatsCard illnesscount='38' symptomcount='55' visitcount='13'/></Grid>
                 <Grid item>
