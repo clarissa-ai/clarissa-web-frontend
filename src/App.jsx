@@ -6,7 +6,6 @@ import {setProfile} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
 import Loader from 'components/navigation/loader/Loader';
-import Landing from 'pages/landing/Landing';
 import Login from 'pages/LoginPage';
 import Signup from 'pages/SignUpPage';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
