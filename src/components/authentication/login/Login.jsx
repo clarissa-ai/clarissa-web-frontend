@@ -2,7 +2,9 @@ import React from 'react';
 import {Grid, Input, InputAdornment, IconButton, Button, Typography, Link, makeStyles, FormControlLabel, Checkbox} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-// import {ProfileContext} from 'App';
+import {profileSelector} from 'redux/selectors';
+import {setProfile} from 'redux/actions';
+import {useSelector, useDispatch} from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     field: {
@@ -33,8 +35,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-    // const profile = ProfileContext;
-    // console.log(profile);
+    const profile = useSelector(profileSelector);
+    const dispatch = useDispatch();
+
+    const login = () => {
+        profile.login('korra@dogmail.com', 'Bark2020', (newProfile) => {
+            console.log(newProfile);
+            dispatch(setProfile(newProfile));
+        });
+    };
+    const logout = () => {
+        profile.logout((newProfile) => {
+            dispatch(setProfile(newProfile));
+            console.log(newProfile);
+        });
+    };
+
     const classes = useStyles();
     const [values, setValues] = React.useState({
         showPassword: false,
@@ -129,7 +145,9 @@ const Login = () => {
                     <Grid item><Typography>Don&apos;t have an account? <Link className={classes.link}>Sign Up</Link></Typography></Grid>
                 </Grid>
             </Grid>
-            <Typography></Typography>
+            <Button onClick={login}>Login</Button>
+            <Button onClick={logout}>Logout</Button>
+            <Typography>{profile.userInfo ? profile.userInfo.user_id : 'nope'}</Typography>
         </Grid>
     );
 };
