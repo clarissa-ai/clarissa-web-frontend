@@ -39,15 +39,9 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const login = () => {
-        profile.login('korra@dogmail.com', 'Bark2020', (newProfile) => {
+        profile.login(values.email, values.password, (newProfile) => {
             console.log(newProfile);
             dispatch(setProfile(newProfile));
-        });
-    };
-    const logout = () => {
-        profile.logout((newProfile) => {
-            dispatch(setProfile(newProfile));
-            console.log(newProfile);
         });
     };
 
@@ -73,31 +67,6 @@ const Login = () => {
 
     const handleCheckbox = (event) => {
         setValues({...values, rememberMe: !values.rememberMe});
-    };
-
-    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
-
-    const handleSignIn = () => {
-
-        const data = {
-            'email': values.email,
-            'password': values.password,
-        }
-
-        fetch(`${apiLink}/api/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log('Login Success:', data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
     };
 
     return (
@@ -140,13 +109,11 @@ const Login = () => {
             </Grid>
             <Grid item>
                 <Grid container justify='flex-end' direction='column' spacing={3}>
-                    <Grid item><Button className={classes.button} onClick={handleSignIn()}>Sign In</Button></Grid>
+                    <Grid item><Button className={classes.button} onClick={login}>Sign In</Button></Grid>
                     <Grid item><Typography><Link className={classes.link}>Forgot Password?</Link></Typography></Grid>
                     <Grid item><Typography>Don&apos;t have an account? <Link className={classes.link}>Sign Up</Link></Typography></Grid>
                 </Grid>
             </Grid>
-            <Button onClick={login}>Login</Button>
-            <Button onClick={logout}>Logout</Button>
             <Typography>{profile.userInfo ? profile.userInfo.user_id : 'nope'}</Typography>
         </Grid>
     );
