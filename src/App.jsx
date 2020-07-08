@@ -14,6 +14,7 @@ import Dashboard from 'pages/dashboard/DashboardPage';
 import MainSurvey from 'components/surveycomponents/MainSurvey';
 import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
 import ResultCard from 'components/surveycomponents/ResultCard';
+import PageNotFound from 'pages/404/404';
 
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
@@ -97,7 +98,7 @@ const App = (props) => {
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         <Route path="/dashboard" render={(props) => <Dashboard/>}/>
                         <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
-                        <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
+                        <Route render={(props) => <PageNotFound />} />
                     </Switch>
                 </Router>
             </Loader>
