@@ -3,7 +3,6 @@ import {Grid, Typography, makeStyles, Button} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
         borderRadius: '4px',
         background: '#F2F6F9',
     },

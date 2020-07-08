@@ -5,7 +5,7 @@ import StatsCard from 'components/dashboard/StatsCard';
 import RecentIllness from 'components/dashboard/RecentIllness';
 import CompletedSurveyCard from 'components/dashboard/CompletedSurveyCard';
 import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
-import InfoCard from 'components/dashboard/InfoCard';
+import TopBar from 'components/dashboard/TopBar';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
         background: '#EBEFF2',
         padding: '1rem',
+        marginTop: '4rem',
     },
     greetingsContainer: {
         background: '#306CDF',
@@ -26,16 +27,17 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const DashboardPage = (props) => {
-    const classes = useStyles()
+    const classes = useStyles();
+
     return <Fade in timeout={1000}>
     <Grid container className={classes.container}>
+        <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}}>New Illness</Button></TopBar></Grid>
         <Grid item>
             <div className={classes.greetingsContainer}>
                 <Typography variant='h5'><Box fontWeight='bold'>Hey Korra!</Box></Typography>
                 <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
             </div>
         </Grid>
-        <Grid item><Button color='primary'>New Illness</Button></Grid>
         <Grid item>
             <ResponsiveDrawer/>
         </Grid>
