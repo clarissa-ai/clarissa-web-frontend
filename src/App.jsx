@@ -98,7 +98,7 @@ const App = (props) => {
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         <Route path="/dashboard" render={(props) => <Dashboard/>}/>
                         <Route path="/signup" render={ () => <Signup />}/>
-                        <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
+                        <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
                         <Route path='/surveys' render={(props) => <SurveysPage/>}/>
                         <Route path='/past-illness' render={(props) => <PastIllnessPage/>}/>
                         {redirect}

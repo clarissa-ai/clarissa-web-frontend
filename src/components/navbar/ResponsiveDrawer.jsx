@@ -54,74 +54,74 @@ const routes = [
 ];
 
 const extraRoutes = [
-  {
-      title: 'Settings',
-      icon: <MoreHorizIcon/>,
-      link: '/settings',
-  },
-  {
-      title: 'Logout',
-      icon: <ExitToAppIcon/>,
-      link: '/logout',
-  },
+    {
+        title: 'Settings',
+        icon: <MoreHorizIcon/>,
+        link: '/settings',
+    },
+    {
+        title: 'Logout',
+        icon: <ExitToAppIcon/>,
+        link: '/login',
+    },
 ];
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    [theme.breakpoints.up('md')]: {
-      width: drawerWidth,
-      flexShrink: 0,
+    root: {
+        display: 'flex',
     },
-  },
-  appBar: {
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
+    drawer: {
+        [theme.breakpoints.up('md')]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
     },
-    backgroundColor: '#fff',
-    boxShadow: 'none',
-    marginBottom: '3em'
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
+    appBar: {
+        [theme.breakpoints.up('md')]: {
+            width: `calc(100% - ${drawerWidth}px)`,
+            marginLeft: drawerWidth,
+        },
+        backgroundColor: '#fff',
+        boxShadow: 'none',
+        marginBottom: '3em'
     },
-  },
-  // necessary for content to be below app bar
-  toolbar: {
-      minHeight: '0', 
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    overflow: 'hidden',
-    background: '#fff',
-    boxShadow: '6px 0px 18px rgba(0, 0, 0, 0.06)',
-    border: 'none',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  name: {
-    marginTop: '.25rem',
-},
-logo: {
-    margin: '1rem',
-    width: '8rem',
-    flexShrink: 0,
-},
-user: {
-    paddingLeft: '1.5rem',
-},
-avatarSize: {
-    width: '3rem',
-    height: '3rem',
-    fontWeight: 600,
-},
+    menuButton: {
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
+        },
+    },
+    // necessary for content to be below app bar
+    toolbar: {
+        minHeight: '0', 
+    },
+    drawerPaper: {
+        width: drawerWidth,
+        overflow: 'hidden',
+        background: '#fff',
+        boxShadow: '6px 0px 18px rgba(0, 0, 0, 0.06)',
+        border: 'none',
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
+    name: {
+        marginTop: '.25rem',
+    },
+    logo: {
+        margin: '1rem',
+        width: '8rem',
+        flexShrink: 0,
+    },
+    user: {
+        paddingLeft: '1.5rem',
+    },
+    avatarSize: {
+        width: '3rem',
+        height: '3rem',
+        fontWeight: 600,
+    },
 }));
 
 const ResponsiveDrawer = (props) => {
@@ -149,16 +149,15 @@ const ResponsiveDrawer = (props) => {
                 <Typography className={classes.bold}>{user.first_name}</Typography>
                 <Typography paragraph color='textSecondary' variant='caption'>{user.email}</Typography>
             </Grid>
-        </Grid>
-      <List>
-        <RenderRoutes routes={routes}/>
-        <Divider/>
-        <RenderRoutes routes={extraRoutes}/>
-      </List>
-    </div>
-  );
+            <List>
+                <RenderRoutes routes={routes}/>
+                <Divider/>
+                <RenderRoutes routes={extraRoutes}/>
+            </List>
+        </div>
+    );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+    const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <div className={classes.root}>
