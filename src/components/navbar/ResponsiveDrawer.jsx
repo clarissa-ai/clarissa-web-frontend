@@ -34,7 +34,7 @@ const routes = [
     {
         title: 'Past Illness',
         icon: <HistoryIcon/>,
-        link: '/past-illness',
+        link: '/past-illnesses',
     },
     // {
     //     title: 'Medical History',

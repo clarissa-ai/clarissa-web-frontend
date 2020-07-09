@@ -16,8 +16,8 @@ const closedLinks = {
     'Dashboard': '/dashboard',
     'Active Illness': '/active-illness',
     'Past Ilnesses': '/past-illnesses',
-    'Medical History': '/medial-history',
-    'Health Surveys': '/health-surveys',
+    'Medical History': '/medical-history',
+    'Health Surveys': '/surveys',
 };
 
 const useStyles = makeStyles({
@@ -47,7 +47,7 @@ const PageNotFound = () => {
                                 <Typography variant='h6' color='textSecondary'>{'We can\'t seem to find the page you are looking for.'}</Typography>
                                 <Typography className={classes.spacedText} color='textSecondary'>Error code: 404</Typography>
                                 <Typography color='textSecondary'>Here are some helpful links instead.</Typography>
-                                <Link component={RouterLink} to='/'>Home<br/></Link>
+                                <Link to='https://clarissa.ai'>Home<br/></Link>
                                 {Object.keys(activeLinks).map((key) => <Link key={key} component={RouterLink} to={closedLinks[key]}>{key}<br/></Link>)}
                             </Grid>
                             <Grid item={true} xs={5}>
