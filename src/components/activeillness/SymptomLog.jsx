@@ -219,7 +219,7 @@ const SymptomLog = (props) => {
                     <InputBase
                         className={classes.textInput}
                         multiline
-                        rows={5}
+                        rows={4}
                         placeholder="I have a fever, and a cough. I have also been feeling nauseous lately."
                         fullWidth
                         margin='none'
@@ -230,7 +230,6 @@ const SymptomLog = (props) => {
                     <Grid><Typography style={{paddingTop: '10px'}}>Symptoms Recognized:</Typography></Grid>
                     <Grid container spacing={2}>
                         { illness.map((illness, index) => {
-                            console.log(illness);
                             return (
                                 <Grid item key={index}>
                                     <Button classes={{root: classes.rootButton, label: classes.labelButton}} onClick={() => onButtonClick(index)}>

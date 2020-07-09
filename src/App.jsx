@@ -13,6 +13,7 @@ import Dashboard from 'pages/DashboardPage';
 import SymptomLog from 'components/activeillness/SymptomLog';
 import SurveysPage from 'pages/SurveysPage';
 import PastIllnessPage from 'pages/PastIllnessPage';
+import ActiveIllnessPage from 'pages/ActiveIllnessPage';
 import PageNotFound from 'pages/404/404';
 
 const contrastText = '#2C3C56';
@@ -97,6 +98,7 @@ const App = (props) => {
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         <Route path="/dashboard" render={(props) => <Dashboard/>}/>
                         <Route path="/signup" render={ () => <Signup />}/>
+                        <Route path="/active-illness" render={ () => <ActiveIllnessPage />}/>
                         <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
                         <Route path='/surveys' render={(props) => <SurveysPage/>}/>
                         <Route path='/past-illnesses' render={(props) => <PastIllnessPage/>}/>
