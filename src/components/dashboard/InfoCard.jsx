@@ -77,7 +77,7 @@ const InfoCard = (props) => {
         <Grid item><Typography>{() => handleSymptoms()}</Typography></Grid>
         <Grid item>
             <Button variant='outlined' className={props.status? classes.activeButton : classes.button}>
-                <Link className={props.status? classes.linkActive : classes.link} href={`/survey/${props.link}`}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
+                <Link className={props.status? classes.linkActive : classes.link} href={`${props.link}`}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
             </Button>
         </Grid>
     </Grid>
