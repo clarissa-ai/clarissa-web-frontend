@@ -39,7 +39,7 @@ const SymptomCard = (props) => {
                         <Grid item><Typography color='error'><Box fontWeight="fontWeightBold">{props.severity}102.8F</Box></Typography></Grid>
                     </Grid>
                 </Grid>
-                <Grid item onClick={props.symptomModalFunction}><Typography variant='subtitle2' className={classes.cardLabel}><Box fontWeight={500}>Edit</Box></Typography></Grid>
+                <Grid item onClick={props.symptomModalFunction}><Typography variant='subtitle2' className={classes.cardLabel} style={{cursor: 'pointer'}}><Box fontWeight={500}>Edit</Box></Typography></Grid>
             </Grid>
             <Grid container direction="row" spacing={1}>
                 <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Date Logged: </Typography></Grid>

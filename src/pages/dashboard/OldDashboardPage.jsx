@@ -4,10 +4,10 @@ import AppointmentTile from 'components/dashboard/AppointmentTile';
 import CurrentIllness from 'components/dashboard/CurrentIllness';
 import SymptomTile from 'components/dashboard/SymptomTile';
 import SymptomLog from 'components/dashboard/SymptomLog';
-import SideNavBar from 'components/navbar/SideNavBar';
+import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import SymptomPopUp from 'components/dashboard/SymptomPopUp';
 import SymptomModal from 'components/dashboard/SymptomModal';
-import {Grid} from '@material-ui/core';
+import {Fade, Grid} from '@material-ui/core';
 
 const Dashboard = (props) => {
     let [symptomModal, showSymptomModal] = useState(false);
@@ -25,11 +25,18 @@ const Dashboard = (props) => {
     return (
         // Wrapper Grid
         <Grid container direction ='row' spacing={2} style={{margin: 0, width: '100%', height: '100%', backgroundColor: '#F5F6F8'}}>
-            {console.log('curr state before rerender:' + symptomModal)}
-            {symptomModal ? <SymptomModal closeModalFunction={symptomModalClose}/> : null}
+            {/* Show symptom if symptomModal state is set to true */}
+            {console.log(symptomModal)}
+            <Fade in={symptomModal} mountOnEnter unmountOnExit style={{zIndex: '9999'}}>
+                {/* Div required to recieve fade effect as child element */}
+                <div>
+                    <SymptomModal closeModalFunction={symptomModalClose} />
+                </div>
+            </Fade>
+
             {/* Nav Bar Item */}
             <Grid item xs={2} style={{height: '100vh', padding: '0'}}>
-                <SideNavBar/>
+                <ResponsiveDrawer/>
             </Grid>
             {/* Dashboard Contents */}
             <Grid item xs ={10}>

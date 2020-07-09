@@ -2,25 +2,26 @@ import React /* ,{useState, useEffect}*/ from 'react';
 import {Typography, Grid, makeStyles, Link, Card, CardContent, Box, Avatar, Divider, useTheme} from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import datas from './results.json';
-import ResultModal from './ResultModal';
+// import ResultModal from './ResultModal';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFF',
-        height: '340px',
-        width: '530px',
+        height: '17rem',
+        width: '25rem',
     },
     wrap: {
         wordWrap: 'break-word',
         maxWidth: '400px',
     },
     box: {
-        width: '530px',
-        height: '270px',
+        width: '25rem',
+        height: '13rem',
         backgroundColor: '#306CDF',
         color: 'white',
         textAlign: 'center',
+        padding: '1rem',
     },
     summTitle: {
         padding: '10px',
@@ -43,6 +44,7 @@ const ActiveSurveys = (props) => {
     /* const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(true);
     const [data, setData] = useState([]);*/
+    // const [showModal, setModal] = useState(false);
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const error = false;
     const isLoaded = true;
@@ -85,7 +87,7 @@ const ActiveSurveys = (props) => {
                                     <CardContent style={{height: '40px'}}>
                                         <div className={classes.wrap}>
                                             <Grid container>
-                                                <Avatar alt={data.title} src={apiLink + data.cover_image_url} className={classes.avatarSize}/>
+                                                <Avatar alt={data.title} src={apiLink + data.image_url} className={classes.avatarSize}/>
                                                 <Typography style={{fontWeight: 'bold', margin: '.65rem'}}>{data.title}</Typography>
                                             </Grid>
                                         </div>
@@ -101,7 +103,7 @@ const ActiveSurveys = (props) => {
                                         <Grid container justify='center' className={classes.start}>
                                             <Link href={'survey/' + data.id} underline='none' style={{color: 'white'}}>
                                                 <Grid container>
-                                                    <Typography style={{fontWeight: 'bold'}}>
+                                                    <Typography style={{fontWeight: 'bold'}} >
                                                         View Survey
                                                     </Typography>
                                                     <ArrowForwardIosIcon/>
@@ -114,7 +116,7 @@ const ActiveSurveys = (props) => {
                         </Card>
                     </Grid>
                 ))}
-                <ResultModal data={datas}/>
+                {/* {showModal? <ResultModal data={datas}/> : null} */}
             </Grid>
         );
     }
