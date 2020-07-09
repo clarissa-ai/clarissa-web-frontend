@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 const PastSymptomCard = (props) => {
     const classes = useStyles();
     return <Grid container className={classes.container} justify='center' direction='column'> 
-            {/* <Grid item ><Typography variant='h6' className={classes.label}><Box fontWeight='bold'>Symptoms Logged</Box></Typography></Grid> */}
             <Grid item>{props.children}</Grid>
         </Grid>
 }
