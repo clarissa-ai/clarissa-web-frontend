@@ -9,7 +9,7 @@ import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import RenderRoutes from './RenderRoutes';
 import {ReactComponent as LogoWithName} from './logoWithName.svg';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
-import MailOutlineOutlinedIcon from '@material-ui/icons/MailOutlineOutlined';
+import HistoryIcon from '@material-ui/icons/History';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -31,7 +31,7 @@ const routes = [
   },
   {
       title: 'Past Illness',
-      icon: <MailOutlineOutlinedIcon/>,
+      icon: <HistoryIcon/>,
       link: '/past-illness',
   },
   {
