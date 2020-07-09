@@ -83,7 +83,7 @@ const DashboardPage = (props) => {
     };
 
     return (
-        // !profile.authenticated ? <Redirect to='/login' /> :
+        !profile.authenticated ? <Redirect to='/login' /> :
             <Fade in timeout={1000}>
                 <div className={classes.container}>
                     <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
