@@ -9,7 +9,7 @@ import CompletedSurveyCard from 'components/dashboard/CompletedSurveyCard';
 import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/navbar/TopBar';
 import InfoCard from 'components/dashboard/InfoCard';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     button: {
