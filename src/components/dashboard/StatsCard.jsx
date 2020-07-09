@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 const StatsCard = (props) => {
     const classes = useStyles();
-    return <Grid container direction='row' className={classes.container}>
+    return <Grid container direction='row' className={classes.container} justify='center'>
         <Grid item>
             <div className={classes.stats}>
                 <Typography variant='h6' style={{color: '#306CDF'}}><Box fontWeight='bold'>{props.illnesscount}</Box></Typography>

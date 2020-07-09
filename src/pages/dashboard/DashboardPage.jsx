@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import {profileSelector} from 'redux/selectors';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
 import StatsCard from 'components/dashboard/StatsCard';
@@ -23,20 +25,18 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         color: '#fff',
     },
-    illnessContainer: {
-        minHeight: '100%',
-    },
 }));
 
 const DashboardPage = (props) => {
     const classes = useStyles();
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const [dashData, setDash] = useState([]);
-    const [userName, setName] = useState('There');
     const [activeSurveys, setActiveSurveys] = useState([]);
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
 
+    const profile = useSelector(profileSelector);
+    const userInfo = profile.userInfo;
 
     useEffect(()=> {
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
@@ -60,7 +60,7 @@ const DashboardPage = (props) => {
 
     return <Fade in timeout={1000}>
     <div className={classes.container}>
-    <Grid container direction='row' spacing={0} justify='center'>
+    <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
         <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}}>New Illness</Button></TopBar></Grid>
         <Grid item><ResponsiveDrawer/></Grid>
 
@@ -68,13 +68,13 @@ const DashboardPage = (props) => {
             <Grid container direction='column' spacing={2}>
                 <Grid item>
                     <div className={classes.greetingsContainer}>
-                        <Typography variant='h6'><Box fontWeight='bold'>Hey {userName}!</Box></Typography>
+                        <Typography variant='h6'><Box fontWeight='bold'>Hey {userInfo.first_name}!</Box></Typography>
                         <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
                     </div>
                 </Grid>
 
                 <Grid item>
-                    <RecentIllness className={classes.illnessContainer}>
+                    <RecentIllness >
                         {recentIllness.map((illness, index) => {
                             console.log(illness)
                             return <Grid item><InfoCard title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count}/></Grid>
@@ -90,7 +90,7 @@ const DashboardPage = (props) => {
                 <Grid item>
                     <CompletedSurveyCard>
                         {completedSurveys.map((completed_surveys, index) => {
-                        return <Grid item><InfoCard title={completed_surveys.title}/></Grid>
+                        return <Grid item><InfoCard title={completed_surveys.title} status={null} /></Grid>
                     })}
                     </CompletedSurveyCard>
                 </Grid>
