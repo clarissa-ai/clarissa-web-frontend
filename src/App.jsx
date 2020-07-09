@@ -10,9 +10,7 @@ import Login from 'pages/LoginPage';
 import Signup from 'pages/SignUpPage';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import Dashboard from 'pages/DashboardPage';
-import MainSurvey from 'components/surveycomponents/MainSurvey';
-import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
-import ResultCard from 'components/surveycomponents/ResultCard';
+import SymptomLog from 'components/activeillness/SymptomLog';
 import SurveysPage from 'pages/SurveysPage';
 import PastIllnessPage from 'pages/PastIllnessPage';
 

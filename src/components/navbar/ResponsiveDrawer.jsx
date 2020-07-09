@@ -21,36 +21,36 @@ import {profileSelector} from 'redux/selectors';
 const drawerWidth = 240;
 
 const routes = [
-  {
-      title: 'Dashboard',
-      icon: <DashboardOutlinedIcon/>,
-      link: '/dashboard',
-  },
-  {
-      title: 'Active Illness',
-      icon: <ViewAgendaOutlinedIcon/>,
-      link: '/active-illness',
-  },
-  {
-      title: 'Past Illness',
-      icon: <HistoryIcon/>,
-      link: '/past-illness',
-  },
-  // {
-  //     title: 'Medical History',
-  //     icon: <PersonOutlineOutlinedIcon/>,
-  //     link: '/medical-history',
-  // },
-  // {
-  //     title: 'Doctor Portal',
-  //     icon: <ChatBubbleOutlineOutlinedIcon/>,
-  //     link: '/doctor-portal',
-  // },
-  {
-      title: 'Health Surveys',
-      icon: <ViewWeekOutlinedIcon/>,
-      link: '/surveys',
-  },
+    {
+        title: 'Dashboard',
+        icon: <DashboardOutlinedIcon/>,
+        link: '/dashboard',
+    },
+    {
+        title: 'Active Illness',
+        icon: <ViewAgendaOutlinedIcon/>,
+        link: '/active-illness',
+    },
+    {
+        title: 'Past Illness',
+        icon: <HistoryIcon/>,
+        link: '/past-illness',
+    },
+    // {
+    //     title: 'Medical History',
+    //     icon: <PersonOutlineOutlinedIcon/>,
+    //     link: '/medical-history',
+    // },
+    // {
+    //     title: 'Doctor Portal',
+    //     icon: <ChatBubbleOutlineOutlinedIcon/>,
+    //     link: '/doctor-portal',
+    // },
+    {
+        title: 'Health Surveys',
+        icon: <ViewWeekOutlinedIcon/>,
+        link: '/surveys',
+    },
 ];
 
 const extraRoutes = [
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
         },
         backgroundColor: '#fff',
         boxShadow: 'none',
-        marginBottom: '3em'
+        marginBottom: '3em',
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     },
     // necessary for content to be below app bar
     toolbar: {
-        minHeight: '0', 
+        minHeight: '0',
     },
     drawerPaper: {
         width: drawerWidth,
@@ -125,89 +125,90 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ResponsiveDrawer = (props) => {
-  const { window } = props;
-  const classes = useStyles();
-  const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+    const {window} = props;
+    const classes = useStyles();
+    const theme = useTheme();
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const profile = useSelector(profileSelector);
-  const user = profile.userInfo;
+    const profile = useSelector(profileSelector);
+    const user = profile.userInfo;
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <LogoWithName className={classes.logo}/>
-        <Grid container spacing={2} className={classes.user} >
-            <Grid item>
-                <Avatar alt={user.name} src={user.img} className={classes.avatarSize}/>
+    const drawer = (
+        <div>
+            <div className={classes.toolbar} />
+            <LogoWithName className={classes.logo}/>
+            <Grid container spacing={2} className={classes.user} >
+                <Grid item>
+                    <Avatar alt={user.name} src={user.img} className={classes.avatarSize}/>
+                </Grid>
+                <Grid item className={classes.name}>
+                    <Typography className={classes.bold}>{user.first_name}</Typography>
+                    <Typography paragraph color='textSecondary' variant='caption'>{user.email}</Typography>
+                </Grid>
+                <List>
+                    <RenderRoutes routes={routes}/>
+                    <Divider/>
+                    <RenderRoutes routes={extraRoutes}/>
+                </List>
             </Grid>
-            <Grid item className={classes.name}>
-                <Typography className={classes.bold}>{user.first_name}</Typography>
-                <Typography paragraph color='textSecondary' variant='caption'>{user.email}</Typography>
-            </Grid>
-            <List>
-                <RenderRoutes routes={routes}/>
-                <Divider/>
-                <RenderRoutes routes={extraRoutes}/>
-            </List>
         </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <Hidden mdUp implementation='css'>
-      <AppBar position='fixed' className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      </Hidden>
-      <nav className={classes.drawer} aria-label="folders">
-        <Hidden mdUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden smDown implementation='css'>
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
-    </div>
-  );
-}
+    return (
+        <div className={classes.root}>
+            <CssBaseline />
+            <Hidden mdUp implementation='css'>
+                <AppBar position='fixed' className={classes.appBar}>
+                    <Toolbar>
+                        <IconButton
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={handleDrawerToggle}
+                            className={classes.menuButton}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+            </Hidden>
+            <nav className={classes.drawer} aria-label="folders">
+                <Hidden mdUp implementation="css">
+                    <Drawer
+                        container={container}
+                        variant="temporary"
+                        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                    >
+                        {drawer}
+                    </Drawer>
+                </Hidden>
+                <Hidden smDown implementation='css'>
+                    <Drawer
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        variant="permanent"
+                        open
+                    >
+                        {drawer}
+                    </Drawer>
+                </Hidden>
+            </nav>
+        </div>
+    );
+};
 
 export default ResponsiveDrawer;
