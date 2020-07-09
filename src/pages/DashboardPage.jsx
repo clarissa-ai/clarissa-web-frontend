@@ -79,7 +79,6 @@ const DashboardPage = (props) => {
                 <Grid item>
                     <RecentIllness >
                         {recentIllness.map((illness, index) => {
-                            console.log(illness)
                             return <Grid item><InfoCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
                         })}
                     </RecentIllness>

@@ -1,6 +1,6 @@
 import React from 'react';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
-import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
+import {Grid, Fade} from '@material-ui/core';
 import PastIllnessCard from 'components/pastillness/PastIllnessCard';
 
 const PastIllnessPage = (props) => {

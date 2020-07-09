@@ -15,6 +15,8 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
+import {useSelector} from 'react-redux';
+import {profileSelector} from 'redux/selectors';
 
 const drawerWidth = 240;
 
@@ -63,12 +65,6 @@ const extraRoutes = [
       link: '/logout',
   },
 ];
-
-const user = {
-  name: 'Teo Nys',
-  email: 'teo@nys.name',
-  img: 'img.png',
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -134,6 +130,9 @@ const ResponsiveDrawer = (props) => {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const profile = useSelector(profileSelector);
+  const user = profile.userInfo;
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -147,7 +146,7 @@ const ResponsiveDrawer = (props) => {
                 <Avatar alt={user.name} src={user.img} className={classes.avatarSize}/>
             </Grid>
             <Grid item className={classes.name}>
-                <Typography className={classes.bold}>{user.name}</Typography>
+                <Typography className={classes.bold}>{user.first_name}</Typography>
                 <Typography paragraph color='textSecondary' variant='caption'>{user.email}</Typography>
             </Grid>
         </Grid>
