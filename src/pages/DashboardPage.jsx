@@ -7,7 +7,7 @@ import StatsCard from 'components/dashboard/StatsCard';
 import RecentIllness from 'components/dashboard/RecentIllness';
 import CompletedSurveyCard from 'components/dashboard/CompletedSurveyCard';
 import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
-import TopBar from 'components/dashboard/TopBar';
+import TopBar from 'components/navbar/TopBar';
 import InfoCard from 'components/dashboard/InfoCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
     },
     greetingsContainer: {
+        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
         background: '#306CDF',
         padding: '1rem 3rem',
         borderRadius: '4px',
