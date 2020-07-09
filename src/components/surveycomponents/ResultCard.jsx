@@ -102,7 +102,7 @@ const ActiveSurveys = (props) => {
                                             <Typography>{data.description}</Typography>
                                         </div>
                                         <Grid container justify='center' className={classes.start}>
-                                            <Link href={'survey/' + data.id} underline='none' style={{color: 'white'}}>
+                                            <Link href={'/surveys'} underline='none' style={{color: 'white'}}>
                                                 <Grid container>
                                                     <Typography style={{fontWeight: 'bold'}} >
                                                         View Survey
