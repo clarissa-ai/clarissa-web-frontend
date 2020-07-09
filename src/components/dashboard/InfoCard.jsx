@@ -1,25 +1,85 @@
-import React from 'react';
-import {Grid, Typography, makeStyles, Button} from '@material-ui/core';
+import React, {useState} from 'react';
+import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
         borderRadius: '4px',
         background: '#F2F6F9',
+        padding: '1rem',
+        marginBottom: '.8rem',
+    },
+    activeContainer: {
+        borderRadius: '4px',
+        background: '#47C594',
+        padding: '1rem',
+        marginBottom: '.8rem',
+        color: '#fff',
     },
     labels: {
         color: '#A6A6A6',
+    },
+    button: {
+        borderRadius: '15px',
+        textTransform: 'none',
+        fontWeight: 'bold',
+        borderColor: '#8D8D8D',
+    },
+    activeButton: {
+        borderRadius: '15px',
+        textTransform: 'none',
+        fontWeight: 'bold',
+        borderColor: '#fff',
+        color: '#fff',
+    },
+    linkActive: {
+        color: '#fff'
+    },
+    link: {
+        color: '#000',
     }
 }));
 
 const InfoCard = (props) => {
     const classes = useStyles();
-    return <Grid container direction='row' spacing={3} className={classes.container}>
-        <Grid item><Typography>{props.title}</Typography></Grid>
-        <Grid item><Typography>{props.date}</Typography></Grid>
-        <Grid item><Typography>{props.status}</Typography></Grid>
-        <Grid item><Typography>{props.symptomcount}</Typography></Grid>
-        <Grid item><Button onClick={props.link}>View</Button></Grid>
+    const [status, setStatus] = useState(null);
+    const [symptoms, setSymptoms] = useState(null);
+
+    const handleStatus = () => {
+        if (status == null) {
+            return null;
+        } else if (status === true) {
+            return <p style={{fontWeight: 'bold'}}>Active</p>;
+        } else {
+            return <p style={{fontWeight: 'bold'}}>Closed</p>;
+        }
+    }
+
+    const handleSymptoms = () => {
+        if (symptoms == null) {
+            return null;
+        } else {
+            return <p style={{fontWeight: 'bold'}}>{symptoms} Symptoms</p>;
+        }
+    }
+
+    useEffect(()=> {
+        setStatus(props.status);
+        setSymptoms(props.symptomcount);
+    }, [props.link, props.status, props.symptomcount]);
+
+    return <Grid container direction='row' alignItems='center' justify='space-evenly' className={props.status? classes.activeContainer : classes.container}>
+        <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
+        <Grid item><Typography><Box fontWeight='bold'>{props.date}</Box></Typography></Grid>
+        <Grid item><Typography>
+            {() => handleStatus()}</Typography>
+        </Grid>
+        <Grid item><Typography>{() => handleSymptoms()}</Typography></Grid>
+        <Grid item>
+            <Button variant='outlined' className={props.status? classes.activeButton : classes.button}>
+                <Link className={props.status? classes.linkActive : classes.link} href={`/survey/${props.link}`}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
+            </Button>
+        </Grid>
     </Grid>
 }
 
