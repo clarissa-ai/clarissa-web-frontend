@@ -34,16 +34,16 @@ const routes = [
       icon: <HistoryIcon/>,
       link: '/past-illness',
   },
-  {
-      title: 'Medical History',
-      icon: <PersonOutlineOutlinedIcon/>,
-      link: '/medical-history',
-  },
-  {
-      title: 'Doctor Portal',
-      icon: <ChatBubbleOutlineOutlinedIcon/>,
-      link: '/doctor-portal',
-  },
+  // {
+  //     title: 'Medical History',
+  //     icon: <PersonOutlineOutlinedIcon/>,
+  //     link: '/medical-history',
+  // },
+  // {
+  //     title: 'Doctor Portal',
+  //     icon: <ChatBubbleOutlineOutlinedIcon/>,
+  //     link: '/doctor-portal',
+  // },
   {
       title: 'Health Surveys',
       icon: <ViewWeekOutlinedIcon/>,
