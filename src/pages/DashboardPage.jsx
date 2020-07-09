@@ -96,7 +96,7 @@ const DashboardPage = (props) => {
                                 <Grid item>
                                     <CompletedSurveyCard>
                                         {completedSurveys.map((completed_surveys, index) => {
-                                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={completed_surveys.id}/></Grid>
+                                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
                                     })}
                                     </CompletedSurveyCard>
                                 </Grid>
@@ -104,7 +104,7 @@ const DashboardPage = (props) => {
                                 <Grid item>
                                     <TakeSurveyCard>
                                         {activeSurveys.map((active_surveys, index) => {
-                                            return <Grid item key={index}><InfoCard title={active_surveys.title} link={active_surveys.id}/></Grid>
+                                            return <Grid item key={index}><InfoCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
                                         })}
                                     </TakeSurveyCard>
                                 </Grid>
