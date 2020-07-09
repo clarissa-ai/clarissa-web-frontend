@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
+import {ThemeProvider, createMuiTheme, responsiveFontSizes} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import {setProfile} from 'redux/actions';
 import './App.css';
