@@ -120,7 +120,6 @@ class Profile {
                 this.authenticated = false;
                 return;
             }
-            console.log(response);
             response.json().then((data) => {
                 const {status, message, data: userInfo} = data;
                 if (status === 'success') {
