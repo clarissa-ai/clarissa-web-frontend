@@ -4,7 +4,7 @@ import {Grid, Fade, Button, makeStyles} from '@material-ui/core';
 import PastIllnessCard from 'components/pastillness/PastIllnessCard';
 import PastSymptomCard from 'components/pastillness/PastSymptomCard';
 import TopBar from 'components/navbar/TopBar';
-import InfoCard from 'components/dashboard/InfoCard';
+import SymptomItem from 'components/pastillness/SymptomItem';
 
 const PastIllnessPage = (props) => {
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
@@ -33,14 +33,15 @@ const PastIllnessPage = (props) => {
     }
 
     const useStyles = makeStyles((theme) => ({
-        symptoms: {
-            background: '#fff',
+        miniBox: {
             height: '20rem'
         },
         container: {
+            width: '100vw',
             background: '#F5F6F8',
             paddingTop: '5rem',
             padding: '2rem',
+            
         },
         label: {
             paddingBottom: '1rem',
@@ -54,27 +55,27 @@ const PastIllnessPage = (props) => {
     const classes = useStyles();
 
     return <Fade in timeout={1000}>
-        <Grid container justify='center' alignItems='center' direction='row' className={classes.container}>
+        <Grid container justify='center' alignItems='center' direction='row' spacing={2} className={classes.container} alignContent='stretch' alignItems='stretch'>
             <Grid item><ResponsiveDrawer/></Grid>
             <Grid item>
                 <TopBar>
-                    <Button variant='filled'>View Active Illness</Button>
+                    <Button color='primary' variant='contained' href='/active-illness'>View Active Illness</Button>
                 </TopBar>
                 </Grid>
-            <Grid item xs={6}>
+            <Grid item>
                 <PastIllnessCard>
                     {console.log(illnessList)}
                     {illnessList.map((illness, index) => {
                         // console.log(illness.created_on, illness.active, illness.symptoms)
-                        return <Grid item><InfoCard title='' status={null} date={illness.created_on} active={illness.active} onClick={() => handleSymptoms(index)}/></Grid>
+                        return <Grid item onClick={() => handleSymptoms(index)}><SymptomItem title='' status={null} date={illness.created_on} active={illness.active}/></Grid>
                     })}
                 </PastIllnessCard>
             </Grid>
-            <Grid item xs={4}>
-                <PastSymptomCard className={classes.symptoms}>
+            <Grid item>
+                <PastSymptomCard>
                     {symptomList.map((symptom, index) => {
                         console.log(symptom)
-                        return <Grid item><InfoCard title={symptom.symptom_json.common_name} status={null}/></Grid>
+                        return <Grid item><SymptomItem title={symptom.symptom_json.common_name} status={null}/></Grid>
                     })}
                 </PastSymptomCard>
             </Grid>

@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
         background: '#fff',
         padding: '1rem',
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+        height: '35rem',
+        width: '25rem',
+        overflow: 'scroll',
     },
     label: {
         paddingBottom: '1rem',
@@ -19,10 +22,8 @@ const useStyles = makeStyles((theme) => ({
 const PastSymptomCard = (props) => {
     const classes = useStyles();
     return <Grid container className={classes.container} justify='center' direction='column'> 
-            <Grid item><Typography variant='h6' className={classes.label}><Box fontWeight='bold'>Symptoms Logged</Box></Typography></Grid>
+            {/* <Grid item ><Typography variant='h6' className={classes.label}><Box fontWeight='bold'>Symptoms Logged</Box></Typography></Grid> */}
             <Grid item>{props.children}</Grid>
-            <Grid container justify='center'>
-            </Grid>
         </Grid>
 }
 export default PastSymptomCard;

@@ -7,6 +7,8 @@ const useStyles = makeStyles((theme) => ({
         background: '#fff',
         padding: '1rem',
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+        height: '35rem',
+        width: '25rem',
     },
     label: {
         paddingBottom: '1rem',
