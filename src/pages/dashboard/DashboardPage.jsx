@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
 import StatsCard from 'components/dashboard/StatsCard';
@@ -23,10 +23,40 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         color: '#fff',
     },
+    illnessContainer: {
+        minHeight: '100%',
+    },
 }));
 
 const DashboardPage = (props) => {
     const classes = useStyles();
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
+    const [dashData, setDash] = useState([]);
+    const [userName, setName] = useState('There');
+    const [activeSurveys, setActiveSurveys] = useState([]);
+    const [completedSurveys, setCompletedSurveys] = useState([]);
+    const [recentIllness, setrecentIllness] = useState([]);
+
+
+    useEffect(()=> {
+        fetch(`${apiLink}/api/dashboard/get_dashboard`, {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },})
+        .then(res => res.json())
+        .then(res => {
+                setDash(res);
+                setActiveSurveys(res.active_surveys);
+                setCompletedSurveys(res.completed_surveys);
+                setrecentIllness(res.recent_illnesses);
+        },
+        (error) => {
+                console.log(error);
+        },);
+    }, [apiLink])
+    
 
     return <Fade in timeout={1000}>
     <div className={classes.container}>
@@ -38,18 +68,17 @@ const DashboardPage = (props) => {
             <Grid container direction='column' spacing={2}>
                 <Grid item>
                     <div className={classes.greetingsContainer}>
-                        <Typography variant='h6'><Box fontWeight='bold'>Hey Korra!</Box></Typography>
+                        <Typography variant='h6'><Box fontWeight='bold'>Hey {userName}!</Box></Typography>
                         <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
                     </div>
                 </Grid>
 
                 <Grid item>
-                    <RecentIllness>
-                        <Grid item><InfoCard title='Test' date='1/20/20 - 2/01/20' status='Active' symptomcount='36'/></Grid>
-                        <Grid item><InfoCard title='Test' date='1/20/20 - 2/01/20' status='Active' symptomcount='36'/></Grid>
-                        <Grid item><InfoCard title='Test' date='1/20/20 - 2/01/20' status='Active' symptomcount='36'/></Grid>
-                        <Grid item><InfoCard title='Test' date='1/20/20 - 2/01/20' status='Active' symptomcount='36'/></Grid>
-                        <Grid item><InfoCard title='Test' date='1/20/20 - 2/01/20' status='Active' symptomcount='36'/></Grid>
+                    <RecentIllness className={classes.illnessContainer}>
+                        {recentIllness.map((illness, index) => {
+                            console.log(illness)
+                            return <Grid item><InfoCard title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count}/></Grid>
+                        })}
                     </RecentIllness>
                 </Grid>
             </Grid>
@@ -57,18 +86,20 @@ const DashboardPage = (props) => {
 
         <Grid item xs={12} md={3} xl={3}style={{marginLeft: '1rem'}}>
             <Grid container direction='column' spacing={2}>
-                <Grid item><StatsCard illnesscount='38' symptomcount='55' visitcount='13'/></Grid>
+                <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
                 <Grid item>
                     <CompletedSurveyCard>
-                        <Grid item><InfoCard title='COVID-19 Screening'/></Grid>
-                        <Grid item><InfoCard title='COVID-19 Screening'/></Grid>
+                        {completedSurveys.map((completed_surveys, index) => {
+                        return <Grid item><InfoCard title={completed_surveys.title}/></Grid>
+                    })}
                     </CompletedSurveyCard>
                 </Grid>
 
                 <Grid item>
                     <TakeSurveyCard>
-                        <Grid item><InfoCard title='COVID-19 Screening'/></Grid>
-                        <Grid item><InfoCard title='COVID-19 Screening'/></Grid>
+                        {activeSurveys.map((active_surveys, index) => {
+                            return <Grid item key={active_surveys.id}><InfoCard title={active_surveys.title}/></Grid>
+                        })}
                     </TakeSurveyCard>
                 </Grid>
             </Grid>
