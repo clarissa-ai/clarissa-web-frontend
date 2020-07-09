@@ -5,6 +5,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import {profileSelector} from 'redux/selectors';
 import {setProfile} from 'redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     field: {
@@ -40,7 +41,6 @@ const Login = () => {
 
     const login = () => {
         profile.login(values.email, values.password, (newProfile) => {
-            console.log(newProfile);
             dispatch(setProfile(newProfile));
         });
     };
@@ -70,52 +70,52 @@ const Login = () => {
     };
 
     return (
-        <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
-            <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign In</Typography></Grid>
-            <Grid item><Input onChange={handleChange('email')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
-            <Grid item>
-                <Input
-                    className={classes.field}
-                    placeholder="Password"
-                    id="standard-password"
-                    type={values.showPassword ? 'text' : 'password'}
-                    value={values.password}
-                    onChange={handleChange('password')}
-                    endAdornment={
-                        <InputAdornment position="end" color='secondary'>
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                            >
-                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                />
-            </Grid>
-            <Grid item>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            classes={{root: classes.checkbox, indeterminate: classes.unchecked}}
-                            checked={values.rememberMe}
-                            onChange={handleCheckbox}
-                            color='inherit'
-                        />
-                    }
-                    label="Keep me logged in"
-                />
-            </Grid>
-            <Grid item>
-                <Grid container justify='flex-end' direction='column' spacing={3}>
-                    <Grid item><Button className={classes.button} onClick={login}>Sign In</Button></Grid>
-                    <Grid item><Typography><Link className={classes.link}>Forgot Password?</Link></Typography></Grid>
-                    <Grid item><Typography>Don&apos;t have an account? <Link className={classes.link}>Sign Up</Link></Typography></Grid>
+        profile.authenticated ? <Redirect to='/dashboard' /> :
+            <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
+                <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign In</Typography></Grid>
+                <Grid item><Input onChange={handleChange('email')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
+                <Grid item>
+                    <Input
+                        className={classes.field}
+                        placeholder="Password"
+                        id="standard-password"
+                        type={values.showPassword ? 'text' : 'password'}
+                        value={values.password}
+                        onChange={handleChange('password')}
+                        endAdornment={
+                            <InputAdornment position="end" color='secondary'>
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                </Grid>
+                <Grid item>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                classes={{root: classes.checkbox, indeterminate: classes.unchecked}}
+                                checked={values.rememberMe}
+                                onChange={handleCheckbox}
+                                color='inherit'
+                            />
+                        }
+                        label="Keep me logged in"
+                    />
+                </Grid>
+                <Grid item>
+                    <Grid container justify='flex-end' direction='column' spacing={3}>
+                        <Grid item><Button className={classes.button} onClick={login}>Sign In</Button></Grid>
+                        <Grid item><Typography><Link className={classes.link}>Forgot Password?</Link></Typography></Grid>
+                        <Grid item><Typography>Don&apos;t have an account? <Link className={classes.link}>Sign Up</Link></Typography></Grid>
+                    </Grid>
                 </Grid>
             </Grid>
-            <Typography>{profile.userInfo ? profile.userInfo.user_id : 'nope'}</Typography>
-        </Grid>
     );
 };
 export default Login;
