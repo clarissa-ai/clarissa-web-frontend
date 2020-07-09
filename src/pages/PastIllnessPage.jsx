@@ -55,7 +55,7 @@ const PastIllnessPage = (props) => {
     const classes = useStyles();
 
     return <Fade in timeout={1000}>
-        <Grid container justify='center' alignItems='center' direction='row' spacing={2} className={classes.container} alignContent='stretch' alignItems='stretch'>
+        <Grid container justify='center' alignItems='center' direction='row' spacing={2} className={classes.container} alignContent='stretch'>
             <Grid item><ResponsiveDrawer/></Grid>
             <Grid item>
                 <TopBar>
