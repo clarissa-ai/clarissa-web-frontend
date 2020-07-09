@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Grid, Typography, makeStyles, Button, Box} from '@material-ui/core';
+import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
 import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +31,12 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         borderColor: '#fff',
         color: '#fff',
+    },
+    linkActive: {
+        color: '#fff'
+    },
+    link: {
+        color: '#000',
     }
 }));
 
@@ -38,11 +44,8 @@ const InfoCard = (props) => {
     const classes = useStyles();
     const [status, setStatus] = useState(null);
     const [symptoms, setSymptoms] = useState(null);
-
-    useEffect(()=> {
-        setStatus(props.status);
-        setSymptoms(props.symptomcount);
-    }, [props.status, props.symptomcount]);
+    const [surveyLink, setLink] = useState('');
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
 
     const handleStatus = () => {
         if (status == null) {
@@ -62,16 +65,44 @@ const InfoCard = (props) => {
         }
     }
 
+    useEffect(()=> {
+        setStatus(props.status);
+        setSymptoms(props.symptomcount);
+
+        if (props.link != null) {
+            const data = {
+                id: props.link,
+            }
+            fetch(`${apiLink}/api/survey/get_survey_by_id`, {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+                })
+                .then(res => res.json())
+                .then(res => {
+                        setLink(res.survey.links);
+                },
+                (error) => {
+                        console.log(error);
+                },);
+        }
+    }, [props.link, props.status, props.symptomcount, apiLink]);
+
     return <Grid container direction='row' alignItems='center' justify='space-evenly' className={props.status? classes.activeContainer : classes.container}>
         <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight='bold'>{props.date}</Box></Typography></Grid>
-        <Grid item><Typography><Box fontWeight='bold'>
-            {() => handleStatus()}</Box></Typography>
+        <Grid item><Typography>
+            {() => handleStatus()}</Typography>
         </Grid>
-        <Grid item><Typography><Box fontWeight='bold'>{() => handleSymptoms()}</Box></Typography></Grid>
+        <Grid item><Typography>{() => handleSymptoms()}</Typography></Grid>
         <Grid item>
-            <Button onClick={props.link} variant='outlined' className={props.status? classes.activeButton : classes.button}>
-                <Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography>
+            <Button variant='outlined' className={props.status? classes.activeButton : classes.button}>
+                {/* Figure out why accessing link is not working */}
+                {console.log(JSON.stringify(surveyLink.link))}
+                <Link className={props.status? classes.linkActive : classes.link} to={surveyLink.link}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
             </Button>
         </Grid>
     </Grid>

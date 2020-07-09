@@ -34,9 +34,9 @@ const DashboardPage = (props) => {
     const [activeSurveys, setActiveSurveys] = useState([]);
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
+    const [userName, setName] = useState('');
 
     const profile = useSelector(profileSelector);
-    const userInfo = profile.userInfo;
 
     useEffect(()=> {
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
@@ -55,6 +55,9 @@ const DashboardPage = (props) => {
         (error) => {
                 console.log(error);
         },);
+
+        const userInfo = profile.userInfo;
+        setName(userInfo.first_name);
     }, [apiLink])
     
 
@@ -68,7 +71,7 @@ const DashboardPage = (props) => {
             <Grid container direction='column' spacing={2}>
                 <Grid item>
                     <div className={classes.greetingsContainer}>
-                        <Typography variant='h6'><Box fontWeight='bold'>Hey {userInfo.first_name}!</Box></Typography>
+                        <Typography variant='h6'><Box fontWeight='bold'>Hey {userName}!</Box></Typography>
                         <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
                     </div>
                 </Grid>
@@ -77,7 +80,7 @@ const DashboardPage = (props) => {
                     <RecentIllness >
                         {recentIllness.map((illness, index) => {
                             console.log(illness)
-                            return <Grid item><InfoCard title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count}/></Grid>
+                            return <Grid item><InfoCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
                         })}
                     </RecentIllness>
                 </Grid>
@@ -90,7 +93,7 @@ const DashboardPage = (props) => {
                 <Grid item>
                     <CompletedSurveyCard>
                         {completedSurveys.map((completed_surveys, index) => {
-                        return <Grid item><InfoCard title={completed_surveys.title} status={null} /></Grid>
+                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={completed_surveys.id}/></Grid>
                     })}
                     </CompletedSurveyCard>
                 </Grid>
@@ -98,7 +101,7 @@ const DashboardPage = (props) => {
                 <Grid item>
                     <TakeSurveyCard>
                         {activeSurveys.map((active_surveys, index) => {
-                            return <Grid item key={active_surveys.id}><InfoCard title={active_surveys.title}/></Grid>
+                            return <Grid item key={index}><InfoCard title={active_surveys.title} link={active_surveys.id}/></Grid>
                         })}
                     </TakeSurveyCard>
                 </Grid>
