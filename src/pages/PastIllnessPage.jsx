@@ -1,13 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {useSelector} from 'react-redux';
-import {profileSelector} from 'redux/selectors';
+import React from 'react';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
+import PastIllnessCard from 'components/pastillness/PastIllnessCard';
 
-const PastIllness = (props) => {
+const PastIllnessPage = (props) => {
     return <Fade in timeout={1000}>
-        <ResponsiveDrawer/>
+        <Grid container justify='center' alignItems='center'>
+            <Grid item><ResponsiveDrawer/></Grid>
+            <Grid item>
+                <PastIllnessCard>
+                </PastIllnessCard>
+            </Grid>
+        </Grid>
     </Fade>
 }
 
-export default PastIllness;
+export default PastIllnessPage;

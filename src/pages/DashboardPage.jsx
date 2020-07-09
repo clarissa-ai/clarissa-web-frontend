@@ -58,7 +58,7 @@ const DashboardPage = (props) => {
 
         const userInfo = profile.userInfo;
         setName(userInfo.first_name);
-    }, [apiLink])
+    }, [apiLink, profile.userInfo])
     
 
     return <Fade in timeout={1000}>
