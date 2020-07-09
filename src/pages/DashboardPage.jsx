@@ -9,7 +9,7 @@ import CompletedSurveyCard from 'components/dashboard/CompletedSurveyCard';
 import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/dashboard/TopBar';
 import InfoCard from 'components/dashboard/InfoCard';
-import {Redirect} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -36,6 +36,7 @@ const DashboardPage = (props) => {
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
+    const history = useHistory();
 
     const profile = useSelector(profileSelector);
 
@@ -61,13 +62,31 @@ const DashboardPage = (props) => {
             const userInfo = profile.userInfo;
             setName(userInfo.first_name);
     }, [apiLink, profile])
-    
+
+    const createNewIllness = (event) => {
+        fetch(`${apiLink}/api/dashboard/create_illness`, {
+            method: 'GET',
+            credentials: 'include',
+        }).then((response) => {
+            if (!response.ok) {
+                console.log('Internal Error. Please contact support.');
+                return;
+            }
+            response.json().then((data) => {
+                const {status, message} = data;
+                if (status === 'success') {
+                    history.push('/active-illness');
+                }
+            });
+        });
+    };
+
     return (
-        !profile.authenticated ? <Redirect to='/login' /> :
+        // !profile.authenticated ? <Redirect to='/login' /> :
             <Fade in timeout={1000}>
                 <div className={classes.container}>
                     <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
-                        <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}}>New Illness</Button></TopBar></Grid>
+                        <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
                         <Grid item><ResponsiveDrawer/></Grid>
 
                         <Grid item xs={12} md={6} xl={7} style={{marginLeft: '1rem'}}>
@@ -82,7 +101,7 @@ const DashboardPage = (props) => {
                                 <Grid item>
                                     <RecentIllness >
                                         {recentIllness.map((illness, index) => {
-                                            return <Grid item><InfoCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                            return <Grid item><InfoCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} link={illness.active ? '/active-illness' : '/past-illnesses'} /></Grid>
                                         })}
                                     </RecentIllness>
                                 </Grid>
@@ -95,7 +114,7 @@ const DashboardPage = (props) => {
                                 <Grid item>
                                     <CompletedSurveyCard>
                                         {completedSurveys.map((completed_surveys, index) => {
-                                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={completed_surveys.id}/></Grid>
+                                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
                                     })}
                                     </CompletedSurveyCard>
                                 </Grid>
@@ -103,7 +122,7 @@ const DashboardPage = (props) => {
                                 <Grid item>
                                     <TakeSurveyCard>
                                         {activeSurveys.map((active_surveys, index) => {
-                                            return <Grid item key={index}><InfoCard title={active_surveys.title} link={active_surveys.id}/></Grid>
+                                            return <Grid item key={index}><InfoCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
                                         })}
                                     </TakeSurveyCard>
                                 </Grid>
