@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
-import { useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
+import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -68,7 +67,7 @@ const InfoCard = (props) => {
         setSymptoms(props.symptomcount);
     }, [props.link, props.status, props.symptomcount]);
 
-    return <Grid container direction='row' alignItems='center' justify='space-evenly' className={props.status? classes.activeContainer : classes.container}>
+    return <Grid container direction='row' alignItems='center' justify='center' className={props.status? classes.activeContainer : classes.container}>
         <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight='bold'>{props.date}</Box></Typography></Grid>
         <Grid item><Typography>
@@ -76,9 +75,6 @@ const InfoCard = (props) => {
         </Grid>
         <Grid item><Typography>{() => handleSymptoms()}</Typography></Grid>
         <Grid item>
-            <Button variant='outlined' className={props.status? classes.activeButton : classes.button}>
-                <Link className={props.status? classes.linkActive : classes.link} href={`${props.link}`}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
-            </Button>
         </Grid>
     </Grid>
 }
