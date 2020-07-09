@@ -7,7 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import RenderRoutes from './RenderRoutes';
-import {ReactComponent as LogoWithName} from './logoWithName.svg';
+import {ReactComponent as LogoWithName} from 'images/LogoWithName.svg';
 // import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import HistoryIcon from '@material-ui/icons/History';
 // import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
