@@ -51,11 +51,27 @@ const RenderRoutes = (props) => {
     const dispatch = useDispatch();
 
     const logout = (link) => {
-        if (link === '/login') {
-            profile.logout((newProfile) => {
-                dispatch(setProfile(newProfile));
-                console.log(newProfile);
-            });
+        profile.logout((newProfile) => {
+            dispatch(setProfile(newProfile));
+            console.log(newProfile);
+        });
+    };
+
+    const displayLinks = (route) => {
+        if (route.link !== '/login') {
+            return (
+                <Button activeClassName={classes.active} className={classes.button} component={ConstructRoutes} to={route.link}>
+                    <div className={classes.icon}>{route.icon}</div>
+                    <Typography variant='body2' className={classes.name}>{route.title}</Typography>
+                </Button>
+            );
+        } else {
+            return (
+                <Button activeClassName={classes.active} className={classes.button} component={ConstructRoutes} to={route.link} onClick={() => logout(route.link)}>
+                    <div className={classes.icon}>{route.icon}</div>
+                    <Typography variant='body2' className={classes.name}>{route.title}</Typography>
+                </Button>
+            );
         }
     };
 
@@ -63,10 +79,7 @@ const RenderRoutes = (props) => {
         <List>
             {routes.map((route, index) => (
                 <ListItem key={index}>
-                    <Button activeClassName={classes.active} className={classes.button} component={ConstructRoutes} to={route.link} onClick={() => logout(route.link)}>
-                        <div className={classes.icon}>{route.icon}</div>
-                        <Typography variant='body2' className={classes.name}>{route.title}</Typography>
-                    </Button>
+                    {displayLinks(route)}
                 </ListItem>
             ))}
         </List>
