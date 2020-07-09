@@ -5,7 +5,7 @@ import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles} from '@material-ui/core';
 import SymptomLog from 'components/activeillness/SymptomLog';
 // import SymptomTile from 'components/activeillness/SymptomTile';
-import TopBar from 'components/dashboard/TopBar';
+import TopBar from 'components/navbar/TopBar';
 import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({

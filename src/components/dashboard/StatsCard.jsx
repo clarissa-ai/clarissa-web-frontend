@@ -36,7 +36,7 @@ const StatsCard = (props) => {
         <Grid item>
             <div className={classes.stats}>
                 <Typography variant='h6' style={{color: '#F46D66'}}><Box fontWeight='bold'>{props.visitcount}</Box></Typography>
-                <Typography variant='subtitle2' className={classes.labels}>Doctor Visits</Typography>
+                <Typography variant='subtitle2' className={classes.labels}>Surveys Completed</Typography>
             </div>
         </Grid>
     </Grid>
