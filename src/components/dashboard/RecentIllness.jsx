@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
+import {Grid, Typography, makeStyles, Box, Link} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     label: {
         paddingBottom: '1rem',
     },
+    link: {
+        color: '#000',
+    },
 }));
 
 const RecentIllness = (props) => {
@@ -19,7 +22,7 @@ const RecentIllness = (props) => {
             <Grid item><Typography variant='h6' className={classes.label}><Box fontWeight='bold'>Recent Illness</Box></Typography></Grid>
             <Grid item>{props.children}</Grid>
             <Grid container justify='center'>
-                <Grid item><Typography variant='subtitle2' style={{opacity: '.4'}}><Box fontWeight='bold'>View More</Box></Typography></Grid>
+                <Grid item><Typography variant='subtitle2' style={{opacity: '.4'}}><Box fontWeight='bold'><Link className={classes.link} href='/past-illness'>View More</Link></Box></Typography></Grid>
             </Grid>
         </Grid>
 }

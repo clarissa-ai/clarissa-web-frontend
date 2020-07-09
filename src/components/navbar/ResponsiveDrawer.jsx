@@ -30,9 +30,9 @@ const routes = [
       link: '/active-illness',
   },
   {
-      title: 'Past Illnesses',
+      title: 'Past Illness',
       icon: <MailOutlineOutlinedIcon/>,
-      link: '/past-illnesses',
+      link: '/past-illness',
   },
   {
       title: 'Medical History',
