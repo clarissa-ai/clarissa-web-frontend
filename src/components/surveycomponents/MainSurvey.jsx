@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFF',
         height: '290px',
-        width: '1098px',
+        width: 'auto',
     },
     overall: {
         wordWrap: 'break-word',

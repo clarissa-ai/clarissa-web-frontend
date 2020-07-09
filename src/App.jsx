@@ -6,14 +6,13 @@ import {setProfile} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
 import Loader from 'components/navigation/loader/Loader';
-
-// import Landing from 'pages/landing/Landing';
-import Login from 'components/authentication/login/Login';
+import Login from 'pages/LoginPage';
+import Signup from 'pages/SignUpPage';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
-import Dashboard from 'pages/dashboard/DashboardPage';
-import MainSurvey from 'components/surveycomponents/MainSurvey';
-import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
-import ResultCard from 'components/surveycomponents/ResultCard';
+import Dashboard from 'pages/DashboardPage';
+import SymptomLog from 'components/activeillness/SymptomLog';
+import SurveysPage from 'pages/SurveysPage';
+import PastIllnessPage from 'pages/PastIllnessPage';
 import PageNotFound from 'pages/404/404';
 
 const contrastText = '#2C3C56';
@@ -97,7 +96,10 @@ const App = (props) => {
                         <Route exact path="/login" render={(props) => <Login/>} />
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         <Route path="/dashboard" render={(props) => <Dashboard/>}/>
-                        <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
+                        <Route path="/signup" render={ () => <Signup />}/>
+                        <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
+                        <Route path='/surveys' render={(props) => <SurveysPage/>}/>
+                        <Route path='/past-illness' render={(props) => <PastIllnessPage/>}/>
                         <Route render={(props) => <PageNotFound />} />
                     </Switch>
                 </Router>

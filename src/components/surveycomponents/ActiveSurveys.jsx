@@ -3,19 +3,21 @@ import {Typography, Grid, makeStyles, Link, Card, CardContent, Box, Avatar, useT
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const useStyles = makeStyles((theme) => ({
+    container: {
+        width: 'auto',
+    },
     root: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFF',
-        height: '200px',
-        width: '540px',
+        height: '12em',
     },
     wrap: {
         wordWrap: 'break-word',
         maxWidth: '400px',
     },
     box: {
-        width: '108px',
-        height: '200px',
+        width: '6em',
+        height: '12em',
         float: 'right',
         color: 'white',
         textAlign: 'center',
@@ -71,7 +73,7 @@ const ActiveSurveys = (props) => {
         return <div></div>;
     } else {
         return (
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.container}>
                 {data.map((data, index) => (
                     <Grid item key={index}>
                         <Card className={classes.root}>
@@ -80,7 +82,7 @@ const ActiveSurveys = (props) => {
                                     <CardContent>
                                         <div className={classes.wrap}>
                                             <Grid container style={{marginBottom: '.5rem'}}>
-                                                <Avatar alt={data.title} src={apiLink + data.cover_image_url} className={classes.avatarSize}/>
+                                                <Avatar alt={data.title} src={apiLink + data.image_url} className={classes.avatarSize}/>
                                                 <Typography style={{fontWeight: 'bold', margin: '.65rem'}}>{data.title}</Typography>
                                             </Grid>
                                             <Typography variant='subtitle2'>{data.description}</Typography>
