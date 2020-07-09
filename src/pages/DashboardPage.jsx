@@ -73,7 +73,7 @@ const DashboardPage = (props) => {
                 return;
             }
             response.json().then((data) => {
-                const {status, message} = data;
+                const {status} = data;
                 if (status === 'success') {
                     history.push('/active-illness');
                 }
