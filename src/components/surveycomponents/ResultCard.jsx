@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#306CDF',
         color: 'white',
         textAlign: 'center',
-        padding: '1rem',
+        padding: '.75rem',
     },
     summTitle: {
-        padding: '10px',
+        padding: '5px',
         fontWeight: 'bold',
     },
     divider: {
@@ -56,6 +56,7 @@ const ActiveSurveys = (props) => {
     /* useEffect(() => {
         fetch(`${apiLink}/api/survey/get_results`, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -84,18 +85,18 @@ const ActiveSurveys = (props) => {
                         <Card className={classes.root}>
                             <Grid container>
                                 <Grid item>
-                                    <CardContent style={{height: '40px'}}>
+                                    <CardContent style={{height: '70px'}}>
                                         <div className={classes.wrap}>
                                             <Grid container>
                                                 <Avatar alt={data.title} src={apiLink + data.image_url} className={classes.avatarSize}/>
-                                                <Typography style={{fontWeight: 'bold', margin: '.65rem'}}>{data.title}</Typography>
+                                                <Typography style={{fontWeight: 'bold', margin: '.55rem'}}>{data.title}</Typography>
                                             </Grid>
                                         </div>
                                     </CardContent>
                                 </Grid>
                                 <Grid item>
                                     <Box className={classes.box} style={{backgroundColor: `${colors[index]}`}}>
-                                        <div style={{height: '80%'}}>
+                                        <div style={{height: '85%'}}>
                                             <Typography className={classes.summTitle} variant='body1'>{data.summary_title}</Typography>
                                             <Divider className={classes.divider} variant='middle'/>
                                             <Typography>{data.description}</Typography>

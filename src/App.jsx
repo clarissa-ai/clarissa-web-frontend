@@ -10,9 +10,7 @@ import Login from 'pages/LoginPage';
 import Signup from 'pages/SignUpPage';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import Dashboard from 'pages/dashboard/DashboardPage';
-import MainSurvey from 'components/surveycomponents/MainSurvey';
-import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
-import ResultCard from 'components/surveycomponents/ResultCard';
+import SymptomLog from 'components/activeillness/SymptomLog';
 import SurveysPage from 'pages/SurveysPage';
 
 const contrastText = '#2C3C56';
@@ -97,7 +95,7 @@ const App = (props) => {
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         <Route path="/dashboard" render={(props) => <Dashboard/>}/>
                         <Route path="/signup" render={ () => <Signup />}/>
-                        <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
+                        <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
                         <Route path='/surveys' render={(props) => <SurveysPage/>}/>
                         {redirect}
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
