@@ -47,8 +47,8 @@ const PageNotFound = () => {
                                 <Typography variant='h6' color='textSecondary'>{'We can\'t seem to find the page you are looking for.'}</Typography>
                                 <Typography className={classes.spacedText} color='textSecondary'>Error code: 404</Typography>
                                 <Typography color='textSecondary'>Here are some helpful links instead.</Typography>
-                                <Link to='https://clarissa.ai'>Home<br/></Link>
-                                {Object.keys(activeLinks).map((key) => <Link key={key} component={RouterLink} to={closedLinks[key]}>{key}<br/></Link>)}
+                                <Link href='https://clarissa.ai'>Home<br/></Link>
+                                {Object.keys(activeLinks).map((key) => <Link key={key} component={RouterLink} to={activeLinks[key]}>{key}<br/></Link>)}
                             </Grid>
                             <Grid item={true} xs={5}>
                                 <img src={Image} alt={'Sad boy has a cold.'} style={{width: '100%', height: '100%'}}/>

@@ -62,7 +62,6 @@ const DashboardPage = (props) => {
             setName(userInfo.first_name);
     }, [apiLink, profile])
     
-    console.log(profile.authenticated);
     return (
         !profile.authenticated ? <Redirect to='/login' /> :
             <Fade in timeout={1000}>

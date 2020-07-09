@@ -99,7 +99,7 @@ const App = (props) => {
                         <Route path="/signup" render={ () => <Signup />}/>
                         <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
                         <Route path='/surveys' render={(props) => <SurveysPage/>}/>
-                        <Route path='/past-illness' render={(props) => <PastIllnessPage/>}/>
+                        <Route path='/past-illnesses' render={(props) => <PastIllnessPage/>}/>
                         <Route render={(props) => <PageNotFound />} />
                     </Switch>
                 </Router>
