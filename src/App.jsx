@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
+import {ThemeProvider, createMuiTheme, responsiveFontSizes} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import {setProfile} from 'redux/actions';
 import './App.css';
@@ -13,6 +13,7 @@ import Dashboard from 'pages/DashboardPage';
 import SymptomLog from 'components/activeillness/SymptomLog';
 import SurveysPage from 'pages/SurveysPage';
 import PastIllnessPage from 'pages/PastIllnessPage';
+import PageNotFound from 'pages/404/404';
 
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
@@ -99,8 +100,7 @@ const App = (props) => {
                         <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
                         <Route path='/surveys' render={(props) => <SurveysPage/>}/>
                         <Route path='/past-illness' render={(props) => <PastIllnessPage/>}/>
-                        {redirect}
-                        <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
+                        <Route render={(props) => <PageNotFound />} />
                     </Switch>
                 </Router>
             </Loader>
