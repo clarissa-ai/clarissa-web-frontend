@@ -14,6 +14,7 @@ import MainSurvey from 'components/surveycomponents/MainSurvey';
 import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
 import ResultCard from 'components/surveycomponents/ResultCard';
 import SurveysPage from 'pages/SurveysPage';
+import ActiveAnalysis from 'components/activeillness/activeanalysis/ActiveAnalysis';
 
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
@@ -99,6 +100,7 @@ const App = (props) => {
                         <Route path="/signup" render={ () => <Signup />}/>
                         <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
                         <Route path='/surveys' render={(props) => <SurveysPage/>}/>
+                        <Route exact path='/activeanalysis' render={(props) => <ActiveAnalysis {...props} />} />
                         {redirect}
                         <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
                     </Switch>
