@@ -42,7 +42,7 @@ const DashboardPage = (props) => {
     const profile = useSelector(profileSelector);
 
     useEffect(()=> {
-        if (!profile.authenticated) return; 
+        if (!profile.authenticated) return;
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
             credentials: 'include',
             method: 'GET',
