@@ -55,9 +55,6 @@ const useStyles = makeStyles((theme) => ({
             outline: '2px auto rgba(19,124,189,.6)',
             outlineOffset: 2,
         },
-        'input:hover ~ &': {
-            backgroundColor: '#ebf1f5',
-        },
         'input:disabled ~ &': {
             boxShadow: 'none',
             background: 'rgba(206,217,224,.5)',
