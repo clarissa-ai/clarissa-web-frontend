@@ -5,10 +5,11 @@ import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
 import StatsCard from 'components/dashboard/StatsCard';
 import RecentIllness from 'components/dashboard/RecentIllness';
-import CompletedSurveyCard from 'components/dashboard/CompletedSurveyCard';
+import CompletedSurveys from 'components/dashboard/CompletedSurveys';
 import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/navbar/TopBar';
-import InfoCard from 'components/dashboard/InfoCard';
+import IllnessCard from 'components/dashboard/IllnessCard';
+import SurveyCard from 'components/dashboard/SurveyCard';
 import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -83,7 +84,7 @@ const DashboardPage = (props) => {
                                 <Grid item>
                                     <RecentIllness >
                                         {recentIllness.map((illness, index) => {
-                                            return <Grid item><InfoCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                            return <Grid item><IllnessCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
                                         })}
                                     </RecentIllness>
                                 </Grid>
@@ -94,17 +95,17 @@ const DashboardPage = (props) => {
                             <Grid container direction='column' spacing={2}>
                                 <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
                                 <Grid item>
-                                    <CompletedSurveyCard>
+                                    <CompletedSurveys>
                                         {completedSurveys.map((completed_surveys, index) => {
-                                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
+                                        return <Grid item><SurveyCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
                                     })}
-                                    </CompletedSurveyCard>
+                                    </CompletedSurveys>
                                 </Grid>
 
                                 <Grid item>
                                     <TakeSurveyCard>
                                         {activeSurveys.map((active_surveys, index) => {
-                                            return <Grid item key={index}><InfoCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
+                                            return <Grid item key={index}><SurveyCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
                                         })}
                                     </TakeSurveyCard>
                                 </Grid>
