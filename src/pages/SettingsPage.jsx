@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {FormHelperText, Select, MenuItem, Box, Button, Grid, makeStyles, TextField, Card, Typography, CardContent, Input, createMuiTheme, ThemeProvider, Avatar} from '@material-ui/core';
+import {FormHelperText, Select, MenuItem, Box, Button, Grid, makeStyles, TextField, Card, Typography, CardContent, Input, createMuiTheme, ThemeProvider, Avatar, Divider} from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -34,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
     column: {
         display: 'flex',
         flexDirection: 'column'
+    },
+    divider: {
+        direction: 'row',
+        display: 'flex',
+        height: '80vh',
     },
 }));
 
@@ -112,13 +117,14 @@ const SettingsPage = (props) => {
             <ResponsiveDrawer/>
             {/* Card contents */}
                 {/* Column 1 */}
-                <Grid item xs={3}>
+                <Grid item xs={1}>
                     <div className={classes.column}>
                         <Avatar alt={profile.userInfo.first_name} src={profile.userInfo.img} className={classes.avatarSize}/>
                     </div>
                 </Grid>
                 {/* Column 2 */}
-                <Grid item xs={3}>
+                <Grid item xs={3} className={classes.divider}>
+                    <Divider orientation='vertical'/>
                     <div className={classes.column}>
                         <Typography variant='h6'><Box fontWeight='bold'>User Information</Box></Typography>
                         <TextField className={classes.close} label='First Name' id="standard-basic" onChange={handleChange('name')} defaultValue={values.name}/>
@@ -161,7 +167,8 @@ const SettingsPage = (props) => {
                 </Grid>
                         
                 {/* Column 3 */}
-                <Grid item xs={3}>
+                <Grid item xs={3} className={classes.divider}>
+                    <Divider orientation='vertical'/>
                     <div className={classes.column}>
                     {/* Change Password */}
                     <FormControl className={clsx(classes.margin, classes.textField)}>
@@ -223,10 +230,10 @@ const SettingsPage = (props) => {
                             }
                             />
                     </FormControl>
+                    <Button onClick={submit}>Submit</Button>
+
                     </div>
                 </Grid>
-
-                <Button onClick={submit}>Submit</Button>
         </Grid>
     </div>
     );
