@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
         background: 'white',
         width: '100vw',
         margin: '10px',
+        padding: '2rem',
     },
     date: {
         background: '#fff',
@@ -33,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     },
     column: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        margin: '2rem'
     },
     divider: {
         direction: 'row',
@@ -123,8 +125,8 @@ const SettingsPage = (props) => {
                     </div>
                 </Grid>
                 {/* Column 2 */}
-                <Grid item xs={3} className={classes.divider}>
-                    <Divider orientation='vertical'/>
+                <Grid item xs={4} className={classes.divider}>
+                    <Divider orientation='vertical' flexItem/>
                     <div className={classes.column}>
                         <Typography variant='h6'><Box fontWeight='bold'>User Information</Box></Typography>
                         <TextField className={classes.close} label='First Name' id="standard-basic" onChange={handleChange('name')} defaultValue={values.name}/>
@@ -167,8 +169,8 @@ const SettingsPage = (props) => {
                 </Grid>
                         
                 {/* Column 3 */}
-                <Grid item xs={3} className={classes.divider}>
-                    <Divider orientation='vertical'/>
+                <Grid item xs={4} className={classes.divider}>
+                    <Divider orientation='vertical' flexItem/>
                     <div className={classes.column}>
                     {/* Change Password */}
                     <FormControl className={clsx(classes.margin, classes.textField)}>
@@ -231,7 +233,6 @@ const SettingsPage = (props) => {
                             />
                     </FormControl>
                     <Button onClick={submit}>Submit</Button>
-
                     </div>
                 </Grid>
         </Grid>
