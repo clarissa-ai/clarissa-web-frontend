@@ -3,7 +3,7 @@ import {FormHelperText, Select, MenuItem, Box, Button, Grid, makeStyles, TextFie
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import SideNavBar from 'components/navbar/SideNavBar';
+import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,8 +19,7 @@ import {profileSelector} from 'redux/selectors';
 const useStyles = makeStyles((theme) => ({
     container: {
         background: 'white',
-        width: '161vh',
-        height: '98vh',
+        width: '100vw',
         margin: '10px',
     },
     date: {
@@ -31,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
         width: '5rem',
         height: '5rem',
         fontWeight: 600,
+    },
+    column: {
+        display: 'flex',
+        flexDirection: 'column'
     },
 }));
 
@@ -104,128 +107,128 @@ const SettingsPage = (props) => {
     };
 
     return (
-        <Grid container direction ='row' spacing={8} style={{margin: 0, width: '100%', height: '100%', backgroundColor: '#F5F6F8'}}>
-            <Grid item xs={2} style={{height: '100vh', padding: '0'}}>
-                <SideNavBar/>
-            </Grid>
-            <Grid item style={{height: '100vh', padding: '0'}}>
-                <Card className={classes.container}>
-                    <CardContent>
-                    <Typography variant='h6'><Box fontWeight='bold'>User Information</Box></Typography>
+        <div className={classes.container}>
+        <Grid container direction='row' wrap='nowrap'>
+            <ResponsiveDrawer/>
+            {/* Card contents */}
+                {/* Column 1 */}
+                <Grid item xs={3}>
+                    <div className={classes.column}>
+                        <Avatar alt={profile.userInfo.first_name} src={profile.userInfo.img} className={classes.avatarSize}/>
+                    </div>
+                </Grid>
+                {/* Column 2 */}
+                <Grid item xs={3}>
+                    <div className={classes.column}>
+                        <Typography variant='h6'><Box fontWeight='bold'>User Information</Box></Typography>
+                        <TextField className={classes.close} label='First Name' id="standard-basic" onChange={handleChange('name')} defaultValue={values.name}/>
+                        <TextField id="standard-basic" label='Email' defaultValue={values.email} onChange={handleChange('email')}/>
 
-                        <Grid item>
-                            <Avatar alt={profile.userInfo.first_name} src={profile.userInfo.img} className={classes.avatarSize}/>
-                        </Grid>
-                        <Grid container direction='column' spacing={1}>
-                            <Grid item><TextField className={classes.close} label='First Name' id="standard-basic" onChange={handleChange('name')} defaultValue={values.name}/></Grid>
-                            <Grid item><TextField id="standard-basic" label='Email' defaultValue={values.email} onChange={handleChange('email')}/></Grid>
-                            
-                            <Grid item>
-                                <ThemeProvider theme={materialTheme}>
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <KeyboardDatePicker
-                                            label='Date of Birth'
-                                            disableToolbar
-                                            variant="inline"
-                                            format="MM/dd/yyyy"
-                                            margin="normal"
-                                            id="date-picker-inline"
-                                            value={date}
-                                            onChange={handleDateChange}
-                                            KeyboardButtonProps={{
-                                                'aria-label': 'change date',
-                                            }}
-                                            className={classes.date}
-                                        />
-                                    </MuiPickersUtilsProvider>
-                                </ThemeProvider>
-                            </Grid>
-
-                            <FormControl className={classes.formControl}>
-                                <FormHelperText>Sex</FormHelperText>
-                                <Select
-                                value={values.sex}
-                                onChange={handleSex}
-                                displayEmpty
-                                className={classes.pickers}
-                                >
-                                <MenuItem value={'Male'}>Male</MenuItem>
-                                <MenuItem value={'Female'}>Female</MenuItem>
-                                <MenuItem value={'None'}>Prefer not to say</MenuItem>
-                                </Select>
-                            </FormControl>
-
-                            
-                            {/* Change Password */}
-                            <FormControl className={clsx(classes.margin, classes.textField)}>
-                                <InputLabel htmlFor="standard-adornment-password">Current password</InputLabel>
-                                <Input
-                                    id="standard-adornment-password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.password}
-                                    onChange={handleChange('password')}
-                                    endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}>
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                    }
+                            <ThemeProvider theme={materialTheme}>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                        label='Date of Birth'
+                                        disableToolbar
+                                        variant="inline"
+                                        format="MM/dd/yyyy"
+                                        margin="normal"
+                                        id="date-picker-inline"
+                                        value={date}
+                                        onChange={handleDateChange}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change date',
+                                        }}
+                                        className={classes.date}
                                     />
-                            </FormControl>
+                                </MuiPickersUtilsProvider>
+                            </ThemeProvider>
+                        
 
-                            <FormControl className={clsx(classes.margin, classes.textField)}>
-                                <InputLabel htmlFor="standard-adornment-password">New Password</InputLabel>
-                                <Input
-                                    id="standard-adornment-password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.password}
-                                    onChange={handleChange('password')}
-                                    endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}>
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                    }
-                                    />
-                            </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <FormHelperText>Sex</FormHelperText>
+                            <Select
+                            value={values.sex}
+                            onChange={handleSex}
+                            displayEmpty
+                            className={classes.pickers}
+                            >
+                            <MenuItem value={'Male'}>Male</MenuItem>
+                            <MenuItem value={'Female'}>Female</MenuItem>
+                            <MenuItem value={'None'}>Prefer not to say</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                </Grid>
+                        
+                {/* Column 3 */}
+                <Grid item xs={3}>
+                    <div className={classes.column}>
+                    {/* Change Password */}
+                    <FormControl className={clsx(classes.margin, classes.textField)}>
+                        <InputLabel htmlFor="standard-adornment-password">Current password</InputLabel>
+                        <Input
+                            id="standard-adornment-password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}>
+                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                            />
+                    </FormControl>
 
-                            <FormControl className={clsx(classes.margin, classes.textField)}>
-                                <InputLabel htmlFor="standard-adornment-password">Confirm new password</InputLabel>
-                                <Input
-                                    id="standard-adornment-password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.password}
-                                    onChange={handleChange('password')}
-                                    endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}>
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                    }
-                                    />
-                            </FormControl>
-                            <Grid item>
-                                <Button onClick={submit}>
-                            Submit
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                </Card>
-            </Grid>
+                    <FormControl className={clsx(classes.margin, classes.textField)}>
+                        <InputLabel htmlFor="standard-adornment-password">New Password</InputLabel>
+                        <Input
+                            id="standard-adornment-password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}>
+                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                            />
+                    </FormControl>
+
+                    <FormControl className={clsx(classes.margin, classes.textField)}>
+                        <InputLabel htmlFor="standard-adornment-password">Confirm new password</InputLabel>
+                        <Input
+                            id="standard-adornment-password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}>
+                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                            />
+                    </FormControl>
+                    </div>
+                </Grid>
+
+                <Button onClick={submit}>Submit</Button>
         </Grid>
+    </div>
     );
 };
 export default SettingsPage;
