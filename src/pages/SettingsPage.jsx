@@ -74,6 +74,7 @@ const SettingsPage = (props) => {
         email: profile.userInfo.email,
         password: '',
         showPassword: false,
+        sex: profile.userInfo.sex,
     });
 
     const submit = () => {
@@ -261,7 +262,7 @@ const SettingsPage = (props) => {
                                         />
                                 </FormControl>
                             </Grid>
-                            <Grid item><Button variant='outlined' onClick={submit}>Save Changes</Button></Grid>
+                            <Grid item><Button fullWidth variant='outlined' onClick={submit} style={{margin: '2rem 0'}}>Save Changes</Button></Grid>
                         </Grid>
                     </div>
                 </Grid>
