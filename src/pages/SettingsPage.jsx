@@ -17,10 +17,10 @@ import {profileSelector} from 'redux/selectors';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        background: 'white',
+        background: '#F5F6F8',
         width: '100vw',
-        margin: '10px',
         padding: '2rem',
+        height: '100%',
     },
     date: {
         background: '#fff',
@@ -40,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
         direction: 'row',
         display: 'flex',
         height: '80vh',
+    },
+    contents: {
+        width: '100vw',
+        display: 'flex',
+        background: '#fff',
+        padding: '2rem',
     },
 }));
 
@@ -116,9 +122,10 @@ const SettingsPage = (props) => {
         <div className={classes.container}>
         <Grid container direction='row' wrap='nowrap'>
             <ResponsiveDrawer/>
+            <div className={classes.contents}>
             {/* Card contents */}
                 {/* Column 1 */}
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                     <div className={classes.column}>
                         <Avatar alt={profile.userInfo.first_name} src={profile.userInfo.img} className={classes.avatarSize}/>
                     </div>
@@ -130,7 +137,7 @@ const SettingsPage = (props) => {
                         <Typography variant='h6'><Box fontWeight='bold'>User Information</Box></Typography>
                         <TextField className={classes.close} label='First Name' id="standard-basic" onChange={handleChange('name')} defaultValue={values.name}/>
                         <TextField id="standard-basic" label='Email' defaultValue={values.email} onChange={handleChange('email')}/>
-
+                            
                             <ThemeProvider theme={materialTheme}>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardDatePicker
@@ -149,21 +156,21 @@ const SettingsPage = (props) => {
                                     />
                                 </MuiPickersUtilsProvider>
                             </ThemeProvider>
-                        
-
-                        <FormControl className={classes.formControl}>
-                            <FormHelperText>Sex</FormHelperText>
-                            <Select
-                            value={values.sex}
-                            onChange={handleSex}
-                            displayEmpty
-                            className={classes.pickers}
-                            >
-                            <MenuItem value={'Male'}>Male</MenuItem>
-                            <MenuItem value={'Female'}>Female</MenuItem>
-                            <MenuItem value={'None'}>Prefer not to say</MenuItem>
-                            </Select>
-                        </FormControl>
+                        <ThemeProvider theme={materialTheme}>    
+                            <FormControl className={classes.formControl}>
+                                <FormHelperText>Sex</FormHelperText>
+                                <Select
+                                value={values.sex}
+                                onChange={handleSex}
+                                displayEmpty
+                                className={classes.pickers}
+                                >
+                                <MenuItem value={'Male'}>Male</MenuItem>
+                                <MenuItem value={'Female'}>Female</MenuItem>
+                                <MenuItem value={'None'}>Prefer not to say</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </ThemeProvider>
                     </div>
                 </Grid>
                         
@@ -172,6 +179,7 @@ const SettingsPage = (props) => {
                     <Divider orientation='vertical' flexItem/>
                     <div className={classes.column}>
                     {/* Change Password */}
+                    <Typography variant='h6'><Box fontWeight='bold'>Change Password </Box></Typography>
                     <FormControl className={clsx(classes.margin, classes.textField)}>
                         <InputLabel htmlFor="standard-adornment-password">Current password</InputLabel>
                         <Input
@@ -231,9 +239,10 @@ const SettingsPage = (props) => {
                             }
                             />
                     </FormControl>
-                    <Button onClick={submit}>Submit</Button>
+                    <Button variant='outlined' onClick={submit}>Save Changes</Button>
                     </div>
                 </Grid>
+            </div>
         </Grid>
     </div>
     );
