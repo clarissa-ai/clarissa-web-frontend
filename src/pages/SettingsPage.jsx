@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         background: '#fff',
         padding: '2rem',
+        borderRadius: '4px',
+        boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.06)',
     },
 }));
 
