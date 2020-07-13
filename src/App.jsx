@@ -6,6 +6,7 @@ import {setProfile} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
 import Loader from 'components/navigation/loader/Loader';
+import MainPage from 'components/navigation/mainpage/MainPage';
 import Login from 'pages/LoginPage';
 import Signup from 'pages/SignUpPage';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
@@ -54,12 +55,14 @@ theme = responsiveFontSizes(theme);
 const App = (props) => {
     // State to control custom routing.
     const [routes, setRoutes] = useState(null);
+    const [profileLoading, setProfileLoading] = useState(true);
     const dispatch = useDispatch(); // react-redux dispatch
     useEffect(() => {
         const profile = new Profile();
         dispatch(setProfile(profile));
         profile.getUserInfo((newProfile) => {
             dispatch(setProfile(newProfile));
+            setProfileLoading(false);
         });
         fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
             method: 'GET',
@@ -89,21 +92,23 @@ const App = (props) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Loader loading={routes ? false : true}>
+            <Loader loading={routes && !profileLoading ? false : true}>
                 <Router>
-                    <Switch>
-                        {redirect}
-                        <Redirect exact from='/' to='/dashboard' />
-                        <Route exact path="/login" render={(props) => <Login/>} />
-                        <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
-                        <Route path="/dashboard" render={(props) => <Dashboard/>}/>
-                        <Route path="/signup" render={ () => <Signup />}/>
-                        <Route path="/active-illness" render={ () => <ActiveIllnessPage />}/>
-                        <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
-                        <Route path='/surveys' render={(props) => <SurveysPage/>}/>
-                        <Route path='/past-illnesses' render={(props) => <PastIllnessPage/>}/>
-                        <Route render={() => <PageNotFound />} />
-                    </Switch>
+                    <MainPage>
+                        <Switch>
+                            {redirect}
+                            <Redirect exact from='/' to='/dashboard' />
+                            <Route exact path="/login" render={(props) => <Login/>} />
+                            <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
+                            <Route path="/dashboard" render={(props) => <Dashboard/>}/>
+                            <Route path="/signup" render={ () => <Signup />}/>
+                            <Route path="/active-illness" render={ () => <ActiveIllnessPage />}/>
+                            <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
+                            <Route path='/surveys' render={(props) => <SurveysPage/>}/>
+                            <Route path='/past-illnesses' render={(props) => <PastIllnessPage/>}/>
+                            <Route render={() => <PageNotFound />} />
+                        </Switch>
+                    </MainPage>
                 </Router>
             </Loader>
         </ThemeProvider>

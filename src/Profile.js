@@ -118,6 +118,7 @@ class Profile {
             if (!response.ok) {
                 console.log('Internal Error. Please contact support.');
                 this.authenticated = false;
+                callback(this);
                 return;
             }
             response.json().then((data) => {
@@ -127,6 +128,7 @@ class Profile {
                     this.authenticated = true;
                     callback(this);
                 } else {
+                    callback(this);
                     console.log(message);
                 }
             });
