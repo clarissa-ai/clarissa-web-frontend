@@ -73,10 +73,11 @@ const Login = () => {
         profile.authenticated ? <Redirect to='/dashboard' /> :
             <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
                 <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign In</Typography></Grid>
-                <Grid item><Input onChange={handleChange('email')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
+                <Grid item><Input required onChange={handleChange('email')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
                 <Grid item>
                     <Input
                         className={classes.field}
+                        required
                         placeholder="Password"
                         id="standard-password"
                         type={values.showPassword ? 'text' : 'password'}
