@@ -21,36 +21,44 @@ const useStyles = makeStyles((theme) => ({
 
 const SymptomCard = (props) => {
     SymptomCard.propTypes = {
-        symptom: propTypes.string,
+        symptom: propTypes.object,
         severity: propTypes.string,
         month: propTypes.string,
-        day: propTypes.string,
-        year: propTypes.string,
-        data: propTypes.string,
         symptomModalFunction: propTypes.func,
     };
     const classes = useStyles();
-    return <Card className={classes.symptomCard}>
-        <CardContent>
-            <Grid container direction="row" justify='space-between'>
-                <Grid item>
-                    <Grid container direction='row' spacing={1}>
-                        <Grid item><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.symptom}Fever</Box></Typography></Grid>
-                        <Grid item><Typography color='error'><Box fontWeight="fontWeightBold">{props.severity}102.8F</Box></Typography></Grid>
+
+    const dateEndPos = props.symptom.updated_on.lastIndexOf('-') + 3;
+    const date = props.symptom.updated_on.substring(0, dateEndPos);
+    const dateArray = date.split('-');
+    const displayDate = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
+
+    return (
+        <Card className={classes.symptomCard}>
+            <CardContent>
+                <Grid container direction="row" justify='space-between'>
+                    <Grid item>
+                        <Grid container direction='row' spacing={1}>
+                            <Grid item><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.symptom.title}</Box></Typography></Grid>
+                        </Grid>
                     </Grid>
+                    {/* <Grid item onClick={props.symptomModalFunction}>
+                            <Typography variant='subtitle2' className={classes.cardLabel} style={{cursor: 'pointer'}}>
+                                <Box fontWeight={500}>Edit</Box>
+                            </Typography>
+                        </Grid>*/}
                 </Grid>
-                <Grid item onClick={props.symptomModalFunction}><Typography variant='subtitle2' className={classes.cardLabel} style={{cursor: 'pointer'}}><Box fontWeight={500}>Edit</Box></Typography></Grid>
-            </Grid>
-            <Grid container direction="row" spacing={1}>
-                <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Date Logged: </Typography></Grid>
-                <Grid item><Typography variant='subtitle2' className={classes.content}>{props.month} {props.day} {props.year} December 23, 2018</Typography></Grid>
-            </Grid>
-            <Grid container direction="row" spacing={1}>
-                <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Data: {props.data} </Typography></Grid>
-                <Grid item><Typography variant='subtitle2' className={classes.content}>102.8F</Typography></Grid>
-            </Grid>
-        </CardContent>
-    </Card>;
+                <Grid container direction="row" spacing={1}>
+                    <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Date Logged: </Typography></Grid>
+                    <Grid item><Typography variant='subtitle2' className={classes.content}>{displayDate}</Typography></Grid>
+                </Grid>
+                <Grid container direction="row" spacing={1}>
+                    <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Data: </Typography></Grid>
+                    <Grid item><Typography variant='subtitle2' className={classes.content}>{}</Typography></Grid>
+                </Grid>
+            </CardContent>
+        </Card>
+    );
 };
 
 export default SymptomCard;
