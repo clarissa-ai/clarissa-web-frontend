@@ -9,7 +9,7 @@ import CompletedSurveyCard from 'components/dashboard/CompletedSurveyCard';
 import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/navbar/TopBar';
 import InfoCard from 'components/dashboard/InfoCard';
-import {useHistory} from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -83,12 +83,12 @@ const DashboardPage = (props) => {
     };
 
     return (
-        // !profile.authenticated ? <Redirect to='/login' /> :
-        <Fade in timeout={1000}>
-            <div className={classes.container}>
-                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
-                    <Grid item><ResponsiveDrawer/></Grid>
+        !profile.authenticated ? <Redirect to='/login' /> :
+            <Fade in timeout={1000}>
+                <div className={classes.container}>
+                    <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
+                        <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
+                        <Grid item><ResponsiveDrawer/></Grid>
 
                     <Grid item xs={12} md={6} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
