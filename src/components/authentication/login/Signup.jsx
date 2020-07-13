@@ -119,14 +119,15 @@ const Signup = () => {
     return (
         <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
             <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign Up</Typography></Grid>
-            <Grid item><Input id="standard-basic" placeholder="Email" className={classes.field} onChange={handleChange('email')}/></Grid>
-            <Grid item><Input id="standard-basic" placeholder="First Name" className={classes.field} onChange={handleChange('firstname')}/></Grid>
+            <Grid item><Input id="standard-basic" required placeholder="Email" className={classes.field} onChange={handleChange('email')}/></Grid>
+            <Grid item><Input id="standard-basic" required placeholder="First Name" className={classes.field} onChange={handleChange('firstname')}/></Grid>
             <Grid item>
                 <Grid container direction='row' alignItems='center' spacing={2}>
                     <Grid item>
                         <FormControl className={classes.formControl}>
                             <FormHelperText>Sex</FormHelperText>
                             <Select
+                            required
                             value={values.sex}
                             onChange={handleSex}
                             displayEmpty
@@ -145,6 +146,7 @@ const Signup = () => {
                             <KeyboardDatePicker
                             label='Date of Birth'
                             disableToolbar
+                            required
                             variant="inline"
                             format="MM/dd/yyyy"
                             margin="normal"
@@ -165,6 +167,7 @@ const Signup = () => {
                 <Input
                     className={classes.field}
                     placeholder="Password"
+                    required
                     id="standard-password"
                     type={values.showPassword ? 'text' : 'password'}
                     value={values.password}
@@ -186,6 +189,7 @@ const Signup = () => {
                 <Input
                     className={classes.field}
                     placeholder="Confirm Password"
+                    required
                     id="standard-password"
                     type={values.showPassword ? 'text' : 'password'}
                     value={values.confirmpassword}
@@ -211,6 +215,7 @@ const Signup = () => {
                             checked={values.rememberMe}
                             onChange={handleCheckbox}
                             color='inherit'
+                            required
                         />
                     }
                     label="I accept our Terms of Service and Privacy Policy"
