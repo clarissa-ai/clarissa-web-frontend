@@ -48,21 +48,21 @@ const DashboardPage = (props) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            },})
-            .then(res => res.json())
-            .then(res => {
-                    setDash(res);
-                    setActiveSurveys(res.active_surveys);
-                    setCompletedSurveys(res.completed_surveys);
-                    setrecentIllness(res.recent_illnesses);
+            }})
+            .then((res) => res.json())
+            .then((res) => {
+                setDash(res);
+                setActiveSurveys(res.active_surveys);
+                setCompletedSurveys(res.completed_surveys);
+                setrecentIllness(res.recent_illnesses);
             },
             (error) => {
-                    console.log(error);
-            },);
+                console.log(error);
+            });
 
-            const userInfo = profile.userInfo;
-            setName(userInfo.first_name);
-    }, [apiLink, profile])
+        const userInfo = profile.userInfo;
+        setName(userInfo.first_name);
+    }, [apiLink, profile]);
 
     const createNewIllness = (event) => {
         fetch(`${apiLink}/api/dashboard/create_illness`, {
@@ -90,48 +90,48 @@ const DashboardPage = (props) => {
                         <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
                         <Grid item><ResponsiveDrawer/></Grid>
 
-                        <Grid item xs={12} md={6} xl={7} style={{marginLeft: '1rem'}}>
-                            <Grid container direction='column' spacing={2}>
-                                <Grid item>
-                                    <div className={classes.greetingsContainer}>
-                                        <Typography variant='h6'><Box fontWeight='bold'>Hey {userName}!</Box></Typography>
-                                        <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
-                                    </div>
-                                </Grid>
-
-                                <Grid item>
-                                    <RecentIllness >
-                                        {recentIllness.map((illness, index) => {
-                                            return <Grid item><InfoCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} link={illness.active ? '/active-illness' : '/past-illnesses'} /></Grid>
-                                        })}
-                                    </RecentIllness>
-                                </Grid>
+                    <Grid item xs={12} md={6} xl={7} style={{marginLeft: '1rem'}}>
+                        <Grid container direction='column' spacing={2}>
+                            <Grid item>
+                                <div className={classes.greetingsContainer}>
+                                    <Typography variant='h6'><Box fontWeight='bold'>Hey {userName}!</Box></Typography>
+                                    <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
+                                </div>
                             </Grid>
-                        </Grid>
 
-                        <Grid item xs={12} md={3} xl={3}style={{marginLeft: '1rem'}}>
-                            <Grid container direction='column' spacing={2}>
-                                <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
-                                <Grid item>
-                                    <CompletedSurveyCard>
-                                        {completedSurveys.map((completed_surveys, index) => {
-                                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
+                            <Grid item>
+                                <RecentIllness >
+                                    {recentIllness.map((illness, index) => {
+                                        return <Grid item><InfoCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} link={illness.active ? '/active-illness' : '/past-illnesses'} /></Grid>;
                                     })}
-                                    </CompletedSurveyCard>
-                                </Grid>
-
-                                <Grid item>
-                                    <TakeSurveyCard>
-                                        {activeSurveys.map((active_surveys, index) => {
-                                            return <Grid item key={index}><InfoCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
-                                        })}
-                                    </TakeSurveyCard>
-                                </Grid>
+                                </RecentIllness>
                             </Grid>
                         </Grid>
                     </Grid>
-                </div>
-            </Fade>
+
+                    <Grid item xs={12} md={3} xl={3}style={{marginLeft: '1rem'}}>
+                        <Grid container direction='column' spacing={2}>
+                            <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
+                            <Grid item>
+                                <CompletedSurveyCard>
+                                    {completedSurveys.map((completed_surveys, index) => {
+                                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>;
+                                    })}
+                                </CompletedSurveyCard>
+                            </Grid>
+
+                            <Grid item>
+                                <TakeSurveyCard>
+                                    {activeSurveys.map((active_surveys, index) => {
+                                        return <Grid item key={index}><InfoCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>;
+                                    })}
+                                </TakeSurveyCard>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </div>
+        </Fade>
     );
-}
+};
 export default DashboardPage;
