@@ -1,5 +1,6 @@
 import React from 'react';
 import {ThemeProvider, createMuiTheme, FormHelperText, FormControl, MenuItem, Select, Grid, Input, InputAdornment, IconButton, Button, Typography, Link, makeStyles, FormControlLabel, Checkbox} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import {
@@ -92,6 +93,10 @@ const Signup = () => {
         setSelectedDate(date);
     };
 
+    const verifyForm = () => {
+        if (values.password !== values.confirmpassword) return <Alert severity="error">Passwords do not match!</Alert>
+    }
+
     const handleSignUp = () => {
         const user = {
             email: values.email,
@@ -118,6 +123,7 @@ const Signup = () => {
 
     return (
         <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
+            <Grid item>{verifyForm()}</Grid>
             <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign Up</Typography></Grid>
             <Grid item><Input id="standard-basic" required placeholder="Email" className={classes.field} onChange={handleChange('email')}/></Grid>
             <Grid item><Input id="standard-basic" required placeholder="First Name" className={classes.field} onChange={handleChange('firstname')}/></Grid>
