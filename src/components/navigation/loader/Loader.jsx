@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Grid, CircularProgress} from '@material-ui/core';
 const LoadingPage = (props) => {
     return (
-        <Grid container={true} direction='column' justify='center' alignItems='center'>
+        <Grid container={true} direction='column' justify='center' alignItems='center' style={{height: '100vh', width: '100vw'}}>
             <Grid container={true} direction='row' justify='center' alignItems='center'>
                 <CircularProgress />
             </Grid>

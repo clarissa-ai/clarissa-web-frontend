@@ -7,6 +7,7 @@ import './App.css';
 import Profile from 'Profile.js';
 import Loader from 'components/navigation/loader/Loader';
 import MainPage from 'components/navigation/mainpage/MainPage';
+import ProtectedRoute from 'components/navigation/protected/ProtectedRoute';
 import Login from 'pages/LoginPage';
 import Signup from 'pages/SignUpPage';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
@@ -51,6 +52,7 @@ let theme = createMuiTheme({
     },
 });
 theme = responsiveFontSizes(theme);
+console.log(theme);
 
 const App = (props) => {
     // State to control custom routing.
@@ -98,15 +100,16 @@ const App = (props) => {
                         <Switch>
                             {redirect}
                             <Redirect exact from='/' to='/dashboard' />
-                            <Route exact path="/login" render={(props) => <Login/>} />
-                            <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
-                            <Route path="/dashboard" render={(props) => <Dashboard/>}/>
+                            <Route exact path="/login" render={(props) => <Login />} />
                             <Route path="/signup" render={ () => <Signup />}/>
-                            <Route path="/active-illness" render={ () => <ActiveIllnessPage />}/>
+                            <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
+                            <ProtectedRoute path='/dashboard' page={<Dashboard />} />
+                            <ProtectedRoute path='/active-illness' page={<ActiveIllnessPage />} />
+                            <ProtectedRoute path='/past-illness' page={<PastIllnessPage />} />
+                            <ProtectedRoute path='/surveys' page={<SurveysPage />} />
                             <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
-                            <Route path='/surveys' render={(props) => <SurveysPage/>}/>
-                            <Route path='/past-illnesses' render={(props) => <PastIllnessPage/>}/>
-                            <Route render={() => <PageNotFound />} />
+                            <Route path='/404' render={() => <PageNotFound />} />
+                            <Redirect to='/404' />
                         </Switch>
                     </MainPage>
                 </Router>

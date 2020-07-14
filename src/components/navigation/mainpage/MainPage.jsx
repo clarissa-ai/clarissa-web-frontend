@@ -1,7 +1,8 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
+
+import {profileSelector} from 'redux/selectors';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
-import { useSelector } from 'react-redux';
-import { profileSelector } from 'redux/selectors';
 
 const MainPage = (props) => {
     const profile = useSelector(profileSelector);
