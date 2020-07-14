@@ -10,8 +10,7 @@ import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/navbar/TopBar';
 import IllnessCard from 'components/dashboard/IllnessCard';
 import SurveyCard from 'components/dashboard/SurveyCard';
-import {Redirect} from 'react-router-dom';
-import { useHistory, Redirect } from 'react-router-dom';
+import {useHistory, Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     button: {
