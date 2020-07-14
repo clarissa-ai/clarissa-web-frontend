@@ -43,7 +43,6 @@ class Profile {
             response.json().then((data) => {
                 const {status, message} = data;
                 if (status === 'success') {
-                    console.log('going to get user info');
                     this.getUserInfo(callback);
                 } else {
                     console.log(message);
@@ -119,17 +118,17 @@ class Profile {
             if (!response.ok) {
                 console.log('Internal Error. Please contact support.');
                 this.authenticated = false;
+                callback(this);
                 return;
             }
-            console.log(response);
             response.json().then((data) => {
                 const {status, message, data: userInfo} = data;
                 if (status === 'success') {
-                    console.log(data);
                     this.userInfo = userInfo;
                     this.authenticated = true;
                     callback(this);
                 } else {
+                    callback(this);
                     console.log(message);
                 }
             });

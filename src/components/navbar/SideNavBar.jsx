@@ -1,7 +1,7 @@
 import React from 'react';
 import {Avatar, makeStyles, Typography, Divider, Grid, Card} from '@material-ui/core';
 import RenderRoutes from './RenderRoutes';
-import {ReactComponent as LogoWithName} from './logoWithName.svg';
+import {ReactComponent as LogoWithName} from 'images/LogoWithName.svg';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 /* import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';*/
 import MailOutlineOutlinedIcon from '@material-ui/icons/MailOutlineOutlined';

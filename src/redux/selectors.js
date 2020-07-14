@@ -1,5 +1,4 @@
 export const profileSelector = (state) => {
-    console.log('here');
     return state.profile;
 };
 

@@ -1,20 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
+import {ThemeProvider, createMuiTheme, responsiveFontSizes} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import {setProfile} from 'redux/actions';
 import './App.css';
 import Profile from 'Profile.js';
 import Loader from 'components/navigation/loader/Loader';
+import MainPage from 'components/navigation/mainpage/MainPage';
+import ProtectedRoute from 'components/navigation/protected/ProtectedRoute';
 import Login from 'pages/LoginPage';
 import Signup from 'pages/SignUpPage';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
-import Dashboard from 'pages/dashboard/DashboardPage';
-import MainSurvey from 'components/surveycomponents/MainSurvey';
-import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
-import ResultCard from 'components/surveycomponents/ResultCard';
+import Dashboard from 'pages/DashboardPage';
+import SymptomLog from 'components/activeillness/SymptomLog';
 import SurveysPage from 'pages/SurveysPage';
 import ActiveAnalysis from 'components/activeillness/activeanalysis/ActiveAnalysis';
+import PastIllnessPage from 'pages/PastIllnessPage';
+import ActiveIllnessPage from 'pages/ActiveIllnessPage';
+import PageNotFound from 'pages/404/404';
 
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
@@ -50,16 +53,19 @@ let theme = createMuiTheme({
     },
 });
 theme = responsiveFontSizes(theme);
+console.log(theme);
 
 const App = (props) => {
     // State to control custom routing.
     const [routes, setRoutes] = useState(null);
+    const [profileLoading, setProfileLoading] = useState(true);
     const dispatch = useDispatch(); // react-redux dispatch
     useEffect(() => {
         const profile = new Profile();
         dispatch(setProfile(profile));
         profile.getUserInfo((newProfile) => {
             dispatch(setProfile(newProfile));
+            setProfileLoading(false);
         });
         fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
             method: 'GET',
@@ -89,21 +95,25 @@ const App = (props) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Loader loading={routes ? false : true}>
+            <Loader loading={routes && !profileLoading ? false : true}>
                 <Router>
-                    <Switch>
-                        {redirect}
-                        <Redirect exact from='/' to='/dashboard' />
-                        <Route exact path="/login" render={(props) => <Login/>} />
-                        <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
-                        <Route path="/dashboard" render={(props) => <Dashboard/>}/>
-                        <Route path="/signup" render={ () => <Signup />}/>
-                        <Route path='/test' render={(props) => <div><ResultCard/><MainSurvey/><ActiveSurveys/></div>}/>
-                        <Route path='/surveys' render={(props) => <SurveysPage/>}/>
-                        <Route exact path='/activeanalysis' render={(props) => <ActiveAnalysis {...props} />} />
-                        {redirect}
-                        <Route render={(props) => <Typography>This is the 404 page.</Typography>} />
-                    </Switch>
+                    <MainPage>
+                        <Switch>
+                            {redirect}
+                            <Redirect exact from='/' to='/dashboard' />
+                            <Route exact path="/login" render={(props) => <Login />} />
+                            <Route path="/signup" render={ () => <Signup />}/>
+                            <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
+                            <ProtectedRoute path='/dashboard' page={<Dashboard />} />
+                            <ProtectedRoute path='/active-illness' page={<ActiveIllnessPage />} />
+                            <ProtectedRoute path='/past-illness' page={<PastIllnessPage />} />
+                            <ProtectedRoute path='/surveys' page={<SurveysPage />} />
+                            <Route path='/analysis' render={() => <ActiveAnalysis />}/>
+                            <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
+                            <Route path='/404' render={() => <PageNotFound />} />
+                            <Redirect to='/404' />
+                        </Switch>
+                    </MainPage>
                 </Router>
             </Loader>
         </ThemeProvider>
