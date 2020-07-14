@@ -6,6 +6,8 @@ import {profileSelector} from 'redux/selectors';
 import {setProfile} from 'redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import Alert from '@material-ui/lab/Alert';
+
 
 const useStyles = makeStyles((theme) => ({
     field: {
@@ -40,6 +42,9 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const login = () => {
+        if (values.password === '') setValues({...values, error: <Alert severity="error">Please enter a password</Alert>});
+        if (values.email === '') setValues({...values, error: <Alert severity="error">Please enter a username</Alert>});
+
         profile.login(values.email, values.password, (newProfile) => {
             dispatch(setProfile(newProfile));
         });
@@ -51,6 +56,7 @@ const Login = () => {
         password: '',
         email: '',
         rememberMe: false,
+        error: '',
     });
 
     const handleChange = (prop) => (event) => {

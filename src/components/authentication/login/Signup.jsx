@@ -1,6 +1,5 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {ThemeProvider, createMuiTheme, FormHelperText, FormControl, MenuItem, Select, Grid, Input, InputAdornment, IconButton, Button, Typography, Link, makeStyles, FormControlLabel, Checkbox} from '@material-ui/core';
-import ReactDom from 'react-dom';
 import Alert from '@material-ui/lab/Alert';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
