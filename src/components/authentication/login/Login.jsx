@@ -6,6 +6,8 @@ import {profileSelector} from 'redux/selectors';
 import {setProfile} from 'redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import Alert from '@material-ui/lab/Alert';
+
 
 const useStyles = makeStyles((theme) => ({
     field: {
@@ -40,8 +42,14 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const login = () => {
+        if (values.password === '') setValues({...values, error: <Alert severity="error">Please enter a password</Alert>});
+        if (values.email === '') setValues({...values, error: <Alert severity="error">Please enter a username</Alert>});
+
         profile.login(values.email, values.password, (newProfile) => {
-            dispatch(setProfile(newProfile));
+            dispatch(setProfile(newProfile))
+            .then(
+                 (error) => console.log(error)
+            )
         });
     };
 
@@ -51,6 +59,7 @@ const Login = () => {
         password: '',
         email: '',
         rememberMe: false,
+        error: '',
     });
 
     const handleChange = (prop) => (event) => {
@@ -72,11 +81,13 @@ const Login = () => {
     return (
         profile.authenticated ? <Redirect to='/dashboard' /> :
             <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
+                <Grid item>{values.error}</Grid>
                 <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign In</Typography></Grid>
-                <Grid item><Input onChange={handleChange('email')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
+                <Grid item><Input required onChange={handleChange('email')} id="standard-basic" placeholder="Email" className={classes.field}/></Grid>
                 <Grid item>
                     <Input
                         className={classes.field}
+                        required
                         placeholder="Password"
                         id="standard-password"
                         type={values.showPassword ? 'text' : 'password'}

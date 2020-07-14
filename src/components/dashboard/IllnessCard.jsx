@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
-import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -40,41 +39,21 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const InfoCard = (props) => {
+const IllnessCard = (props) => {
     const classes = useStyles();
-    const [status, setStatus] = useState(null);
-    const [symptoms, setSymptoms] = useState(null);
 
-    const handleStatus = () => {
-        if (status == null) {
-            return null;
-        } else if (status === true) {
-            return <p style={{fontWeight: 'bold'}}>Active</p>;
-        } else {
-            return <p style={{fontWeight: 'bold'}}>Closed</p>;
-        }
+    const parseDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.getMonth()+1 +'/'+ date.getDate() +'/'+date.getFullYear();
     }
-
-    const handleSymptoms = () => {
-        if (symptoms == null) {
-            return null;
-        } else {
-            return <p style={{fontWeight: 'bold'}}>{symptoms} Symptoms</p>;
-        }
-    }
-
-    useEffect(()=> {
-        setStatus(props.status);
-        setSymptoms(props.symptomcount);
-    }, [props.link, props.status, props.symptomcount]);
 
     return <Grid container direction='row' alignItems='center' justify='space-evenly' className={props.status? classes.activeContainer : classes.container}>
         <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
-        <Grid item><Typography><Box fontWeight='bold'>{props.date}</Box></Typography></Grid>
-        <Grid item><Typography>
-            {() => handleStatus()}</Typography>
+        <Grid item><Typography><Box fontWeight='bold'>{parseDate(props.dateStart)} - {parseDate(props.dateEndOrUpdated)}</Box></Typography></Grid>
+        <Grid item>
+            <Typography><Box fontWeight='bold'>{props.status === true ? 'Active' : 'Closed'}</Box></Typography>
         </Grid>
-        <Grid item><Typography>{() => handleSymptoms()}</Typography></Grid>
+        <Grid item><Typography><Box fontWeight='bold'>{props.symptomcount} Symptoms</Box></Typography></Grid>
         <Grid item>
             <Button variant='outlined' className={props.status? classes.activeButton : classes.button}>
                 <Link className={props.status? classes.linkActive : classes.link} href={`${props.link}`}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
@@ -83,4 +62,4 @@ const InfoCard = (props) => {
     </Grid>
 }
 
-export default InfoCard;
+export default IllnessCard;

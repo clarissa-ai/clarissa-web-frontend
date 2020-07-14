@@ -57,7 +57,7 @@ const handleChange = (event, newValue) => {
 };
 
 return <div className={classes.wrapper}>
-    <Fade in timeout={1000}>
+    <Fade in timeout={500}>
         <Grid container direction='row' justify='center'>
                 {/* <Grid item><SideNavBar/></Grid> */}
                 <Grid item><ResponsiveDrawer/></Grid>
