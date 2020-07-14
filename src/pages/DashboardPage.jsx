@@ -111,29 +111,27 @@ const DashboardPage = (props) => {
                         </Grid>
                     </Grid>
 
-                        <Grid item xs={12} md={3} xl={3}style={{marginLeft: '1rem'}}>
-                            <Grid container direction='column' spacing={2}>
-                                <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
-                                <Grid item>
-                                    <CompletedSurveys>
-                                        {completedSurveys.map((completed_surveys, index) => {
-                                        return <Grid item><SurveyCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
-                                    })}
-                                    </CompletedSurveys>
-                                </Grid>
+                    <Grid item xs={12} md={3} xl={3}style={{marginLeft: '1rem'}}>
+                        <Grid container direction='column' spacing={2}>
+                            <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
+                            <Grid item>
+                                <CompletedSurveys>
+                                    {completedSurveys.map((completed_surveys, index) => {
+                                    return <Grid item><SurveyCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
+                                })}
+                                </CompletedSurveys>
+                            </Grid>
 
-                                <Grid item>
-                                    <TakeSurveyCard>
-                                        {activeSurveys.map((active_surveys, index) => {
-                                            return <Grid item key={index}><SurveyCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
-                                        })}
-                                    </TakeSurveyCard>
-                                </Grid>
+                            <Grid item>
+                                <TakeSurveyCard>
+                                    {activeSurveys.map((active_surveys, index) => {
+                                        return <Grid item key={index}><SurveyCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
+                                    })}
+                                </TakeSurveyCard>
                             </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-            </div>
+                </div>
         </Fade>
     );
 };
