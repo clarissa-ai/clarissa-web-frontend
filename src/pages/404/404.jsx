@@ -9,7 +9,7 @@ import {profileSelector} from 'redux/selectors';
 
 const openLinks = {
     'Login': '/login',
-    'Register': '/register',
+    'Sign Up': '/signup',
 };
 
 const closedLinks = {

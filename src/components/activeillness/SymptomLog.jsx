@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
-import {Button, Card, CardHeader, Grid, CardContent, makeStyles, Divider, Typography, Checkbox} from '@material-ui/core';
+import {Button, Card, CircularProgress, Grid, CardContent, makeStyles, Divider, Typography, Checkbox} from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles((theme) => ({
@@ -85,6 +85,7 @@ const SymptomLog = (props) => {
     const [error, setError] = useState(null);
     const [illness, setIllness] = useState([]);
     const [selected, setSelected] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(true);
 
     const handleChange = (event) => {
         setText(event.target.value);
@@ -169,6 +170,9 @@ const SymptomLog = (props) => {
     };
 
     const onSubmit = () => {
+        if (isLoaded) {
+            setIsLoaded(false);
+        }
         let i = 0;
         const symptoms = [];
         while (i < illness.length) {
@@ -185,7 +189,12 @@ const SymptomLog = (props) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({symptoms}),
-        }).then((res) => res.json());
+        }).then((res) => {
+            res.json();
+        }).then(() => {
+            props.incrState();
+            setIsLoaded(true);
+        });
         setIllness([]);
         setSelected([]);
         setText('');
@@ -212,14 +221,12 @@ const SymptomLog = (props) => {
     } else {
         return (
             <Card className={classes.container}>
-                {/* Heading */}
-                <CardHeader title='Tell Clarissa how you are feeling.' classes={{root: classes.title, title: classes.title}}/>
                 <CardContent className={classes.content}>
                     {/* Symptom Input */}
                     <InputBase
                         className={classes.textInput}
                         multiline
-                        rows={5}
+                        rows={2}
                         placeholder="I have a fever, and a cough. I have also been feeling nauseous lately."
                         fullWidth
                         margin='none'
@@ -230,7 +237,6 @@ const SymptomLog = (props) => {
                     <Grid><Typography style={{paddingTop: '10px'}}>Symptoms Recognized:</Typography></Grid>
                     <Grid container spacing={2}>
                         { illness.map((illness, index) => {
-                            console.log(illness);
                             return (
                                 <Grid item key={index}>
                                     <Button classes={{root: classes.rootButton, label: classes.labelButton}} onClick={() => onButtonClick(index)}>
@@ -251,8 +257,10 @@ const SymptomLog = (props) => {
                         })}
                     </Grid>
                     <Grid container justify='flex-end' style={{paddingTop: '10px'}}>
-                        <Divider orientation='vertical' flexItem/>
-                        <Grid item><Button size='small' className={classes.submitBtn} onClick={onSubmit}>Save</Button></Grid>
+                        {!isLoaded && <CircularProgress style={{color: '#47C594', margin: '5px'}} size={24}/>}
+                        <Grid item>
+                            <Button size='small' className={classes.submitBtn} onClick={onSubmit}>Save</Button>
+                        </Grid>
                     </Grid>
                 </CardContent>
             </Card>

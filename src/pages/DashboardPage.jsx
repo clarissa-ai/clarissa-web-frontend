@@ -11,6 +11,7 @@ import TopBar from 'components/navbar/TopBar';
 import IllnessCard from 'components/dashboard/IllnessCard';
 import SurveyCard from 'components/dashboard/SurveyCard';
 import {Redirect} from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -38,50 +39,69 @@ const DashboardPage = (props) => {
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
+    const history = useHistory();
 
     const profile = useSelector(profileSelector);
 
     useEffect(()=> {
-        if (!profile.authenticated) return; 
+        if (!profile.authenticated) return;
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
             credentials: 'include',
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            },})
-            .then(res => res.json())
-            .then(res => {
-                    setDash(res);
-                    setActiveSurveys(res.active_surveys);
-                    setCompletedSurveys(res.completed_surveys);
-                    setrecentIllness(res.recent_illnesses);
+            }})
+            .then((res) => res.json())
+            .then((res) => {
+                setDash(res);
+                setActiveSurveys(res.active_surveys);
+                setCompletedSurveys(res.completed_surveys);
+                setrecentIllness(res.recent_illnesses);
             },
             (error) => {
-                    console.log(error);
-            },);
+                console.log(error);
+            });
 
-            const userInfo = profile.userInfo;
-            setName(userInfo.first_name);
-    }, [apiLink, profile])
-    
+        const userInfo = profile.userInfo;
+        setName(userInfo.first_name);
+    }, [apiLink, profile]);
+
+    const createNewIllness = (event) => {
+        fetch(`${apiLink}/api/dashboard/create_illness`, {
+            method: 'GET',
+            credentials: 'include',
+        }).then((response) => {
+            if (!response.ok) {
+                console.log('Internal Error. Please contact support.');
+                return;
+            }
+            response.json().then((data) => {
+                const {status} = data;
+                if (status === 'success') {
+                    history.push('/active-illness');
+                }
+            });
+        });
+    };
+
     return (
         !profile.authenticated ? <Redirect to='/login' /> :
             <Fade in timeout={1000}>
                 <div className={classes.container}>
                     <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
-                        <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}}>New Illness</Button></TopBar></Grid>
+                        <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
                         <Grid item><ResponsiveDrawer/></Grid>
 
-                        <Grid item xs={12} md={6} xl={7} style={{marginLeft: '1rem'}}>
-                            <Grid container direction='column' spacing={2}>
-                                <Grid item>
-                                    <div className={classes.greetingsContainer}>
-                                        <Typography variant='h6'><Box fontWeight='bold'>Hey {userName}!</Box></Typography>
-                                        <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
-                                    </div>
-                                </Grid>
-
-                                <Grid item>
+                    <Grid item xs={12} md={6} xl={7} style={{marginLeft: '1rem'}}>
+                        <Grid container direction='column' spacing={2}>
+                            <Grid item>
+                                <div className={classes.greetingsContainer}>
+                                    <Typography variant='h6'><Box fontWeight='bold'>Hey {userName}!</Box></Typography>
+                                    <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
+                                </div>
+                            </Grid>
+                          
+                               <Grid item>
                                     <RecentIllness >
                                         {recentIllness.map((illness, index) => {
                                             return <Grid item><IllnessCard key={index} title='' dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
@@ -90,6 +110,7 @@ const DashboardPage = (props) => {
                                 </Grid>
                             </Grid>
                         </Grid>
+                    </Grid>
 
                         <Grid item xs={12} md={3} xl={3}style={{marginLeft: '1rem'}}>
                             <Grid container direction='column' spacing={2}>
@@ -112,8 +133,9 @@ const DashboardPage = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
-                </div>
-            </Fade>
+                </Grid>
+            </div>
+        </Fade>
     );
-}
+};
 export default DashboardPage;

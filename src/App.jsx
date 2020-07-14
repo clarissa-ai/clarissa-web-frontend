@@ -13,6 +13,7 @@ import Dashboard from 'pages/DashboardPage';
 import SymptomLog from 'components/activeillness/SymptomLog';
 import SurveysPage from 'pages/SurveysPage';
 import PastIllnessPage from 'pages/PastIllnessPage';
+import ActiveIllnessPage from 'pages/ActiveIllnessPage';
 import PageNotFound from 'pages/404/404';
 import SettingsPage from 'pages/SettingsPage';
 
@@ -98,11 +99,13 @@ const App = (props) => {
                         <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                         <Route path="/dashboard" render={(props) => <Dashboard/>}/>
                         <Route path="/signup" render={ () => <Signup />}/>
+                        <Route path="/active-illness" render={ () => <ActiveIllnessPage />}/>
                         <Route path='/surveys' render={(props) => <SurveysPage/>}/>
                         <Route path='/settings' render={(props) => <SettingsPage/>}/>
                         <Route path='/past-illnesses' render={(props) => <PastIllnessPage/>}/>
                         <Route render={(props) => <PageNotFound />} />
                         <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
+
                     </Switch>
                 </Router>
             </Loader>
