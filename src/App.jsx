@@ -51,6 +51,13 @@ let theme = createMuiTheme({
     typography: {
         fontFamily: 'Poppins',
     },
+    overrides: {
+        MuiTab: {
+            wrapper: {
+                flexDirection: 'row',
+            },
+        },
+    },
 });
 theme = responsiveFontSizes(theme);
 console.log(theme);
