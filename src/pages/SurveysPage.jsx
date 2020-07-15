@@ -71,7 +71,6 @@ const SurveysPage = (props) => {
                 <Grid container direction='row' justify='center'>
                     {showModal[0] ?
                         <div>
-
                             <ResultModal data={showModal[1]} closeModalFunction={() => setModal([false, 0])}/>
                         </div>:
                         null}
