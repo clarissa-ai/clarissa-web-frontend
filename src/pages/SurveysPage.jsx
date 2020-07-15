@@ -75,7 +75,7 @@ const SurveysPage = (props) => {
                         </div>:
                         null}
                     <Grid item><ResponsiveDrawer/></Grid>
-                    <Grid item className={classes.content} xs={12} md={9} xl={7}>
+                    <Grid item className={classes.content}>
                         {showSurvey ? (showSurvey[0] ?
                             <div>
                                 <Grid item>

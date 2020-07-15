@@ -9,7 +9,6 @@ import {ReactComponent as NextIconDisable} from './icons/DisableNext.svg';
 import {ReactComponent as PrevIconDisable} from './icons/DisablePrev.svg';
 import {ReactComponent as NextIconActive} from './icons/ActiveNext.svg';
 import {ReactComponent as PrevIconActive} from './icons/ActivePrev.svg';
-// import data from './COV-19.json';
 import ScreeningResult from './ScreeningResult';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: '2rem',
     },
     rootButton: {
-        width: '17.75rem',
+        maxWidth: '17.75rem',
+        minWidth: '14rem',
         minHeight: '5.75rem',
         textAlign: 'left',
         paddingLeft: '0',

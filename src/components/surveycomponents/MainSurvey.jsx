@@ -15,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '8px',
     },
     box: {
-        width: '200px',
+        maxWidth: '0px',
         height: '290px',
     },
     imgSize: {
         width: '600px',
-        align: 'right',
+        flex: 'right',
     },
 }));
 
