@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
-import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
+// import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, makeStyles, Typography} from '@material-ui/core';
 import SymptomLog from 'components/activeillness/SymptomLog';
 import SymptomTile from 'components/activeillness/SymptomTile';

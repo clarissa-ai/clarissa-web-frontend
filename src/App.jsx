@@ -17,7 +17,7 @@ import SurveysPage from 'pages/SurveysPage';
 import PastIllnessPage from 'pages/PastIllnessPage';
 import ActiveIllnessPage from 'pages/ActiveIllnessPage';
 import PageNotFound from 'pages/404/404';
-import SettingsPage from 'pages/SettingsPage';
+// import SettingsPage from 'pages/SettingsPage';
 
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({

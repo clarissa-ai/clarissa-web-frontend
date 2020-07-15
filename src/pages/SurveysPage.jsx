@@ -6,7 +6,7 @@ import MainSurvey from 'components/surveycomponents/MainSurvey';
 import {Fade, Grid, Typography, Tab, makeStyles, Box, Tabs, Button} from '@material-ui/core';
 import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
 import ResultCard from 'components/surveycomponents/ResultCard';
-import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
+// import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import ResultModal from 'components/surveycomponents/ResultModal';
 import TopBar from 'components/navbar/TopBar';
