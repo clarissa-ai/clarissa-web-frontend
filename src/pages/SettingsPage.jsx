@@ -14,7 +14,6 @@ import Visibility from '@material-ui/icons/Visibility';
 
 import {useSelector} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
-// a
 const useStyles = makeStyles((theme) => ({
     container: {
         background: '#F5F6F8',

@@ -140,7 +140,7 @@ const ScreeningQuestions = (props) => {
         }
         return qIndex;
     };
-    // Gets summary index
+    // Gets summary indexes
     const processSummary = (sNum) => {
         let sIndex = 0;
         let i = 0;
