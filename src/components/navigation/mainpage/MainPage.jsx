@@ -1,6 +1,5 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-
 import {profileSelector} from 'redux/selectors';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {makeStyles} from '@material-ui/core';
