@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, makeStyles} from '@material-ui/core';
+import {Grid, Typography, makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         background: '#fff',
         padding: '1rem',
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-        height: '35rem',
+        height: '50rem',
         width: '25rem',
         overflow: 'scroll',
     },
@@ -20,9 +20,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PastSymptomCard = (props) => {
+
     const classes = useStyles();
-    return <Grid container className={classes.container} justify='center' direction='column'> 
+
+    return (
+        <Grid container className={classes.container} direction='column'> 
+            
             <Grid item>{props.children}</Grid>
         </Grid>
+    );
 }
 export default PastSymptomCard;

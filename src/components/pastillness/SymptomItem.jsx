@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
+import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         borderRadius: '4px',
-        background: '#F2F6F9',
-        padding: '1rem',
+        padding: '.1rem',
         marginBottom: '.8rem',
     },
     activeContainer: {
@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
     },
     link: {
         color: '#000',
+    },
+    labelGreen: {
+        color: '#47C594',
     }
 }));
 
@@ -67,9 +70,14 @@ const InfoCard = (props) => {
         setSymptoms(props.symptomcount);
     }, [props.link, props.status, props.symptomcount]);
 
-    return <Grid container direction='row' alignItems='center' justify='center' className={props.status? classes.activeContainer : classes.container}>
-        <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
-        <Grid item><Typography><Box fontWeight='bold'>{props.date}</Box></Typography></Grid>
+    return <Grid container direction='row' alignItems='center' className={props.status? classes.activeContainer : classes.container}>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="3" cy="3" r="2.5" stroke="#47C594"/>
+        </svg>
+        <Grid item><Typography><Box >{props.title}{props.index}</Box></Typography></Grid>
+        <Grid item><Typography><Box   className = {classes.labelGreen}>  {props.data}</Box></Typography></Grid>
+        <Grid item><Typography><Box  > {(props.symptomNum > 0) && "Date Created" }{props.date}</Box></Typography></Grid>
+        <Grid item><Typography><Box > {(props.symptomNum > 0) && "Number of Symptoms Logged:" } {props.symptomNum}</Box></Typography></Grid>
         <Grid item><Typography>
             {() => handleStatus()}</Typography>
         </Grid>
