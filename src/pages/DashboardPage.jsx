@@ -88,7 +88,7 @@ const DashboardPage = (props) => {
                 <div className={classes.container}>
                     <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
                         <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
-                        <Grid item><ResponsiveDrawer/></Grid>
+                        {/* <Grid item><ResponsiveDrawer/></Grid> */}
 
                         <Grid item xs={12} md={6} xl={7} style={{marginLeft: '1rem'}}>
                             <Grid container direction='column' spacing={2}>
