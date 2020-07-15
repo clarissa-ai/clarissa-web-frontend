@@ -3,8 +3,8 @@ import {useSelector} from 'react-redux';
 
 import {profileSelector} from 'redux/selectors';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
-import { makeStyles } from '@material-ui/core';
-import { useLocation } from 'react-router-dom';
+import {makeStyles} from '@material-ui/core';
+import {useLocation} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     main: {
