@@ -5,11 +5,12 @@ import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
 import StatsCard from 'components/dashboard/StatsCard';
 import RecentIllness from 'components/dashboard/RecentIllness';
-import CompletedSurveyCard from 'components/dashboard/CompletedSurveyCard';
+import CompletedSurveys from 'components/dashboard/CompletedSurveys';
 import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/navbar/TopBar';
-import InfoCard from 'components/dashboard/InfoCard';
-import { useHistory, Redirect } from 'react-router-dom';
+import IllnessCard from 'components/dashboard/IllnessCard';
+import SurveyCard from 'components/dashboard/SurveyCard';
+import {useHistory, Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -48,21 +49,21 @@ const DashboardPage = (props) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            },})
-            .then(res => res.json())
-            .then(res => {
-                    setDash(res);
-                    setActiveSurveys(res.active_surveys);
-                    setCompletedSurveys(res.completed_surveys);
-                    setrecentIllness(res.recent_illnesses);
+            }})
+            .then((res) => res.json())
+            .then((res) => {
+                setDash(res);
+                setActiveSurveys(res.active_surveys);
+                setCompletedSurveys(res.completed_surveys);
+                setrecentIllness(res.recent_illnesses);
             },
             (error) => {
-                    console.log(error);
-            },);
+                console.log(error);
+            });
 
-            const userInfo = profile.userInfo;
-            setName(userInfo.first_name);
-    }, [apiLink, profile])
+        const userInfo = profile.userInfo;
+        setName(userInfo.first_name);
+    }, [apiLink, profile]);
 
     const createNewIllness = (event) => {
         fetch(`${apiLink}/api/dashboard/create_illness`, {
@@ -98,32 +99,32 @@ const DashboardPage = (props) => {
                                         <Typography variant='subtitle2' style={{opacity: '0.7'}}>View and manage your important information here.</Typography>
                                     </div>
                                 </Grid>
-
+                            
                                 <Grid item>
-                                    <RecentIllness >
-                                        {recentIllness.map((illness, index) => {
-                                            return <Grid item><InfoCard key={index} title='' date={`${illness.created_on} - ${illness.updated_on}`} status={illness.active} symptomcount={illness.symptom_count} link={illness.active ? '/active-illness' : '/past-illnesses'} /></Grid>
-                                        })}
-                                    </RecentIllness>
+                                        <RecentIllness >
+                                            {recentIllness.map((illness, index) => {
+                                                return <Grid item><IllnessCard key={index} title='' dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                            })}
+                                        </RecentIllness>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Grid>
+                         </Grid>
 
-                        <Grid item xs={12} md={3} xl={3}style={{marginLeft: '1rem'}}>
+                         <Grid item xs={12} md={3} xl={3}style={{marginLeft: '1rem'}}>
                             <Grid container direction='column' spacing={2}>
                                 <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
                                 <Grid item>
-                                    <CompletedSurveyCard>
+                                    <CompletedSurveys>
                                         {completedSurveys.map((completed_surveys, index) => {
-                                        return <Grid item><InfoCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
+                                        return <Grid item><SurveyCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
                                     })}
-                                    </CompletedSurveyCard>
+                                    </CompletedSurveys>
                                 </Grid>
 
                                 <Grid item>
                                     <TakeSurveyCard>
                                         {activeSurveys.map((active_surveys, index) => {
-                                            return <Grid item key={index}><InfoCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
+                                            return <Grid item key={index}><SurveyCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
                                         })}
                                     </TakeSurveyCard>
                                 </Grid>
@@ -131,7 +132,7 @@ const DashboardPage = (props) => {
                         </Grid>
                     </Grid>
                 </div>
-            </Fade>
+        </Fade>
     );
-}
+};
 export default DashboardPage;

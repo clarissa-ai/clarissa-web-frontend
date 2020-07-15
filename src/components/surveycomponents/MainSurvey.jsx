@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Typography, Grid, makeStyles, Link, Card, CardContent, Box} from '@material-ui/core';
+import {Typography, Grid, makeStyles, Button, Card, CardContent, Box} from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const useStyles = makeStyles((theme) => ({
@@ -7,19 +7,20 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFF',
         height: '290px',
-        width: 'auto',
+        maxWidth: 'auto',
     },
     overall: {
         wordWrap: 'break-word',
-        width: '500px',
+        maxWidth: '500px',
         marginTop: '8px',
     },
     box: {
-        width: '500px',
+        width: '200px',
         height: '290px',
     },
     imgSize: {
         width: '600px',
+        align: 'right',
     },
 }));
 
@@ -61,28 +62,26 @@ const MainSurvey = (props) => {
                         <div className={classes.overall}>
                             <CardContent style={{height: '190px'}}>
                                 <Typography paragraph style={{fontWeight: 'bold'}} variant='h5'>{data.title}</Typography>
-                                <Typography>{data.description}</Typography>
+                                <Typography >{data.description}</Typography>
                             </CardContent>
                             <CardContent>
                                 <Grid container>
-                                    <Typography style={{fontWeight: 'bold', width: '400px'}}>{data.question_count + ' '}Questions</Typography>
-                                    <Link href={'survey/' + data.id} underline='none' color='textPrimary'>
+                                    <Typography style={{fontWeight: 'bold', width: '380px'}}>{data.question_count + ' '}Questions</Typography>
+                                    <Button onClick={() => props.surveyClick([true, data.id])}>
                                         <Grid container>
                                             <Typography style={{fontWeight: 'bold'}}>
                                                 Start
                                             </Typography>
                                             <ArrowForwardIosIcon/>
                                         </Grid>
-                                    </Link>
+                                    </Button>
                                 </Grid>
                             </CardContent>
                         </div>
                     </Grid>
-                    <Grid item>
-                        <Box className={classes.box}>
-                            <img src={apiLink + data.cover_image_url} alt={'Cover'} className={classes.imgSize}/>
-                        </Box>
-                    </Grid>
+                    <Box className={classes.box}>
+                        <img src={apiLink + data.cover_image_url} alt={'Cover'} className={classes.imgSize}/>
+                    </Box>
                 </Grid>
             </Card>
         );

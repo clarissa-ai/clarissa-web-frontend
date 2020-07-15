@@ -304,7 +304,7 @@ const ScreeningQuestions = (props) => {
             }
 
             let result;
-            if (email === '') {
+            if (!email) {
                 result = {
                     'survey_id': idNum,
                     'json_body': {

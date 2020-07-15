@@ -1,12 +1,12 @@
 import React from 'react';
-import {Card, makeStyles, CardHeader, Divider, CardContent, Link, Grid} from '@material-ui/core';
+import {Card, makeStyles, CardContent} from '@material-ui/core';
 import SymptomCard from './SymptomCard';
 import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        backgroundColor: '#FFF',
+        backgroundColor: '#FFFF',
         height: '100%',
     },
     title: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardContent: {
         'overflow': 'scroll',
-        'height': '75%',
+        'height': '99%',
         '&::-webkit-scrollbar': {
             width: '0.3em',
         },
@@ -50,21 +50,19 @@ const useStyles = makeStyles((theme) => ({
 const SymptomTile = (props) => {
     SymptomTile.propTypes = {
         symptomModalFunction: propTypes.func,
+        symptoms: propTypes.object,
     };
     const classes = useStyles();
+
     return (
         <Card className={classes.card}>
-            <CardHeader title='Symptom History' classes={{title: classes.title}}/>
-            <Divider variant='middle' classes={{middle: classes.divider}}/>
             <CardContent className={classes.cardContent}>
-                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
-                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
-                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
-                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
-                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
-                <SymptomCard symptomModalFunction={props.symptomModalFunction}/>
+                {props.symptoms ? props.symptoms.map((symptom, index) => {
+                    return (
+                        <SymptomCard key={index} symptom={symptom} symptomModalFunction={props.symptomModalFunction}/>
+                    );
+                }) : null}
             </CardContent>
-            <Grid container justify='center'><Link variant='subtitle2' href='' className={classes.link}>View More</Link></Grid>
         </Card>
     );
 };
