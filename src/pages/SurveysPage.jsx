@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
     },
     content: {
-        width: '80vw',
-        padding: ' 1em 4em',
+        // width: '100vw',
+        // padding: ' 1em 4em',
     },
 }));
 
@@ -74,8 +74,8 @@ const SurveysPage = (props) => {
                             <ResultModal data={showModal[1]} closeModalFunction={() => setModal([false, 0])}/>
                         </div>:
                         null}
-                    <Grid item><ResponsiveDrawer/></Grid>
-                    <Grid item className={classes.content} xs={12} md={9} xl={7}>
+                    {/* <Grid item><ResponsiveDrawer/></Grid> */}
+                    <Grid item className={classes.content} xs={12} md={9} xl={10}>
                         {showSurvey ? (showSurvey[0] ?
                             <div>
                                 <Grid item>

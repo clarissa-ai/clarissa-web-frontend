@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import { makeStyles } from '@material-ui/core';
+import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -12,21 +13,28 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: 240,
         },
     },
+    toolbar: theme.mixins.toolbar,
 }));
 
 const MainPage = (props) => {
     const profile = useSelector(profileSelector);
     const classes = useStyles();
-    return (
-        profile.authenticated ? <div>
-            <ResponsiveDrawer />
-            <div className={classes.main}>
+    const location = useLocation();
+    if (profile.authenticated && location.pathname !== '/404') {
+        return (
+            <div>
+                <ResponsiveDrawer />
+                <div className={classes.main}>
+                    {props.children}
+                </div>
+            </div>
+        );
+    } else {
+        return (
+            <div>
                 {props.children}
             </div>
-        </div> :
-            <div className={classes.main}>
-                {props.children}
-            </div>
-    );
+        );
+    }
 };
 export default MainPage;

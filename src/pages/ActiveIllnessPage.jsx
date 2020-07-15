@@ -84,9 +84,9 @@ const DashboardPage = (props) => {
             <Fade in timeout={1000}>
                 <div className={classes.container}>
                     <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
-                        <Grid item><ResponsiveDrawer/></Grid>
+                        {/* <Grid item><ResponsiveDrawer/></Grid> */}
 
-                        <Grid item xs={12} md={9} xl={7}>
+                        <Grid item xs={12} md={9} xl={8}>
                             <Grid container direction='column' spacing={2}>
                                 <Typography className={classes.title}>
                                     Tell Clarissa how you are feeling.

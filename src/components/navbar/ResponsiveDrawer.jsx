@@ -32,7 +32,7 @@ const routes = [
         link: '/active-illness',
     },
     {
-        title: 'Past Illness',
+        title: 'Past Illnesses',
         icon: <HistoryIcon/>,
         link: '/past-illnesses',
     },
