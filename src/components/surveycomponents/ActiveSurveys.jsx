@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {Typography, Grid, makeStyles, Link, Card, CardContent, Box, Avatar, useTheme} from '@material-ui/core';
+import {Typography, Grid, makeStyles, Button, Card, CardContent, Box, Avatar, useTheme} from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        width: 'auto',
+        maxWidth: 'auto',
     },
     root: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
@@ -13,12 +13,11 @@ const useStyles = makeStyles((theme) => ({
     },
     wrap: {
         wordWrap: 'break-word',
-        maxWidth: '400px',
+        maxWidth: '341px',
     },
     box: {
         width: '6em',
         height: '12em',
-        float: 'right',
         color: 'white',
         textAlign: 'center',
     },
@@ -75,7 +74,7 @@ const ActiveSurveys = (props) => {
         return (
             <Grid container spacing={2} className={classes.container}>
                 {data.map((data, index) => (
-                    <Grid item key={index}>
+                    <Grid item key={index} >
                         <Card className={classes.root}>
                             <Grid container>
                                 <Grid item>
@@ -96,14 +95,14 @@ const ActiveSurveys = (props) => {
                                             <Typography style={{fontWeight: 'bold'}} variant='body2'>Questions</Typography>
                                         </div>
                                         <Grid container justify='center' className={classes.start}>
-                                            <Link href={'survey/' + data.id} underline='none' style={{color: 'white'}}>
+                                            <Button onClick={() => props.surveyClick([true, data.id])} style={{color: '#FFFF'}}>
                                                 <Grid container>
                                                     <Typography style={{fontWeight: 'bold'}}>
                                                         Start
                                                     </Typography>
                                                     <ArrowForwardIosIcon/>
                                                 </Grid>
-                                            </Link>
+                                            </Button>
                                         </Grid>
                                     </Box>
                                 </Grid>
