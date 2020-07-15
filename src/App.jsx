@@ -17,7 +17,7 @@ import SurveysPage from 'pages/SurveysPage';
 import PastIllnessPage from 'pages/PastIllnessPage';
 import ActiveIllnessPage from 'pages/ActiveIllnessPage';
 import PageNotFound from 'pages/404/404';
-// import SettingsPage from 'pages/SettingsPage';
+import SettingsPage from 'pages/SettingsPage';
 
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
@@ -108,6 +108,7 @@ const App = (props) => {
                             <ProtectedRoute path='/active-illness' page={<ActiveIllnessPage />} />
                             <ProtectedRoute path='/past-illness' page={<PastIllnessPage />} />
                             <ProtectedRoute path='/surveys' page={<SurveysPage />} />
+                            <ProtectedRoute path='/settings' page={<SettingsPage />} />
                             <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
                             <Route path='/404' render={() => <PageNotFound />} />
                             <Redirect to='/404' />
