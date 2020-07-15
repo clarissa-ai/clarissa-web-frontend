@@ -46,9 +46,6 @@ const Login = () => {
 
         profile.login(values.email, values.password, (newProfile) => {
             dispatch(setProfile(newProfile))
-            // .then(
-            //      (error) => console.log(error)
-            // )
         });
     };
 
