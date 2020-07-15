@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, Typography, Box,  makeStyles, ButtonGroup} from '@material-ui/core';
 import PastIllnessCard from 'components/pastillness/PastIllnessCard';
-import PastSymptomCard from 'components/pastillness/PastSymptomCard';
+import IllnessDataCard from 'components/pastillness/IllnessDataCard';
 import TopBar from 'components/navbar/TopBar';
 import SymptomItem from 'components/pastillness/SymptomItem';
 import IllnessSummaryCard from 'components/pastillness/IllnessSummaryCard';
@@ -98,7 +98,7 @@ const PastIllnessPage = (props) => {
              <Grid item xs = {12} md = {3} xl = {3} style = {{marginLeft: '1rem'}}> 
                 <Grid container direction = 'column' spacing = {2}>
                     <Grid item> 
-                        <PastSymptomCard>
+                        <IllnessDataCard>
                             <ButtonGroup color="primary" style = {{paddingBottom: '5rem'}} aria-label="outlined primary button group">
                                 <Button>Download Illness PDF</Button>
                                 <Button>Export Illness PDF</Button>
@@ -119,7 +119,7 @@ const PastIllnessPage = (props) => {
                                 return <Grid item><DiagnosisItem title = {diagnosis.common_name}/></Grid>
                             })}
                             
-                        </PastSymptomCard>
+                        </IllnessDataCard>
 
 
                     </Grid>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Typography, makeStyles} from '@material-ui/core';
+import {Grid, makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -19,15 +19,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PastSymptomCard = (props) => {
+const IllnessDataCard = (props) => {
 
     const classes = useStyles();
 
     return (
         <Grid container className={classes.container} direction='column'> 
-            
             <Grid item>{props.children}</Grid>
         </Grid>
     );
 }
-export default PastSymptomCard;
+export default IllnessDataCard;

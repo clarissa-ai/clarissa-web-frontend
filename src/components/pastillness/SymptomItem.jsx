@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
-import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     container: {

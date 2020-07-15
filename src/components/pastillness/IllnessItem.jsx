@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
-import propTypes from 'prop-types';
+import React from 'react';
+import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const IllnessItem = (props) => {
     const classes = useStyles();
     const created_on = new Date(props.created_on);
-    const updated_on = new Date(props.updated_on);
+    // const updated_on = new Date(props.updated_on);
     return <Grid container direction='row' alignItems='center' justify='space-evenly' className={classes.container}>
         <Grid item><Typography><Box fontWeight = 'bold'>{props.title}{props.index} </Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'> Date Created: {created_on.toString()} </Box></Typography></Grid>
