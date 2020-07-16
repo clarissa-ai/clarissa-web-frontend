@@ -76,12 +76,12 @@ const PastIllnessPage = (props) => {
                 <Grid item><TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
             <Grid item xs = {12} md = {7} l={7} xl={7}>
                 <Grid container direction='column' spacing={2}>
-                    {/* <Grid item>
+                    <Grid item>
                         <div className = {classes.topContainer}> 
                             <Typography variant = 'h6'><Box fontWeight='bold'> Past Illlnesses</Box></Typography>
-                            <Typography variant = 'subtitle2' style = {{opacity: '.7'}}>View and export your logged illnesses</Typography>
+                            <Typography variant = 'subtitle2' style = {{opacity: '.7'}}>View your logged illnesses</Typography>
                         </div>
-                    </Grid>  */}
+                    </Grid> 
                     <Grid item> 
                         <PastIllnessCard>
                             {illnessList.map((illness, index) => {
