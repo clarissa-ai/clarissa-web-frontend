@@ -6,9 +6,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         background: '#fff',
         padding: '.5rem',
-        paddingTop: '15rem',
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-        height: '45rem',
+        height: '80vh',
         overflow: 'scroll',
     },
     label: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PastIllnessCard = (props) => {
     const classes = useStyles();
-    return <Grid container className={classes.container} justify='center' direction='column' alignItems='stretch' alignContent='stretch'> 
+    return <Grid container className={classes.container} justify='space-between' direction='column' alignItems='stretch' alignContent='stretch'> 
             <Grid item>{props.children}</Grid>
     </Grid>
 }
