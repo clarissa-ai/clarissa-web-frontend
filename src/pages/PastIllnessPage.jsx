@@ -74,8 +74,8 @@ const PastIllnessPage = (props) => {
         <div className = {classes.container}> 
             <Grid container direction = 'row' spacing = {0} justify='center' alignitems = 'stretch' alignContent = 'stretch'>
                 <Grid item><TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
-            <Grid item xs = {12} md = {6} xl = {7} style = {{marginLeft: '1rem'}}>
-                <Grid container direction = 'column' spacing = {2}>
+            <Grid item xs = {12} md = {7} l={7} xl={7}>
+                <Grid container direction='column' spacing={2}>
                     <Grid item>
                         <div className = {classes.topContainer}> 
                             <Typography variant = 'h6'><Box fontWeight='bold'> Past Illlnesses</Box></Typography>
@@ -85,7 +85,7 @@ const PastIllnessPage = (props) => {
                     <Grid item> 
                         <PastIllnessCard>
                             {illnessList.map((illness, index) => {
-                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index = {illnessList.length - index} title = 'Illness #' created_on = {illness.created_on} updated_on = {illness.updated_on} date ={`${illness.created_on} - ${illness.updated_on}`} symptomCount = {illness.symptoms.length} /> </Grid>
+                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index = {illnessList.length - index} title = 'Illness #' created_on = {illness.created_on} updated_on = {illness.updated_on} symptomCount = {illness.symptoms.length} /> </Grid>
                             })}
                         </PastIllnessCard>
 
@@ -93,11 +93,11 @@ const PastIllnessPage = (props) => {
                 </Grid>
             </Grid>
             
-             <Grid item xs={12} md={3} xl={3} style={{marginLeft: '1rem'}}> 
+             <Grid item xs={12} md={4} l={3} xl={3} style={{marginLeft: '1rem'}}> 
                 <Grid container direction='column' spacing={2}>
                     <Grid item> 
                         <IllnessDataCard>
-                            <ButtonGroup color="primary" style={{paddingBottom: '5rem'}} aria-label="outlined primary button group">
+                            <ButtonGroup color="primary" aria-label="outlined primary button group">
                                 <Button>Download Illness PDF</Button>
                                 <Button>Export Illness PDF</Button>
                             </ButtonGroup>
@@ -118,10 +118,7 @@ const PastIllnessPage = (props) => {
                             })}
                             
                         </IllnessDataCard>
-
-
                     </Grid>
-
                 </Grid> 
             </Grid>
             
