@@ -36,7 +36,12 @@ const ScreeningStart = (props) => {
     const [data, setData] = useState([]);
     const [clicked, setClicked] = useState(false);
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
-    const idNum = parseInt(props.location.pathname.replace(props.match.path, '').substring(1));
+    let idNum;
+    if (props.id) {
+        idNum = props.id;
+    } else {
+        idNum = parseInt(props.location.pathname.replace(props.match.path, '').substring(1));
+    }
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -118,7 +123,7 @@ const ScreeningStart = (props) => {
             </Container>
         );
     } else {
-        return <ScreeningQuestions data={data} idNum={idNum} email={''}/>;
+        return <ScreeningQuestions data={data} idNum={idNum} email={props.email}/>;
     }
 };
 export default ScreeningStart;

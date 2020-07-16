@@ -12,13 +12,14 @@ const useStyles = makeStyles((theme) => ({
     },
     stats: {
         padding: '1rem',
+        textAlign: 'center',
     }
 }));
 
 
 const StatsCard = (props) => {
     const classes = useStyles();
-    return <Grid container direction='row' className={classes.container} justify='center'>
+    return <Grid container direction='row' className={classes.container} justify='space-evenly'>
         <Grid item>
             <div className={classes.stats}>
                 <Typography variant='h6' style={{color: '#306CDF'}}><Box fontWeight='bold'>{props.illnesscount}</Box></Typography>
@@ -36,7 +37,7 @@ const StatsCard = (props) => {
         <Grid item>
             <div className={classes.stats}>
                 <Typography variant='h6' style={{color: '#F46D66'}}><Box fontWeight='bold'>{props.visitcount}</Box></Typography>
-                <Typography variant='subtitle2' className={classes.labels}>Surveys Completed</Typography>
+                <Typography variant='subtitle2' className={classes.labels}>Surveys Taken</Typography>
             </div>
         </Grid>
     </Grid>

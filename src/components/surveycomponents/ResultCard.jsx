@@ -1,8 +1,6 @@
-import React /* ,{useState, useEffect}*/ from 'react';
-import {Typography, Grid, makeStyles, Link, Card, CardContent, Box, Avatar, Divider, useTheme} from '@material-ui/core';
+import React, {useState, useEffect} from 'react';
+import {Typography, Grid, makeStyles, Button, Card, CardContent, Box, Avatar, Divider, useTheme} from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import datas from './results.json';
-// import ResultModal from './ResultModal';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,20 +39,17 @@ const useStyles = makeStyles((theme) => ({
 
 const ActiveSurveys = (props) => {
     const classes = useStyles();
-    /* const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(true);
-    const [data, setData] = useState([]);*/
-    // const [showModal, setModal] = useState(false);
+    const [data, setData] = useState([]);
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
-    const error = false;
-    const isLoaded = true;
 
     const theme = useTheme();
     const colors = [theme.palette.primary.main, theme.palette.secondary.main,
         theme.palette.info.main, theme.palette.error.main];
 
-    /* useEffect(() => {
-        fetch(`${apiLink}/api/survey/get_results`, {
+    useEffect(() => {
+        fetch(`${apiLink}/api/survey/get_response`, {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -71,7 +66,7 @@ const ActiveSurveys = (props) => {
                     setError(error);
                 },
             );
-    }, [apiLink]);*/
+    }, [apiLink]);
 
     if (error) {
         return <div>{error.message}</div>;
@@ -80,7 +75,7 @@ const ActiveSurveys = (props) => {
     } else {
         return (
             <Grid container spacing={2}>
-                {datas.surveys.map((data, index) => (
+                {data.length !== 0 ? data.map((data, index) => (
                     <Grid item key={index}>
                         <Card className={classes.root}>
                             <Grid container>
@@ -102,22 +97,21 @@ const ActiveSurveys = (props) => {
                                             <Typography>{data.description}</Typography>
                                         </div>
                                         <Grid container justify='center' className={classes.start}>
-                                            <Link href={'/surveys'} underline='none' style={{color: 'white'}}>
+                                            <Button style={{color: 'white'}} onClick={() => props.setModal([true, data])}>
                                                 <Grid container>
                                                     <Typography style={{fontWeight: 'bold'}} >
                                                         View Survey
                                                     </Typography>
                                                     <ArrowForwardIosIcon/>
                                                 </Grid>
-                                            </Link>
+                                            </Button>
                                         </Grid>
                                     </Box>
                                 </Grid>
                             </Grid>
                         </Card>
                     </Grid>
-                ))}
-                {/* {showModal? <ResultModal data={datas}/> : null} */}
+                )): <Typography style={{padding: '30px'}}>No Surveys Have Been Completed</Typography>}
             </Grid>
         );
     }

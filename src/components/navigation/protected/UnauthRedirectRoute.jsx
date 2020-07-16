@@ -7,7 +7,7 @@ import {profileSelector} from 'redux/selectors';
 const ProtectedRoute = (props) => {
     const profile = useSelector(profileSelector);
     return (
-        <Route exact={props.exact} path={props.path} render={() => profile.authenticated ? props.page : <Redirect to='/login' />} />
+        <Route exact={props.exact} path={props.path} render={() => !profile.authenticated ? props.page : <Redirect to='/dashboard' />} />
     );
 };
 

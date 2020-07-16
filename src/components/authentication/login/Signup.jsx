@@ -1,5 +1,6 @@
 import React from 'react';
 import {ThemeProvider, createMuiTheme, FormHelperText, FormControl, MenuItem, Select, Grid, Input, InputAdornment, IconButton, Button, Typography, Link, makeStyles, FormControlLabel, Checkbox} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import {
@@ -64,6 +65,7 @@ const Signup = () => {
         rememberMe: false,
         sex: '',
         acceptterms: false,
+        error: '',
     });
 
     const handleChange = (prop) => (event) => {
@@ -79,7 +81,7 @@ const Signup = () => {
     };
 
     const handleCheckbox = (event) => {
-        setValues({...values, rememberMe: !values.rememberMe});
+        setValues({...values, acceptterms: !values.acceptterms});
     };
 
     const handleSex = (event) => {
@@ -91,6 +93,14 @@ const Signup = () => {
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
+
+    const verifyForm = () => {
+        if (values.password !== values.confirmpassword) setValues({...values, error: <Alert severity="error">Passwords do not match!</Alert>});
+        if (values.firstname === '') setValues({...values, error: <Alert severity="error">Must enter a first name</Alert>});
+        if (values.email === '') setValues({...values, error: <Alert severity="error">Must enter a valid email</Alert>});
+        if (values.acceptterms === false) setValues({...values, error: <Alert severity="error">Must accept Terms of Service and Privacy Policy</Alert>});
+        handleSignUp();
+    }
 
     const handleSignUp = () => {
         const user = {
@@ -118,15 +128,17 @@ const Signup = () => {
 
     return (
         <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
+            <Grid item>{values.error}</Grid>
             <Grid item><Typography variant='h4' style={{fontWeight: 'bold', color: '#334D6E'}}>Sign Up</Typography></Grid>
-            <Grid item><Input id="standard-basic" placeholder="Email" className={classes.field} onChange={handleChange('email')}/></Grid>
-            <Grid item><Input id="standard-basic" placeholder="First Name" className={classes.field} onChange={handleChange('firstname')}/></Grid>
+            <Grid item><Input id="standard-basic" required placeholder="Email*" className={classes.field} onChange={handleChange('email')}/></Grid>
+            <Grid item><Input id="standard-basic" required placeholder="First Name*" className={classes.field} onChange={handleChange('firstname')}/></Grid>
             <Grid item>
                 <Grid container direction='row' alignItems='center' spacing={2}>
                     <Grid item>
                         <FormControl className={classes.formControl}>
-                            <FormHelperText>Sex</FormHelperText>
+                            <FormHelperText>Sex*</FormHelperText>
                             <Select
+                            required
                             value={values.sex}
                             onChange={handleSex}
                             displayEmpty
@@ -145,6 +157,7 @@ const Signup = () => {
                             <KeyboardDatePicker
                             label='Date of Birth'
                             disableToolbar
+                            required
                             variant="inline"
                             format="MM/dd/yyyy"
                             margin="normal"
@@ -164,7 +177,8 @@ const Signup = () => {
             <Grid item>
                 <Input
                     className={classes.field}
-                    placeholder="Password"
+                    placeholder="Password*"
+                    required
                     id="standard-password"
                     type={values.showPassword ? 'text' : 'password'}
                     value={values.password}
@@ -185,7 +199,8 @@ const Signup = () => {
             <Grid item>
                 <Input
                     className={classes.field}
-                    placeholder="Confirm Password"
+                    placeholder="Confirm Password*"
+                    required
                     id="standard-password"
                     type={values.showPassword ? 'text' : 'password'}
                     value={values.confirmpassword}
@@ -211,6 +226,7 @@ const Signup = () => {
                             checked={values.rememberMe}
                             onChange={handleCheckbox}
                             color='inherit'
+                            required
                         />
                     }
                     label="I accept our Terms of Service and Privacy Policy"
@@ -218,7 +234,7 @@ const Signup = () => {
             </Grid>
             <Grid item>
                 <Grid container justify='flex-end' direction='column' spacing={3}>
-                    <Grid item><Button className={classes.button} onClick={handleSignUp}>Sign Up</Button></Grid>
+                    <Grid item><Button className={classes.button} onClick={verifyForm}>Sign Up</Button></Grid>
                     <Grid item><Typography>Already have an account? <Link className={classes.link} href='/login'>Sign In</Link></Typography></Grid>
                 </Grid>
             </Grid>

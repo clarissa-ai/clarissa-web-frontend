@@ -2,10 +2,9 @@ import React, {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import {List, ListItem, Typography, makeStyles, Button} from '@material-ui/core';
 import {NavLink} from 'react-router-dom';
-
 import {useSelector, useDispatch} from 'react-redux';
-import {setProfile} from 'redux/actions';
 import {profileSelector} from 'redux/selectors';
+import {setProfile} from 'redux/actions';
 
 const useStyles = makeStyles((theme) => ({
     name: {
