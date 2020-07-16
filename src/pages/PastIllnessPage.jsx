@@ -93,15 +93,15 @@ const PastIllnessPage = (props) => {
                 </Grid>
             </Grid>
             
-             <Grid item xs = {12} md = {3} xl = {3} style = {{marginLeft: '1rem'}}> 
-                <Grid container direction = 'column' spacing = {2}>
+             <Grid item xs={12} md={3} xl={3} style={{marginLeft: '1rem'}}> 
+                <Grid container direction='column' spacing={2}>
                     <Grid item> 
                         <IllnessDataCard>
-                            <ButtonGroup color="primary" style = {{paddingBottom: '5rem'}} aria-label="outlined primary button group">
+                            <ButtonGroup color="primary" style={{paddingBottom: '5rem'}} aria-label="outlined primary button group">
                                 <Button>Download Illness PDF</Button>
                                 <Button>Export Illness PDF</Button>
                             </ButtonGroup>
-                            <IllnessSummaryCard name = {activeIllness.created_on} created_on = {activeIllness.created_on} updated_on = {activeIllness.updated_on}>
+                            <IllnessSummaryCard name={activeIllness.created_on} created_on={activeIllness.created_on} updated_on={activeIllness.updated_on}>
                             </IllnessSummaryCard>
                             <Grid item><Typography vairant = 'h5'><Box fontWeight = 'bold' style = {{paddingBottom: '1rem'}}>Symptoms</Box></Typography></Grid>
     
@@ -111,7 +111,7 @@ const PastIllnessPage = (props) => {
                                 return <Grid item><SymptomItem title={symptom.symptom_json.common_name} status={null}/></Grid>
                             })}
 
-                            <Grid item><Typography vairant = 'h5'><Box fontWeight = 'bold' style = {{paddingBottom: '1rem'}}>  Diagnoses </Box></Typography></Grid>
+                            <Grid item><Typography vairant = 'h5'><Box fontWeight = 'bold' style = {{paddingBottom: '1rem'}}>Diagnosis</Box></Typography></Grid>
 
                             {activeDiagnosis.map((diagnosis, index) => {
                                 return <Grid item><DiagnosisItem title = {diagnosis.common_name}/></Grid>
