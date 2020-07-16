@@ -20,13 +20,15 @@ const useStyles = makeStyles((theme) => ({
         width: '50%',
         padding: '2%',
         borderRadius: '4px',
+        height: '70%',
     },
     date: {
         background: '#fff',
     },
     cardContent: {
-        'overflow': 'scroll',
-        'height': '99%',
+        'overflow': 'auto',
+        'height': '85%',
+        'width': '100%',
         '&::-webkit-scrollbar': {
             width: '0.3em',
         },
@@ -49,20 +51,22 @@ const ResultModal = (props) => {
     console.log(props.data);
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
-            <Grid container className={classes.formContainer} direction='column' spacing={1}>
+            <Grid container className={classes.formContainer} direction='row' spacing={1}>
                 <Grid container justify='flex-end'>
                     <Grid item><Button onClick={props.closeModalFunction}>x Close</Button></Grid>
                 </Grid>
-                {props.data.answered_questions.map((data, index) => (
-                    <Grid item key={index}>
-                        <Typography style={{fontWeight: 'bold'}}>{'Question: '}</Typography>
-                        <Typography style={{paddingLeft: '20px'}}>{data.title}</Typography>
-                        <Typography style={{fontWeight: 'bold'}}>{'Answer/s: '}</Typography>
-                        {data.choices.map((choices, index) => (
-                            <Typography key={index} style={{paddingLeft: '20px'}}>{choices}</Typography>
-                        ))}
-                    </Grid>
-                ))}
+                <div className={classes.cardContent}>
+                    {props.data.answered_questions.map((data, index) => (
+                        <Grid item key={index}>
+                            <Typography style={{fontWeight: 'bold'}}>{'Question: '}</Typography>
+                            <Typography style={{paddingLeft: '20px'}}>{data.title}</Typography>
+                            <Typography style={{fontWeight: 'bold'}}>{'Answer/s: '}</Typography>
+                            {data.choices.map((choices, index) => (
+                                <Typography key={index} style={{paddingLeft: '20px'}}>{choices}</Typography>
+                            ))}
+                        </Grid>
+                    ))}
+                </div>
             </Grid>
         </Grid>
     );
