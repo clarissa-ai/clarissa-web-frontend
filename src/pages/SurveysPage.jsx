@@ -67,13 +67,13 @@ const SurveysPage = (props) => {
 
     return (
         <div className={classes.wrapper}>
+            {showModal[0] ?
+                <div>
+                    <ResultModal data={showModal[1]} closeModalFunction={() => setModal([false, 0])}/>
+                </div>:
+                null}
             <Fade in timeout={1000}>
                 <Grid container direction='row' justify='center'>
-                    {showModal[0] ?
-                        <div>
-                            <ResultModal data={showModal[1]} closeModalFunction={() => setModal([false, 0])}/>
-                        </div>:
-                        null}
                     {/* <Grid item><ResponsiveDrawer/></Grid> */}
                     <Grid item className={classes.content} xs={12} md={9} xl={10}>
                         {showSurvey ? (showSurvey[0] ?

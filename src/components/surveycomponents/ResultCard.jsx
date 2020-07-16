@@ -7,14 +7,13 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFF',
         height: '17rem',
-        width: '25rem',
     },
     wrap: {
         wordWrap: 'break-word',
         maxWidth: '400px',
     },
     box: {
-        width: '25rem',
+        width: 'auto',
         height: '13rem',
         backgroundColor: '#306CDF',
         color: 'white',
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '.75rem',
     },
     summTitle: {
-        padding: '5px',
+        margin: '5px',
         fontWeight: 'bold',
     },
     divider: {
@@ -34,6 +33,17 @@ const useStyles = makeStyles((theme) => ({
         width: '3rem',
         height: '3rem',
         fontWeight: 600,
+    },
+    cardContent: {
+        'overflow': 'auto',
+        'height': '99%',
+        '&::-webkit-scrollbar': {
+            width: '0.3em',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#C0C0C0',
+            borderRadius: '2em',
+        },
     },
 }));
 
@@ -76,7 +86,7 @@ const ActiveSurveys = (props) => {
         return (
             <Grid container spacing={2}>
                 {data.length !== 0 ? data.map((data, index) => (
-                    <Grid item key={index}>
+                    <Grid item key={index} xs={12} sm={6}>
                         <Card className={classes.root}>
                             <Grid container>
                                 <Grid item>
@@ -91,12 +101,12 @@ const ActiveSurveys = (props) => {
                                 </Grid>
                                 <Grid item>
                                     <Box className={classes.box} style={{backgroundColor: `${colors[index]}`}}>
-                                        <div style={{height: '85%'}}>
+                                        <div style={{height: '85%'}} className={classes.cardContent} >
                                             <Typography className={classes.summTitle} variant='body1'>{data.summary_title}</Typography>
                                             <Divider className={classes.divider} variant='middle'/>
                                             <Typography>{data.description}</Typography>
                                         </div>
-                                        <Grid container justify='center' className={classes.start}>
+                                        <Grid container justify='center'>
                                             <Button style={{color: 'white'}} onClick={() => props.setModal([true, data])}>
                                                 <Grid container>
                                                     <Typography style={{fontWeight: 'bold'}} >
