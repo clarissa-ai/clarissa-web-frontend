@@ -250,7 +250,7 @@ const SymptomLog = (props) => {
                                             inputProps={{'aria-label': 'decorative checkbox'}}
                                             {...props}
                                         />
-                                        {displayIllnessName(illness.name)}
+                                        {displayIllnessName(illness.common_name)}
                                     </Button>
                                 </Grid>
                             );
