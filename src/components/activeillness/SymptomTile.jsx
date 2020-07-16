@@ -63,6 +63,7 @@ const SymptomTile = (props) => {
                     );
                 }) : null}
             </CardContent>
+            
         </Card>
     );
 };

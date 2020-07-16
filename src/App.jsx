@@ -107,7 +107,7 @@ const App = (props) => {
                             <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
                             <ProtectedRoute path='/dashboard' page={<Dashboard />} />
                             <ProtectedRoute path='/active-illness' page={<ActiveIllnessPage />} />
-                            <ProtectedRoute path='/past-illness' page={<PastIllnessPage />} />
+                            <ProtectedRoute path='/past-illnesses' page={<PastIllnessPage />} />
                             <ProtectedRoute path='/surveys' page={<SurveysPage />} />
                             <ProtectedRoute path='/settings' page={<SettingsPage />} />
                             <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>

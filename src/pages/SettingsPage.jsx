@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
         height: '80vh',
     },
     contents: {
-        width: '100vw',
         display: 'flex',
         background: '#fff',
         padding: '2rem',
