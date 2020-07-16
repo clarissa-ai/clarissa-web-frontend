@@ -6,18 +6,34 @@ const useStyles = makeStyles((theme) => ({
     container: {
         position: 'fixed',
         background: 'rgba(0, 0, 0, 0.4)',
-        width: '100%',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '90%',
+        },
         height: '100%',
         zIndex: '999',
     },
     formContainer: {
         background: '#fff',
         width: '50%',
-        padding: '5%',
+        padding: '2%',
         borderRadius: '4px',
     },
     date: {
         background: '#fff',
+    },
+    cardContent: {
+        'overflow': 'scroll',
+        'height': '99%',
+        '&::-webkit-scrollbar': {
+            width: '0.3em',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#C0C0C0',
+            borderRadius: '2em',
+        },
     },
 }));
 
