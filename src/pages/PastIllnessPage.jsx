@@ -85,7 +85,7 @@ const PastIllnessPage = (props) => {
                     <Grid item> 
                         <PastIllnessCard>
                             {illnessList.map((illness, index) => {
-                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/> </Grid>
+                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>
                             })}
                         </PastIllnessCard>
 
