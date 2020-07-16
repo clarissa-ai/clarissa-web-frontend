@@ -11,14 +11,13 @@ const useStyles = makeStyles((theme) => ({
     },
     overall: {
         wordWrap: 'break-word',
-        maxWidth: '55%',
+        maxWidth: '52%',
         marginTop: '8px',
         marginLeft: '8px',
     },
     box: {
         width: '0px',
         height: '290px',
-        align: 'right',
     },
     imgSize: {
         width: '600px',

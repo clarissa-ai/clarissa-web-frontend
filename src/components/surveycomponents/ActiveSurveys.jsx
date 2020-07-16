@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     wrap: {
         wordWrap: 'break-word',
         maxWidth: '76%',
+        height: '12em',
     },
     box: {
         height: '12em',
