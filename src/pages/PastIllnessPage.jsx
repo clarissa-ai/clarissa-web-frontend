@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, Typography, Box,  makeStyles, ButtonGroup} from '@material-ui/core';
 import PastIllnessCard from 'components/pastillness/PastIllnessCard';
 import IllnessDataCard from 'components/pastillness/IllnessDataCard';
@@ -73,15 +72,14 @@ const PastIllnessPage = (props) => {
 
     return <Fade in timeout={1000}>
         <div className = {classes.container}> 
-            <Grid container direction = 'row' spacing = {0} justify = 'center' alignitems = 'stretch' alignContent = 'stretch'>
-                <Grid item><TopBar><Button color = 'primary' variant = "contained" style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
-                <Grid Item><ResponsiveDrawer/></Grid>
+            <Grid container direction = 'row' spacing = {0} justify='center' alignitems = 'stretch' alignContent = 'stretch'>
+                <Grid item><TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
             <Grid item xs = {12} md = {6} xl = {7} style = {{marginLeft: '1rem'}}>
                 <Grid container direction = 'column' spacing = {2}>
                     <Grid item>
                         <div className = {classes.topContainer}> 
-                            <Typography variant = 'h6'><Box fontWeight = 'bold'> Past Illlnesses Page </Box></Typography>
-                            <Typography variant = 'subtitle2' style = {{opacity: '.7'}}> Here you can see past looged illnesses aswell as export them</Typography>
+                            <Typography variant = 'h6'><Box fontWeight='bold'> Past Illlnesses</Box></Typography>
+                            <Typography variant = 'subtitle2' style = {{opacity: '.7'}}>View and export your logged illnesses</Typography>
                         </div>
                     </Grid> 
                     <Grid item> 
