@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, Fade, Button, Typography, Box,  makeStyles, ButtonGroup} from '@material-ui/core';
+import {Grid, Fade, Button, Typography, Box,  makeStyles} from '@material-ui/core';
 import PastIllnessCard from 'components/pastillness/PastIllnessCard';
 import IllnessDataCard from 'components/pastillness/IllnessDataCard';
 import TopBar from 'components/navbar/TopBar';
@@ -97,10 +97,10 @@ const PastIllnessPage = (props) => {
                 <Grid container direction='column' spacing={2}>
                     <Grid item> 
                         <IllnessDataCard>
-                            <ButtonGroup color="primary" aria-label="outlined primary button group">
+                            {/* <ButtonGroup color="primary" aria-label="outlined primary button group" size='medium'>
                                 <Button>Download Illness PDF</Button>
                                 <Button>Export Illness PDF</Button>
-                            </ButtonGroup>
+                            </ButtonGroup> */}
                             <IllnessSummaryCard name={activeIllness.created_on} created_on={activeIllness.created_on} updated_on={activeIllness.updated_on}>
                             </IllnessSummaryCard>
                             <Grid item><Typography vairant = 'h5'><Box fontWeight = 'bold' style = {{paddingBottom: '1rem'}}>Symptoms</Box></Typography></Grid>
