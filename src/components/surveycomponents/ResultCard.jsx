@@ -101,13 +101,13 @@ const ActiveSurveys = (props) => {
                                 </Grid>
                                 <Grid item>
                                     <Box className={classes.box} style={{backgroundColor: `${colors[index]}`}}>
-                                        <div style={{height: '85%'}} className={classes.cardContent} >
+                                        <div style={{height: '80%'}} className={classes.cardContent} >
                                             <Typography className={classes.summTitle} variant='body1'>{data.summary_title}</Typography>
                                             <Divider className={classes.divider} variant='middle'/>
                                             <Typography>{data.description}</Typography>
                                         </div>
                                         <Grid container justify='center'>
-                                            <Button style={{color: 'white'}} onClick={() => props.setModal([true, data])}>
+                                            <Button style={{color: '#FFFF', borderColor: '#FFFF'}} onClick={() => props.setModal([true, data])} variant='outlined'>
                                                 <Grid container>
                                                     <Typography style={{fontWeight: 'bold'}} >
                                                         View Survey
