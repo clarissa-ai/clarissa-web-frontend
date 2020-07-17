@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,51 +38,30 @@ const useStyles = makeStyles((theme) => ({
     },
     labelGreen: {
         color: '#47C594',
-    }
+    },
+    lowOpacity: {
+        opacity: '60%',
+        paddingLeft: '1rem',
+    },
 }));
 
 const InfoCard = (props) => {
     const classes = useStyles();
-    const [status, setStatus] = useState(null);
-    const [symptoms, setSymptoms] = useState(null);
+    console.log(props.date);
 
-    const handleStatus = () => {
-        if (status == null) {
-            return null;
-        } else if (status === true) {
-            return <p style={{fontWeight: 'bold'}}>Active</p>;
-        } else {
-            return <p style={{fontWeight: 'bold'}}>Closed</p>;
-        }
+    const parseDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.getMonth()+1 +'/'+ date.getDate() +'/'+date.getFullYear();
     }
 
-    const handleSymptoms = () => {
-        if (symptoms == null) {
-            return null;
-        } else {
-            return <p style={{fontWeight: 'bold'}}>{symptoms} Symptoms</p>;
-        }
-    }
 
-    useEffect(()=> {
-        setStatus(props.status);
-        setSymptoms(props.symptomcount);
-    }, [props.link, props.status, props.symptomcount]);
-
-    return <Grid container direction='row' alignItems='center' className={props.status? classes.activeContainer : classes.container}>
+    return <Grid container direction='row' alignItems='center' className={classes.container}>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="3" cy="3" r="2.5" stroke="#47C594"/>
         </svg>
-        <Grid item><Typography><Box >{props.title}{props.index}</Box></Typography></Grid>
-        <Grid item><Typography><Box   className = {classes.labelGreen}>  {props.data}</Box></Typography></Grid>
-        <Grid item><Typography><Box  > {(props.symptomNum > 0) && "Date Created" }{props.date}</Box></Typography></Grid>
-        <Grid item><Typography><Box > {(props.symptomNum > 0) && "Number of Symptoms Logged:" } {props.symptomNum}</Box></Typography></Grid>
-        <Grid item><Typography>
-            {() => handleStatus()}</Typography>
-        </Grid>
-        <Grid item><Typography>{() => handleSymptoms()}</Typography></Grid>
-        <Grid item>
-        </Grid>
+        <Grid item><Typography><Box>{props.title}{props.index}</Box></Typography></Grid>
+        <Grid item><Typography><Box className = {classes.lowOpacity}>{parseDate(props.date)}</Box></Typography></Grid>
+
     </Grid>
 }
 

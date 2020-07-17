@@ -1,12 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
-import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         borderRadius: '4px',
-        background: '#F2F6F9',
-        padding: '1rem',
+        padding: '.1rem',
         marginBottom: '.8rem',
     },
     activeContainer: {
@@ -40,14 +38,24 @@ const useStyles = makeStyles((theme) => ({
     },
     labelGreen: {
         color: '#47C594',
-    }
+    },
+    lowOpacity: {
+        opacity: '60%',
+        paddingLeft: '1rem',
+    },
 }));
 
-const  DiagnosisItem = (props) => {
+const InfoCard = (props) => {
+    const classes = useStyles();
 
-    return <Grid container direction='row' alignItems='center' justify="space-between" className={classes.container}>
-        <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
+
+    return <Grid container direction='row' alignItems='center' className={classes.container}>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="3" cy="3" r="2.5" stroke="#47C594"/>
+        </svg>
+        <Grid item><Typography><Box>{props.title}</Box></Typography></Grid>
+
     </Grid>
 }
 
-export default DiagnosisItem;
+export default InfoCard;

@@ -5,7 +5,7 @@ import IllnessDataCard from 'components/pastillness/IllnessDataCard';
 import TopBar from 'components/navbar/TopBar';
 import SymptomItem from 'components/pastillness/SymptomItem';
 import IllnessSummaryCard from 'components/pastillness/IllnessSummaryCard';
-import DiagnosisItem from 'components/pastillness/SymptomItem';
+import DiagnosisItem from 'components/pastillness/DiagnosisItem';
 import IllnessItem from 'components/pastillness/IllnessItem';
 
 const PastIllnessPage = (props) => {
@@ -14,6 +14,7 @@ const PastIllnessPage = (props) => {
     const [symptomList, setSymptoms] = useState([]);
     const [activeIllness, setActiveIllness] = useState({});
     const [activeDiagnosis, setActiveDiagnosis] = useState([]);
+    const [selectedIllness, setSelectedIllness] = useState(0);
  
     useEffect(()=> {
         fetch(`${apiLink}/api/illness/get_illness_history`, {
@@ -39,6 +40,7 @@ const PastIllnessPage = (props) => {
         setActiveIllness(illnessList[index]);   
         setSymptoms(illnessList[index].symptoms);
         setActiveDiagnosis(illnessList[index].diagnosis);
+        setSelectedIllness(index);
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -85,7 +87,7 @@ const PastIllnessPage = (props) => {
                     <Grid item> 
                         <PastIllnessCard>
                             {illnessList.map((illness, index) => {
-                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>
+                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} currIndex = {index} selectedIllness = {selectedIllness} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>
                             })}
                         </PastIllnessCard>
 
@@ -106,7 +108,7 @@ const PastIllnessPage = (props) => {
     
                             
                             {symptomList.map((symptom, index) => {
-                                return <Grid item><SymptomItem title={symptom.symptom_json.common_name} status={null}/></Grid>
+                                return <Grid item><SymptomItem title={symptom.symptom_json.common_name} date = {symptom.created_on} status={null}/></Grid>
                             })}
 
                             <Grid item><Typography variant='subtitle1'><Box fontWeight='bold'>Diagnosis</Box></Typography></Grid>

@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         background: '#fff',
         padding: '.5rem',
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-        height: '65vh',
+        height: '71vh',
         overflow: 'scroll',
     },
     greenText: {
