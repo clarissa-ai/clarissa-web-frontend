@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
-import {Grid, Fade, Button, Typography, Box,  makeStyles, ButtonGroup} from '@material-ui/core';
+import {Grid, Fade, Button, Typography, Box,  makeStyles} from '@material-ui/core';
 import PastIllnessCard from 'components/pastillness/PastIllnessCard';
 import IllnessDataCard from 'components/pastillness/IllnessDataCard';
 import TopBar from 'components/navbar/TopBar';
@@ -73,21 +72,20 @@ const PastIllnessPage = (props) => {
 
     return <Fade in timeout={1000}>
         <div className = {classes.container}> 
-            <Grid container direction = 'row' spacing = {0} justify = 'center' alignitems = 'stretch' alignContent = 'stretch'>
-                <Grid item><TopBar><Button color = 'primary' variant = "contained" style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
-                <Grid Item><ResponsiveDrawer/></Grid>
-            <Grid item xs = {12} md = {6} xl = {7} style = {{marginLeft: '1rem'}}>
-                <Grid container direction = 'column' spacing = {2}>
+            <Grid container direction = 'row' spacing = {0} justify='center' alignitems = 'stretch' alignContent = 'stretch'>
+                <Grid item><TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
+            <Grid item xs = {12} md = {7} l={7} xl={7}>
+                <Grid container direction='column' spacing={2}>
                     <Grid item>
                         <div className = {classes.topContainer}> 
-                            <Typography variant = 'h6'><Box fontWeight = 'bold'> Past Illlnesses Page </Box></Typography>
-                            <Typography variant = 'subtitle2' style = {{opacity: '.7'}}> Here you can see past looged illnesses aswell as export them</Typography>
+                            <Typography variant = 'h6'><Box fontWeight='bold'> Past Illlnesses</Box></Typography>
+                            <Typography variant = 'subtitle2' style = {{opacity: '.7'}}>View your logged illnesses</Typography>
                         </div>
                     </Grid> 
                     <Grid item> 
                         <PastIllnessCard>
                             {illnessList.map((illness, index) => {
-                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index = {illnessList.length - index} title = 'Illness #' created_on = {illness.created_on} updated_on = {illness.updated_on} date ={`${illness.created_on} - ${illness.updated_on}`} symptomCount = {illness.symptoms.length} /> </Grid>
+                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>
                             })}
                         </PastIllnessCard>
 
@@ -95,35 +93,30 @@ const PastIllnessPage = (props) => {
                 </Grid>
             </Grid>
             
-             <Grid item xs = {12} md = {3} xl = {3} style = {{marginLeft: '1rem'}}> 
-                <Grid container direction = 'column' spacing = {2}>
+             <Grid item xs={12} md={4} l={3} xl={3} style={{marginLeft: '1rem'}}> 
+                <Grid container direction='column'>
                     <Grid item> 
                         <IllnessDataCard>
-                            <ButtonGroup color="primary" style = {{paddingBottom: '5rem'}} aria-label="outlined primary button group">
+                            {/* <ButtonGroup color="primary" aria-label="outlined primary button group" size='medium'>
                                 <Button>Download Illness PDF</Button>
                                 <Button>Export Illness PDF</Button>
-                            </ButtonGroup>
-                            <IllnessSummaryCard name = {activeIllness.created_on} created_on = {activeIllness.created_on} updated_on = {activeIllness.updated_on}>
-                            </IllnessSummaryCard>
-                            <Grid item><Typography vairant = 'h5'><Box fontWeight = 'bold' style = {{paddingBottom: '1rem'}}>Symptoms</Box></Typography></Grid>
+                            </ButtonGroup> */}
+                            <IllnessSummaryCard name={activeIllness.created_on} created_on={activeIllness.created_on} updated_on={activeIllness.updated_on}></IllnessSummaryCard>
+                            <Grid item><Typography variant='subtitle1'><Box fontWeight='bold'>Symptoms</Box></Typography></Grid>
     
                             
                             {symptomList.map((symptom, index) => {
-                                console.log(symptom)
                                 return <Grid item><SymptomItem title={symptom.symptom_json.common_name} status={null}/></Grid>
                             })}
 
-                            <Grid item><Typography vairant = 'h5'><Box fontWeight = 'bold' style = {{paddingBottom: '1rem'}}>  Diagnoses </Box></Typography></Grid>
+                            <Grid item><Typography variant='subtitle1'><Box fontWeight='bold'>Diagnosis</Box></Typography></Grid>
 
                             {activeDiagnosis.map((diagnosis, index) => {
-                                return <Grid item><DiagnosisItem title = {diagnosis.common_name}/></Grid>
+                                return <Grid item><DiagnosisItem title={diagnosis.common_name}/></Grid>
                             })}
                             
                         </IllnessDataCard>
-
-
                     </Grid>
-
                 </Grid> 
             </Grid>
             

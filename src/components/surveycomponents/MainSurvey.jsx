@@ -11,16 +11,28 @@ const useStyles = makeStyles((theme) => ({
     },
     overall: {
         wordWrap: 'break-word',
-        maxWidth: '500px',
+        maxWidth: '48%',
         marginTop: '8px',
+        marginLeft: '8px',
     },
     box: {
-        width: '200px',
+        maxWidth: '50%',
         height: '290px',
+        marginLeft: 'auto',
     },
     imgSize: {
         width: '600px',
-        align: 'right',
+    },
+    cardContent: {
+        'overflow': 'scroll',
+        'height': '99%',
+        '&::-webkit-scrollbar': {
+            width: '0.3em',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#C0C0C0',
+            borderRadius: '2em',
+        },
     },
 }));
 
@@ -58,27 +70,25 @@ const MainSurvey = (props) => {
         return (
             <Card className={classes.root}>
                 <Grid container spacing={2}>
-                    <Grid item>
-                        <div className={classes.overall}>
-                            <CardContent style={{height: '190px'}}>
-                                <Typography paragraph style={{fontWeight: 'bold'}} variant='h5'>{data.title}</Typography>
-                                <Typography >{data.description}</Typography>
-                            </CardContent>
-                            <CardContent>
-                                <Grid container>
-                                    <Typography style={{fontWeight: 'bold', width: '380px'}}>{data.question_count + ' '}Questions</Typography>
-                                    <Button onClick={() => props.surveyClick([true, data.id])}>
-                                        <Grid container>
-                                            <Typography style={{fontWeight: 'bold'}}>
+                    <div className={classes.overall}>
+                        <CardContent style={{height: '210px'}} className={classes.cardContent}>
+                            <Typography paragraph style={{fontWeight: 'bold'}} variant='h5'>{data.title}</Typography>
+                            <Typography >{data.description}</Typography>
+                        </CardContent>
+                        <CardContent>
+                            <Grid container>
+                                <Typography style={{fontWeight: 'bold', width: '80%'}}>{data.question_count + ' '}Questions</Typography>
+                                <Button onClick={() => props.surveyClick([true, data.id])}>
+                                    <Grid container>
+                                        <Typography style={{fontWeight: 'bold'}}>
                                                 Start
-                                            </Typography>
-                                            <ArrowForwardIosIcon/>
-                                        </Grid>
-                                    </Button>
-                                </Grid>
-                            </CardContent>
-                        </div>
-                    </Grid>
+                                        </Typography>
+                                        <ArrowForwardIosIcon/>
+                                    </Grid>
+                                </Button>
+                            </Grid>
+                        </CardContent>
+                    </div>
                     <Box className={classes.box}>
                         <img src={apiLink + data.cover_image_url} alt={'Cover'} className={classes.imgSize}/>
                     </Box>

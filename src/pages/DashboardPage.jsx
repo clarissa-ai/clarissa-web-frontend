@@ -108,7 +108,7 @@ const DashboardPage = (props) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={5} lg={4} xl={4} style={{marginLeft: '1rem'}}>
-                        <Grid container direction='column' spacing={2}>
+                        <Grid container direction='column' spacing={2} alignItems='stretch' alignContent='stretch'>
                             <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
                             <Grid item>
                                 <CompletedSurveys>

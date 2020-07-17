@@ -19,8 +19,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
         color: '#334D6E',
         fontWeight: 'bold',
-        fontSize: '1rem',
-        margin: 0,
+        marginRight: 'auto',
         paddingBottom: '0.5rem',
     },
 }));
@@ -88,17 +87,17 @@ const DashboardPage = (props) => {
 
                         <Grid item xs={12} md={9} xl={8}>
                             <Grid container direction='column' spacing={2}>
-                                <Typography className={classes.title}>
-                                    Tell Clarissa how you are feeling.
-                                    <Grid container justify='flex-end' direction='row'>
-                                        <Grid item style={{marginRight: '1rem'}}>
-                                            <ExportIllnessButton/>
-                                        </Grid>
-                                        <Grid item style={{marginRight: '0.5rem'}}>
-                                            <EndIllnessButton incrState={() => incrState()}/>
-                                        </Grid>
+                                <Grid container justify='flex-end' direction='row'>
+                                    <Typography variant='h5' className={classes.title}>
+                                        Tell Clarissa how you are feeling.
+                                    </Typography>
+                                    <Grid item style={{marginRight: '1rem'}}>
+                                        <ExportIllnessButton/>
                                     </Grid>
-                                </Typography>
+                                    <Grid item style={{marginRight: '0.5rem'}}>
+                                        <EndIllnessButton incrState={() => incrState()}/>
+                                    </Grid>
+                                </Grid>
                                 <Grid item className={classes.greetingsContainer}>
                                     <SymptomLog incrState={() => incrState()}/>
                                 </Grid>

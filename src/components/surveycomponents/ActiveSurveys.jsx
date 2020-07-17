@@ -13,10 +13,21 @@ const useStyles = makeStyles((theme) => ({
     },
     wrap: {
         wordWrap: 'break-word',
-        maxWidth: '341px',
+        height: '12em',
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: '75%',
+        },
+        [theme.breakpoints.up('md')]: {
+            maxWidth: '77%',
+        },
+        [theme.breakpoints.up('lg')]: {
+            maxWidth: '80%',
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: '87%',
+        },
     },
     box: {
-        width: '6em',
         height: '12em',
         color: 'white',
         textAlign: 'center',
@@ -33,6 +44,31 @@ const useStyles = makeStyles((theme) => ({
         width: '3rem',
         height: '3rem',
         fontWeight: 600,
+    },
+    boxWidth: {
+        [theme.breakpoints.down('sm')]: {
+            width: '25%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '23%',
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: '20%',
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: '13%',
+        },
+    },
+    cardContent: {
+        'overflow': 'auto',
+        'height': '99%',
+        '&::-webkit-scrollbar': {
+            width: '0.3em',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#C0C0C0',
+            borderRadius: '2em',
+        },
     },
 }));
 
@@ -74,21 +110,19 @@ const ActiveSurveys = (props) => {
         return (
             <Grid container spacing={2} className={classes.container}>
                 {data.map((data, index) => (
-                    <Grid item key={index} >
+                    <Grid item key={index} xs={12} sm={6}>
                         <Card className={classes.root}>
                             <Grid container>
-                                <Grid item>
-                                    <CardContent>
-                                        <div className={classes.wrap}>
-                                            <Grid container style={{marginBottom: '.5rem'}}>
-                                                <Avatar alt={data.title} src={apiLink + data.image_url} className={classes.avatarSize}/>
-                                                <Typography style={{fontWeight: 'bold', margin: '.65rem'}}>{data.title}</Typography>
-                                            </Grid>
-                                            <Typography variant='subtitle2'>{data.description}</Typography>
-                                        </div>
+                                <Grid item className={classes.wrap}>
+                                    <CardContent className={classes.cardContent}>
+                                        <Grid container style={{marginBottom: '.5rem'}}>
+                                            <Avatar alt={data.title} src={apiLink + data.image_url} className={classes.avatarSize}/>
+                                            <Typography style={{fontWeight: 'bold', margin: '.65rem'}}>{data.title}</Typography>
+                                        </Grid>
+                                        <Typography variant='subtitle2'>{data.description}</Typography>
                                     </CardContent>
                                 </Grid>
-                                <Grid item>
+                                <Grid item className={classes.boxWidth}>
                                     <Box className={classes.box} style={{backgroundColor: `${colors[index]}`}}>
                                         <div style={{height: '75%'}}>
                                             <Typography className={classes.questions} variant='h6'>{data.question_count}</Typography>

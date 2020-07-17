@@ -57,13 +57,12 @@ const SymptomTile = (props) => {
     return (
         <Card className={classes.card}>
             <CardContent className={classes.cardContent}>
-                {props.symptoms ? props.symptoms.map((symptom, index) => {
+                {props.symptoms ? props.symptoms.slice(0).reverse().map((symptom, index) => {
                     return (
                         <SymptomCard key={index} symptom={symptom} symptomModalFunction={props.symptomModalFunction}/>
                     );
                 }) : null}
             </CardContent>
-            
         </Card>
     );
 };
