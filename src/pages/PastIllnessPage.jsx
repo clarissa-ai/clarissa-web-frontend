@@ -14,6 +14,7 @@ const PastIllnessPage = (props) => {
     const [symptomList, setSymptoms] = useState([]);
     const [activeIllness, setActiveIllness] = useState({});
     const [activeDiagnosis, setActiveDiagnosis] = useState([]);
+    const [selectedIllness, setSelectedIllness] = useState(0);
  
     useEffect(()=> {
         fetch(`${apiLink}/api/illness/get_illness_history`, {
@@ -39,6 +40,7 @@ const PastIllnessPage = (props) => {
         setActiveIllness(illnessList[index]);   
         setSymptoms(illnessList[index].symptoms);
         setActiveDiagnosis(illnessList[index].diagnosis);
+        setSelectedIllness(index);
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -85,7 +87,7 @@ const PastIllnessPage = (props) => {
                     <Grid item> 
                         <PastIllnessCard>
                             {illnessList.map((illness, index) => {
-                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>
+                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} currIndex = {index} selectedIllness = {selectedIllness} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>
                             })}
                         </PastIllnessCard>
 
