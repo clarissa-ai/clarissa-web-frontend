@@ -108,7 +108,7 @@ const IllnessTabPanel = (props) => {
     const symptomsMatching = [];
     props.symptomsSupporting.forEach((symptom, index) => {
         symptomsMatching.push(
-            <ListItem>
+            <ListItem key={index}>
                 <ListItemIcon>
                     <ClosedBulletIcon color={listPalette.matching} />
                 </ListItemIcon>
@@ -121,7 +121,7 @@ const IllnessTabPanel = (props) => {
     const symptomsMissing = [];
     props.symptomsOpposing.forEach((symptom, index) => {
         symptomsMissing.push(
-            <ListItem>
+            <ListItem key={index}>
                 <ListItemIcon>
                     <ClosedBulletIcon color={listPalette.missing} />
                 </ListItemIcon>
@@ -182,6 +182,7 @@ const ActiveAnalysis = (props) => {
         setActiveTab(newValue);
     };
     const tabs = [];
+  
     props.analysis.forEach((diagnosis, index) => tabs.push(<IllnessTab commonName={diagnosis.common_name} index={index} />));
     const tabPanels = [];
     props.analysis.forEach((diagnosis, index) => tabPanels.push(
