@@ -58,7 +58,6 @@ const DashboardPage = (props) => {
             (error) => {
                 console.log(error);
             });
-        console.log('hello');
     };
 
     useEffect(()=> {

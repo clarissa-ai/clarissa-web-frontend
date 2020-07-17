@@ -15,6 +15,7 @@ import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import Dashboard from 'pages/DashboardPage';
 import SymptomLog from 'components/activeillness/SymptomLog';
 import SurveysPage from 'pages/SurveysPage';
+import ActiveAnalysis from 'components/activeillness/activeanalysis/ActiveAnalysis';
 import PastIllnessPage from 'pages/PastIllnessPage';
 import ActiveIllnessPage from 'pages/ActiveIllnessPage';
 import PageNotFound from 'pages/404/404';
@@ -52,9 +53,15 @@ let theme = createMuiTheme({
     typography: {
         fontFamily: 'Poppins',
     },
+    overrides: {
+        MuiTab: {
+            wrapper: {
+                flexDirection: 'row',
+            },
+        },
+    },
 });
 theme = responsiveFontSizes(theme);
-console.log(theme);
 
 const App = (props) => {
     // State to control custom routing.
@@ -109,6 +116,7 @@ const App = (props) => {
                             <ProtectedRoute path='/active-illness' page={<ActiveIllnessPage />} />
                             <ProtectedRoute path='/past-illnesses' page={<PastIllnessPage />} />
                             <ProtectedRoute path='/surveys' page={<SurveysPage />} />
+                            <Route path='/analysis' render={() => <ActiveAnalysis />}/>
                             <ProtectedRoute path='/settings' page={<SettingsPage />} />
                             <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
                             <Route path='/404' render={() => <PageNotFound />} />
