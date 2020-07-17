@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,16 +48,10 @@ const parseDate = (dateString) => {
 
 const IllnessItem = (props) => {
     const classes = useStyles();
-    const [active, setStatus] = React.useState(false);
-    const activeI = (props.selectedIllness == props.currIndex);
-    console.log(activeI);
+    const active = (props.selectedIllness === props.currIndex);
 
 
-    useEffect(() => {
-        setStatus(props.status);
-    }, [props.status]);
-
-    return <Grid container direction='row' alignItems='center' justify='space-evenly' className={activeI ? classes.activeContainer : classes.container}>
+    return <Grid container direction='row' alignItems='center' justify='space-evenly' className={active ? classes.activeContainer : classes.container}>
         <Grid item><Typography><Box fontWeight = 'bold'>{props.title}{props.index}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'>{parseDate(props.created_on)} - {parseDate(props.updated_on)}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'>{props.symptomCount} Symptoms</Box></Typography></Grid>
