@@ -73,6 +73,7 @@ const DashboardPage = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setSymptoms(res.illness.symptoms);
+                console.log(res.illness.analysis);
             },
             (error) => {
                 console.log(error);

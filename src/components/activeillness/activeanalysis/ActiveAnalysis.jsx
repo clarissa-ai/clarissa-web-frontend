@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {Card, CardHeader, Typography, Grid, AppBar, Tabs, Tab, Box, Chip, useTheme, makeStyles, Paper, List, ListItem, ListItemText, Avatar, ListItemAvatar} from '@material-ui/core';
+import {Typography, Grid, AppBar, Tabs, Tab, Box, Chip, useTheme, makeStyles, Paper, List, ListItem, ListItemText, ListItemIcon} from '@material-ui/core';
+import {useSelector} from 'react-redux';
 
 import OpenBulletIcon from 'components/misc/common/OpenBulletIcon';
+import ClosedBulletIcon from 'components/misc/common/ClosedBulletIcon';
+import {profileSelector} from 'redux/selectors';
 
 const useStyles = makeStyles((theme) => ({
     tab: {
@@ -36,7 +39,6 @@ const TabPanel = (props) => {
         </div>
     );
 };
-
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
@@ -45,7 +47,14 @@ TabPanel.propTypes = {
 
 const TabLabel = (props) => {
     return (
-        <Typography><OpenBulletIcon color={props.color}/> {props.children} <Chip size='small' label={props.chipText} style={{backgroundColor: props.color, color: 'white', cursor: 'pointer'}}/></Typography>
+        <Grid container={true} direction='row' alignContent='center'>
+            <Grid item={true} xs={12}>
+                <Typography><OpenBulletIcon color={props.color}/> {props.children}</Typography>
+            </Grid>
+            <Grid item={true} xs={12}>
+                <Chip size='small' label={props.chipText} style={{backgroundColor: props.color, color: 'white', cursor: 'pointer'}}/>
+            </Grid>
+        </Grid>
     );
 };
 TabLabel.propTypes = {
@@ -54,19 +63,144 @@ TabLabel.propTypes = {
     chipText: PropTypes.string,
 };
 
+const IllnessTab = (props) => {
+    const theme = useTheme();
+    const analysisPalette = [
+        theme.palette.error.main,
+        theme.palette.secondary.main,
+        theme.palette.success.main,
+    ];
+    const analysisChance = [
+        'Most Likely',
+        'Likely',
+        'Least Likely',
+    ];
+
+    const classes = useStyles();
+    const {commonName, index, ...other} = props;
+    return (
+        <Tab {...other} className={classes.tab} disableRipple={true} label={<TabLabel color={analysisPalette[index]} chipText={analysisChance[index]}>{commonName}</TabLabel>}></Tab>
+    );
+};
+IllnessTab.propTypes = {
+    index: PropTypes.number.isRequired,
+    commonName: PropTypes.string.isRequired,
+};
+
+const IllnessTabPanel = (props) => {
+    const classes = useStyles();
+    const theme = useTheme();
+    const listPalette = {
+        matching: theme.palette.success.main,
+        missing: theme.palette.error.main,
+    }
+    const symptomsMatching = [];
+    props.symptomsSupporting.forEach((symptom, index) => {
+        symptomsMatching.push(
+            <ListItem>
+                <ListItemIcon>
+                    <ClosedBulletIcon color={listPalette.matching} />
+                </ListItemIcon>
+                <ListItemText>
+                    {symptom.common_name}
+                </ListItemText>
+            </ListItem>,
+        );
+    });
+    const symptomsMissing = [];
+    props.symptomsOpposing.forEach((symptom, index) => {
+        symptomsMissing.push(
+            <ListItem>
+                <ListItemIcon>
+                    <ClosedBulletIcon color={listPalette.missing} />
+                </ListItemIcon>
+                <ListItemText>
+                    {symptom.common_name}
+                </ListItemText>
+            </ListItem>,
+        );
+    });
+    return (
+        <Grid container={true} direction='column'>
+            <Grid className={classes.infoBoxes} item={true} xs={12}>
+                <Paper square={true} elevation={4}>
+                    <Box p={3}>
+                        <Typography variant='h6'>{props.commonName}</Typography>
+                        <Typography>{props.definition}</Typography>
+                    </Box>
+                </Paper>
+            </Grid>
+            <Grid className={classes.infoBoxes} item={true} xs={12}>
+                <Paper square={true} elevation={4}>
+                    <Box p={3}>
+                        <Typography variant='h6'>Symptoms Analysis</Typography>
+                        <Grid container={true} direction='row'>
+                            <Grid item={true} xs={6}>
+                                <Typography>Symptoms Matching</Typography>
+                                <List dense={true}>
+                                    {symptomsMatching}
+                                </List>
+                            </Grid>
+                            <Grid item={true} xs={6}>
+                                <Typography>Symptoms Missing</Typography>
+                                <List dense={true}>
+                                    {symptomsMissing}
+                                </List>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Paper>
+            </Grid>
+        </Grid>
+    );
+};
+IllnessTabPanel.propTypes = {
+    commonName: PropTypes.string.isRequired,
+    definition: PropTypes.string.isRequired,
+    symptomsSupporting: PropTypes.array.isRequired,
+    symptomsOpposing: PropTypes.array.isRequired,
+};
+
 const ActiveAnalysis = (props) => {
     const [activeTab, setActiveTab] = useState(0);
-
+    const [analysis, setAnalysis] = useState([]);
+    const profile = useSelector(profileSelector);
     const theme = useTheme();
+
+
+    useEffect(()=> {
+        if (!profile.authenticated) return;
+        fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/illness/get_active_illness`, {
+            credentials: 'include',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }})
+            .then((res) => res.json())
+            .then((res) => {
+                setAnalysis(res.illness.analysis);
+                console.log(res.illness.analysis);
+            },
+            (error) => {
+                console.log(error);
+            });
+    }, [profile]);
 
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);
+        console.log(newValue);
     };
-
-    const classes = useStyles();
+    const tabs = [];
+    analysis.forEach((diagnosis, index) => tabs.push(<IllnessTab commonName={diagnosis.common_name} index={index} />));
+    const tabPanels = [];
+    analysis.forEach((diagnosis, index) => tabPanels.push(
+        <TabPanel value={activeTab} index={index}>
+            <IllnessTabPanel commonName={diagnosis.common_name} definition={diagnosis.hint} symptomsSupporting={diagnosis.supporting_symptoms} symptomsOpposing={diagnosis.opposing_symptoms}/>
+        </TabPanel>,
+    ));
 
     return (
-        <Paper style={{width: '50%'}}elevation={4}>
+        <Paper style={{width: '50%'}} elevation={4}>
             <Grid container={true} direction='column' justify='space-evenly'>
                 <Grid item={true} xs={12}>
                     <Box pt={3} pr={3} pb={3}>
@@ -76,98 +210,10 @@ const ActiveAnalysis = (props) => {
                 <Grid item={true} xs={12}>
                     <AppBar position="static" color='default' elevation={0}>
                         <Tabs value={activeTab} variant='fullWidth' onChange={handleChange} centered={true} indicatorColor='primary'>
-                            <Tab className={classes.tab} disableRipple={true} label={<TabLabel color={theme.palette.error.main} chipText='Most Likely'>Pneumonia</TabLabel>}></Tab>
-                            <Tab className={classes.tab} disableRipple={true} label={<TabLabel color={theme.palette.secondary.main} chipText='Likely'>Strep</TabLabel>} />
-                            <Tab className={classes.tab} disableRipple={true} label={<TabLabel color={theme.palette.success.main} chipText='Least Likely'>Common Cold</TabLabel>}/>
+                            {tabs}
                         </Tabs>
                     </AppBar>
-                    <TabPanel value={activeTab} index={0}>
-                        <Grid container={true} direction='column'>
-                            <Grid className={classes.infoBoxes} item={true} xs={12}>
-                                <Paper square={true} elevation={4}>
-                                    <Box p={3}>
-                                        <Typography variant='h6'>Pneumonia</Typography>
-                                        <Typography>Pneumonia is an infection in one or both of the lungs. Bacteria, viruses, and fungi cause it. The infection causes inflammation in the air sacs in your lungs, which are called alveoli. The alveoli fill with fluid or pus, making it difficult to breathe.</Typography>
-                                    </Box>
-                                </Paper>
-                            </Grid>
-                            <Grid className={classes.infoBoxes} item={true} xs={12}>
-                                <Paper square={true} elevation={4}>
-                                    <Box p={3}>
-                                        <Typography variant='h6'>Symptoms Analysis</Typography>
-                                        <Grid container={true} direction='row'>
-                                            <Grid item={true} xs={6}>
-                                                <Typography>Symptoms Matching</Typography>
-                                                <List dense={true} className={classes.list}>
-                                                    <ListItem className={classes.list}>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                </List>
-                                            </Grid>
-                                            <Grid item={true} xs={6}>
-                                                <Typography>Symptoms Missing</Typography>
-                                                <List dense={true}>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                    <ListItem>
-                                                        <ListItemText>
-                                                            Cough
-                                                        </ListItemText>
-                                                    </ListItem>
-                                                </List>
-                                            </Grid>
-                                        </Grid>
-                                    </Box>
-                                </Paper>
-                            </Grid>
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel value={activeTab} index={1}>
-                        Item Two
-                    </TabPanel>
-                    <TabPanel value={activeTab} index={2}>
-                        Item Three
-                    </TabPanel>
+                    {tabPanels}
                 </Grid>
             </Grid>
         </Paper>

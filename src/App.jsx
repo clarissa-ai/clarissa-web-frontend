@@ -62,7 +62,6 @@ let theme = createMuiTheme({
     },
 });
 theme = responsiveFontSizes(theme);
-console.log(theme);
 
 const App = (props) => {
     // State to control custom routing.
