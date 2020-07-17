@@ -59,7 +59,6 @@ const DashboardPage = (props) => {
             (error) => {
                 console.log(error);
             });
-        console.log('hello');
     };
 
     useEffect(()=> {
@@ -73,7 +72,6 @@ const DashboardPage = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setSymptoms(res.illness.symptoms);
-                console.log(res.illness.analysis);
             },
             (error) => {
                 console.log(error);

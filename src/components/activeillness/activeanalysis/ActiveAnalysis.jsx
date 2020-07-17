@@ -179,7 +179,6 @@ const ActiveAnalysis = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setAnalysis(res.illness.analysis);
-                console.log(res.illness.analysis);
             },
             (error) => {
                 console.log(error);
@@ -188,7 +187,6 @@ const ActiveAnalysis = (props) => {
 
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);
-        console.log(newValue);
     };
     const tabs = [];
     analysis.forEach((diagnosis, index) => tabs.push(<IllnessTab commonName={diagnosis.common_name} index={index} />));
