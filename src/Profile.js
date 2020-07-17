@@ -11,7 +11,7 @@ class Profile {
         // TOOD: Implement the check stated above ^.
         // Function binds.
         this.login = this.login.bind(this);
-        this.register = this.register.bind(this);
+        this.signup = this.signup.bind(this);
         this.getUserInfo = this.getUserInfo.bind(this);
         this.dashboard = this.dashboard.bind(this);
         this.logout = this.logout.bind(this);
@@ -52,23 +52,25 @@ class Profile {
     };
     /**
      * This method registers a user. If successful, it will set the access and refresh tokens for JWT. It calls the retrieve function as well, setting user info.
-     * @param {String} firstName The first name that the user registers with.
-     * @param {Number} age The age that the user registers with.
      * @param {String} email The email that the user registers with.
+     * @param {String} firstName The first name that the user registers with.
+     * @param {String} sex The sex that the user registers with.
+     * @param {Number} birthdate The birthdate that the user registers with.
      * @param {String} password The password that the user registers with.
      * @param {Function} callback Function should take in the current profile. (New profile, per se).
      */
-    register(firstName, age, email, password, callback) {
-        fetch(`${ENDPOINT_BASE}/api/registration`, {
+    signup(email, firstName, sex, birthdate, password, callback) {
+        fetch(`${ENDPOINT_BASE}/api/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             credentials: 'include',
             body: JSON.stringify({
-                first_name: firstName,
-                age: age,
                 email: email,
+                first_name: firstName,
+                sex: sex,
+                birthdate: birthdate,
                 password: password,
             }),
         }).then((response) => {
