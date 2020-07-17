@@ -259,7 +259,7 @@ const SymptomLog = (props) => {
                     <Grid container justify='flex-end' style={{paddingTop: '10px'}}>
                         {!isLoaded && <CircularProgress style={{color: '#47C594', margin: '5px'}} size={24}/>}
                         <Grid item>
-                            <Button size='small' className={classes.submitBtn} onClick={onSubmit}>Save</Button>
+                            <Button size='small' className={classes.submitBtn} onClick={onSubmit} disabled={!isLoaded}>Save</Button>
                         </Grid>
                     </Grid>
                 </CardContent>

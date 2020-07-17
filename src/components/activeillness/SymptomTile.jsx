@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const SymptomTile = (props) => {
     SymptomTile.propTypes = {
         symptomModalFunction: propTypes.func,
-        symptoms: propTypes.object,
+        symptoms: propTypes.array,
     };
     const classes = useStyles();
 

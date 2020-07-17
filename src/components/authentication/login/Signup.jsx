@@ -7,6 +7,7 @@ import {
     KeyboardDatePicker,
     MuiPickersUtilsProvider
   } from '@material-ui/pickers';
+import {Link as RouterLink} from 'react-router-dom';
   import DateFnsUtils from '@date-io/date-fns';
 
   const materialTheme = createMuiTheme({
@@ -223,7 +224,7 @@ const Signup = () => {
                     control={
                         <Checkbox
                             classes={{root: classes.checkbox, indeterminate: classes.unchecked}}
-                            checked={values.rememberMe}
+                            checked={values.acceptterms}
                             onChange={handleCheckbox}
                             color='inherit'
                             required
@@ -235,7 +236,7 @@ const Signup = () => {
             <Grid item>
                 <Grid container justify='flex-end' direction='column' spacing={3}>
                     <Grid item><Button className={classes.button} onClick={verifyForm}>Sign Up</Button></Grid>
-                    <Grid item><Typography>Already have an account? <Link className={classes.link} href='/login'>Sign In</Link></Typography></Grid>
+                    <Grid item><Typography>Already have an account? <Link component={RouterLink} className={classes.link} to='/login'>Sign In</Link></Typography></Grid>
                 </Grid>
             </Grid>
         </Grid>

@@ -8,6 +8,7 @@ import SymptomTile from 'components/activeillness/SymptomTile';
 import EndIllnessButton from 'components/activeillness/EndIllnessButton';
 import ExportIllnessButton from 'components/activeillness/ExportIllnessButton';
 import {Redirect} from 'react-router-dom';
+import ActiveAnalysis from 'components/activeillness/activeanalysis/ActiveAnalysis';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,7 @@ const DashboardPage = (props) => {
     const classes = useStyles();
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const [symptoms, setSymptoms] = useState([]);
+    const [analysis, setAnalysis] = useState(undefined);
     const [render, setRender] = useState(0);
     /* const [symptomModal, showSymptomModal] = useState(false); */
 
@@ -54,6 +56,7 @@ const DashboardPage = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setSymptoms(res.illness.symptoms);
+                setAnalysis(res.illness.analysis);
             },
             (error) => {
                 console.log(error);
@@ -71,6 +74,7 @@ const DashboardPage = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setSymptoms(res.illness.symptoms);
+                setAnalysis(res.illness.analysis);
             },
             (error) => {
                 console.log(error);
@@ -86,14 +90,14 @@ const DashboardPage = (props) => {
 
                         <Grid item xs={12} md={9} xl={8}>
                             <Grid container direction='column' spacing={2}>
-                                <Grid container justify='flex-end' direction='row'>
+                                <Grid container justify='flex-end' direction='row' spacing={2}>
                                     <Typography variant='h5' className={classes.title}>
                                         Tell Clarissa how you are feeling.
                                     </Typography>
-                                    <Grid item style={{marginRight: '1rem'}}>
+                                    <Grid item>
                                         <ExportIllnessButton/>
                                     </Grid>
-                                    <Grid item style={{marginRight: '0.5rem'}}>
+                                    <Grid item>
                                         <EndIllnessButton incrState={() => incrState()}/>
                                     </Grid>
                                 </Grid>
@@ -101,9 +105,15 @@ const DashboardPage = (props) => {
                                     <SymptomLog incrState={() => incrState()}/>
                                 </Grid>
                                 <Grid item style={{height: '0vmin'}}>
-                                    <Grid style={{height: '55vmin', width: '50%'}}>
-                                        <Typography className={classes.title}>Symptoms</Typography>
-                                        <SymptomTile symptoms={symptoms}/>
+                                    <Grid container direction='row' spacing={2}>
+                                        <Grid item style={{height: '55vmin', width: '50%'}}>
+                                            <Typography className={classes.title}>Symptoms</Typography>
+                                            <SymptomTile symptoms={symptoms}/>
+                                        </Grid>
+                                        <Grid item style={{height: '55vmin', width: '50%'}}>
+                                            <Typography className={classes.title}>Analysis</Typography>
+                                            <ActiveAnalysis analysis={analysis}/>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>

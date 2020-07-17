@@ -2,6 +2,7 @@ import React from 'react';
 import {Grid, Input, InputAdornment, IconButton, Button, Typography, Link, makeStyles, FormControlLabel, Checkbox} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import {Link as RouterLink} from 'react-router-dom';
 import {profileSelector} from 'redux/selectors';
 import {setProfile} from 'redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
@@ -117,8 +118,8 @@ const Login = () => {
             <Grid item>
                 <Grid container justify='flex-end' direction='column' spacing={3}>
                     <Grid item><Button className={classes.button} onClick={login}>Sign In</Button></Grid>
-                    <Grid item><Typography><Link className={classes.link}>Forgot Password?</Link></Typography></Grid>
-                    <Grid item><Typography>Don&apos;t have an account? <Link className={classes.link}>Sign Up</Link></Typography></Grid>
+                    <Grid item><Typography><Link component={RouterLink} className={classes.link}>Forgot Password?</Link></Typography></Grid>
+                    <Grid item><Typography>Don&apos;t have an account? <Link component={RouterLink} className={classes.link} to='/signup'>Sign Up</Link></Typography></Grid>
                 </Grid>
             </Grid>
         </Grid>
