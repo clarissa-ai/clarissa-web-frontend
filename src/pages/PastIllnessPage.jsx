@@ -108,7 +108,7 @@ const PastIllnessPage = (props) => {
     
                             
                             {symptomList.map((symptom, index) => {
-                                return <Grid item><SymptomItem title={symptom.symptom_json.common_name} status={null}/></Grid>
+                                return <Grid item><SymptomItem title={symptom.symptom_json.common_name} date = {symptom.created_on} status={null}/></Grid>
                             })}
 
                             <Grid item><Typography variant='subtitle1'><Box fontWeight='bold'>Diagnosis</Box></Typography></Grid>
