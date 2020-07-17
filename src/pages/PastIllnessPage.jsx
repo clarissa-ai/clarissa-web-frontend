@@ -48,7 +48,6 @@ const PastIllnessPage = (props) => {
             background: '#EBEFF2',
             height: 'inherit',
             maxHeight: 'inherit',
-            height: '100vh',
         },
         label: {
             paddingBottom: '1rem',
