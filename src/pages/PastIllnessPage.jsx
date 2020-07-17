@@ -5,7 +5,7 @@ import IllnessDataCard from 'components/pastillness/IllnessDataCard';
 import TopBar from 'components/navbar/TopBar';
 import SymptomItem from 'components/pastillness/SymptomItem';
 import IllnessSummaryCard from 'components/pastillness/IllnessSummaryCard';
-import DiagnosisItem from 'components/pastillness/SymptomItem';
+import DiagnosisItem from 'components/pastillness/DiagnosisItem';
 import IllnessItem from 'components/pastillness/IllnessItem';
 
 const PastIllnessPage = (props) => {
