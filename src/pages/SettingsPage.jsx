@@ -157,19 +157,24 @@ const SettingsPage = (props) => {
 
     return (
         <div className={classes.container}>
-            <Grid container direction='row' wrap='nowrap'>
+            <Grid container direction='row' wrap='nowrap' justify='center'>
                 <div className={classes.contents}>
                     {/* Card contents */}
                     {/* Column 1 */}
-                    <Grid item xs={1}>
+                    <Grid item xs={3}>
                         <Grid container justify='center'>
                             <div className={classes.column}>
                                 <Avatar alt={profile.userInfo.first_name} src={profile.userInfo.img} className={classes.avatarSize}/>
                             </div>
+                            <Grid item>
+                                    <Button fullWidth variant='outlined' onClick={()=> {submitPass(); submitInfo();}} style={{margin: '2rem 0'}} disabled={newPassError}>
+                                        Save Changes
+                                    </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                     {/* Column 2 */}
-                    <Grid item xs={4} className={classes.divider}>
+                    <Grid item xs={5} className={classes.divider}>
                         <Divider orientation='vertical' flexItem/>
                         <div className={classes.column}>
                             <Grid container direction='column' spacing={2} justify='center'>
@@ -221,7 +226,6 @@ const SettingsPage = (props) => {
                                         </MuiPickersUtilsProvider>
                                     </ThemeProvider>
                                 </Grid>
-                                <Grid item><Button fullWidth variant='outlined' onClick={submitInfo} style={{margin: '2rem 0'}}>Save Changes</Button></Grid>
                                 {infoResponse ? <Typography>{infoResponse.message}</Typography> : null}
                                 {console.log(infoResponse)}
                             </Grid>
@@ -229,7 +233,7 @@ const SettingsPage = (props) => {
                     </Grid>
 
                     {/* Column 3 */}
-                    <Grid item xs={4} className={classes.divider}>
+                    <Grid item xs={5} className={classes.divider}>
                         <Divider orientation='vertical' flexItem/>
                         <div className={classes.column}>
                             {/* Change Password */}
@@ -298,11 +302,6 @@ const SettingsPage = (props) => {
                                             }
                                         />
                                     </FormControl>
-                                </Grid>
-                                <Grid item>
-                                    <Button fullWidth variant='outlined' onClick={submitPass} style={{margin: '2rem 0'}} disabled={newPassError}>
-                                        Save Changes
-                                    </Button>
                                 </Grid>
                                 {passResponse ? <Typography>{passResponse.message}</Typography> : null}
                             </Grid>
