@@ -224,7 +224,7 @@ const Signup = () => {
                     control={
                         <Checkbox
                             classes={{root: classes.checkbox, indeterminate: classes.unchecked}}
-                            checked={values.rememberMe}
+                            checked={values.acceptterms}
                             onChange={handleCheckbox}
                             color='inherit'
                             required
