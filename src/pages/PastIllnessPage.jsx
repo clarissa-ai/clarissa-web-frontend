@@ -43,22 +43,11 @@ const PastIllnessPage = (props) => {
     }
 
     const useStyles = makeStyles((theme) => ({
-        miniBox: {
-            height: '20rem'
-        },
         container: {
             paddingTop: '6rem',
             background: '#EBEFF2',
-            height: '100vh',
-            
-        },
-        topContainer: {
-            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-            background: '#2C3C56',
-            padding: '1rem 3rem',
-            borderRadius: '4px',
-            color: '#fff',
-
+            height: 'inherit',
+            maxHeight: 'inherit',
         },
         label: {
             paddingBottom: '1rem',
@@ -66,65 +55,60 @@ const PastIllnessPage = (props) => {
         link: {
             color: '#000',
         },
+        wrapper: {
+            height: '100vh',
+        },
     }));
     
 
     const classes = useStyles();
 
-    return <Fade in timeout={1000}>
-        <div className = {classes.container}> 
-            <Grid container direction = 'row' spacing = {0} justify='center' alignitems = 'stretch' alignContent = 'stretch'>
-                <Grid item><TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
-            <Grid item xs = {12} md = {7} l={7} xl={7}>
-                <Grid container direction='column' spacing={2}>
-                    <Grid item>
-                        <div className = {classes.topContainer}> 
-                            <Typography variant = 'h6'><Box fontWeight='bold'> Past Illlnesses</Box></Typography>
-                            <Typography variant = 'subtitle2' style = {{opacity: '.7'}}>View your logged illnesses</Typography>
-                        </div>
-                    </Grid> 
-                    <Grid item> 
-                        <PastIllnessCard>
-                            {illnessList.map((illness, index) => {
-                                return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} currIndex = {index} selectedIllness = {selectedIllness} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>
-                            })}
-                        </PastIllnessCard>
+    return <div className={classes.wrapper}>
+            <Fade in timeout={500}>
+                <Grid container direction = 'row' spacing = {0} justify='center' className={classes.container} alignItems='stretch'>
+                    <Grid item xs={12} md={7} l={7} xl={7}>
+                    <Grid container direction='column'>
+                        <Grid item><TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
+                        <Grid item>
+                            
+                            
+                            <PastIllnessCard>
+                                {illnessList.map((illness, index) => {
+                                    return <Grid item onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} currIndex = {index} selectedIllness = {selectedIllness} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>
+                                })}
+                            </PastIllnessCard>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12} md={4} l={3} xl={3} style={{marginLeft: '1rem'}} >
+                    <Grid container direction='column'>
+                        <Grid item> 
+                            <IllnessDataCard>
+                                {/* <ButtonGroup color="primary" aria-label="outlined primary button group" size='medium'>
+                                    <Button>Download Illness PDF</Button>
+                                    <Button>Export Illness PDF</Button>
+                                </ButtonGroup> */}
+                                <IllnessSummaryCard name={activeIllness.created_on} created_on={activeIllness.created_on} updated_on={activeIllness.updated_on}></IllnessSummaryCard>
+                                <Typography variant='subtitle1'><Box fontWeight='bold'>Symptoms</Box></Typography>
 
+                                
+                                {symptomList.map((symptom, index) => {
+                                    return <Grid item><SymptomItem title={symptom.symptom_json.common_name} date = {symptom.created_on} status={null}/></Grid>
+                                })}
+
+                                <Typography variant='subtitle1'><Box fontWeight='bold'>Diagnosis</Box></Typography>
+
+                                {activeDiagnosis.map((diagnosis, index) => {
+                                    return <Grid item><DiagnosisItem title={diagnosis.common_name}/></Grid>
+                                })}
+                                
+                            </IllnessDataCard>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-            
-             <Grid item xs={12} md={4} l={3} xl={3} style={{marginLeft: '1rem'}}> 
-                <Grid container direction='column'>
-                    <Grid item> 
-                        <IllnessDataCard>
-                            {/* <ButtonGroup color="primary" aria-label="outlined primary button group" size='medium'>
-                                <Button>Download Illness PDF</Button>
-                                <Button>Export Illness PDF</Button>
-                            </ButtonGroup> */}
-                            <IllnessSummaryCard name={activeIllness.created_on} created_on={activeIllness.created_on} updated_on={activeIllness.updated_on}></IllnessSummaryCard>
-                            <Grid item><Typography variant='subtitle1'><Box fontWeight='bold'>Symptoms</Box></Typography></Grid>
-    
-                            
-                            {symptomList.map((symptom, index) => {
-                                return <Grid item><SymptomItem title={symptom.symptom_json.common_name} date = {symptom.created_on} status={null}/></Grid>
-                            })}
-
-                            <Grid item><Typography variant='subtitle1'><Box fontWeight='bold'>Diagnosis</Box></Typography></Grid>
-
-                            {activeDiagnosis.map((diagnosis, index) => {
-                                return <Grid item><DiagnosisItem title={diagnosis.common_name}/></Grid>
-                            })}
-                            
-                        </IllnessDataCard>
-                    </Grid>
-                </Grid> 
-            </Grid>
-            
-
-            </Grid>
-        </div>
-    </Fade>
+        </Fade>
+    </div>
 }
 
 export default PastIllnessPage;
