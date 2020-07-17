@@ -55,7 +55,6 @@ TabPanel.propTypes = {
 const SurveysPage = (props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const [showMain, setMain] = React.useState(true);
     const [showSurvey, setShowSurvey] = React.useState([false, 0]);
     const [showModal, setModal] = React.useState([false, {}]);
 
@@ -81,22 +80,22 @@ const SurveysPage = (props) => {
                                 <Grid item>
                                     <TopBar>
                                         <Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => setShowSurvey([false, 0])}>
-                                        Close
+                                            Close
                                         </Button>
                                     </TopBar>
                                     <ScreeningStart id={showSurvey[1]} email={profile.userInfo.email}/>
                                 </Grid>
                             </div>:
                             null) : null}
-                        {showMain && (!showSurvey[0]) ?
+                        {(!showSurvey[0]) ?
                             <div>
                                 <Typography variant='h5' style={{padding: '2rem 0'}}><Box fontWeight='bold'>Featured</Box></Typography>
                                 <MainSurvey surveyClick={setShowSurvey}/>
                             </div> : null}
                         { (!showSurvey[0]) ?
                             <Tabs value={value} onChange={handleChange} classes={{indicator: classes.tabBorder}}>
-                                <Tab label={<p className={classes.tabs}>Active Surveys</p>} onClick={() => setMain(true)}/>
-                                <Tab label={<p className={classes.tabs}>Survey Results</p>} onClick={() => setMain(false)}/>
+                                <Tab label={<p className={classes.tabs}>Active Surveys</p>}/>
+                                <Tab label={<p className={classes.tabs}>Survey Results</p>}/>
                             </Tabs> : null }
                         { (!showSurvey[0]) ?
                             <TabPanel value={value} index={0}>
