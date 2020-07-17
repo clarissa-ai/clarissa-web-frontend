@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {FormHelperText, Select, MenuItem, Box, Button, Grid, makeStyles, TextField, Typography, Input, createMuiTheme, ThemeProvider, Avatar, Divider} from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
+import Alert from '@material-ui/lab/Alert';
 import DateFnsUtils from '@date-io/date-fns';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -17,9 +17,7 @@ import {profileSelector} from 'redux/selectors';
 const useStyles = makeStyles((theme) => ({
     container: {
         background: '#F5F6F8',
-        width: '100%',
         padding: '2rem',
-        height: '100%',
     },
     date: {
         background: '#fff',
@@ -47,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.06)',
     },
+    alert: {
+        position: 'absolute',
+    }
 }));
 
 const materialTheme = createMuiTheme({
@@ -67,8 +68,8 @@ const SettingsPage = (props) => {
     const [date, setDate] = useState(profile.userInfo.birthdate);
     const [confirmNewPass, setConfirmNew] = useState('');
     const [newPassError, setNewPassError] = useState(false);
-    const [infoResponse, setInfoResponse] = useState();
-    const [passResponse, setPassResponse] = useState();
+    const [infoResponse, setInfoResponse] = useState('No changes made to profile');
+    const [passResponse, setPassResponse] = useState('No changes made to profile');
     const [values, setValues] = useState({
         name: profile.userInfo.first_name,
         email: profile.userInfo.email,
@@ -103,7 +104,7 @@ const SettingsPage = (props) => {
             body: JSON.stringify(result),
         }).then((res) => res.json()).then(
             (result) => {
-                setInfoResponse(result);
+                setInfoResponse(result.message);
             },
         );
     };
@@ -123,7 +124,7 @@ const SettingsPage = (props) => {
             body: JSON.stringify(result),
         }).then((res) => res.json()).then(
             (result) => {
-                setPassResponse(result);
+                setPassResponse(result.message);
             },
         );
     };
@@ -157,7 +158,8 @@ const SettingsPage = (props) => {
 
     return (
         <div className={classes.container}>
-            <Grid container direction='row' wrap='nowrap' justify='center'>
+            <Grid container direction='row' wrap='nowrap' justify='center' >
+                <Grid item>{passResponse === 'No changes made to profile' || infoResponse === 'No changes made to profile' ? null: <Alert className={classes.alert} severity='success'>{passResponse}</Alert>}</Grid>
                 <div className={classes.contents}>
                     {/* Card contents */}
                     {/* Column 1 */}
@@ -226,8 +228,6 @@ const SettingsPage = (props) => {
                                         </MuiPickersUtilsProvider>
                                     </ThemeProvider>
                                 </Grid>
-                                {infoResponse ? <Typography>{infoResponse.message}</Typography> : null}
-                                {console.log(infoResponse)}
                             </Grid>
                         </div>
                     </Grid>
@@ -303,7 +303,6 @@ const SettingsPage = (props) => {
                                         />
                                     </FormControl>
                                 </Grid>
-                                {passResponse ? <Typography>{passResponse.message}</Typography> : null}
                             </Grid>
                         </div>
                     </Grid>
