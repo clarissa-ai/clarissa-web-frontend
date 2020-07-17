@@ -16,8 +16,9 @@ import {profileSelector} from 'redux/selectors';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        background: '#F5F6F8',
+        background: '#EBEFF2',
         padding: '2rem',
+        height: '100vh',
     },
     date: {
         background: '#fff',
