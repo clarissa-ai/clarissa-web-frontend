@@ -13,8 +13,19 @@ const useStyles = makeStyles((theme) => ({
     },
     wrap: {
         wordWrap: 'break-word',
-        maxWidth: '76%',
         height: '12em',
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: '75%',
+        },
+        [theme.breakpoints.up('md')]: {
+            maxWidth: '79%',
+        },
+        [theme.breakpoints.up('lg')]: {
+            maxWidth: '85%',
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: '87%',
+        },
     },
     box: {
         height: '12em',
@@ -33,6 +44,20 @@ const useStyles = makeStyles((theme) => ({
         width: '3rem',
         height: '3rem',
         fontWeight: 600,
+    },
+    boxWidth: {
+        [theme.breakpoints.down('sm')]: {
+            width: '25%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '21%',
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: '15%',
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: '13%',
+        },
     },
     cardContent: {
         'overflow': 'auto',
@@ -97,7 +122,7 @@ const ActiveSurveys = (props) => {
                                         <Typography variant='subtitle2'>{data.description}</Typography>
                                     </CardContent>
                                 </Grid>
-                                <Grid item style={{width: '24%'}}>
+                                <Grid item className={classes.boxWidth}>
                                     <Box className={classes.box} style={{backgroundColor: `${colors[index]}`}}>
                                         <div style={{height: '75%'}}>
                                             <Typography className={classes.questions} variant='h6'>{data.question_count}</Typography>
