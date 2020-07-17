@@ -46,14 +46,6 @@ const parseDate = (dateString) => {
     return date.getMonth()+1 +'/'+ date.getDate() +'/'+date.getFullYear();
 }
 
-function changeBackground(e) {
-    e.target.style.background = 'red';
-}
-
-function changeBackBackground(e) {
-    e.target.style.background = '#F2F6F9';
-}
-
 const IllnessItem = (props) => {
     const classes = useStyles();
     const [active, setStatus] = React.useState(false);
@@ -65,7 +57,7 @@ const IllnessItem = (props) => {
         setStatus(props.status);
     }, [props.status]);
 
-    return <Grid container direction='row' onMouseOver={changeBackground}  onMouseLeave= {changeBackBackground} alignItems='center' justify='space-evenly' className={activeI ? classes.activeContainer : classes.container}>
+    return <Grid container direction='row' alignItems='center' justify='space-evenly' className={activeI ? classes.activeContainer : classes.container}>
         <Grid item><Typography><Box fontWeight = 'bold'>{props.title}{props.index}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'>{parseDate(props.created_on)} - {parseDate(props.updated_on)}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'>{props.symptomCount} Symptoms</Box></Typography></Grid>
