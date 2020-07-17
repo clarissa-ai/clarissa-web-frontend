@@ -14,16 +14,24 @@ import ScreeningResult from './ScreeningResult';
 
 const useStyles = makeStyles((theme) => ({
     start: {
-        paddingTop: '13rem',
+        paddingTop: '15%',
         paddingBottom: '2rem',
     },
     rootButton: {
-        width: '17.75rem',
+        width: '100%',
         minHeight: '5.75rem',
         textAlign: 'left',
         paddingLeft: '0',
         borderRadius: 6,
         borderWidth: 1.25,
+    },
+    gridButtonWrapper: {
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '50%',
+        },
     },
     rootPrev: {
         height: '4rem',
@@ -476,7 +484,7 @@ const ScreeningQuestions = (props) => {
     const displayChoices =
     (data.questions[questionIndex].options).map((data, index) => {
         return (
-            <Grid item key={index}>
+            <Grid item key={index} className={classes.gridButtonWrapper}>
                 <Button
                     color={changeButtonColor(index)} disableRipple
                     variant={variantClicked(index)}

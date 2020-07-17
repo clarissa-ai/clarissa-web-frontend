@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
             maxWidth: '75%',
         },
         [theme.breakpoints.up('md')]: {
-            maxWidth: '79%',
+            maxWidth: '77%',
         },
         [theme.breakpoints.up('lg')]: {
-            maxWidth: '85%',
+            maxWidth: '80%',
         },
         [theme.breakpoints.up('xl')]: {
             maxWidth: '87%',
@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme) => ({
             width: '25%',
         },
         [theme.breakpoints.up('md')]: {
-            width: '21%',
+            width: '23%',
         },
         [theme.breakpoints.up('lg')]: {
-            width: '15%',
+            width: '20%',
         },
         [theme.breakpoints.up('xl')]: {
             maxWidth: '13%',
