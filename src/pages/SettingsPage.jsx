@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {FormHelperText, Select, MenuItem, Box, Button, Grid, makeStyles, TextField, Typography, Input, createMuiTheme, ThemeProvider, Avatar, Divider} from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
+import Alert from '@material-ui/lab/Alert';
 import DateFnsUtils from '@date-io/date-fns';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -16,10 +16,9 @@ import {profileSelector} from 'redux/selectors';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        background: '#F5F6F8',
-        width: '100%',
+        background: '#EBEFF2',
         padding: '2rem',
-        height: '100%',
+        height: '100vh',
     },
     date: {
         background: '#fff',
@@ -47,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.06)',
     },
+    alert: {
+        position: 'absolute',
+    }
 }));
 
 const materialTheme = createMuiTheme({
@@ -67,8 +69,8 @@ const SettingsPage = (props) => {
     const [date, setDate] = useState(profile.userInfo.birthdate);
     const [confirmNewPass, setConfirmNew] = useState('');
     const [newPassError, setNewPassError] = useState(false);
-    const [infoResponse, setInfoResponse] = useState();
-    const [passResponse, setPassResponse] = useState();
+    const [infoResponse, setInfoResponse] = useState('No changes made to profile');
+    const [passResponse, setPassResponse] = useState('No changes made to profile');
     const [values, setValues] = useState({
         name: profile.userInfo.first_name,
         email: profile.userInfo.email,
@@ -103,7 +105,7 @@ const SettingsPage = (props) => {
             body: JSON.stringify(result),
         }).then((res) => res.json()).then(
             (result) => {
-                setInfoResponse(result);
+                setInfoResponse(result.message);
             },
         );
     };
@@ -123,7 +125,7 @@ const SettingsPage = (props) => {
             body: JSON.stringify(result),
         }).then((res) => res.json()).then(
             (result) => {
-                setPassResponse(result);
+                setPassResponse(result.message);
             },
         );
     };
@@ -157,19 +159,25 @@ const SettingsPage = (props) => {
 
     return (
         <div className={classes.container}>
-            <Grid container direction='row' wrap='nowrap'>
+            <Grid container direction='row' wrap='nowrap' justify='center' >
+                <Grid item>{passResponse === 'No changes made to profile' || infoResponse === 'No changes made to profile' ? null: <Alert className={classes.alert} severity='success'>{passResponse}</Alert>}</Grid>
                 <div className={classes.contents}>
                     {/* Card contents */}
                     {/* Column 1 */}
-                    <Grid item xs={1}>
+                    <Grid item xs={3}>
                         <Grid container justify='center'>
                             <div className={classes.column}>
                                 <Avatar alt={profile.userInfo.first_name} src={profile.userInfo.img} className={classes.avatarSize}/>
                             </div>
+                            <Grid item>
+                                    <Button fullWidth variant='outlined' onClick={()=> {submitPass(); submitInfo();}} style={{margin: '2rem 0'}} disabled={newPassError}>
+                                        Save Changes
+                                    </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                     {/* Column 2 */}
-                    <Grid item xs={4} className={classes.divider}>
+                    <Grid item xs={5} className={classes.divider}>
                         <Divider orientation='vertical' flexItem/>
                         <div className={classes.column}>
                             <Grid container direction='column' spacing={2} justify='center'>
@@ -221,15 +229,12 @@ const SettingsPage = (props) => {
                                         </MuiPickersUtilsProvider>
                                     </ThemeProvider>
                                 </Grid>
-                                <Grid item><Button fullWidth variant='outlined' onClick={submitInfo} style={{margin: '2rem 0'}}>Save Changes</Button></Grid>
-                                {infoResponse ? <Typography>{infoResponse.message}</Typography> : null}
-                                {console.log(infoResponse)}
                             </Grid>
                         </div>
                     </Grid>
 
                     {/* Column 3 */}
-                    <Grid item xs={4} className={classes.divider}>
+                    <Grid item xs={5} className={classes.divider}>
                         <Divider orientation='vertical' flexItem/>
                         <div className={classes.column}>
                             {/* Change Password */}
@@ -299,12 +304,6 @@ const SettingsPage = (props) => {
                                         />
                                     </FormControl>
                                 </Grid>
-                                <Grid item>
-                                    <Button fullWidth variant='outlined' onClick={submitPass} style={{margin: '2rem 0'}} disabled={newPassError}>
-                                        Save Changes
-                                    </Button>
-                                </Grid>
-                                {passResponse ? <Typography>{passResponse.message}</Typography> : null}
                             </Grid>
                         </div>
                     </Grid>
