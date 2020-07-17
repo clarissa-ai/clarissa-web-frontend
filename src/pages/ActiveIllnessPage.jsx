@@ -29,7 +29,7 @@ const DashboardPage = (props) => {
     const classes = useStyles();
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const [symptoms, setSymptoms] = useState([]);
-    const [analysis, setAnalysis] = useState([]);
+    const [analysis, setAnalysis] = useState(undefined);
     const [render, setRender] = useState(0);
     /* const [symptomModal, showSymptomModal] = useState(false); */
 
@@ -90,14 +90,14 @@ const DashboardPage = (props) => {
 
                         <Grid item xs={12} md={9} xl={8}>
                             <Grid container direction='column' spacing={2}>
-                                <Grid container justify='flex-end' direction='row'>
+                                <Grid container justify='flex-end' direction='row' spacing={2}>
                                     <Typography variant='h5' className={classes.title}>
                                         Tell Clarissa how you are feeling.
                                     </Typography>
-                                    <Grid item style={{marginRight: '1rem'}}>
+                                    <Grid item>
                                         <ExportIllnessButton/>
                                     </Grid>
-                                    <Grid item style={{marginRight: '0.5rem'}}>
+                                    <Grid item>
                                         <EndIllnessButton incrState={() => incrState()}/>
                                     </Grid>
                                 </Grid>

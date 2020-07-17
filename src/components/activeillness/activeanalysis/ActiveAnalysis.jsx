@@ -13,10 +13,14 @@ const useStyles = makeStyles((theme) => ({
     list: {
         listStyleType: 'circle',
     },
-    card: {
+    analysisCard: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFFF',
         height: '100%',
+    },
+    card: {
+        boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
+        backgroundColor: '#FFFF',
     },
     cardContent: {
         'overflow': 'auto',
@@ -25,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
             width: '0.3em',
         },
         '&::-webkit-scrollbar-thumb': {
-            backgroundColor: '#7064D0',
+            backgroundColor: theme.palette.info.main,
             borderRadius: '2em',
         },
     },
@@ -132,7 +136,7 @@ const IllnessTabPanel = (props) => {
         );
     });
     return (
-        <Grid containers direction='column' style={{height: '34vmin'}} className={classes.cardContent}>
+        <Grid container={true} direction='column' style={{height: '34vmin'}} className={classes.cardContent}>
             <Grid item xs={12}>
                 <Card className={classes.card}>
                     <CardContent>
@@ -181,8 +185,13 @@ const ActiveAnalysis = (props) => {
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);
     };
+    if (!props.analysis) {
+        return (
+            <Card className={classes.analysisCard}>
+            </Card>
+        );
+    };
     const tabs = [];
-  
     props.analysis.forEach((diagnosis, index) => tabs.push(<IllnessTab commonName={diagnosis.common_name} index={index} />));
     const tabPanels = [];
     props.analysis.forEach((diagnosis, index) => tabPanels.push(
@@ -190,9 +199,8 @@ const ActiveAnalysis = (props) => {
             <IllnessTabPanel commonName={diagnosis.common_name} definition={diagnosis.hint} symptomsSupporting={diagnosis.supporting_symptoms} symptomsOpposing={diagnosis.opposing_symptoms}/>
         </TabPanel>,
     ));
-
     return (
-        <Card className={classes.card}>
+        <Card className={classes.analysisCard}>
             <Grid container={true} direction='column' justify='space-evenly'>
                 <Grid item={true} xs={12}>
                     <AppBar position="static" color='default' elevation={0}>
