@@ -1,21 +1,31 @@
-import React, {createContext} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {ThemeProvider, createMuiTheme, responsiveFontSizes, Typography} from '@material-ui/core';
+import React, {useEffect, useState} from 'react';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {ThemeProvider, createMuiTheme, responsiveFontSizes} from '@material-ui/core';
+import {useDispatch} from 'react-redux';
+import {setProfile} from 'redux/actions';
 import './App.css';
-
 import Profile from 'Profile.js';
-// import SurveyDAG from 'components/misc/Survey/SurveyDAG';
-import Login from 'components/authentication/login/Login';
+import Loader from 'components/navigation/loader/Loader';
+import MainPage from 'components/navigation/mainpage/MainPage';
+import ProtectedRoute from 'components/navigation/protected/ProtectedRoute';
+import UnauthRedirectRoute from 'components/navigation/protected/UnauthRedirectRoute';
+import Login from 'pages/LoginPage';
+import Signup from 'pages/SignUpPage';
+import ScreeningStart from 'components/misc/survey/ScreeningStart';
+import Dashboard from 'pages/DashboardPage';
+import SymptomLog from 'components/activeillness/SymptomLog';
+import SurveysPage from 'pages/SurveysPage';
+import PastIllnessPage from 'pages/PastIllnessPage';
+import ActiveIllnessPage from 'pages/ActiveIllnessPage';
+import PageNotFound from 'pages/404/404';
+import SettingsPage from 'pages/SettingsPage';
 
-// Here we create a new context, allowing all nested elements of ProfileContext.Provider to use the profile object.
-const ProfileContext = createContext(null);
-// const survey = new SurveyDAG();
 const contrastText = '#2C3C56';
 let theme = createMuiTheme({
     palette: {
         primary: {
             main: '#306DDF',
-            contrastText: contrastText,
+            contrastText: '#ffff',
         },
         secondary: {
             main: '#FEAD18',
@@ -33,31 +43,87 @@ let theme = createMuiTheme({
             main: '#47C594',
             contrastText: contrastText,
         },
+        background: '#F5F8FF',
+        text: {
+            primary: '#2C3C56',
+            secondary: '#AEAEAE',
+        },
     },
     typography: {
         fontFamily: 'Poppins',
     },
+    overrides: {
+        MuiTab: {
+            wrapper: {
+                flexDirection: 'row',
+            },
+        },
+    },
 });
 theme = responsiveFontSizes(theme);
 
-const App = () => {
-    // We create a new profile object. It should automatically be populated if the user has already logged in.
-    const profile = new Profile();
-    console.log(process.env.REACT_APP_ENDPOINT_BASE);
+const App = (props) => {
+    // State to control custom routing.
+    const [routes, setRoutes] = useState(null);
+    const [profileLoading, setProfileLoading] = useState(true);
+    const dispatch = useDispatch(); // react-redux dispatch
+    useEffect(() => {
+        const profile = new Profile();
+        dispatch(setProfile(profile));
+        profile.getUserInfo((newProfile) => {
+            dispatch(setProfile(newProfile));
+            setProfileLoading(false);
+        });
+        fetch(`${process.env.REACT_APP_ENDPOINT_BASE}/api/routes`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
+            if (!response.ok) {
+                console.log('Internal Error. Please contact support.');
+                return;
+            }
+            response.json().then((data) => {
+                const {status, message} = data;
+                if (status === 'success') {
+                    setRoutes(data.routes);
+                } else {
+                    console.log(message);
+                }
+            });
+        });
+    }, [dispatch]);
+
+    const redirect = [];
+    if (routes) {
+        Object.keys(routes).forEach((key) => redirect.push(<Redirect key={key} from={key} to={routes[key]} />));
+    };
 
     return (
-        <ProfileContext.Provider value={profile}>
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <Loader loading={routes && !profileLoading ? false : true}>
                 <Router>
-                    <Switch>
-                        <Route exact path="/" render={(props) => <Typography>This is the landing page!</Typography> }></Route>
-                        <Route exact path="/login" render={(props) => <Login/>} />
-                    </Switch>
+                    <MainPage>
+                        <Switch>
+                            {redirect}
+                            <Redirect exact from='/' to='/dashboard' />
+                            <UnauthRedirectRoute path="/login" page={<Login />} />
+                            <UnauthRedirectRoute path="/signup" page={<Signup />}/>
+                            <Route path="/survey" render={(props) => <ScreeningStart {...props}/>} />
+                            <ProtectedRoute path='/dashboard' page={<Dashboard />} />
+                            <ProtectedRoute path='/active-illness' page={<ActiveIllnessPage />} />
+                            <ProtectedRoute path='/past-illnesses' page={<PastIllnessPage />} />
+                            <ProtectedRoute path='/surveys' page={<SurveysPage />} />
+                            <ProtectedRoute path='/settings' page={<SettingsPage />} />
+                            <Route path='/test' render={(props) => <div><SymptomLog/></div>}/>
+                            <Route path='/404' render={() => <PageNotFound />} />
+                            <Redirect to='/404' />
+                        </Switch>
+                    </MainPage>
                 </Router>
-            </ThemeProvider>
-        </ProfileContext.Provider>
+            </Loader>
+        </ThemeProvider>
     );
 };
 export default App;
-export {ProfileContext};
-
