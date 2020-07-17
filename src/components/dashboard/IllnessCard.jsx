@@ -1,5 +1,6 @@
 import React from 'react';
 import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
+import {Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -56,7 +57,7 @@ const IllnessCard = (props) => {
         <Grid item><Typography><Box fontWeight='bold'>{props.symptomcount} Symptoms</Box></Typography></Grid>
         <Grid item>
             <Button variant='outlined' className={props.status? classes.activeButton : classes.button}>
-                <Link className={props.status? classes.linkActive : classes.link} href={props.status? '/active-illness' : '/past-illnesses'}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
+                <Link className={props.status? classes.linkActive : classes.link} component={RouterLink} to={props.status? '/active-illness' : '/past-illnesses'}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
             </Button>
         </Grid>
     </Grid>

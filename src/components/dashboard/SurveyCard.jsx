@@ -1,5 +1,6 @@
 import React from 'react';
 import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
+import {Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -29,7 +30,7 @@ const SurveyCard = (props) => {
         <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
         <Grid item>
             <Button variant='outlined' className={classes.button}>
-                <Link className={classes.link} href={`${props.link}`}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
+                <Link className={classes.link} component={RouterLink} to={props.link}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
             </Button>
         </Grid>
     </Grid>
