@@ -25,7 +25,6 @@ const PastIllnessPage = (props) => {
         },})
         .then(res => res.json())
         .then(res => {
-                console.log(res);
                 setIllness(res.illnesses);
                 setSymptoms(res.illnesses[0].symptoms);
                 setActiveIllness(res.illnesses[0]);
