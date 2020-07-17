@@ -5,6 +5,9 @@ const useStyles = makeStyles((theme) => ({
     container: {
         borderRadius: '4px',
         background: '#F2F6F9',
+        '&:hover': {
+            background: '#d5dbde',
+          },
         padding: '1rem',
         marginBottom: '.8rem',
         cursor: 'pointer',
