@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 
 const InfoCard = (props) => {
     const classes = useStyles();
-    console.log(props.date);
 
     const parseDate = (dateString) => {
         const date = new Date(dateString);
