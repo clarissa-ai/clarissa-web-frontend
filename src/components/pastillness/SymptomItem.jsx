@@ -1,5 +1,7 @@
 import React from 'react';
-import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
+import {Grid, Typography, makeStyles, Box, useTheme} from '@material-ui/core';
+
+import OpenBulletIconSmall from 'components/misc/common/OpenBulletIconSmall';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -48,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const InfoCard = (props) => {
     const classes = useStyles();
     console.log(props.date);
+    const theme = useTheme();
 
     const parseDate = (dateString) => {
         const date = new Date(dateString);
@@ -56,9 +59,9 @@ const InfoCard = (props) => {
 
 
     return <Grid container direction='row' alignItems='center' className={classes.container}>
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="3" cy="3" r="2.5" stroke="#47C594"/>
-        </svg>
+        <Grid item>
+            <OpenBulletIconSmall color={theme.palette.success.main} />
+        </Grid>
         <Grid item><Typography><Box>{props.title}{props.index}</Box></Typography></Grid>
         <Grid item><Typography><Box className = {classes.lowOpacity}>{parseDate(props.date)}</Box></Typography></Grid>
 
