@@ -22,7 +22,7 @@ const EndIllnessButton = (props) => {
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
 
     EndIllnessButton.propTypes = {
-        incrState: propTypes.func,
+        incrstate: propTypes.func,
     };
 
     const profile = useSelector(profileSelector);
@@ -36,7 +36,7 @@ const EndIllnessButton = (props) => {
                 'Content-Type': 'application/json',
             },
         }).then((res) => res.json()).then(() => {
-            props.incrState();
+            props.incrstate();
         });
     };
 
