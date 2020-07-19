@@ -45,7 +45,7 @@ const DashboardPage = (props) => {
 
     const profile = useSelector(profileSelector);
 
-    const incrState = () => {
+    const incrstate = () => {
         setRender(render + 1);
         fetch(`${apiLink}/api/illness/get_active_illness`, {
             credentials: 'include',
@@ -98,11 +98,11 @@ const DashboardPage = (props) => {
                                         <ExportIllnessButton/>
                                     </Grid>
                                     <Grid item>
-                                        <EndIllnessButton incrState={() => incrState()}/>
+                                        <EndIllnessButton incrstate={() => incrstate()}/>
                                     </Grid>
                                 </Grid>
                                 <Grid item className={classes.greetingsContainer}>
-                                    <SymptomLog incrState={() => incrState()}/>
+                                    <SymptomLog incrstate={() => incrstate()}/>
                                 </Grid>
                                 <Grid item style={{height: '0vmin'}}>
                                     <Grid container direction='row' spacing={2}>
