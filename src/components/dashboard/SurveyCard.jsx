@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const SurveyCard = (props) => {
     const classes = useStyles();
 
-    return <Grid container direction='row' alignItems='center' justify='space-evenly' className={classes.container}>
+    return <Grid container direction='row' alignItems='center' justify='space-between' className={classes.container}>
         <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
         <Grid item>
             <Button variant='outlined' className={classes.button}>
