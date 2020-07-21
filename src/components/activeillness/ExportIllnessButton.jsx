@@ -20,7 +20,7 @@ const ExportIllnessButton = (props) => {
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
 
     return (
-        <Link href={apiLink + '/api/illness/export_active_illness/illness.pdf'} underline='none' download>
+        <Link target="_blank" href={apiLink + '/api/illness/export_active_illness/illness.pdf'} underline='none' download>
             <Button classes={{root: classes.button, label: classes.labelButton}}>
                 <FilterNoneOutlinedIcon/>
                 <Typography variant='subtitle2' style={{marginLeft: '30px'}}>Export Illness</Typography>

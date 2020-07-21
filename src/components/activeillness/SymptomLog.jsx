@@ -86,36 +86,40 @@ const SymptomLog = (props) => {
     const [illness, setIllness] = useState([]);
     const [selected, setSelected] = useState([]);
     const [isLoaded, setIsLoaded] = useState(true);
+    const [timeout, sTimeout] = useState(null);
 
     const handleChange = (event) => {
         setText(event.target.value);
-        const result = {
-            'text': event.target.value,
-        };
-        fetch(`${apiLink}/api/illness/check_symptoms`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(result),
-        }).then((res) => res.json())
-            .then(
-                (result) => {
-                    if (result.symptoms_json.mentions === undefined) {
-                        updateSelected(0 - illness.length,
-                            result.symptoms_json.mentions, illness);
-                        setIllness([]);
-                    } else {
-                        updateSelected(result.symptoms_json.mentions.length - illness.length,
-                            result.symptoms_json.mentions, illness);
-                        setIllness(result.symptoms_json.mentions);
-                    }
+        clearTimeout(timeout);
+        sTimeout(setTimeout(() => {
+            const result = {
+                'text': text,
+            };
+            fetch(`${apiLink}/api/illness/check_symptoms`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
                 },
-                (error) => {
-                    setError(error);
-                },
-            );
+                body: JSON.stringify(result),
+            }).then((res) => res.json())
+                .then(
+                    (result) => {
+                        if (result.symptoms_json.mentions === undefined) {
+                            updateSelected(0 - illness.length,
+                                result.symptoms_json.mentions, illness);
+                            setIllness([]);
+                        } else {
+                            updateSelected(result.symptoms_json.mentions.length - illness.length,
+                                result.symptoms_json.mentions, illness);
+                            setIllness(result.symptoms_json.mentions);
+                        }
+                    },
+                    (error) => {
+                        setError(error);
+                    },
+                );
+        }, 500));
     };
 
     const updateSelected = (change, newIllness, oldIllness) => {
@@ -160,7 +164,6 @@ const SymptomLog = (props) => {
             }
         }
         setSelected(select);
-        console.log(select);
     };
 
     const onButtonClick = (index) => {
@@ -181,7 +184,6 @@ const SymptomLog = (props) => {
             }
             i++;
         }
-        console.log(symptoms);
         fetch(`${apiLink}/api/illness/save_symptoms`, {
             method: 'POST',
             credentials: 'include',
@@ -192,12 +194,13 @@ const SymptomLog = (props) => {
         }).then((res) => {
             res.json();
         }).then(() => {
-            props.incrState();
+            props.incrstate();
             setIsLoaded(true);
         });
         setIllness([]);
         setSelected([]);
         setText('');
+        sTimeout(null);
     };
 
     const displayIllnessName = (name) => {

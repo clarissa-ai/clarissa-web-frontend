@@ -9,6 +9,9 @@ import {
   } from '@material-ui/pickers';
 import {Link as RouterLink} from 'react-router-dom';
   import DateFnsUtils from '@date-io/date-fns';
+import {useSelector, useDispatch} from 'react-redux';
+import {profileSelector} from 'redux/selectors';
+import {setProfile} from 'redux/actions';
 
   const materialTheme = createMuiTheme({
     overrides: {
@@ -68,6 +71,8 @@ const Signup = () => {
         acceptterms: false,
         error: '',
     });
+    const profile = useSelector(profileSelector);
+    const dispatch = useDispatch();
 
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
@@ -104,26 +109,8 @@ const Signup = () => {
     }
 
     const handleSignUp = () => {
-        const user = {
-            email: values.email,
-            first_name: values.firstname,
-            birthdate: ("0" + (selectedDate.getMonth() + 1)).slice(-2)+'/'+("0" + selectedDate.getDate()).slice(-2)+'/'+selectedDate.getFullYear(),
-            password: values.password,
-            sex: values.sex
-        }
-        const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
-        // console.log(user);
-
-        fetch(`${apiLink}/api/user/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user)
-        })
-        .then(res => res.json())
-        .catch((error) => {
-            console.error(error);
+        profile.signup(values.email, values.firstname, values.sex, ('0' + (selectedDate.getMonth() + 1)).slice(-2)+'/'+('0' + selectedDate.getDate()).slice(-2)+'/'+selectedDate.getFullYear(), values.password, (newProfile) => {
+            dispatch(setProfile(newProfile));
         });
     }
 
