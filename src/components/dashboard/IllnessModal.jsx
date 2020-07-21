@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Grid, makeStyles, TextField, ThemeProvider} from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -50,12 +50,35 @@ const IllnessModal = (props) => {
 
     const [selectedDate, setSelectedDate] = React.useState(Date.now());
     const [showModal, setModal] = React.useState(true);
+    const [hasActiveIllness, setHasActiveIllness] = React.useState();
+    const [title, setTitle] = React.useState('');
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
 
+    const API_LINK = process.env.API_LINK;
+
+    const populateData = () => {
+        fetch(`${API_LINK}/api/illness/get_active_illness`, {
+            method: 'GET',
+            credentials: 'include',
+        }).then((response) => {
+            if (response.status === 400) setHasActiveIllness(false);
+            else setHasActiveIllness(true);
+        })
+
+        if (hasActiveIllness) {
+
+        }
+    }
+
     const classes = useStyles();
+
+    useEffect(() => {
+        populateData();
+    })
+
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
             {showModal ? <Grid container className={classes.formContainer} direction='column' spacing={2}>
@@ -73,7 +96,6 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            id="date-picker-inline"
                             value={selectedDate}
                             onChange={handleDateChange}
                             KeyboardButtonProps={{
@@ -93,7 +115,6 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            id="date-picker-inline"
                             value={selectedDate}
                             onChange={handleDateChange}
                             KeyboardButtonProps={{
@@ -103,10 +124,9 @@ const IllnessModal = (props) => {
                     </MuiPickersUtilsProvider>
                 </ThemeProvider></Grid>
 
-                <Grid item><TextField id="outlined-basic" label="Data" variant="outlined" fullWidth/></Grid>
                 <Grid container justify='center'>
                     {/* NOTE TO SELF: POST CHANGES WHEN CONNECTING TO BACKEND */}
-                    <Grid item><Button className={classes.button} onClick={props.closeModalFunction}>Save</Button></Grid>
+                    <Grid item><Button className={classes.button}>Save</Button></Grid>
                 </Grid>
             </Grid> : null}
         </Grid>
