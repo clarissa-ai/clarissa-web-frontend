@@ -85,7 +85,7 @@ const DashboardPage = (props) => {
     };
 
     return (
-        <Fade in timeout={1000}>
+        <Fade in timeout={500}>
             <div className={classes.container}>
                 {showModal ? <IllnessModal open={true}/> : null}
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
