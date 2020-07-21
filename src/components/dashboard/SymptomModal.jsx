@@ -17,10 +17,9 @@ const theme = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
     container: {
         zIndex: '9999',
-        position: 'fixed',
-        background: 'rgba(0, 0, 0, 0.4)',
-        width: '100vw',
-        height: '100vh',
+        position: 'absolute',
+        // background: 'rgba(0, 0, 0, 0.4)',
+
     },
     formContainer: {
         background: '#fff',

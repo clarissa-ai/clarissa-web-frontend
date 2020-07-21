@@ -10,8 +10,7 @@ import TopBar from 'components/navbar/TopBar';
 import IllnessCard from 'components/dashboard/IllnessCard';
 import SurveyCard from 'components/dashboard/SurveyCard';
 import {useHistory} from 'react-router-dom';
-import IllnessModal from 'components/dashboard/IllnessModal';
-
+import SymptomModal from 'components/dashboard/SymptomModal';
 const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
@@ -87,7 +86,7 @@ const DashboardPage = (props) => {
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                {showModal ? <IllnessModal open={true}/> : null}
+                {showModal ? <SymptomModal open={true}/> : null}
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
                     <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {createNewIllness(); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
