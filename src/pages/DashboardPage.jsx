@@ -84,10 +84,14 @@ const DashboardPage = (props) => {
         });
     };
 
+    const handleModal = () => {
+        setModal(!showModal);
+    }
+
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                {showModal ? <SymptomModal/> : null}
+                {showModal? <SymptomModal onModalChange={handleModal}/> : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
                     <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {createNewIllness(); setModal(true);}}>New Illness</Button></TopBar></Grid>
 

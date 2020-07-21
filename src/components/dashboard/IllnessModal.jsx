@@ -44,12 +44,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IllnessModal = (props) => {
+
     IllnessModal.propTypes = {
-        closeModalFunction: propTypes.func,
+        onModalChange: propTypes.func,
     };
 
     const [selectedDate, setSelectedDate] = React.useState(Date.now());
-    const [showModal, setModal] = React.useState(true);
     const [hasActiveIllness, setHasActiveIllness] = React.useState();
     const [title, setTitle] = React.useState('');
 
@@ -77,13 +77,14 @@ const IllnessModal = (props) => {
 
     useEffect(() => {
         populateData();
+        console.log(props.onModalChange)
     })
 
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
-            {showModal ? <Grid container className={classes.formContainer} direction='column' spacing={2}>
+            <Grid container className={classes.formContainer} direction='column' spacing={2}>
                 <Grid container justify='flex-end' >
-                    <Grid item><Button className={classes.close} onClick={() => setModal(false)}>Close</Button></Grid>
+                    <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
                 </Grid>
                 <Grid item><TextField id="outlined-basic" label="Illness Name" variant="outlined" fullWidth/></Grid>
                 <Grid item><ThemeProvider theme={theme}>
@@ -128,7 +129,7 @@ const IllnessModal = (props) => {
                     {/* NOTE TO SELF: POST CHANGES WHEN CONNECTING TO BACKEND */}
                     <Grid item><Button className={classes.button}>Save</Button></Grid>
                 </Grid>
-            </Grid> : null}
+            </Grid>
         </Grid>
     );
 };
