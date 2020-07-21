@@ -89,11 +89,12 @@ const SymptomLog = (props) => {
     const [timeout, sTimeout] = useState(null);
 
     const handleChange = (event) => {
-        setText(event.target.value);
+        const txt = event.target.value;
+        setText(txt);
         clearTimeout(timeout);
         sTimeout(setTimeout(() => {
             const result = {
-                'text': text,
+                'text': txt,
             };
             fetch(`${apiLink}/api/illness/check_symptoms`, {
                 method: 'POST',
