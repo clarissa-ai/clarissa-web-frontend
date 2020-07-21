@@ -93,7 +93,7 @@ const DashboardPage = (props) => {
             <div className={classes.container}>
                 {showModal? <SymptomModal onModalChange={handleModal}/> : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {createNewIllness(); setModal(true);}}>New Illness</Button></TopBar></Grid>
+                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} createNewIllness={true} onClick={() => {createNewIllness(); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
