@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: '1rem',
     },
     img: {
-        width: '75px',
-        height: '75px',
+        width: '100px',
+        height: '100px',
     },
 }));
 
