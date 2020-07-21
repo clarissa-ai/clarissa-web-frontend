@@ -48,6 +48,7 @@ const Login = () => {
         profile.login(values.email, values.password, (newProfile) => {
             dispatch(setProfile(newProfile))
         });
+        if (!profile.authenticated) setValues({...values, error: <Alert severity="error">Incorrect username or password</Alert>})
     };
 
     const classes = useStyles();

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Fade, Grid} from '@material-ui/core';
-import SignUpForm from 'components/authentication/login/Signup';
+import SignUpForm from 'components/authentication/Signup';
 
 const LoginPage = () => {
     return <Fade in timeout={500}>
