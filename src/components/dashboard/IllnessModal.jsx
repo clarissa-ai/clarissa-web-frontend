@@ -51,6 +51,9 @@ const IllnessModal = (props) => {
     const [selectedDate, setSelectedDate] = React.useState(Date.now());
     const [hasActiveIllness, setHasActiveIllness] = React.useState();
     const [title, setTitle] = React.useState('');
+    const [startDate, setStartDate] = React.useState(Date.now());
+    const [endDate, setEndDate] = React.useState(Date.now());
+
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
