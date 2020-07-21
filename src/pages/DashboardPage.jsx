@@ -86,7 +86,7 @@ const DashboardPage = (props) => {
     return (
         <Fade in timeout={1000}>
             <div className={classes.container}>
-                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
+                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
                     <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
                     {/* <Grid item><ResponsiveDrawer/></Grid> */}
 
@@ -107,8 +107,8 @@ const DashboardPage = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={5} lg={4} xl={4} style={{marginLeft: '1rem'}}>
-                        <Grid container direction='column' spacing={2} alignItems='stretch' alignContent='stretch'>
+                    <Grid item xs={12} md={5} lg={4} xl={4} style={{marginLeft: '1rem', height: '70vh'}}>
+                        <Grid container direction='column' spacing={2}>
                             <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
                             <Grid item>
                                 <CompletedSurveys>
