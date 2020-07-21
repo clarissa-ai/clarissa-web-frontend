@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     close: {
         textTransform: 'none',
         width: 'fitContent',
-        marginBottom: '1rem',
     },
 }));
 
