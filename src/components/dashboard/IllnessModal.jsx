@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Modal} from '@material-ui/core';
 
 const IllnessModal = (props) => {
+    const [open, setOpen] = useState(props.open);
     return <div>
-        <Modal>
+        {/* <Modal open={open}>
             Pop up
-        </Modal>
+        </Modal> */}
+
+        TEST
     </div>
 }
 export default IllnessModal;

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
-// import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
 import StatsCard from 'components/dashboard/StatsCard';
 import RecentIllness from 'components/dashboard/RecentIllness';
@@ -11,6 +10,7 @@ import TopBar from 'components/navbar/TopBar';
 import IllnessCard from 'components/dashboard/IllnessCard';
 import SurveyCard from 'components/dashboard/SurveyCard';
 import {useHistory} from 'react-router-dom';
+import IllnessModal from 'components/dashboard/IllnessModal';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -39,6 +39,7 @@ const DashboardPage = (props) => {
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
     const history = useHistory();
+    const [showModal, setModal] = useState(false);
 
     const profile = useSelector(profileSelector);
 
@@ -77,7 +78,7 @@ const DashboardPage = (props) => {
             response.json().then((data) => {
                 const {status} = data;
                 if (status === 'success') {
-                    history.push('/active-illness');
+                    // history.push('/active-illness');
                 }
             });
         });
@@ -86,9 +87,9 @@ const DashboardPage = (props) => {
     return (
         <Fade in timeout={1000}>
             <div className={classes.container}>
+                {showModal ? <IllnessModal open={true}/> : null}
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
-                    {/* <Grid item><ResponsiveDrawer/></Grid> */}
+                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {createNewIllness(); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
