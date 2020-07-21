@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SymptomModal = (props) => {
-    SymptomModal.propTypes = {
+const IllnessModal = (props) => {
+    IllnessModal.propTypes = {
         closeModalFunction: propTypes.func,
     };
 
@@ -93,4 +93,4 @@ const SymptomModal = (props) => {
         </Grid>
     );
 };
-export default SymptomModal;
+export default IllnessModal;

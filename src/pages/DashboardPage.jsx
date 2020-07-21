@@ -10,7 +10,7 @@ import TopBar from 'components/navbar/TopBar';
 import IllnessCard from 'components/dashboard/IllnessCard';
 import SurveyCard from 'components/dashboard/SurveyCard';
 import {useHistory} from 'react-router-dom';
-import SymptomModal from 'components/dashboard/SymptomModal';
+import SymptomModal from 'components/dashboard/IllnessModal';
 const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
