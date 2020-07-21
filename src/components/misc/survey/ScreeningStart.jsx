@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Typography, Grid, makeStyles, Link, Button, Container} from '@material-ui/core';
 import ScreeningQuestions from './ScreeningQuestions';
+import TopBar from 'components/navbar/TopBar';
+import {Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     start: {
@@ -26,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     },
     belowMinutes: {
         paddingBottom: '1rem',
+    },
+    img: {
+        width: '75px',
+        height: '75px',
     },
 }));
 
@@ -56,7 +62,7 @@ const ScreeningStart = (props) => {
                     <Link underline="none" href={data.link}>
                         <Grid container spacing={1} justify="center">
                             <Grid item>
-                                <img alt='linkImage' src={apiLink + data.image_url}/>
+                                <img alt='linkImage' src={apiLink + data.image_url} className={classes.img}/>
                             </Grid>
                             <Grid item xs={9}>
                                 <Typography variant="body1" className={classes.underline}>{data.title}</Typography>
@@ -93,37 +99,46 @@ const ScreeningStart = (props) => {
         return <div>{error.message}</div>;
     } else if (!isLoaded) {
         return <div></div>;
-    } else if (!clicked) {
-        return (
-            <Container>
-                <Grid container justify="center">
-                    <Grid container justify="center" className={classes.start}>
-                        <img alt='centerImage' src={apiLink + data.image_url}/>
-                    </Grid>
-                    <Grid container justify="center">
-                        <Typography variant="h4" color="primary" paragraph>{data.title}</Typography>
-                    </Grid>
-                    <Grid>
-                        <Typography paragraph className={classes.wordWrap}>{data.description}</Typography>
-                    </Grid>
-                    <Grid container justify="center" className={classes.spacing}>
-                        <Button variant="contained" color="primary" size="large" classes={{root: classes.rootButton, label: classes.labelButton}} onClick={handleClick}>
-                            <Typography variant="body1">Start Screening</Typography>
-                        </Button>
-                    </Grid>
-                    <Grid container justify="center">
-                        <Typography paragraph variant="body2" color="textSecondary" className={classes.belowMinutes}>
-                            Approximately {data.question_count/2} Minutes
-                        </Typography>
-                    </Grid>
-                    <Grid container spacing={6}>
-                        {displayLinks}
-                    </Grid>
-                </Grid>
-            </Container>
-        );
     } else {
-        return <ScreeningQuestions data={data} idNum={idNum} email={props.email}/>;
+        return (
+            <div>
+                <TopBar>
+                    <Link to={'/surveys'} component={RouterLink}>
+                        <Button color='primary' variant="contained" style={{textTransform: 'none'}}>
+                            Close
+                        </Button>
+                    </Link>
+                </TopBar>
+                {clicked ? <ScreeningQuestions data={data} idNum={idNum} email={props.email}/> :
+                    <Container>
+                        <Grid container justify="center">
+                            <Grid container justify="center" className={classes.start}>
+                                <img alt='centerImage' src={apiLink + data.image_url}/>
+                            </Grid>
+                            <Grid container justify="center">
+                                <Typography variant="h4" color="primary" paragraph>{data.title}</Typography>
+                            </Grid>
+                            <Grid>
+                                <Typography paragraph className={classes.wordWrap}>{data.description}</Typography>
+                            </Grid>
+                            <Grid container justify="center" className={classes.spacing}>
+                                <Button variant="contained" color="primary" size="large" classes={{root: classes.rootButton, label: classes.labelButton}} onClick={handleClick}>
+                                    <Typography variant="body1">Start Screening</Typography>
+                                </Button>
+                            </Grid>
+                            <Grid container justify="center">
+                                <Typography paragraph variant="body2" color="textSecondary" className={classes.belowMinutes}>
+                                        Approximately {data.question_count/2} Minutes
+                                </Typography>
+                            </Grid>
+                            <Grid container spacing={6}>
+                                {displayLinks}
+                            </Grid>
+                        </Grid>
+                    </Container>
+                }
+            </div>
+        );
     }
 };
 export default ScreeningStart;
