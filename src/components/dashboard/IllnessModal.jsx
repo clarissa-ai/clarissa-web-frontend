@@ -17,9 +17,7 @@ const theme = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
     container: {
         zIndex: '9999',
-        position: 'absolute',
-        // background: 'rgba(0, 0, 0, 0.4)',
-
+        position: 'fixed',
     },
     formContainer: {
         background: '#fff',
@@ -51,6 +49,7 @@ const IllnessModal = (props) => {
     };
 
     const [selectedDate, setSelectedDate] = React.useState(Date.now());
+    const [showModal, setModal] = React.useState(true);
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -59,12 +58,11 @@ const IllnessModal = (props) => {
     const classes = useStyles();
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
-            {/* Form contents */}
-            <Grid container className={classes.formContainer} direction='column' spacing={2}>
+            {showModal ? <Grid container className={classes.formContainer} direction='column' spacing={2}>
                 <Grid container justify='flex-end' >
-                    <Grid item><Button className={classes.close} onClick={props.closeModalFunction}>Close</Button></Grid>
+                    <Grid item><Button className={classes.close} onClick={() => setModal(false)}>Close</Button></Grid>
                 </Grid>
-                <Grid item><TextField id="outlined-basic" label="Symptom" variant="outlined" fullWidth/></Grid>
+                <Grid item><TextField id="outlined-basic" label="Illness Name" variant="outlined" fullWidth/></Grid>
                 <Grid item><ThemeProvider theme={theme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -84,12 +82,33 @@ const IllnessModal = (props) => {
                         />
                     </MuiPickersUtilsProvider>
                 </ThemeProvider></Grid>
+
+                <Grid item><ThemeProvider theme={theme}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            className={classes.date}
+                            fullWidth
+                            disableToolbar
+                            variant="inline"
+                            inputVariant="outlined"
+                            format="MM/dd/yyyy"
+                            margin='none'
+                            id="date-picker-inline"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
+                </ThemeProvider></Grid>
+
                 <Grid item><TextField id="outlined-basic" label="Data" variant="outlined" fullWidth/></Grid>
                 <Grid container justify='center'>
                     {/* NOTE TO SELF: POST CHANGES WHEN CONNECTING TO BACKEND */}
                     <Grid item><Button className={classes.button} onClick={props.closeModalFunction}>Save</Button></Grid>
                 </Grid>
-            </Grid>
+            </Grid> : null}
         </Grid>
     );
 };

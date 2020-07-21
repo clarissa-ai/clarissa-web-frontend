@@ -53,6 +53,7 @@ const DashboardPage = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setDash(res);
+                console.log(res);
                 setActiveSurveys(res.active_surveys);
                 setCompletedSurveys(res.completed_surveys);
                 setrecentIllness(res.recent_illnesses);
@@ -86,7 +87,7 @@ const DashboardPage = (props) => {
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                {showModal ? <SymptomModal open={true}/> : null}
+                {showModal ? <SymptomModal/> : null}
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
                     <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {createNewIllness(); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
