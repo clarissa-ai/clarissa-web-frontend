@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {Typography, Grid, makeStyles, Button, Card, CardContent, Box, Avatar, useTheme} from '@material-ui/core';
+import {Typography, Grid, makeStyles, Button, Card, CardContent, Box, Avatar, useTheme, Link} from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import {Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -129,14 +130,16 @@ const ActiveSurveys = (props) => {
                                             <Typography style={{fontWeight: 'bold'}} variant='body2'>Questions</Typography>
                                         </div>
                                         <Grid container justify='center' className={classes.start}>
-                                            <Button onClick={() => props.surveyClick([true, data.id])} style={{color: '#FFFF'}}>
-                                                <Grid container>
-                                                    <Typography style={{fontWeight: 'bold'}}>
+                                            <Link to={`/survey/${data.id}`} component={RouterLink}>
+                                                <Button style={{color: '#FFFF'}}>
+                                                    <Grid container>
+                                                        <Typography style={{fontWeight: 'bold'}}>
                                                         Start
-                                                    </Typography>
-                                                    <ArrowForwardIosIcon/>
-                                                </Grid>
-                                            </Button>
+                                                        </Typography>
+                                                        <ArrowForwardIosIcon/>
+                                                    </Grid>
+                                                </Button>
+                                            </Link>
                                         </Grid>
                                     </Box>
                                 </Grid>
