@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 const getMobile = () => window.matchMedia('only screen and (max-width: 959px)').matches;
