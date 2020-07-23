@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
-// import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
 import StatsCard from 'components/dashboard/StatsCard';
 import RecentIllness from 'components/dashboard/RecentIllness';
@@ -10,8 +9,7 @@ import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/navbar/TopBar';
 import IllnessCard from 'components/dashboard/IllnessCard';
 import SurveyCard from 'components/dashboard/SurveyCard';
-import {useHistory} from 'react-router-dom';
-
+import IllnessModal from 'components/dashboard/IllnessModal';
 const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
@@ -31,18 +29,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DashboardPage = (props) => {
-    const classes = useStyles();
-    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
+    // Functions here declared at the top in order to be used for modal state
+    const handleModal = () => {
+        setModal(false)
+    }
+    // Modal State
+    const [showModal, setModal] = useState(false);
+    const [modalType, setModalType] = useState(<IllnessModal newIllness={true} onModalChange={handleModal}/>)
+
+    
+    // Info State
     const [dashData, setDash] = useState([]);
     const [activeSurveys, setActiveSurveys] = useState([]);
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
-    const history = useHistory();
 
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const profile = useSelector(profileSelector);
+    const classes = useStyles();
 
     useEffect(()=> {
+
         if (!profile.authenticated) return;
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
             credentials: 'include',
@@ -53,6 +61,7 @@ const DashboardPage = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setDash(res);
+                console.log(res);
                 setActiveSurveys(res.active_surveys);
                 setCompletedSurveys(res.completed_surveys);
                 setrecentIllness(res.recent_illnesses);
@@ -65,30 +74,18 @@ const DashboardPage = (props) => {
         setName(userInfo.first_name);
     }, [apiLink, profile]);
 
-    const createNewIllness = (event) => {
-        fetch(`${apiLink}/api/dashboard/create_illness`, {
-            method: 'GET',
-            credentials: 'include',
-        }).then((response) => {
-            if (!response.ok) {
-                console.log('Internal Error. Please contact support.');
-                return;
-            }
-            response.json().then((data) => {
-                const {status} = data;
-                if (status === 'success') {
-                    history.push('/active-illness');
-                }
-            });
-        });
-    };
+    const newIllnessModal = (condition) => {
+        if (!condition) {
+            setModalType(<IllnessModal newIllness={false} onModalChange={handleModal}/>);
+        }
+    }
 
     return (
-        <Fade in timeout={1000}>
+        <Fade in timeout={500}>
             <div className={classes.container}>
+                {showModal ? modalType : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
-                    {/* <Grid item><ResponsiveDrawer/></Grid> */}
+                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {newIllnessModal(true); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
@@ -101,7 +98,7 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <RecentIllness >
                                     {recentIllness.map((illness, index) => {
-                                        return <Grid item><IllnessCard key={index} title='' dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                        return <Grid item><IllnessCard key={index} title={illness.title} dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
                                     })}
                                 </RecentIllness>
                             </Grid>
