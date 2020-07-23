@@ -30,25 +30,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DashboardPage = (props) => {
-    // Functions here declared at the top in order to be used for state
+    // Functions here declared at the top in order to be used for modal state
     const handleModal = () => {
-        setModal(!showModal);
+        setModal(false)
+        console.log(showModal);
     }
-
+    // Modal State
     const [showModal, setModal] = useState(false);
     const [modalType, setModalType] = useState(<IllnessModal newIllness={true} onModalChange={handleModal}/>)
 
-    const classes = useStyles();
-    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
+    
+    // Info State
     const [dashData, setDash] = useState([]);
     const [activeSurveys, setActiveSurveys] = useState([]);
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
+
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const history = useHistory();
     const profile = useSelector(profileSelector);
+    const classes = useStyles();
 
     useEffect(()=> {
+
         if (!profile.authenticated) return;
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
             credentials: 'include',
@@ -91,7 +96,6 @@ const DashboardPage = (props) => {
     };
 
     const newIllnessModal = (condition) => {
-        setModal(true);
         if (!condition) {
             setModalType(<IllnessModal newIllness={false} onModalChange={handleModal}/>);
         }
@@ -100,9 +104,9 @@ const DashboardPage = (props) => {
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                {showModal? modalType : null }
+                {showModal ? modalType : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {createNewIllness(); newIllnessModal(true);}}>New Illness</Button></TopBar></Grid>
+                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {createNewIllness(); newIllnessModal(true); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>

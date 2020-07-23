@@ -44,10 +44,6 @@ const useStyles = makeStyles((theme) => ({
 
 const IllnessModal = (props) => {
 
-    IllnessModal.propTypes = {
-        onModalChange: propTypes.func,
-    };
-
     const [selectedDate, setSelectedDate] = React.useState(Date.now());
     const [hasActiveIllness, setHasActiveIllness] = React.useState();
     const [title, setTitle] = React.useState('');
@@ -80,7 +76,7 @@ const IllnessModal = (props) => {
     useEffect(() => {
         populateData();
         console.log(props.onModalChange)
-        console.log(props.newIllness)
+        // console.log(props.newIllness)
     })
 
     return (
