@@ -17,7 +17,6 @@ import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import ViewWeekOutlinedIcon from '@material-ui/icons/ViewWeekOutlined';
 import {useSelector} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
-import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
