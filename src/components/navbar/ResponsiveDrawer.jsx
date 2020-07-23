@@ -217,7 +217,7 @@ const ResponsiveDrawer = (props) => {
                         <a className={classes.reportLink} href="https://forms.gle/b26TiM6Mz974joJM6" target="_blank" rel="noopener noreferrer">Report a Bug</a>
                     </Drawer>
                 </Hidden>
-            </nav>            
+            </nav>
         </div>
     );
 };
