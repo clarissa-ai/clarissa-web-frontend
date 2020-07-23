@@ -88,12 +88,21 @@ const DashboardPage = (props) => {
         setModal(!showModal);
     }
 
+    const SymptomModalType = <SymptomModal newIllness={true} onModalChange={handleModal}/>
+
+    const newIllnessModal = (condition) => {
+        setModal(true);
+        if (!condition) {
+            SymptomModalType = <SymptomModal newIllness={false} onModalChange={handleModal}/>
+        }
+    }
+
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                {showModal? <SymptomModal onModalChange={handleModal}/> : null }
+                {showModal? SymptomModalType : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} createNewIllness={true} onClick={() => {createNewIllness(); setModal(true);}}>New Illness</Button></TopBar></Grid>
+                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} createNewIllness={true} onClick={() => {createNewIllness(); newIllnessModal(true);}}>New Illness</Button></TopBar></Grid>
 
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
