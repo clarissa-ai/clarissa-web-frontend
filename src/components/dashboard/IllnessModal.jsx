@@ -95,6 +95,7 @@ const IllnessModal = (props) => {
                         <KeyboardDatePicker
                             className={classes.date}
                             fullWidth
+                            label="Start Date"
                             disableToolbar
                             variant="inline"
                             inputVariant="outlined"
