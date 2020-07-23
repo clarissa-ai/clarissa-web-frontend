@@ -30,10 +30,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DashboardPage = (props) => {
+    // Functions here declared at the top in order to be used for state
     const handleModal = () => {
         setModal(!showModal);
     }
-    
+
+    const [showModal, setModal] = useState(false);
+    const [modalType, setModalType] = useState(<IllnessModal newIllness={true} onModalChange={handleModal}/>)
+
     const classes = useStyles();
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const [dashData, setDash] = useState([]);
@@ -42,9 +46,6 @@ const DashboardPage = (props) => {
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
     const history = useHistory();
-    const [showModal, setModal] = useState(false);
-    const [modalType, setModalType] = useState(<IllnessModal newIllness={true} onModalChange={handleModal}/>)
-
     const profile = useSelector(profileSelector);
 
     useEffect(()=> {
