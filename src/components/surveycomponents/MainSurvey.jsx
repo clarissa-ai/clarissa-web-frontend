@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {Typography, Grid, makeStyles, Button, Card, CardContent, Box} from '@material-ui/core';
+import {Typography, Grid, makeStyles, Button, Card, CardContent, Box, Link} from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import {Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -78,14 +79,16 @@ const MainSurvey = (props) => {
                         <CardContent>
                             <Grid container>
                                 <Typography style={{fontWeight: 'bold', width: '80%'}}>{data.question_count + ' '}Questions</Typography>
-                                <Button onClick={() => props.surveyClick([true, data.id])}>
-                                    <Grid container>
-                                        <Typography style={{fontWeight: 'bold'}}>
+                                <Link to={`/survey/${data.id}`} component={RouterLink}>
+                                    <Button>
+                                        <Grid container>
+                                            <Typography style={{fontWeight: 'bold'}}>
                                                 Start
-                                        </Typography>
-                                        <ArrowForwardIosIcon/>
-                                    </Grid>
-                                </Button>
+                                            </Typography>
+                                            <ArrowForwardIosIcon/>
+                                        </Grid>
+                                    </Button>
+                                </Link>
                             </Grid>
                         </CardContent>
                     </div>
