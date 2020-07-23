@@ -80,6 +80,7 @@ const IllnessModal = (props) => {
     useEffect(() => {
         populateData();
         console.log(props.onModalChange)
+        console.log(props.newIllness)
     })
 
     return (
@@ -107,7 +108,7 @@ const IllnessModal = (props) => {
                         />
                     </MuiPickersUtilsProvider>
                 </ThemeProvider></Grid>
-
+                {props.newIllness ? null : 
                 <Grid item><ThemeProvider theme={theme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -126,6 +127,7 @@ const IllnessModal = (props) => {
                         />
                     </MuiPickersUtilsProvider>
                 </ThemeProvider></Grid>
+                }
 
                 <Grid container justify='center'>
                     {/* NOTE TO SELF: POST CHANGES WHEN CONNECTING TO BACKEND */}
