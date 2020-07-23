@@ -113,7 +113,7 @@ const ScreeningStart = (props) => {
                     <Container>
                         <Grid container justify="center">
                             <Grid container justify="center" className={classes.start}>
-                                <img alt='centerImage' src={apiLink + data.image_url}/>
+                                <img alt='centerImage' src={apiLink + data.image_url} style={{width: '175px', height: '175px'}}/>
                             </Grid>
                             <Grid container justify="center">
                                 <Typography variant="h4" color="primary" paragraph>{data.title}</Typography>
