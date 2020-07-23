@@ -122,6 +122,16 @@ const useStyles = makeStyles((theme) => ({
         height: '3rem',
         fontWeight: 600,
     },
+    reportLink: {
+        fontWeight: 50,
+        color: '#bababa',
+        fontSize: 12,
+        position: "fixed",
+        bottom: 0,
+        textAlign: "center",
+        paddingBottom: 5,
+        width: drawerWidth
+    }
 }));
 
 const ResponsiveDrawer = (props) => {
@@ -204,6 +214,7 @@ const ResponsiveDrawer = (props) => {
                         open
                     >
                         {drawer}
+                        <a className={classes.reportLink} href="https://forms.gle/b26TiM6Mz974joJM6" target="_blank" rel="noopener noreferrer">Report a Bug</a>
                     </Drawer>
                 </Hidden>
             </nav>
