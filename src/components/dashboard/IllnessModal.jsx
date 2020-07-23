@@ -46,10 +46,10 @@ const useStyles = makeStyles((theme) => ({
 const IllnessModal = (props) => {
 
     const [selectedDate, setSelectedDate] = React.useState(Date.now());
-    const [openNewIllness, setOpenNewIllness] = React.useState(props.newIllness);
+    const openNewIllness = React.useState(props.newIllness);
     const [title, setTitle] = React.useState('');
-    const [startDate, setStartDate] = React.useState(Date.now());
-    const [endDate, setEndDate] = React.useState(Date.now());
+    // const [startDate, setStartDate] = React.useState(Date.now());
+    // const [endDate, setEndDate] = React.useState(Date.now());
 
 
     const handleDateChange = (date) => {

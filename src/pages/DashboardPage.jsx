@@ -9,7 +9,6 @@ import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/navbar/TopBar';
 import IllnessCard from 'components/dashboard/IllnessCard';
 import SurveyCard from 'components/dashboard/SurveyCard';
-import {useHistory} from 'react-router-dom';
 import IllnessModal from 'components/dashboard/IllnessModal';
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -47,7 +46,6 @@ const DashboardPage = (props) => {
     const [userName, setName] = useState('');
 
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
-    const history = useHistory();
     const profile = useSelector(profileSelector);
     const classes = useStyles();
 
