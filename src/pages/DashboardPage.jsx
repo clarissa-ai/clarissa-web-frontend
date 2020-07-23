@@ -33,7 +33,6 @@ const DashboardPage = (props) => {
     // Functions here declared at the top in order to be used for modal state
     const handleModal = () => {
         setModal(false)
-        console.log(showModal);
     }
     // Modal State
     const [showModal, setModal] = useState(false);
@@ -77,24 +76,6 @@ const DashboardPage = (props) => {
         setName(userInfo.first_name);
     }, [apiLink, profile]);
 
-    const createNewIllness = (event) => {
-        fetch(`${apiLink}/api/dashboard/create_illness`, {
-            method: 'GET',
-            credentials: 'include',
-        }).then((response) => {
-            if (!response.ok) {
-                console.log('Internal Error. Please contact support.');
-                return;
-            }
-            response.json().then((data) => {
-                const {status} = data;
-                if (status === 'success') {
-                    // history.push('/active-illness');
-                }
-            });
-        });
-    };
-
     const newIllnessModal = (condition) => {
         if (!condition) {
             setModalType(<IllnessModal newIllness={false} onModalChange={handleModal}/>);
@@ -106,7 +87,7 @@ const DashboardPage = (props) => {
             <div className={classes.container}>
                 {showModal ? modalType : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {createNewIllness(); newIllnessModal(true); setModal(true);}}>New Illness</Button></TopBar></Grid>
+                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {newIllnessModal(true); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
@@ -119,7 +100,7 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <RecentIllness >
                                     {recentIllness.map((illness, index) => {
-                                        return <Grid item><IllnessCard key={index} title='' dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                        return <Grid item><IllnessCard key={index} title={illness.title} dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
                                     })}
                                 </RecentIllness>
                             </Grid>

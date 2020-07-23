@@ -3,7 +3,8 @@ import {Button, Grid, makeStyles, TextField, ThemeProvider} from '@material-ui/c
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import {createMuiTheme} from '@material-ui/core/styles';
-import propTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
+
 
 // For overriding date picker background, it allows themes only
 const theme = createMuiTheme({
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const IllnessModal = (props) => {
 
     const [selectedDate, setSelectedDate] = React.useState(Date.now());
-    const [hasActiveIllness, setHasActiveIllness] = React.useState();
+    const [openNewIllness, setOpenNewIllness] = React.useState(props.newIllness);
     const [title, setTitle] = React.useState('');
     const [startDate, setStartDate] = React.useState(Date.now());
     const [endDate, setEndDate] = React.useState(Date.now());
@@ -55,28 +56,68 @@ const IllnessModal = (props) => {
         setSelectedDate(date);
     };
 
-    const API_LINK = process.env.API_LINK;
+    const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
 
     const populateData = () => {
-        fetch(`${API_LINK}/api/illness/get_active_illness`, {
+        // fetch(`${API_LINK}/api/illness/get_active_illness`, {
+        //     method: 'GET',
+        //     credentials: 'include',
+        // }).then((response) => {
+    
+        // })
+    }
+
+    const history = useHistory();
+
+    const createIllness = () => {
+        fetch(`${API_LINK}/api/dashboard/create_illness`, {
             method: 'GET',
             credentials: 'include',
         }).then((response) => {
-            if (response.status === 400) setHasActiveIllness(false);
-            else setHasActiveIllness(true);
+            if (!response.ok) {
+                console.log('Internal Error. Please contact support.');
+                return;
+            }
+            response.json();
+        });
+
+        fetch(`${API_LINK}/api/illness/get_active_illness`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         })
+        .then(response => response.json())
+        .then(data => {
+           const activeIllnessId = data.illness.id;
 
-        if (hasActiveIllness) {
+           const payload = {
+            'illness_id': activeIllnessId,
+            'new_title': `${title}`
+            }
 
-        }
-    }
+            fetch(`${API_LINK}/api/illness/edit_illness`, {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(payload),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then(response => response.json())
+            .then(data => {
+                const {status} = data;
+                if (status === 'success') {
+                    history.push('/active-illness');
+                }
+            })
+        })
+    };
 
     const classes = useStyles();
 
     useEffect(() => {
-        populateData();
-        console.log(props.onModalChange)
-        // console.log(props.newIllness)
+        if (!openNewIllness) populateData();
     })
 
     return (
@@ -85,7 +126,7 @@ const IllnessModal = (props) => {
                 <Grid container justify='flex-end' >
                     <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
                 </Grid>
-                <Grid item><TextField id="outlined-basic" label="Illness Name" variant="outlined" fullWidth/></Grid>
+                <Grid item><TextField id="outlined-basic" onChange={(e) => setTitle(e.target.value)} label="Illness Name" variant="outlined" fullWidth/></Grid>
                 <Grid item><ThemeProvider theme={theme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -127,8 +168,7 @@ const IllnessModal = (props) => {
                 }
 
                 <Grid container justify='center'>
-                    {/* NOTE TO SELF: POST CHANGES WHEN CONNECTING TO BACKEND */}
-                    <Grid item><Button className={classes.button}>Save</Button></Grid>
+                    <Grid item><Button className={classes.button} onClick={createIllness}>Save</Button></Grid>
                 </Grid>
             </Grid>
         </Grid>
