@@ -137,7 +137,7 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            value={selectedDate}
+                            value={props.dateStart ? props.dateStart : selectedDate}
                             onChange={handleDateChange}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',

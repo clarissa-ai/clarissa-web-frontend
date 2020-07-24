@@ -1,7 +1,6 @@
 import React from 'react';
 import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
 import {Link as RouterLink} from 'react-router-dom';
-import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -64,7 +63,14 @@ const IllnessCard = (props) => {
                 <Link className={props.status? classes.linkActive : classes.link} component={RouterLink} to={props.status? '/active-illness' : '/past-illnesses'}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
             </Button>
         </Grid>
-        <Grid item><Link className={props.status? classes.linkActive : classes.link} onClick={() => {props.newIllnessFunction(false); props.modalFunction()}}>Edit</Link></Grid>
+        <Grid item>
+            <Link className={props.status? classes.linkActive : classes.link} 
+            onClick={() => {
+                props.newIllnessFunction(false); 
+                props.modalFunction();
+                props.setModalInfo(props.title, props.dateStart, props.dateEndOrUpdated);
+            }}>Edit</Link>
+        </Grid>
     </Grid>
 }
 
