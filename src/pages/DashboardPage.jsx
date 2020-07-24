@@ -78,6 +78,8 @@ const DashboardPage = (props) => {
     const newIllnessModal = (condition) => {
         if (!condition) {
             setModalType(<IllnessModal newIllness={false} onModalChange={handleModal}/>);
+        } else {
+            setModalType(<IllnessModal newIllness={true} onModalChange={handleModal}/>);
         }
     }
 
@@ -101,6 +103,7 @@ const DashboardPage = (props) => {
                                     {recentIllness.map((illness, index) => {
                                         return <Grid item>
                                             <IllnessCard 
+                                            newIllnessFunction={newIllnessModal}
                                             modalFunction={handleModal} 
                                             key={index} 
                                             title={illness.title} 
