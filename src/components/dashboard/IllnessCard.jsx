@@ -37,7 +37,10 @@ const useStyles = makeStyles((theme) => ({
     },
     link: {
         color: '#000',
-    }
+    },
+    title: {
+        width: '8rem',
+    },
 }));
 
 const IllnessCard = (props) => {
@@ -48,8 +51,8 @@ const IllnessCard = (props) => {
         return date.getMonth()+1 +'/'+ date.getDate() +'/'+date.getFullYear();
     }
 
-    return <Grid container direction='row' alignItems='center' justify='space-evenly' className={props.status ? classes.activeContainer : classes.container}>
-        <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid>
+    return <Grid container direction='row' alignItems='center' justify='space-around' className={props.status ? classes.activeContainer : classes.container}>
+        <Grid item><Typography><Box fontWeight='bold' textOverflow="ellipsis" className={classes.title}>{props.title}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight='bold'>{parseDate(props.dateStart)} - {parseDate(props.dateEndOrUpdated)}</Box></Typography></Grid>
         <Grid item>
             <Typography><Box fontWeight='bold'>{props.status === true ? 'Active' : 'Closed'}</Box></Typography>
@@ -60,6 +63,7 @@ const IllnessCard = (props) => {
                 <Link className={props.status? classes.linkActive : classes.link} component={RouterLink} to={props.status? '/active-illness' : '/past-illnesses'}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
             </Button>
         </Grid>
+        <Grid item><Link className={props.status? classes.linkActive : classes.link} onClick={() => props.modalFunction()}>Edit</Link></Grid>
     </Grid>
 }
 

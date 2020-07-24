@@ -44,6 +44,7 @@ const DashboardPage = (props) => {
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
+    const [showEditButton, setEditButton] = useState(false);
 
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const profile = useSelector(profileSelector);
@@ -61,7 +62,6 @@ const DashboardPage = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setDash(res);
-                console.log(res);
                 setActiveSurveys(res.active_surveys);
                 setCompletedSurveys(res.completed_surveys);
                 setrecentIllness(res.recent_illnesses);
@@ -98,7 +98,7 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <RecentIllness >
                                     {recentIllness.map((illness, index) => {
-                                        return <Grid item><IllnessCard key={index} title={illness.title} dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                        return <Grid item><IllnessCard modalFunction={handleModal} key={index} title={illness.title} dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
                                     })}
                                 </RecentIllness>
                             </Grid>

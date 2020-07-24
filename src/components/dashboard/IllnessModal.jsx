@@ -5,7 +5,6 @@ import DateFnsUtils from '@date-io/date-fns';
 import {createMuiTheme} from '@material-ui/core/styles';
 import {useHistory} from 'react-router-dom';
 
-
 // For overriding date picker background, it allows themes only
 const theme = createMuiTheme({
     overrides: {
