@@ -31,8 +31,9 @@ const useStyles = makeStyles((theme) => ({
 const DashboardPage = (props) => {
     // Functions here declared at the top in order to be used for modal state
     const handleModal = () => {
-        setModal(false)
+        setModal(showModal => !showModal)
     }
+
     // Modal State
     const [showModal, setModal] = useState(false);
     const [modalType, setModalType] = useState(<IllnessModal newIllness={true} onModalChange={handleModal}/>)
@@ -98,7 +99,16 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <RecentIllness >
                                     {recentIllness.map((illness, index) => {
-                                        return <Grid item><IllnessCard modalFunction={handleModal} key={index} title={illness.title} dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                        return <Grid item>
+                                            <IllnessCard 
+                                            modalFunction={handleModal} 
+                                            key={index} 
+                                            title={illness.title} 
+                                            dateStart={illness.created_on} 
+                                            dateEndOrUpdated={illness.updated_on} 
+                                            status={illness.active} 
+                                            symptomcount={illness.symptom_count} 
+                                            /></Grid>
                                     })}
                                 </RecentIllness>
                             </Grid>
