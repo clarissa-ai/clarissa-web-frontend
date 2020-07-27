@@ -44,27 +44,20 @@ const useStyles = makeStyles((theme) => ({
 
 const IllnessModal = (props) => {
 
-    const [selectedDate, setSelectedDate] = React.useState(Date.now());
-    const openNewIllness = React.useState(props.newIllness);
     const [title, setTitle] = React.useState('');
-    // const [startDate, setStartDate] = React.useState(Date.now());
-    // const [endDate, setEndDate] = React.useState(Date.now());
+    const [startDate, setStartDate] = React.useState(props.dateStart);
+    const [endDate, setEndDate] = React.useState(props.dateEnd);
 
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    const handleStartDate = (date) => {
+        setStartDate(date);
     };
 
-    const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
-
-    const populateData = () => {
-        // fetch(`${API_LINK}/api/illness/get_active_illness`, {
-        //     method: 'GET',
-        //     credentials: 'include',
-        // }).then((response) => {
-    
-        // })
+    const handleEndDate = (date) => {
+        setStartDate(date);
     }
+
+    const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
 
     const history = useHistory();
 
@@ -116,10 +109,10 @@ const IllnessModal = (props) => {
     const classes = useStyles();
 
     useEffect(() => {
-        // if (!openNewIllness) populateData();
-        // console.log(props.dateStart)
-        console.log(props.title)
-    }, [props.title])
+        console.log(title)
+        console.log(startDate)
+        console.log(endDate)
+    }, [title, startDate, endDate])
 
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
@@ -131,7 +124,7 @@ const IllnessModal = (props) => {
                     <TextField 
                         id="outlined-basic" 
                         onChange={(e) => setTitle(e.target.value)} 
-                        defaultValue={props.title} 
+                        defaultValue={props.newIllness ? '' : props.title} 
                         label="Illness Name" 
                         variant="outlined" 
                         fullWidth/>
@@ -147,8 +140,8 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            value={props.newIllness ? selectedDate : props.dateStart}
-                            onChange={handleDateChange}
+                            value={props.newIllness ? new Date() : startDate}
+                            onChange={handleStartDate}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
@@ -167,7 +160,7 @@ const IllnessModal = (props) => {
                             format="MM/dd/yyyy"
                             margin='none'
                             value={props.dateEnd}
-                            onChange={handleDateChange}
+                            onChange={handleEndDate}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}

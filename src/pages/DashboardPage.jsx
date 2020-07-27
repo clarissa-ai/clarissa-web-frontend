@@ -38,8 +38,6 @@ const DashboardPage = (props) => {
         setModalTitle(title);
         setModalStartDate(startDate);
         setModalEndDate(endDate);
-
-        // console.log(modalTitle+' '+modalStartDate+' '+modalEndDate)
     }
 
     const decideModalType = () => {
@@ -84,8 +82,6 @@ const DashboardPage = (props) => {
     const classes = useStyles();
 
     useEffect(()=> {
-        console.log(modalTitle)
-
         if (!profile.authenticated) return;
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
             credentials: 'include',
