@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
         zIndex: '9999',
         position: 'fixed',
         background: 'rgb(0, 0, 0, 0.3)',
-        width: '100vw',
-        height: '100vh',
+        width: '100%',
+        height: '100%',
     },
     formContainer: {
         background: '#fff',
@@ -149,7 +149,7 @@ const IllnessModal = (props) => {
     }, [title, startDate, endDate, props.id, props.idNum])
 
     return (
-        <Grid container className={classes.container} justify='center' alignItems='center'>
+        <Grid container className={classes.container} justify='center' alignItems='center' onClick={()=> props.onModalChange()}>
             <Grid container className={classes.formContainer} direction='column' spacing={2}>
                 <Grid container justify='flex-end' >
                     <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
