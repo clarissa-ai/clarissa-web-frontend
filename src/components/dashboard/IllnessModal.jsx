@@ -16,9 +16,9 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        zIndex: '9999',
+        zIndex: '1000',
         position: 'fixed',
-        background: 'rgb(0, 0, 0, 0.3)',
+        background: 'rgb(0, 0, 0, 0.2)',
         width: '100%',
         height: '100%',
     },
@@ -30,12 +30,14 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+        margin: '2rem',
 
     },
     date: {
         background: '#fff',
         fontFamily: 'Poppins',
+        zIndex: '9999',
     },
     button: {
         marginTop: '1rem',
@@ -149,7 +151,7 @@ const IllnessModal = (props) => {
     }, [title, startDate, endDate, props.id, props.idNum])
 
     return (
-        <Grid container className={classes.container} justify='center' alignItems='center' onClick={()=> props.onModalChange()}>
+        <Grid container className={classes.container} justify='center' alignItems='center' alignContent='center'>
             <Grid container className={classes.formContainer} direction='column' spacing={2}>
                 <Grid container justify='flex-end' >
                     <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
