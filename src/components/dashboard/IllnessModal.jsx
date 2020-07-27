@@ -138,7 +138,7 @@ const IllnessModal = (props) => {
         console.log(startDate)
         console.log(endDate)
         console.log(props.idNum)
-    }, [title, startDate, endDate, props.id])
+    }, [title, startDate, endDate, props.id, props.idNum])
 
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
