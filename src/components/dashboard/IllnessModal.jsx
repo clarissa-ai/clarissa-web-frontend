@@ -55,8 +55,8 @@ const useStyles = makeStyles((theme) => ({
 const IllnessModal = (props) => {
 
     const [title, setTitle] = React.useState(props.title);
-    const [startDate, setStartDate] = React.useState(props.dateStart);
-    const [endDate, setEndDate] = React.useState(props.dateEnd);
+    const [startDate, setStartDate] = React.useState(new Date(props.dateStart).toISOString());
+    const [endDate, setEndDate] = React.useState(new Date(props.dateEnd).toISOString());
 
 
     const handleStartDate = (date) => {
@@ -136,8 +136,11 @@ const IllnessModal = (props) => {
             .then(data => {
                 const {status} = data;
                 if (status === 'success') {
-                    history.push('/dashboard');
+                    window.location.reload(true);
                 }
+            })
+            .catch(error => {
+                console.log(error);
             })
     }
 
