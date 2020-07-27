@@ -18,12 +18,20 @@ const useStyles = makeStyles((theme) => ({
     container: {
         zIndex: '9999',
         position: 'fixed',
+        background: 'rgb(0, 0, 0, 0.3)',
+        width: '100vw',
+        height: '100vh',
     },
     formContainer: {
         background: '#fff',
         width: '30vw',
         padding: '2rem',
         borderRadius: '4px',
+        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+
     },
     date: {
         background: '#fff',
