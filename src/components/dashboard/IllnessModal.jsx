@@ -5,7 +5,6 @@ import DateFnsUtils from '@date-io/date-fns';
 import {createMuiTheme} from '@material-ui/core/styles';
 import {useHistory} from 'react-router-dom';
 
-
 // For overriding date picker background, it allows themes only
 const theme = createMuiTheme({
     overrides: {
@@ -45,27 +44,20 @@ const useStyles = makeStyles((theme) => ({
 
 const IllnessModal = (props) => {
 
-    const [selectedDate, setSelectedDate] = React.useState(Date.now());
-    const openNewIllness = React.useState(props.newIllness);
     const [title, setTitle] = React.useState('');
-    // const [startDate, setStartDate] = React.useState(Date.now());
-    // const [endDate, setEndDate] = React.useState(Date.now());
+    const [startDate, setStartDate] = React.useState(props.dateStart);
+    const [endDate, setEndDate] = React.useState(props.dateEnd);
 
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    const handleStartDate = (date) => {
+        setStartDate(date);
     };
 
-    const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
-
-    const populateData = () => {
-        // fetch(`${API_LINK}/api/illness/get_active_illness`, {
-        //     method: 'GET',
-        //     credentials: 'include',
-        // }).then((response) => {
-    
-        // })
+    const handleEndDate = (date) => {
+        setEndDate(date);
     }
+
+    const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
 
     const history = useHistory();
 
@@ -114,11 +106,39 @@ const IllnessModal = (props) => {
         })
     };
 
+    const updateIllness = () => {
+        const id = props.idNum;
+        const payload = {
+            'illness_id': id,
+            'new_title': `${title}`,
+            'start_date': `${startDate}`,
+            'end_date': `${endDate}`
+            }
+
+            fetch(`${API_LINK}/api/illness/edit_illness`, {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(payload),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then(response => response.json())
+            .then(data => {
+                const {status} = data;
+                if (status === 'success') {
+                    history.push('/dashboard');
+                }
+            })
+    }
+
     const classes = useStyles();
 
     useEffect(() => {
-        if (!openNewIllness) populateData();
-    })
+        console.log(title)
+        console.log(startDate)
+        console.log(endDate)
+        console.log(props.idNum)
+    }, [title, startDate, endDate, props.id, props.idNum])
 
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
@@ -126,7 +146,15 @@ const IllnessModal = (props) => {
                 <Grid container justify='flex-end' >
                     <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
                 </Grid>
-                <Grid item><TextField id="outlined-basic" onChange={(e) => setTitle(e.target.value)} label="Illness Name" variant="outlined" fullWidth/></Grid>
+                <Grid item>
+                    <TextField 
+                        id="outlined-basic" 
+                        onChange={(e) => setTitle(e.target.value)} 
+                        defaultValue={props.newIllness ? '' : props.title} 
+                        label="Illness Name" 
+                        variant="outlined" 
+                        fullWidth/>
+                        </Grid>
                 <Grid item><ThemeProvider theme={theme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -138,8 +166,8 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            value={selectedDate}
-                            onChange={handleDateChange}
+                            value={props.newIllness ? new Date() : startDate}
+                            onChange={handleStartDate}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
@@ -157,8 +185,8 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            value={selectedDate}
-                            onChange={handleDateChange}
+                            value={endDate}
+                            onChange={handleEndDate}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
@@ -168,7 +196,7 @@ const IllnessModal = (props) => {
                 }
 
                 <Grid container justify='center'>
-                    <Grid item><Button className={classes.button} onClick={createIllness}>Save</Button></Grid>
+                    <Grid item><Button className={classes.button} onClick={props.newIllness? createIllness : updateIllness}>Save</Button></Grid>
                 </Grid>
             </Grid>
         </Grid>

@@ -31,12 +31,47 @@ const useStyles = makeStyles((theme) => ({
 const DashboardPage = (props) => {
     // Functions here declared at the top in order to be used for modal state
     const handleModal = () => {
-        setModal(false)
+        setModal(showModal => !showModal)
     }
+
+    const setExistingIllness = (title, startDate, endDate) => {
+        setModalTitle(title);
+        setModalStartDate(startDate);
+        setModalEndDate(endDate);
+    }
+
+    const decideModalType = () => {
+        if (isModalForNewIllness) {
+            return <IllnessModal
+            title={modalTitle} 
+            dateStart={modalStartDate} 
+            dateEnd={modalEndDate}
+            newIllness={true} 
+            onModalChange={handleModal}
+            setModalInfo={setExistingIllness}
+            idNum={modalIllnessID}/>
+        } else {
+            return <IllnessModal
+            title={modalTitle} 
+            dateStart={modalStartDate} 
+            dateEnd={modalEndDate}
+            newIllness={false} 
+            onModalChange={handleModal}
+            setModalInfo={setExistingIllness}
+            idNum={modalIllnessID}/>
+        }
+        
+    }
+
+    //Modal Fields for Existing Info
+    const [modalTitle, setModalTitle] = useState();
+    const [modalStartDate, setModalStartDate] = useState();
+    const [modalEndDate, setModalEndDate] = useState();
+    const [modalIllnessID, setModalIllnessID] = useState(); 
+
     // Modal State
     const [showModal, setModal] = useState(false);
-    const [modalType, setModalType] = useState(<IllnessModal newIllness={true} onModalChange={handleModal}/>)
-
+    const [isModalForNewIllness, setModalType] = useState(true);
     
     // Info State
     const [dashData, setDash] = useState([]);
@@ -50,7 +85,6 @@ const DashboardPage = (props) => {
     const classes = useStyles();
 
     useEffect(()=> {
-
         if (!profile.authenticated) return;
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
             credentials: 'include',
@@ -61,7 +95,6 @@ const DashboardPage = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setDash(res);
-                console.log(res);
                 setActiveSurveys(res.active_surveys);
                 setCompletedSurveys(res.completed_surveys);
                 setrecentIllness(res.recent_illnesses);
@@ -72,18 +105,24 @@ const DashboardPage = (props) => {
 
         const userInfo = profile.userInfo;
         setName(userInfo.first_name);
-    }, [apiLink, profile]);
+    }, [apiLink, profile, modalTitle]);
 
     const newIllnessModal = (condition) => {
-        if (!condition) {
-            setModalType(<IllnessModal newIllness={false} onModalChange={handleModal}/>);
+        if (!condition) { //Existing Illness Modal
+            setModalType(false);
+        } else { //Create new Illness Modal
+            setModalType(true);
         }
+    }
+
+    const handleModalIllnessID = (num) => {
+        setModalIllnessID(num);
     }
 
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                {showModal ? modalType : null }
+                {showModal ? decideModalType() : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
                     <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {newIllnessModal(true); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
@@ -98,7 +137,20 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <RecentIllness >
                                     {recentIllness.map((illness, index) => {
-                                        return <Grid item><IllnessCard key={index} title={illness.title} dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                        return <Grid item>
+                                            <IllnessCard 
+                                            idNum={illness.id}
+                                            handleModalIllnessID={handleModalIllnessID}
+                                            newIllnessFunction={newIllnessModal}
+                                            modalFunction={handleModal}
+                                            setModalInfo={setExistingIllness}
+                                            key={index} 
+                                            title={illness.title} 
+                                            dateStart={illness.created_on} 
+                                            dateEndOrUpdated={illness.updated_on} 
+                                            status={illness.active} 
+                                            symptomcount={illness.symptom_count} 
+                                            /></Grid>
                                     })}
                                 </RecentIllness>
                             </Grid>
