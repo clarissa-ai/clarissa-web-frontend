@@ -48,7 +48,8 @@ const DashboardPage = (props) => {
             dateEnd={modalEndDate}
             newIllness={true} 
             onModalChange={handleModal}
-            setModalInfo={setExistingIllness}/>
+            setModalInfo={setExistingIllness}
+            idNum={modalIllnessID}/>
         } else {
             return <IllnessModal
             title={modalTitle} 
@@ -56,7 +57,8 @@ const DashboardPage = (props) => {
             dateEnd={modalEndDate}
             newIllness={false} 
             onModalChange={handleModal}
-            setModalInfo={setExistingIllness}/>
+            setModalInfo={setExistingIllness}
+            idNum={modalIllnessID}/>
         }
         
     }
@@ -65,6 +67,7 @@ const DashboardPage = (props) => {
     const [modalTitle, setModalTitle] = useState();
     const [modalStartDate, setModalStartDate] = useState();
     const [modalEndDate, setModalEndDate] = useState();
+    const [modalIllnessID, setModalIllnessID] = useState(); 
 
     // Modal State
     const [showModal, setModal] = useState(false);
@@ -112,6 +115,10 @@ const DashboardPage = (props) => {
         }
     }
 
+    const handleModalIllnessID = (num) => {
+        setModalIllnessID(num);
+    }
+
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
@@ -132,6 +139,8 @@ const DashboardPage = (props) => {
                                     {recentIllness.map((illness, index) => {
                                         return <Grid item>
                                             <IllnessCard 
+                                            idNum={illness.id}
+                                            handleModalIllnessID={handleModalIllnessID}
                                             newIllnessFunction={newIllnessModal}
                                             modalFunction={handleModal}
                                             setModalInfo={setExistingIllness}

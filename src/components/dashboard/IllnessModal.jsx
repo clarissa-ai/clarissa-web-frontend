@@ -106,13 +106,39 @@ const IllnessModal = (props) => {
         })
     };
 
+    const updateIllness = () => {
+        const id = props.idNum;
+        const payload = {
+            'illness_id': id,
+            'new_title': `${title}`,
+            'start_date': `${startDate}`,
+            'end_date': `${endDate}`
+            }
+
+            fetch(`${API_LINK}/api/illness/edit_illness`, {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(payload),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then(response => response.json())
+            .then(data => {
+                const {status} = data;
+                if (status === 'success') {
+                    history.push('/dashboard');
+                }
+            })
+    }
+
     const classes = useStyles();
 
     useEffect(() => {
         console.log(title)
         console.log(startDate)
         console.log(endDate)
-    }, [title, startDate, endDate])
+        console.log(props.idNum)
+    }, [title, startDate, endDate, props.id])
 
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
@@ -170,7 +196,7 @@ const IllnessModal = (props) => {
                 }
 
                 <Grid container justify='center'>
-                    <Grid item><Button className={classes.button} onClick={createIllness}>Save</Button></Grid>
+                    <Grid item><Button className={classes.button} onClick={props.newIllness? createIllness : updateIllness}>Save</Button></Grid>
                 </Grid>
             </Grid>
         </Grid>

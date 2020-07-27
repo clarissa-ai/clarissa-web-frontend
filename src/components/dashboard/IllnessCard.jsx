@@ -69,6 +69,7 @@ const IllnessCard = (props) => {
                 props.newIllnessFunction(false); 
                 props.modalFunction();
                 props.setModalInfo(props.title, props.dateStart, props.dateEndOrUpdated);
+                props.handleModalIllnessID(props.idNum);
             }}>Edit</Link>
         </Grid>
     </Grid>
