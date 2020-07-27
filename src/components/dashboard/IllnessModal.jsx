@@ -54,7 +54,7 @@ const IllnessModal = (props) => {
     };
 
     const handleEndDate = (date) => {
-        setStartDate(date);
+        setEndDate(date);
     }
 
     const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
@@ -159,7 +159,7 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            value={props.dateEnd}
+                            value={endDate}
                             onChange={handleEndDate}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
