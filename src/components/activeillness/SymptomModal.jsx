@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     formContainer: {
         background: '#fff',
         width: '30vw',
-        padding: '2rem',
+        padding: '1rem',
         borderRadius: '4px',
     },
     date: {
