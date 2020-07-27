@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SymptomTile = (props) => {
     SymptomTile.propTypes = {
-        symptomModalFunction: propTypes.func,
+        setModal: propTypes.func,
         symptoms: propTypes.array,
     };
     const classes = useStyles();
@@ -59,7 +59,7 @@ const SymptomTile = (props) => {
             <CardContent className={classes.cardContent}>
                 {props.symptoms ? props.symptoms.slice(0).reverse().map((symptom, index) => {
                     return (
-                        <SymptomCard key={index} symptom={symptom} symptomModalFunction={props.symptomModalFunction}/>
+                        <SymptomCard key={index} symptom={symptom} setModal={props.setModal}/>
                     );
                 }) : null}
             </CardContent>
