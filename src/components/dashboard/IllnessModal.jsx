@@ -116,8 +116,10 @@ const IllnessModal = (props) => {
     const classes = useStyles();
 
     useEffect(() => {
-        if (!openNewIllness) populateData();
-    })
+        // if (!openNewIllness) populateData();
+        // console.log(props.dateStart)
+        console.log(props.title)
+    }, [props.title])
 
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
@@ -125,7 +127,15 @@ const IllnessModal = (props) => {
                 <Grid container justify='flex-end' >
                     <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
                 </Grid>
-                <Grid item><TextField id="outlined-basic" onChange={(e) => setTitle(e.target.value)} label="Illness Name" variant="outlined" fullWidth/></Grid>
+                <Grid item>
+                    <TextField 
+                        id="outlined-basic" 
+                        onChange={(e) => setTitle(e.target.value)} 
+                        defaultValue={props.title} 
+                        label="Illness Name" 
+                        variant="outlined" 
+                        fullWidth/>
+                        </Grid>
                 <Grid item><ThemeProvider theme={theme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -137,7 +147,7 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            value={props.dateStart ? props.dateStart : selectedDate}
+                            value={props.newIllness ? selectedDate : props.dateStart}
                             onChange={handleDateChange}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
@@ -156,7 +166,7 @@ const IllnessModal = (props) => {
                             inputVariant="outlined"
                             format="MM/dd/yyyy"
                             margin='none'
-                            value={selectedDate}
+                            value={props.dateEnd}
                             onChange={handleDateChange}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',

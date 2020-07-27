@@ -34,22 +34,43 @@ const DashboardPage = (props) => {
         setModal(showModal => !showModal)
     }
 
-    // Modal State
-    const [showModal, setModal] = useState(false);
-    const [modalType, setModalType] = useState(<IllnessModal newIllness={true} onModalChange={handleModal}/>)
+    const setExistingIllness = (title, startDate, endDate) => {
+        setModalTitle(title);
+        setModalStartDate(startDate);
+        setModalEndDate(endDate);
+
+        // console.log(modalTitle+' '+modalStartDate+' '+modalEndDate)
+    }
+
+    const decideModalType = () => {
+        if (isModalForNewIllness) {
+            return <IllnessModal
+            title={modalTitle} 
+            dateStart={modalStartDate} 
+            dateEnd={modalEndDate}
+            newIllness={true} 
+            onModalChange={handleModal}
+            setModalInfo={setExistingIllness}/>
+        } else {
+            return <IllnessModal
+            title={modalTitle} 
+            dateStart={modalStartDate} 
+            dateEnd={modalEndDate}
+            newIllness={false} 
+            onModalChange={handleModal}
+            setModalInfo={setExistingIllness}/>
+        }
+        
+    }
 
     //Modal Fields for Existing Info
     const [modalTitle, setModalTitle] = useState();
     const [modalStartDate, setModalStartDate] = useState();
     const [modalEndDate, setModalEndDate] = useState();
 
-    const setExistingIllness = (title, startDate, endDate) => {
-        setModalTitle(title);
-        setModalStartDate(startDate);
-        setModalEndDate(endDate);
-
-        console.log(modalTitle+' '+modalStartDate+' '+modalEndDate)
-    }
+    // Modal State
+    const [showModal, setModal] = useState(false);
+    const [isModalForNewIllness, setModalType] = useState(true);
     
     // Info State
     const [dashData, setDash] = useState([]);
@@ -63,6 +84,7 @@ const DashboardPage = (props) => {
     const classes = useStyles();
 
     useEffect(()=> {
+        console.log(modalTitle)
 
         if (!profile.authenticated) return;
         fetch(`${apiLink}/api/dashboard/get_dashboard`, {
@@ -84,27 +106,20 @@ const DashboardPage = (props) => {
 
         const userInfo = profile.userInfo;
         setName(userInfo.first_name);
-    }, [apiLink, profile]);
+    }, [apiLink, profile, modalTitle]);
 
     const newIllnessModal = (condition) => {
         if (!condition) { //Existing Illness Modal
-            setModalType(<IllnessModal 
-                        title={modalTitle} 
-                        dateStart={modalStartDate} 
-                        dateEnd={modalEndDate} 
-                        newIllness={false} 
-                        onModalChange={handleModal}
-                        setModalInfo={setExistingIllness}
-                        />);
+            setModalType(false);
         } else { //Create new Illness Modal
-            setModalType(<IllnessModal newIllness={true} onModalChange={handleModal}/>);
+            setModalType(true);
         }
     }
 
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                {showModal ? modalType : null }
+                {showModal ? decideModalType() : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
                     <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {newIllnessModal(true); setModal(true);}}>New Illness</Button></TopBar></Grid>
 
