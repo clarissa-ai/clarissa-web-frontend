@@ -44,17 +44,17 @@ const useStyles = makeStyles((theme) => ({
 
 const IllnessModal = (props) => {
 
-    const [title, setTitle] = React.useState('');
+    const [title, setTitle] = React.useState(props.title);
     const [startDate, setStartDate] = React.useState(props.dateStart);
     const [endDate, setEndDate] = React.useState(props.dateEnd);
 
 
     const handleStartDate = (date) => {
-        setStartDate(date);
+        setStartDate(date.toISOString());
     };
 
     const handleEndDate = (date) => {
-        setEndDate(date);
+        setEndDate(date.toISOString());
     }
 
     const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
