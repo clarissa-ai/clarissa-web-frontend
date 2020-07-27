@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         height: '100%',
         backgroundColor: '#FFF',
+        margin: '1rem 0',
     },
     textInput: {
         color: '#AEAEAE',
