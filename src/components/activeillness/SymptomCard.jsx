@@ -24,7 +24,7 @@ const SymptomCard = (props) => {
         symptom: propTypes.object,
         severity: propTypes.string,
         month: propTypes.string,
-        symptomModalFunction: propTypes.func,
+        setModal: propTypes.func,
     };
     const classes = useStyles();
 
@@ -42,20 +42,20 @@ const SymptomCard = (props) => {
                             <Grid item><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.symptom.title}</Box></Typography></Grid>
                         </Grid>
                     </Grid>
-                    {/* <Grid item onClick={props.symptomModalFunction}>
-                            <Typography variant='subtitle2' className={classes.cardLabel} style={{cursor: 'pointer'}}>
-                                <Box fontWeight={500}>Edit</Box>
-                            </Typography>
-                        </Grid>*/}
+                    <Grid item onClick={() => props.setModal([true, props.symptom])}>
+                        <Typography variant='subtitle2' className={classes.cardLabel} style={{cursor: 'pointer'}}>
+                            <Box fontWeight={500}>Edit</Box>
+                        </Typography>
+                    </Grid>
                 </Grid>
                 <Grid container direction="row" spacing={1}>
                     <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Date Logged: </Typography></Grid>
                     <Grid item><Typography variant='subtitle2' className={classes.content}>{displayDate}</Typography></Grid>
                 </Grid>
-                <Grid container direction="row" spacing={1}>
+                {/* <Grid container direction="row" spacing={1}>
                     <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Data: </Typography></Grid>
                     <Grid item><Typography variant='subtitle2' className={classes.content}>{}</Typography></Grid>
-                </Grid>
+                </Grid>*/}
             </CardContent>
         </Card>
     );

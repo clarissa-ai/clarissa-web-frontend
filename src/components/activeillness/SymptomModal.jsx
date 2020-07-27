@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Grid, makeStyles, TextField, ThemeProvider} from '@material-ui/core';
+import {Button, Grid, makeStyles, /* TextField,*/ ThemeProvider, Typography} from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import {createMuiTheme} from '@material-ui/core/styles';
@@ -11,16 +11,22 @@ const theme = createMuiTheme({
         MuiPickersDay: {
             backgroundColor: '#fff',
         },
+        zIndex: '9999',
     },
 });
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        zIndex: '9999',
+        zIndex: '999',
         position: 'fixed',
         background: 'rgba(0, 0, 0, 0.4)',
-        width: '100vw',
-        height: '100vh',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '90%',
+        },
+        height: '100%',
     },
     formContainer: {
         background: '#fff',
@@ -49,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 const SymptomModal = (props) => {
     SymptomModal.propTypes = {
         closeModalFunction: propTypes.func,
+        data: propTypes.object,
     };
 
     const [selectedDate, setSelectedDate] = React.useState(Date.now());
@@ -60,12 +67,12 @@ const SymptomModal = (props) => {
     const classes = useStyles();
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
-            {/* Form contents */}
             <Grid container className={classes.formContainer} direction='column' spacing={2}>
                 <Grid container justify='flex-end' >
                     <Grid item><Button className={classes.close} onClick={props.closeModalFunction}>Close</Button></Grid>
                 </Grid>
-                <Grid item><TextField id="outlined-basic" label="Symptom" variant="outlined" fullWidth/></Grid>
+                <Grid item><Typography>Symptom: {props.data.title}</Typography></Grid>
+                {/* <Grid item><TextField id="outlined-basic" label="Symptom" variant="outlined" fullWidth/></Grid>*/}
                 <Grid item><ThemeProvider theme={theme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -85,7 +92,7 @@ const SymptomModal = (props) => {
                         />
                     </MuiPickersUtilsProvider>
                 </ThemeProvider></Grid>
-                <Grid item><TextField id="outlined-basic" label="Data" variant="outlined" fullWidth/></Grid>
+                {/* <Grid item><TextField id="outlined-basic" label="Data" variant="outlined" fullWidth/></Grid>*/}
                 <Grid container justify='center'>
                     {/* NOTE TO SELF: POST CHANGES WHEN CONNECTING TO BACKEND */}
                     <Grid item><Button className={classes.button} onClick={props.closeModalFunction}>Save</Button></Grid>
