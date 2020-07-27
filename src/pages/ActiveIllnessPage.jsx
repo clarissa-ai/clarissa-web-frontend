@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
-// import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, makeStyles, Typography} from '@material-ui/core';
 import SymptomLog from 'components/activeillness/SymptomLog';
 import SymptomTile from 'components/activeillness/SymptomTile';
@@ -9,6 +8,7 @@ import EndIllnessButton from 'components/activeillness/EndIllnessButton';
 import ExportIllnessButton from 'components/activeillness/ExportIllnessButton';
 import {Redirect} from 'react-router-dom';
 import ActiveAnalysis from 'components/activeillness/activeanalysis/ActiveAnalysis';
+import TopBar from 'components/navbar/TopBar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -86,7 +86,12 @@ const DashboardPage = (props) => {
             <Fade in timeout={1000}>
                 <div className={classes.container}>
                     <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
-                        {/* <Grid item><ResponsiveDrawer/></Grid> */}
+                        <Grid item>
+                            <TopBar>
+                                <ExportIllnessButton/>
+                                <EndIllnessButton incrstate={() => incrstate()}/>
+                            </TopBar>
+                        </Grid>
 
                         <Grid item xs={12} md={9} xl={8}>
                             <Grid container direction='column' spacing={2}>
@@ -94,12 +99,6 @@ const DashboardPage = (props) => {
                                     <Typography variant='h5' className={classes.title}>
                                         Tell Clarissa how you are feeling.
                                     </Typography>
-                                    <Grid item>
-                                        <ExportIllnessButton/>
-                                    </Grid>
-                                    <Grid item>
-                                        <EndIllnessButton incrstate={() => incrstate()}/>
-                                    </Grid>
                                 </Grid>
                                 <Grid item className={classes.greetingsContainer}>
                                     <SymptomLog incrstate={() => incrstate()}/>

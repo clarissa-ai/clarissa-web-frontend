@@ -21,9 +21,8 @@ const ExportIllnessButton = (props) => {
 
     return (
         <Link target="_blank" href={apiLink + '/api/illness/export_active_illness/illness.pdf'} underline='none' download>
-            <Button classes={{root: classes.button, label: classes.labelButton}}>
-                <FilterNoneOutlinedIcon/>
-                <Typography variant='subtitle2' style={{marginLeft: '30px'}}>Export Illness</Typography>
+            <Button classes={{root: classes.button, label: classes.labelButton}} variant="contained" startIcon={<FilterNoneOutlinedIcon/>}>
+                <Typography variant='subtitle2'>Export Illness</Typography>
             </Button>
         </Link>
     );
