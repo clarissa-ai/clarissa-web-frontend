@@ -12,8 +12,8 @@ const TopBar = (props) => {
     const classes = useStyles();
     return <AppBar className={classes.container}>
         <Toolbar>
-            <Grid container justify='flex-end'>
-            {props.children}
+            <Grid container justify='flex-end' spacing={2}>
+            <Grid item>{props.children}</Grid>
             </Grid>
         </Toolbar>
     </AppBar>

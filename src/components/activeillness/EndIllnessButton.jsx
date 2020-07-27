@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     button: {
         backgroundColor: '#F46D66',
         color: '#FFFF',
+        marginLeft: '10px',
     },
     labelButton: {
         textTransform: 'none',
@@ -41,9 +42,8 @@ const EndIllnessButton = (props) => {
     };
 
     return (
-        <Button classes={{root: classes.button, label: classes.labelButton}} onClick={handleClick}>
-            <CloseIcon/>
-            <Typography variant='subtitle2' style={{marginLeft: '30px'}}>End Illness</Typography>
+        <Button classes={{root: classes.button, label: classes.labelButton}} onClick={handleClick} variant="contained" startIcon={<CloseIcon/>}>
+            <Typography variant='subtitle2'>End Illness</Typography>
         </Button>
     );
 };

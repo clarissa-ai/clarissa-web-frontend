@@ -16,18 +16,28 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        zIndex: '9999',
+        zIndex: '1000',
         position: 'fixed',
+        background: 'rgb(0, 0, 0, 0.2)',
+        width: '100%',
+        height: '100%',
     },
     formContainer: {
         background: '#fff',
         width: '30vw',
         padding: '2rem',
         borderRadius: '4px',
+        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        margin: '2rem',
+
     },
     date: {
         background: '#fff',
         fontFamily: 'Poppins',
+        zIndex: '9999',
     },
     button: {
         marginTop: '1rem',
@@ -44,17 +54,17 @@ const useStyles = makeStyles((theme) => ({
 
 const IllnessModal = (props) => {
 
-    const [title, setTitle] = React.useState('');
-    const [startDate, setStartDate] = React.useState(props.dateStart);
-    const [endDate, setEndDate] = React.useState(props.dateEnd);
+    const [title, setTitle] = React.useState(props.title);
+    const [startDate, setStartDate] = React.useState(new Date(props.dateStart).toISOString());
+    const [endDate, setEndDate] = React.useState(new Date(props.dateEnd).toISOString());
 
 
     const handleStartDate = (date) => {
-        setStartDate(date);
+        setStartDate(date.toISOString());
     };
 
     const handleEndDate = (date) => {
-        setEndDate(date);
+        setEndDate(date.toISOString());
     }
 
     const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
@@ -126,8 +136,11 @@ const IllnessModal = (props) => {
             .then(data => {
                 const {status} = data;
                 if (status === 'success') {
-                    history.push('/dashboard');
+                    window.location.reload(true);
                 }
+            })
+            .catch(error => {
+                console.log(error);
             })
     }
 
@@ -141,7 +154,7 @@ const IllnessModal = (props) => {
     }, [title, startDate, endDate, props.id, props.idNum])
 
     return (
-        <Grid container className={classes.container} justify='center' alignItems='center'>
+        <Grid container className={classes.container} justify='center' alignItems='center' alignContent='center'>
             <Grid container className={classes.formContainer} direction='column' spacing={2}>
                 <Grid container justify='flex-end' >
                     <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
