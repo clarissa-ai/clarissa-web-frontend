@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
     },
     container: {
-        paddingTop: '6rem',
+        paddingTop: '3rem',
         background: '#EBEFF2',
         height: '100vh',
     },
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         color: '#fff',
     },
+    toolbar: theme.mixins.toolbar,
 }));
 
 const DashboardPage = (props) => {
@@ -121,12 +122,12 @@ const DashboardPage = (props) => {
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
+                <TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {
+                    newIllnessModal(true); setModal(true);
+                }}>New Illness</Button></TopBar>
+                <div className={classes.toolbar} />
                 {showModal ? decideModalType() : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {
-                        newIllnessModal(true); setModal(true);
-                    }}>New Illness</Button></TopBar></Grid>
-
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
                             <Grid item>
