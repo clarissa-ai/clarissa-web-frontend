@@ -79,7 +79,7 @@ const DashboardPage = (props) => {
             <div className={classes.wrapper}>
                 {showModal[0] ?
                     <div>
-                        <SymptomModal data={showModal[1]} closeModalFunction={() => setModal([false, 0])}/>
+                        <SymptomModal data={showModal[1]} closeModalFunction={() => setModal([false, 0])} incrstate={() => incrstate()}/>
                     </div>:
                     null}
                 <Fade in timeout={1000}>

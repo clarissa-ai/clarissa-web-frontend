@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Grid, makeStyles, /* TextField,*/ ThemeProvider, Typography} from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -38,10 +38,17 @@ const useStyles = makeStyles((theme) => ({
         background: '#fff',
         fontFamily: 'Poppins',
     },
-    button: {
+    saveButton: {
         marginTop: '1rem',
         textTransform: 'none',
         backgroundColor: '#47C594',
+        bordeRadius: '4px',
+        color: '#fff',
+    },
+    deleteButton: {
+        marginTop: '1rem',
+        textTransform: 'none',
+        backgroundColor: '#F46D66',
         bordeRadius: '4px',
         color: '#fff',
     },
@@ -53,15 +60,53 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SymptomModal = (props) => {
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     SymptomModal.propTypes = {
         closeModalFunction: propTypes.func,
         data: propTypes.object,
+        incrstate: propTypes.func,
     };
 
-    const [selectedDate, setSelectedDate] = React.useState(Date.now());
-
+    const [selectedDate, setSelectedDate] = useState(props.data.created_on);
     const handleDateChange = (date) => {
         setSelectedDate(date);
+    };
+
+    const onClickDelete = () => {
+        props.closeModalFunction();
+        const result = {
+            'symptom_id': props.data.id,
+        };
+        console.log(result);
+        fetch(`${apiLink}/api/illness/delete_symptoms`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(result),
+        }).then((res) => res.json()).then(() => {
+            props.incrstate();
+        });
+    };
+
+    const onClickSave = () => {
+        props.closeModalFunction();
+        const result = {
+            'symptom_id': props.data.id,
+            'new_date': new Date(selectedDate).toISOString(),
+        };
+        console.log(result);
+        fetch(`${apiLink}/api/illness/edit_symptoms`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(result),
+        }).then((res) => res.json()).then(() => {
+            props.incrstate();
+        });
     };
 
     const classes = useStyles();
@@ -93,9 +138,14 @@ const SymptomModal = (props) => {
                     </MuiPickersUtilsProvider>
                 </ThemeProvider></Grid>
                 {/* <Grid item><TextField id="outlined-basic" label="Data" variant="outlined" fullWidth/></Grid>*/}
-                <Grid container justify='center'>
+                <Grid container justify='space-between'>
                     {/* NOTE TO SELF: POST CHANGES WHEN CONNECTING TO BACKEND */}
-                    <Grid item><Button className={classes.button} onClick={props.closeModalFunction}>Save</Button></Grid>
+                    <Grid item>
+                        <Button className={classes.deleteButton} onClick={onClickDelete}>
+                            Delete
+                        </Button>
+                    </Grid>
+                    <Grid item><Button className={classes.saveButton} onClick={onClickSave}>Save</Button></Grid>
                 </Grid>
             </Grid>
         </Grid>
