@@ -67,8 +67,7 @@ const SymptomModal = (props) => {
         incrstate: propTypes.func,
     };
 
-    const [selectedDate, setSelectedDate] = useState(props.data.updated_on);
-    console.log(props.data.updated_on);
+    const [selectedDate, setSelectedDate] = useState(props.data.created_on);
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
@@ -95,18 +94,19 @@ const SymptomModal = (props) => {
         props.closeModalFunction();
         const result = {
             'symptom_id': props.data.id,
-            'new_date': selectedDate,
+            'new_date': new Date(selectedDate).toISOString(),
         };
         console.log(result);
-        /* fetch(`${apiLink}/api/illness/delete_symptoms`, {
+        fetch(`${apiLink}/api/illness/edit_symptoms`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(result),
         }).then((res) => res.json()).then(() => {
             props.incrstate();
-        });*/
+        });
     };
 
     const classes = useStyles();
