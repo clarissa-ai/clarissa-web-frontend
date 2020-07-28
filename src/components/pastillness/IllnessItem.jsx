@@ -3,14 +3,14 @@ import {Grid, Typography, makeStyles, Box} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        borderRadius: '4px',
-        background: '#F2F6F9',
+        'borderRadius': '4px',
+        'background': '#F2F6F9',
         '&:hover': {
             background: '#d5dbde',
-          },
-        padding: '1rem',
-        marginBottom: '.8rem',
-        cursor: 'pointer',
+        },
+        'padding': '1rem',
+        'marginBottom': '.8rem',
+        'cursor': 'pointer',
     },
     activeContainer: {
         borderRadius: '4px',
@@ -37,17 +37,17 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
     },
     linkActive: {
-        color: '#fff'
+        color: '#fff',
     },
     link: {
         color: '#000',
-    }
+    },
 }));
 
 const parseDate = (dateString) => {
     const date = new Date(dateString);
     return date.getMonth()+1 +'/'+ date.getDate() +'/'+date.getFullYear();
-}
+};
 
 const IllnessItem = (props) => {
     const classes = useStyles();
@@ -58,8 +58,7 @@ const IllnessItem = (props) => {
         <Grid item><Typography><Box fontWeight = 'bold'>{props.title}{props.index}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'>{parseDate(props.created_on)} - {parseDate(props.updated_on)}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'>{props.symptomCount} Symptoms</Box></Typography></Grid>
-    </Grid>
-
-}
+    </Grid>;
+};
 
 export default IllnessItem;

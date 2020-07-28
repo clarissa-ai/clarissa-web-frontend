@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
     link: {
         color: '#000',
-    }
+    },
 }));
 
 const SurveyCard = (props) => {
@@ -33,7 +33,7 @@ const SurveyCard = (props) => {
                 <Link className={classes.link} component={RouterLink} to={props.link}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
             </Button>
         </Grid>
-    </Grid>
-}
+    </Grid>;
+};
 
 export default SurveyCard;

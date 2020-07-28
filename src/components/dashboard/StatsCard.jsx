@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     stats: {
         padding: '1rem',
         textAlign: 'center',
-    }
+    },
 }));
 
 
@@ -40,6 +40,6 @@ const StatsCard = (props) => {
                 <Typography variant='subtitle2' className={classes.labels}>Surveys Taken</Typography>
             </div>
         </Grid>
-    </Grid>
-}
+    </Grid>;
+};
 export default StatsCard;

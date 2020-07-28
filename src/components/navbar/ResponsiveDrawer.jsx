@@ -126,12 +126,12 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 50,
         color: '#bababa',
         fontSize: 12,
-        position: "fixed",
+        position: 'fixed',
         bottom: 0,
-        textAlign: "center",
+        textAlign: 'center',
         paddingBottom: 5,
-        width: drawerWidth
-    }
+        width: drawerWidth,
+    },
 }));
 
 const ResponsiveDrawer = (props) => {
