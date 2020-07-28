@@ -70,11 +70,9 @@ const PastIllnessPage = (props) => {
                     <Grid container direction='column'>
                         <Grid item><TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar></Grid>
                         <Grid item>
-
-
                             <PastIllnessCard>
                                 {illnessList.map((illness, index) => {
-                                    return <Grid item key={index} onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} currIndex = {index} selectedIllness = {selectedIllness} status={false} title='Illness #' created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>;
+                                    return <Grid item key={index} onClick={() => handleCurrent(index)}><IllnessItem index={illnessList.length - index} currIndex = {index} selectedIllness = {selectedIllness} status={false} title={illness.title} created_on={illness.created_on} updated_on={illness.updated_on} symptomCount={illness.symptoms.length}/></Grid>;
                                 })}
                             </PastIllnessCard>
                         </Grid>
