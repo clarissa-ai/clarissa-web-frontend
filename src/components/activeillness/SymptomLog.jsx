@@ -175,34 +175,36 @@ const SymptomLog = (props) => {
     };
 
     const onSubmit = () => {
-        if (isLoaded) {
-            setIsLoaded(false);
-        }
-        let i = 0;
-        const symptoms = [];
-        while (i < illness.length) {
-            if (selected[i]) {
-                symptoms.push(illness[i]);
+        if (text !== '') {
+            if (isLoaded) {
+                setIsLoaded(false);
             }
-            i++;
+            let i = 0;
+            const symptoms = [];
+            while (i < illness.length) {
+                if (selected[i]) {
+                    symptoms.push(illness[i]);
+                }
+                i++;
+            }
+            fetch(`${apiLink}/api/illness/save_symptoms`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({symptoms}),
+            }).then((res) => {
+                res.json();
+            }).then(() => {
+                props.incrstate();
+                setIsLoaded(true);
+            });
+            setIllness([]);
+            setSelected([]);
+            setText('');
+            sTimeout(null);
         }
-        fetch(`${apiLink}/api/illness/save_symptoms`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({symptoms}),
-        }).then((res) => {
-            res.json();
-        }).then(() => {
-            props.incrstate();
-            setIsLoaded(true);
-        });
-        setIllness([]);
-        setSelected([]);
-        setText('');
-        sTimeout(null);
     };
 
     const displayIllnessName = (name) => {

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
     },
     linkActive: {
-        color: '#fff'
+        color: '#fff',
     },
     link: {
         color: '#000',
@@ -57,7 +57,7 @@ const InfoCard = (props) => {
         </Grid>
         <Grid item><Typography><Box>{props.title}</Box></Typography></Grid>
 
-    </Grid>
-}
+    </Grid>;
+};
 
 export default InfoCard;

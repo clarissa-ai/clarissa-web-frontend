@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IllnessModal = (props) => {
-
     const [title, setTitle] = React.useState(props.title);
     const [startDate, setStartDate] = React.useState(props.dateStart);
     const [endDate, setEndDate] = React.useState(props.dateEnd);
@@ -65,7 +64,7 @@ const IllnessModal = (props) => {
 
     const handleEndDate = (date) => {
         setEndDate(date.toISOString());
-    }
+    };
 
     const API_LINK = process.env.REACT_APP_ENDPOINT_BASE;
 
@@ -105,14 +104,8 @@ const IllnessModal = (props) => {
                 'new_title': validTitle,
                 'startDate': new Date(validStartDate).toISOString()
                 }
-    
-                fetch(`${API_LINK}/api/illness/edit_illness`, {
-                    method: 'POST',
-                    credentials: 'include',
-                    body: JSON.stringify(payload),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+        });
+
                 }).then(response => response.json())
                 .then(data => {
                     const {status} = data;
@@ -132,34 +125,33 @@ const IllnessModal = (props) => {
             'start_date': new Date(startDate).toISOString(),
             'end_date': new Date(endDate).toISOString()
             }
-
-            fetch(`${API_LINK}/api/illness/edit_illness`, {
-                method: 'POST',
-                credentials: 'include',
-                body: JSON.stringify(payload),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).then(response => response.json())
-            .then(data => {
+        fetch(`${API_LINK}/api/illness/edit_illness`, {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => response.json())
+            .then((data) => {
                 const {status} = data;
                 if (status === 'success') {
                     window.location.reload(true);
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
-            })
-    }
+            });
+    };
 
     const classes = useStyles();
 
     useEffect(() => {
-        console.log(title)
-        console.log(startDate)
-        console.log(endDate)
-        console.log(props.idNum)
-    }, [title, startDate, endDate, props.id, props.idNum])
+        console.log(title);
+        console.log(startDate);
+        console.log(endDate);
+        console.log(props.idNum);
+    }, [title, startDate, endDate, props.id, props.idNum]);
 
     return (
         <Grid container className={classes.container} justify='center' alignItems='center' alignContent='center'>
@@ -168,14 +160,14 @@ const IllnessModal = (props) => {
                     <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
                 </Grid>
                 <Grid item>
-                    <TextField 
-                        id="outlined-basic" 
-                        onChange={(e) => setTitle(e.target.value)} 
-                        defaultValue={props.newIllness ? '' : props.title} 
-                        label="Illness Name" 
-                        variant="outlined" 
+                    <TextField
+                        id="outlined-basic"
+                        onChange={(e) => setTitle(e.target.value)}
+                        defaultValue={props.newIllness ? '' : props.title}
+                        label="Illness Name"
+                        variant="outlined"
                         fullWidth/>
-                        </Grid>
+                </Grid>
                 <Grid item><ThemeProvider theme={theme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -195,25 +187,25 @@ const IllnessModal = (props) => {
                         />
                     </MuiPickersUtilsProvider>
                 </ThemeProvider></Grid>
-                {props.newIllness ? null : 
-                <Grid item><ThemeProvider theme={theme}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            className={classes.date}
-                            fullWidth
-                            disableToolbar
-                            variant="inline"
-                            inputVariant="outlined"
-                            format="MM/dd/yyyy"
-                            margin='none'
-                            value={endDate}
-                            onChange={handleEndDate}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                        />
-                    </MuiPickersUtilsProvider>
-                </ThemeProvider></Grid>
+                {props.newIllness ? null :
+                    <Grid item><ThemeProvider theme={theme}>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                className={classes.date}
+                                fullWidth
+                                disableToolbar
+                                variant="inline"
+                                inputVariant="outlined"
+                                format="MM/dd/yyyy"
+                                margin='none'
+                                value={endDate}
+                                onChange={handleEndDate}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </ThemeProvider></Grid>
                 }
 
                 <Grid container justify='center'>
