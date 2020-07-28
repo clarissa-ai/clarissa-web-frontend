@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
 
 const IllnessModal = (props) => {
     const [title, setTitle] = React.useState(props.title);
-    const [startDate, setStartDate] = React.useState(new Date(props.dateStart).toISOString());
-    const [endDate, setEndDate] = React.useState(new Date(props.dateEnd).toISOString());
+    const [startDate, setStartDate] = React.useState(props.dateStart);
+    const [endDate, setEndDate] = React.useState(props.dateEnd);
 
 
     const handleStartDate = (date) => {
@@ -80,24 +80,31 @@ const IllnessModal = (props) => {
                 return;
             }
             response.json();
-        });
-
-        fetch(`${API_LINK}/api/illness/get_active_illness`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                const activeIllnessId = data.illness.id;
-
-                const payload = {
-                    'illness_id': activeIllnessId,
-                    'new_title': `${title}`,
-                };
-
+        }).then(
+            fetch(`${API_LINK}/api/illness/get_active_illness`, {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+               const activeIllnessId = data.illness.id;
+               let validStartDate = startDate;
+                if (!startDate) {
+                    validStartDate = new Date();
+                }
+                let validTitle = title;
+                if(!title) {
+                    validTitle = 'Untitled Illness'
+                }
+               const payload = {
+                'illness_id': activeIllnessId,
+                'new_title': validTitle,
+                'startDate': new Date(validStartDate).toISOString()
+                }
+    
                 fetch(`${API_LINK}/api/illness/edit_illness`, {
                     method: 'POST',
                     credentials: 'include',
@@ -105,14 +112,15 @@ const IllnessModal = (props) => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                }).then((response) => response.json())
-                    .then((data) => {
-                        const {status} = data;
-                        if (status === 'success') {
-                            history.push('/active-illness');
-                        }
-                    });
-            });
+                }).then(response => response.json())
+                .then(data => {
+                    const {status} = data;
+                    if (status === 'success') {
+                        history.push('/active-illness');
+                    }
+                })
+            })
+        )
     };
 
     const updateIllness = () => {
@@ -120,9 +128,9 @@ const IllnessModal = (props) => {
         const payload = {
             'illness_id': id,
             'new_title': `${title}`,
-            'start_date': `${startDate}`,
-            'end_date': `${endDate}`,
-        };
+            'start_date': new Date(startDate).toISOString(),
+            'end_date': new Date(endDate).toISOString()
+            }
 
         fetch(`${API_LINK}/api/illness/edit_illness`, {
             method: 'POST',
