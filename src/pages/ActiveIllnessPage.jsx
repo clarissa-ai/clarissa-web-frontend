@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 'auto',
         paddingBottom: '0.5rem',
     },
+    toolbar: theme.mixins.toolbar,
 }));
 
 const DashboardPage = (props) => {
@@ -84,13 +85,12 @@ const DashboardPage = (props) => {
                     null}
                 <Fade in timeout={1000}>
                     <div className={classes.container}>
+                        <TopBar>
+                            <ExportIllnessButton/>
+                            <EndIllnessButton incrstate={() => incrstate()}/>
+                        </TopBar>
+                        <div className={classes.toolbar} />
                         <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
-                            <Grid item>
-                                <TopBar>
-                                    <ExportIllnessButton/>
-                                    <EndIllnessButton incrstate={() => incrstate()}/>
-                                </TopBar>
-                            </Grid>
                             <Grid item xs={12} md={9} xl={8}>
                                 <Grid container direction='column' spacing={2}>
                                     <Grid container justify='flex-end' direction='row' spacing={2}>
