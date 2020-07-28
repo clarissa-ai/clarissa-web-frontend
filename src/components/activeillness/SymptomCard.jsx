@@ -28,8 +28,8 @@ const SymptomCard = (props) => {
     };
     const classes = useStyles();
 
-    const dateEndPos = props.symptom.updated_on.lastIndexOf('-') + 3;
-    const date = props.symptom.updated_on.substring(0, dateEndPos);
+    const dateEndPos = props.symptom.created_on.lastIndexOf('-') + 3;
+    const date = props.symptom.created_on.substring(0, dateEndPos);
     const dateArray = date.split('-');
     const displayDate = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
 

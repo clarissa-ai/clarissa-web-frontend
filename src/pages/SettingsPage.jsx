@@ -95,7 +95,7 @@ const SettingsPage = (props) => {
         if (date !== profile.userInfo.birthdate) {
             result['birthdate'] = date;
         }
-        // console.log(JSON.stringify(result));
+        console.log(JSON.stringify(result));
         fetch(`${apiLink}/api/user/edit_settings`, {
             method: 'POST',
             credentials: 'include',
