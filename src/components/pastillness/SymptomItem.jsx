@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
     },
     linkActive: {
-        color: '#fff'
+        color: '#fff',
     },
     link: {
         color: '#000',
@@ -54,7 +54,7 @@ const InfoCard = (props) => {
     const parseDate = (dateString) => {
         const date = new Date(dateString);
         return date.getMonth()+1 +'/'+ date.getDate() +'/'+date.getFullYear();
-    }
+    };
 
 
     return <Grid container direction='row' alignItems='center' className={classes.container}>
@@ -64,7 +64,7 @@ const InfoCard = (props) => {
         <Grid item><Typography><Box>{props.title}{props.index}</Box></Typography></Grid>
         <Grid item><Typography><Box className = {classes.lowOpacity}>{parseDate(props.date)}</Box></Typography></Grid>
 
-    </Grid>
-}
+    </Grid>;
+};
 
 export default InfoCard;

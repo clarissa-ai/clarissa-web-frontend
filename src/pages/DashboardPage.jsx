@@ -31,48 +31,47 @@ const useStyles = makeStyles((theme) => ({
 const DashboardPage = (props) => {
     // Functions here declared at the top in order to be used for modal state
     const handleModal = () => {
-        setModal(showModal => !showModal)
-    }
+        setModal((showModal) => !showModal);
+    };
 
     const setExistingIllness = (title, startDate, endDate) => {
         setModalTitle(title);
         setModalStartDate(startDate);
         setModalEndDate(endDate);
-    }
+    };
 
     const decideModalType = () => {
         if (isModalForNewIllness) {
             return <IllnessModal
-            title={modalTitle} 
-            dateStart={modalStartDate} 
-            dateEnd={modalEndDate}
-            newIllness={true} 
-            onModalChange={handleModal}
-            setModalInfo={setExistingIllness}
-            idNum={modalIllnessID}/>
+                title={modalTitle}
+                dateStart={modalStartDate}
+                dateEnd={modalEndDate}
+                newIllness={true}
+                onModalChange={handleModal}
+                setModalInfo={setExistingIllness}
+                idNum={modalIllnessID}/>;
         } else {
             return <IllnessModal
-            title={modalTitle} 
-            dateStart={modalStartDate} 
-            dateEnd={modalEndDate}
-            newIllness={false} 
-            onModalChange={handleModal}
-            setModalInfo={setExistingIllness}
-            idNum={modalIllnessID}/>
+                title={modalTitle}
+                dateStart={modalStartDate}
+                dateEnd={modalEndDate}
+                newIllness={false}
+                onModalChange={handleModal}
+                setModalInfo={setExistingIllness}
+                idNum={modalIllnessID}/>;
         }
-        
-    }
+    };
 
-    //Modal Fields for Existing Info
+    // Modal Fields for Existing Info
     const [modalTitle, setModalTitle] = useState();
     const [modalStartDate, setModalStartDate] = useState();
     const [modalEndDate, setModalEndDate] = useState();
-    const [modalIllnessID, setModalIllnessID] = useState(); 
+    const [modalIllnessID, setModalIllnessID] = useState();
 
     // Modal State
     const [showModal, setModal] = useState(false);
     const [isModalForNewIllness, setModalType] = useState(true);
-    
+
     // Info State
     const [dashData, setDash] = useState([]);
     const [activeSurveys, setActiveSurveys] = useState([]);
@@ -108,23 +107,25 @@ const DashboardPage = (props) => {
     }, [apiLink, profile, modalTitle]);
 
     const newIllnessModal = (condition) => {
-        if (!condition) { //Existing Illness Modal
+        if (!condition) { // Existing Illness Modal
             setModalType(false);
-        } else { //Create new Illness Modal
+        } else { // Create new Illness Modal
             setModalType(true);
         }
-    }
+    };
 
     const handleModalIllnessID = (num) => {
         setModalIllnessID(num);
-    }
+    };
 
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
                 {showModal ? decideModalType() : null }
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {newIllnessModal(true); setModal(true);}}>New Illness</Button></TopBar></Grid>
+                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {
+                        newIllnessModal(true); setModal(true);
+                    }}>New Illness</Button></TopBar></Grid>
 
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
@@ -137,20 +138,20 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <RecentIllness >
                                     {recentIllness.map((illness, index) => {
-                                        return <Grid item>
-                                            <IllnessCard 
-                                            idNum={illness.id}
-                                            handleModalIllnessID={handleModalIllnessID}
-                                            newIllnessFunction={newIllnessModal}
-                                            modalFunction={handleModal}
-                                            setModalInfo={setExistingIllness}
-                                            key={index} 
-                                            title={illness.title} 
-                                            dateStart={illness.created_on} 
-                                            dateEndOrUpdated={illness.updated_on} 
-                                            status={illness.active} 
-                                            symptomcount={illness.symptom_count} 
-                                            /></Grid>
+                                        return <Grid item key={index}>
+                                            <IllnessCard
+                                                idNum={illness.id}
+                                                handleModalIllnessID={handleModalIllnessID}
+                                                newIllnessFunction={newIllnessModal}
+                                                modalFunction={handleModal}
+                                                setModalInfo={setExistingIllness}
+                                                key={index}
+                                                title={illness.title}
+                                                dateStart={illness.created_on}
+                                                dateEndOrUpdated={illness.updated_on}
+                                                status={illness.active}
+                                                symptomcount={illness.symptom_count}
+                                            /></Grid>;
                                     })}
                                 </RecentIllness>
                             </Grid>
@@ -162,7 +163,7 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <CompletedSurveys>
                                     {completedSurveys.map((completed_surveys, index) => {
-                                        return <Grid item><SurveyCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
+                                        return <Grid item key={index}><SurveyCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>;
                                     })}
                                 </CompletedSurveys>
                             </Grid>
@@ -170,7 +171,7 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <TakeSurveyCard>
                                     {activeSurveys.map((active_surveys, index) => {
-                                        return <Grid item key={index}><SurveyCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
+                                        return <Grid item key={index}><SurveyCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>;
                                     })}
                                 </TakeSurveyCard>
                             </Grid>

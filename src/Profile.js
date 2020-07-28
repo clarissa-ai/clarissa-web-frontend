@@ -36,8 +36,8 @@ class Profile {
             }),
         }).then((response) => {
             if (!response.ok) {
-                console.log('Internal Error. Please contact support.');
                 this.authenticated = false;
+                callback(this, `${response.status} ${response.statusText}`);
                 return;
             }
             response.json().then((data) => {
@@ -75,8 +75,8 @@ class Profile {
             }),
         }).then((response) => {
             if (!response.ok) {
-                console.log('Internal Error. Please contact support.');
                 this.authenticated = false;
+                callback(this, `${response.status} ${response.statusText}`);
                 return;
             }
             response.json().then((data) => {
@@ -99,8 +99,8 @@ class Profile {
             credentials: 'include',
         }).then((response) => {
             if (!response.ok) {
-                console.log('Internal Error. Please contact support.');
-                this.authenticated = true;
+                this.authenticated = false;
+                callback(this, `${response.status} ${response.statusText}`);
                 return;
             }
             this.authenticated = false;
@@ -120,7 +120,7 @@ class Profile {
             if (!response.ok) {
                 console.log('Internal Error. Please contact support.');
                 this.authenticated = false;
-                callback(this);
+                callback(this, `${response.status} ${response.statusText}`);
                 return;
             }
             response.json().then((data) => {
