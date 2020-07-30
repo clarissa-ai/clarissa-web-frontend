@@ -44,11 +44,10 @@ const PastIllnessPage = (props) => {
 
     const useStyles = makeStyles((theme) => ({
         container: {
-            paddingTop: '3rem',
+            paddingTop: '1rem',
             background: '#EBEFF2',
-            height: 'inherit',
-            maxHeight: 'inherit',
             height: '100vh',
+            maxHeight: 'inherit',
         },
         label: {
             paddingBottom: '1rem',

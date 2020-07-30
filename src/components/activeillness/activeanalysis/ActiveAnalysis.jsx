@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     analysisCard: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFFF',
-        height: '100%',
+        height: '23rem',
     },
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
