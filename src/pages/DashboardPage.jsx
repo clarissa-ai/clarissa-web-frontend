@@ -44,22 +44,24 @@ const DashboardPage = (props) => {
     const decideModalType = () => {
         if (isModalForNewIllness) {
             return <IllnessModal
-                title={modalTitle}
-                dateStart={modalStartDate}
-                dateEnd={modalEndDate}
-                newIllness={true}
-                onModalChange={handleModal}
-                setModalInfo={setExistingIllness}
-                idNum={modalIllnessID}/>;
+            title={modalTitle} 
+            dateStart={modalStartDate} 
+            dateEnd={modalEndDate}
+            newIllness={true} 
+            onModalChange={handleModal}
+            setModalInfo={setExistingIllness}
+            idNum={modalIllnessID}
+            rerenderPastIllness={rerenderPastIllness}/>
         } else {
             return <IllnessModal
-                title={modalTitle}
-                dateStart={modalStartDate}
-                dateEnd={modalEndDate}
-                newIllness={false}
-                onModalChange={handleModal}
-                setModalInfo={setExistingIllness}
-                idNum={modalIllnessID}/>;
+            title={modalTitle} 
+            dateStart={modalStartDate} 
+            dateEnd={modalEndDate}
+            newIllness={false} 
+            onModalChange={handleModal}
+            setModalInfo={setExistingIllness}
+            idNum={modalIllnessID}
+            rerenderPastIllness={rerenderPastIllness}/>
         }
     };
 
@@ -79,6 +81,13 @@ const DashboardPage = (props) => {
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
+
+    // Update Past Illness
+    const [pastIllnessRender, setPastIllnessRender] = useState(1);
+
+    const rerenderPastIllness = () => {
+        setPastIllnessRender(pastIllnessRender + 1);
+    }
 
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const profile = useSelector(profileSelector);
@@ -105,7 +114,7 @@ const DashboardPage = (props) => {
 
         const userInfo = profile.userInfo;
         setName(userInfo.first_name);
-    }, [apiLink, profile, modalTitle]);
+    }, [apiLink, profile, modalTitle, pastIllnessRender]);
 
     const newIllnessModal = (condition) => {
         if (!condition) { // Existing Illness Modal
