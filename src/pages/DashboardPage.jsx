@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '3rem',
         background: '#EBEFF2',
         height: '100vh',
+        paddingTop: '3rem',
     },
     greetingsContainer: {
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
@@ -89,6 +90,9 @@ const DashboardPage = (props) => {
         setPastIllnessRender(pastIllnessRender + 1);
     }
 
+    //Calculate Bar Height
+    const [barHeight, setBarHeight] = useState();
+
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const profile = useSelector(profileSelector);
     const classes = useStyles();
@@ -128,6 +132,10 @@ const DashboardPage = (props) => {
         setModalIllnessID(num);
     };
 
+    const calcBarHeight = (node) => {
+        setBarHeight(node.offsetHeight);
+    }
+
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
@@ -136,8 +144,18 @@ const DashboardPage = (props) => {
                 }}>New Illness</Button></TopBar>
                 <div className={classes.toolbar} />
                 {showModal ? decideModalType() : null }
-                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
+
+                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{marginTop: barHeight}}>
+                    <Grid item>
+                        <TopBar ref={(node) => calcBarHeight(node)}>
+                            <Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {
+                                newIllnessModal(true); 
+                                setModal(true);
+                                }}>New Illness</Button>
+                        </TopBar>
+                    </Grid>
+
+                    <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem', marginTop: '2rem'}}>
                         <Grid container direction='column' spacing={2}>
                             <Grid item>
                                 <div className={classes.greetingsContainer}>
@@ -167,7 +185,7 @@ const DashboardPage = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={5} lg={4} xl={4} style={{marginLeft: '1rem', height: '70vh'}}>
+                    <Grid item xs={12} md={5} lg={4} xl={4} style={{marginLeft: '1rem', height: '70vh', marginTop: '2rem'}}>
                         <Grid container direction='column' spacing={2}>
                             <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
                             <Grid item>

@@ -83,7 +83,7 @@ const DashboardPage = (props) => {
                         <SymptomModal data={showModal[1]} closeModalFunction={() => setModal([false, 0])} incrstate={() => incrstate()}/>
                     </div>:
                     null}
-                <Fade in timeout={1000}>
+                <Fade in timeout={500}>
                     <div className={classes.container}>
                         <TopBar>
                             <ExportIllnessButton/>
