@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     card: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         backgroundColor: '#FFFF',
-        height: '100%',
+        height: '23rem',
     },
     title: {
         color: '#334D6E',

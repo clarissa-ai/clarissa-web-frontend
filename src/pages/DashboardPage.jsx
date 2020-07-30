@@ -15,10 +15,8 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
     },
     container: {
-        paddingTop: '3rem',
         background: '#EBEFF2',
         height: '100vh',
-        paddingTop: '3rem',
     },
     greetingsContainer: {
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',

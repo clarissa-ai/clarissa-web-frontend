@@ -16,9 +16,10 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
     },
     container: {
-        paddingTop: '3rem',
+        paddingTop: '0.5rem',
         background: '#EBEFF2',
-        height: '100vmin',
+        minHeight: '100vh',
+        height: '100%',
     },
     title: {
         color: '#334D6E',
@@ -93,11 +94,6 @@ const DashboardPage = (props) => {
                         <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
                             <Grid item xs={12} md={9} xl={8}>
                                 <Grid container direction='column' spacing={2}>
-                                    <Grid container justify='flex-end' direction='row' spacing={2}>
-                                        <Typography variant='h5' className={classes.title}>
-                                            Tell Clarissa how you are feeling.
-                                        </Typography>
-                                    </Grid>
                                     <Grid item className={classes.greetingsContainer}>
                                         <SymptomLog incrstate={() => incrstate()}/>
                                     </Grid>

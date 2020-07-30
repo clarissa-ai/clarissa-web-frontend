@@ -227,50 +227,60 @@ const SymptomLog = (props) => {
         return <div>{error.message}</div>;
     } else {
         return (
-            <Card className={classes.container}>
-                <CardContent className={classes.content}>
-                    {/* Symptom Input */}
-                    <InputBase
-                        className={classes.textInput}
-                        multiline
-                        rows={2}
-                        placeholder="I have a fever, and a cough. I have also been feeling nauseous lately."
-                        fullWidth
-                        margin='none'
-                        value={text}
-                        onChange={handleChange}
-                    />
-                    <Divider/>
-                    <Grid><Typography style={{paddingTop: '10px'}}>Symptoms Recognized:</Typography></Grid>
-                    <Grid container spacing={2}>
-                        { illness.map((illness, index) => {
-                            return (
-                                <Grid item key={index}>
-                                    <Button classes={{root: classes.rootButton, label: classes.labelButton}} onClick={() => onButtonClick(index)}>
-                                        <Checkbox
-                                            checked={selected[index]}
-                                            className={classes.root}
-                                            disableRipple
-                                            color="default"
-                                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-                                            icon={<span className={classes.icon} />}
-                                            inputProps={{'aria-label': 'decorative checkbox'}}
-                                            {...props}
-                                        />
-                                        {displayIllnessName(illness.common_name)}
-                                    </Button>
+            <Grid container direction='column'>
+                <Grid item>
+                <Typography variant='subtitle1' className={classes.title}>
+                    Tell Clarissa how you are feeling.
+                </Typography>
+                </Grid>
+
+                <Grid item>
+                        <Card className={classes.container}>
+                        <CardContent className={classes.content}>
+                            {/* Symptom Input */}
+                            <InputBase
+                                className={classes.textInput}
+                                multiline
+                                rows={2}
+                                placeholder="I have a fever, and a cough. I have also been feeling nauseous lately."
+                                fullWidth
+                                margin='none'
+                                value={text}
+                                onChange={handleChange}
+                            />
+                            <Divider/>
+                            <Grid><Typography style={{paddingTop: '10px'}}>Symptoms Recognized:</Typography></Grid>
+                            <Grid container spacing={2}>
+                                { illness.map((illness, index) => {
+                                    return (
+                                        <Grid item key={index}>
+                                            <Button classes={{root: classes.rootButton, label: classes.labelButton}} onClick={() => onButtonClick(index)}>
+                                                <Checkbox
+                                                    checked={selected[index]}
+                                                    className={classes.root}
+                                                    disableRipple
+                                                    color="default"
+                                                    checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+                                                    icon={<span className={classes.icon} />}
+                                                    inputProps={{'aria-label': 'decorative checkbox'}}
+                                                    {...props}
+                                                />
+                                                {displayIllnessName(illness.common_name)}
+                                            </Button>
+                                        </Grid>
+                                    );
+                                })}
+                            </Grid>
+                            <Grid container justify='flex-end' style={{paddingTop: '10px'}}>
+                                {!isLoaded && <CircularProgress style={{color: '#47C594', margin: '5px'}} size={24}/>}
+                                <Grid item>
+                                    <Button size='small' className={classes.submitBtn} onClick={onSubmit} disabled={!isLoaded}>Save</Button>
                                 </Grid>
-                            );
-                        })}
-                    </Grid>
-                    <Grid container justify='flex-end' style={{paddingTop: '10px'}}>
-                        {!isLoaded && <CircularProgress style={{color: '#47C594', margin: '5px'}} size={24}/>}
-                        <Grid item>
-                            <Button size='small' className={classes.submitBtn} onClick={onSubmit} disabled={!isLoaded}>Save</Button>
-                        </Grid>
-                    </Grid>
-                </CardContent>
-            </Card>
+                            </Grid>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            </Grid>
         );
     }
 };
