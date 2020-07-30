@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
     },
     container: {
+        paddingTop: '3rem',
         background: '#EBEFF2',
         height: '100vh',
         paddingTop: '3rem',
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         color: '#fff',
     },
+    toolbar: theme.mixins.toolbar,
 }));
 
 const DashboardPage = (props) => {
@@ -137,7 +139,12 @@ const DashboardPage = (props) => {
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
+                <TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {
+                    newIllnessModal(true); setModal(true);
+                }}>New Illness</Button></TopBar>
+                <div className={classes.toolbar} />
                 {showModal ? decideModalType() : null }
+
                 <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{marginTop: barHeight}}>
                     <Grid item>
                         <TopBar ref={(node) => calcBarHeight(node)}>

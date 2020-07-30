@@ -55,7 +55,7 @@ const IllnessItem = (props) => {
 
 
     return <Grid container direction='row' alignItems='center' justify='space-evenly' className={active ? classes.activeContainer : classes.container}>
-        <Grid item><Typography><Box fontWeight = 'bold'>{props.title}{props.index}</Box></Typography></Grid>
+        <Grid item><Typography><Box fontWeight = 'bold'>{props.title}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'>{parseDate(props.created_on)} - {parseDate(props.updated_on)}</Box></Typography></Grid>
         <Grid item><Typography><Box fontWeight = 'bold'>{props.symptomCount} Symptoms</Box></Typography></Grid>
     </Grid>;
