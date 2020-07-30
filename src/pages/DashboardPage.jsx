@@ -49,7 +49,8 @@ const DashboardPage = (props) => {
             newIllness={true} 
             onModalChange={handleModal}
             setModalInfo={setExistingIllness}
-            idNum={modalIllnessID}/>
+            idNum={modalIllnessID}
+            rerenderPastIllness={rerenderPastIllness}/>
         } else {
             return <IllnessModal
             title={modalTitle} 
@@ -58,7 +59,8 @@ const DashboardPage = (props) => {
             newIllness={false} 
             onModalChange={handleModal}
             setModalInfo={setExistingIllness}
-            idNum={modalIllnessID}/>
+            idNum={modalIllnessID}
+            rerenderPastIllness={rerenderPastIllness}/>
         }
         
     }
@@ -79,6 +81,13 @@ const DashboardPage = (props) => {
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
+
+    // Update Past Illness
+    const [pastIllnessRender, setPastIllnessRender] = useState(1);
+
+    const rerenderPastIllness = () => {
+        setPastIllnessRender(pastIllnessRender + 1);
+    }
 
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const profile = useSelector(profileSelector);

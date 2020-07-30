@@ -144,7 +144,8 @@ const IllnessModal = (props) => {
             .then(data => {
                 const {status} = data;
                 if (status === 'success') {
-                    window.location.reload(true);
+                    props.rerenderPastIllness(); //Rerender Recent Illness Component
+                    props.onModalChange(); //Close Modal
                 }
             })
             .catch(error => {
