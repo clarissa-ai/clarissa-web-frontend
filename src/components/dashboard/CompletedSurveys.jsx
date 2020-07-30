@@ -18,6 +18,6 @@ const CompletedSurveys = (props) => {
     return <Grid container className={classes.container} direction='column'>
         <Grid item><Typography variant='h6' className={classes.label}><Box fontWeight='bold'>Completed Surveys</Box></Typography></Grid>
         <Grid item>{props.children}</Grid>
-    </Grid>
-}
+    </Grid>;
+};
 export default CompletedSurveys;

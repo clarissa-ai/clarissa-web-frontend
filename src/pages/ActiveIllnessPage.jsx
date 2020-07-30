@@ -8,10 +8,13 @@ import EndIllnessButton from 'components/activeillness/EndIllnessButton';
 import ExportIllnessButton from 'components/activeillness/ExportIllnessButton';
 import {Redirect} from 'react-router-dom';
 import ActiveAnalysis from 'components/activeillness/activeanalysis/ActiveAnalysis';
+import SymptomModal from 'components/activeillness/SymptomModal';
 import TopBar from 'components/navbar/TopBar';
 
-
 const useStyles = makeStyles((theme) => ({
+    wrapper: {
+        position: 'relative',
+    },
     container: {
         paddingTop: '3rem',
         background: '#EBEFF2',
@@ -31,17 +34,7 @@ const DashboardPage = (props) => {
     const [symptoms, setSymptoms] = useState([]);
     const [analysis, setAnalysis] = useState(undefined);
     const [render, setRender] = useState(0);
-    /* const [symptomModal, showSymptomModal] = useState(false); */
-
-    /* const symptomModalShow = () => {
-        showSymptomModal(true);
-        console.log(symptomModal);
-    }; */
-
-    /* const symptomModalClose = () => {
-        showSymptomModal(false);
-        console.log(symptomModal);
-    }; */
+    const [showModal, setModal] = useState([false, {}]);
 
     const profile = useSelector(profileSelector);
 
@@ -83,43 +76,49 @@ const DashboardPage = (props) => {
 
     return (
         !profile.authenticated ? <Redirect to='/login' /> :
-            <Fade in timeout={1000}>
-                <div className={classes.container}>
-                    <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
-                        <Grid item>
-                            <TopBar>
-                                <ExportIllnessButton/>
-                                <EndIllnessButton incrstate={() => incrstate()}/>
-                            </TopBar>
-                        </Grid>
-
-                        <Grid item xs={12} md={9} xl={8}>
-                            <Grid container direction='column' spacing={2}>
-                                <Grid container justify='flex-end' direction='row' spacing={2}>
-                                    <Typography variant='h5' className={classes.title}>
-                                        Tell Clarissa how you are feeling.
-                                    </Typography>
-                                </Grid>
-                                <Grid item className={classes.greetingsContainer}>
-                                    <SymptomLog incrstate={() => incrstate()}/>
-                                </Grid>
-                                <Grid item style={{height: '0vmin'}}>
-                                    <Grid container direction='row' spacing={2}>
-                                        <Grid item style={{height: '55vmin', width: '50%'}}>
-                                            <Typography className={classes.title}>Symptoms</Typography>
-                                            <SymptomTile symptoms={symptoms}/>
-                                        </Grid>
-                                        <Grid item style={{height: '55vmin', width: '50%'}}>
-                                            <Typography className={classes.title}>Analysis</Typography>
-                                            <ActiveAnalysis analysis={analysis}/>
+            <div className={classes.wrapper}>
+                {showModal[0] ?
+                    <div>
+                        <SymptomModal data={showModal[1]} closeModalFunction={() => setModal([false, 0])} incrstate={() => incrstate()}/>
+                    </div>:
+                    null}
+                <Fade in timeout={1000}>
+                    <div className={classes.container}>
+                        <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
+                            <Grid item>
+                                <TopBar>
+                                    <ExportIllnessButton/>
+                                    <EndIllnessButton incrstate={() => incrstate()}/>
+                                </TopBar>
+                            </Grid>
+                            <Grid item xs={12} md={9} xl={8}>
+                                <Grid container direction='column' spacing={2}>
+                                    <Grid container justify='flex-end' direction='row' spacing={2}>
+                                        <Typography variant='h5' className={classes.title}>
+                                            Tell Clarissa how you are feeling.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item className={classes.greetingsContainer}>
+                                        <SymptomLog incrstate={() => incrstate()}/>
+                                    </Grid>
+                                    <Grid item style={{height: '0vmin'}}>
+                                        <Grid container direction='row' spacing={2}>
+                                            <Grid item style={{height: '55vmin', width: '50%'}}>
+                                                <Typography className={classes.title}>Symptoms</Typography>
+                                                <SymptomTile symptoms={symptoms} setModal={setModal}/>
+                                            </Grid>
+                                            <Grid item style={{height: '55vmin', width: '50%'}}>
+                                                <Typography className={classes.title}>Analysis</Typography>
+                                                <ActiveAnalysis analysis={analysis}/>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </div>
-            </Fade>
+                    </div>
+                </Fade>
+            </div>
     );
 };
 export default DashboardPage;

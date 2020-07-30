@@ -185,7 +185,7 @@ const ActiveAnalysis = (props) => {
     const handleChange = (event, newValue) => {
         setActiveTab(newValue);
     };
-    if (!props.analysis) {
+    if (!props.analysis || props.analysis.length === 0) {
         return (
             <Card className={classes.analysisCard}>
             </Card>

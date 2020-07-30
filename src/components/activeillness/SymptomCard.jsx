@@ -24,12 +24,12 @@ const SymptomCard = (props) => {
         symptom: propTypes.object,
         severity: propTypes.string,
         month: propTypes.string,
-        symptomModalFunction: propTypes.func,
+        setModal: propTypes.func,
     };
     const classes = useStyles();
 
-    const dateEndPos = props.symptom.updated_on.lastIndexOf('-') + 3;
-    const date = props.symptom.updated_on.substring(0, dateEndPos);
+    const dateEndPos = props.symptom.created_on.lastIndexOf('-') + 3;
+    const date = props.symptom.created_on.substring(0, dateEndPos);
     const dateArray = date.split('-');
     const displayDate = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
 
@@ -42,20 +42,20 @@ const SymptomCard = (props) => {
                             <Grid item><Typography className={classes.heading}><Box fontWeight="fontWeightBold">{props.symptom.title}</Box></Typography></Grid>
                         </Grid>
                     </Grid>
-                    {/* <Grid item onClick={props.symptomModalFunction}>
-                            <Typography variant='subtitle2' className={classes.cardLabel} style={{cursor: 'pointer'}}>
-                                <Box fontWeight={500}>Edit</Box>
-                            </Typography>
-                        </Grid>*/}
+                    <Grid item onClick={() => props.setModal([true, props.symptom])}>
+                        <Typography variant='subtitle2' className={classes.cardLabel} style={{cursor: 'pointer'}}>
+                            <Box fontWeight={500}>Edit</Box>
+                        </Typography>
+                    </Grid>
                 </Grid>
                 <Grid container direction="row" spacing={1}>
                     <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Date Logged: </Typography></Grid>
                     <Grid item><Typography variant='subtitle2' className={classes.content}>{displayDate}</Typography></Grid>
                 </Grid>
-                <Grid container direction="row" spacing={1}>
+                {/* <Grid container direction="row" spacing={1}>
                     <Grid item><Typography variant='subtitle2' className={classes.cardLabel}>Data: </Typography></Grid>
                     <Grid item><Typography variant='subtitle2' className={classes.content}>{}</Typography></Grid>
-                </Grid>
+                </Grid>*/}
             </CardContent>
         </Card>
     );

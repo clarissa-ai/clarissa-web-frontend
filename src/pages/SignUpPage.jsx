@@ -7,7 +7,7 @@ const LoginPage = () => {
         <Grid container justify='center' alignItems='center' style={{width: '100vw', height: '100vh'}}>
             <Grid item><SignUpForm/></Grid>
         </Grid>
-    </Fade>
-}
+    </Fade>;
+};
 
 export default LoginPage;

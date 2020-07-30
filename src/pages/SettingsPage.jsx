@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
     alert: {
         position: 'absolute',
-    }
+    },
 }));
 
 const materialTheme = createMuiTheme({
@@ -95,7 +95,7 @@ const SettingsPage = (props) => {
         if (date !== profile.userInfo.birthdate) {
             result['birthdate'] = date;
         }
-        // console.log(JSON.stringify(result));
+        console.log(JSON.stringify(result));
         fetch(`${apiLink}/api/user/edit_settings`, {
             method: 'POST',
             credentials: 'include',
@@ -170,9 +170,11 @@ const SettingsPage = (props) => {
                                 <Avatar alt={profile.userInfo.first_name} src={profile.userInfo.img} className={classes.avatarSize}/>
                             </div>
                             <Grid item>
-                                    <Button fullWidth variant='outlined' onClick={()=> {submitPass(); submitInfo();}} style={{margin: '2rem 0'}} disabled={newPassError}>
+                                <Button fullWidth variant='outlined' onClick={()=> {
+                                    submitPass(); submitInfo();
+                                }} style={{margin: '2rem 0'}} disabled={newPassError}>
                                         Save Changes
-                                    </Button>
+                                </Button>
                             </Grid>
                         </Grid>
                     </Grid>
