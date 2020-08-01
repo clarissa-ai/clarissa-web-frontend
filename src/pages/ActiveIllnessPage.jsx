@@ -93,17 +93,17 @@ const DashboardPage = (props) => {
                         <div className={classes.toolbar} />
                         <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
                             <Grid item xs={12} md={9} xl={8}>
-                                <Grid container direction='column' spacing={2} justify='center' alignItems='stretch' alignContent='stretch's>
+                                <Grid container direction='column' spacing={2}>
                                     <Grid item className={classes.greetingsContainer}>
                                         <SymptomLog incrstate={() => incrstate()}/>
                                     </Grid>
                                     <Grid item style={{height: '0vmin'}}>
-                                        <Grid container direction='row' spacing={2} justify='center' alignItems='stretch' alignContent='stretch'>
-                                            <Grid item style={{width: '50%'}}>
+                                        <Grid container direction='row' spacing={2}>
+                                            <Grid item style={{height: '55vmin', width: '50%'}}>
                                                 <Typography className={classes.title}>Symptoms</Typography>
                                                 <SymptomTile symptoms={symptoms} setModal={setModal}/>
                                             </Grid>
-                                            <Grid item style={{width: '50%'}}>
+                                            <Grid item style={{height: '55vmin', width: '50%'}}>
                                                 <Typography className={classes.title}>Analysis</Typography>
                                                 <ActiveAnalysis analysis={analysis}/>
                                             </Grid>

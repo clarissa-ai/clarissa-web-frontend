@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         marginBottom: '0.5rem',
         backgroundColor: '#FFFF',
-        height: '23rem',
+        height: '100%',
     },
     card: {
         boxShadow: 'none',
