@@ -15,11 +15,12 @@ const useStyles = makeStyles((theme) => ({
     },
     analysisCard: {
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
+        marginBottom: '0.5rem',
         backgroundColor: '#FFFF',
-        height: '23rem',
+        height: '100%',
     },
     card: {
-        boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
+        boxShadow: 'none',
         backgroundColor: '#FFFF',
     },
     cardContent: {
@@ -140,13 +141,13 @@ const IllnessTabPanel = (props) => {
             <Grid item xs={12}>
                 <Card className={classes.card}>
                     <CardContent>
-                        <Typography variant='body1'>{props.commonName}</Typography>
+                        <Typography variant='body1'><Box fontWeight='bold'>{props.commonName}</Box></Typography>
                         <Typography variant='subtitle2'>{props.definition}</Typography>
                     </CardContent>
                 </Card>
                 <Card className={classes.card}>
                     <CardContent>
-                        <Typography variant='body1'>Symptoms Analysis</Typography>
+                        <Typography variant='body1'><Box fontWeight='bold'>Symptoms Analysis</Box></Typography>
                         <Grid container direction='row'>
                             <Grid item xs={6}>
                                 <Typography variant='subtitle2'>Symptoms Matching</Typography>
