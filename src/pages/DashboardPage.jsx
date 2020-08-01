@@ -153,7 +153,7 @@ const DashboardPage = (props) => {
                         </TopBar>
                     </Grid>
 
-                    <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem', marginTop: '2rem'}}>
+                    <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem', marginTop: '1rem', height: '80vmin'}}>
                         <Grid container direction='column' spacing={2}>
                             <Grid item>
                                 <div className={classes.greetingsContainer}>
