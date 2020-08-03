@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Typography, Grid, AppBar, Tabs, Tab, Box, Chip, useTheme, makeStyles, List, ListItem, ListItemText, ListItemIcon, Card, CardContent} from '@material-ui/core';
 
-import OpenBulletIcon from 'components/misc/common/OpenBulletIcon';
 import ClosedBulletIcon from 'components/misc/common/ClosedBulletIcon';
 
 const useStyles = makeStyles((theme) => ({
@@ -62,11 +61,8 @@ TabPanel.propTypes = {
 
 const TabLabel = (props) => {
     return (
-        <Grid container={true} direction='row' alignContent='center'>
-            <Grid item={true} xs={12}>
-                <Typography><OpenBulletIcon color={props.color}/>{props.children}</Typography>
-            </Grid>
-            <Grid item={true} xs={12}>
+        <Grid container direction='row' alignContent='center'>
+            <Grid item xs={12}>
                 <Chip size='small' label={props.chipText} style={{backgroundColor: props.color, color: 'white', cursor: 'pointer'}}/>
             </Grid>
         </Grid>
