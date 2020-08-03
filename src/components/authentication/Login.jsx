@@ -51,10 +51,10 @@ const Login = () => {
             return;
         }  
 
-        profile.login (values.email, values.password, (newProfile) => {
+        profile.login(values.email, values.password, (newProfile) => {
             dispatch(setProfile(newProfile));
+            if (!newProfile.authenticated) setValues({...values, error: <Alert severity="error">Incorrect username or password</Alert>})
         });
-        if (!profile.authenticated) setValues({...values, error: <Alert severity="error">Incorrect username or password</Alert>})
     };
 
     const classes = useStyles();
