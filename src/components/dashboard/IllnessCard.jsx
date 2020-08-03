@@ -40,6 +40,15 @@ const useStyles = makeStyles((theme) => ({
     title: {
         width: '8rem',
     },
+    date: {
+        width: '11rem',
+    },
+    active: {
+        width: '4rem',
+    },
+    symptoms: {
+        width: '8rem',
+    },
 }));
 
 const IllnessCard = (props) => {
@@ -52,11 +61,11 @@ const IllnessCard = (props) => {
 
     return <Grid container direction='row' alignItems='center' justify='space-around' className={props.status ? classes.activeContainer : classes.container}>
         <Grid item><Typography><Box fontWeight='bold' textOverflow="ellipsis" className={classes.title}>{props.title}</Box></Typography></Grid>
-        <Grid item><Typography><Box fontWeight='bold'>{parseDate(props.dateStart)} - {parseDate(props.dateEndOrUpdated)}</Box></Typography></Grid>
+        <Grid item><Typography><Box fontWeight='bold' className={classes.date}>{parseDate(props.dateStart)} - {parseDate(props.dateEndOrUpdated)}</Box></Typography></Grid>
         <Grid item>
-            <Typography><Box fontWeight='bold'>{props.status === true ? 'Active' : 'Closed'}</Box></Typography>
+            <Typography><Box fontWeight='bold' className={classes.active}>{props.status === true ? 'Active' : 'Closed'}</Box></Typography>
         </Grid>
-        <Grid item><Typography><Box fontWeight='bold'>{props.symptomcount} Symptoms</Box></Typography></Grid>
+        <Grid item><Typography><Box fontWeight='bold' className={classes.symptoms}>{props.symptomcount} Symptoms</Box></Typography></Grid>
         <Grid item>
             <Button 
             variant='outlined' 
