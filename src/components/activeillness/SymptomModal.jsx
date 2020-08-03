@@ -63,7 +63,7 @@ const SymptomModal = (props) => {
             {/* Form contents */}
             <Grid container className={classes.formContainer} direction='column' spacing={2}>
                 <Grid container justify='flex-end' >
-                    <Grid item><Button className={classes.close} onClick={props.closeModalFunction}>Close</Button></Grid>
+                    <Grid item><Button className={classes.close} variant='contained' onClick={props.closeModalFunction}>Close</Button></Grid>
                 </Grid>
                 <Grid item><TextField id="outlined-basic" label="Symptom" variant="outlined" fullWidth/></Grid>
                 <Grid item><ThemeProvider theme={theme}>
