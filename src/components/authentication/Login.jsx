@@ -43,13 +43,12 @@ const Login = () => {
 
     const login = () => {
         if (values.password === '') {
-            setValues({...values, error: <Alert severity="error">Please enter a password</Alert>}) ;
+            setValues({...values, error: <Alert severity="error">Please enter a password</Alert>});
             return;
-        } 
-        else if (values.email === '') {
+        } else if (values.email === '') {
             setValues({...values, error: <Alert severity="error">Please enter a username</Alert>});
             return;
-        }  
+        }
 
         profile.login(values.email, values.password, (newProfile) => {
             dispatch(setProfile(newProfile));

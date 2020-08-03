@@ -5,23 +5,23 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import {
     KeyboardDatePicker,
-    MuiPickersUtilsProvider
-  } from '@material-ui/pickers';
+    MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 import {Link as RouterLink} from 'react-router-dom';
-  import DateFnsUtils from '@date-io/date-fns';
+import DateFnsUtils from '@date-io/date-fns';
 import {useSelector, useDispatch} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
 import {setProfile} from 'redux/actions';
 
-  const materialTheme = createMuiTheme({
+const materialTheme = createMuiTheme({
     overrides: {
         MuiPickersBasePicker: {
             pickerView: {
-              background: '#fff',
+                background: '#fff',
             },
         },
     },
-  });
+});
 
 const useStyles = makeStyles((theme) => ({
     field: {
@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
         width: '9.5rem',
     },
 }));
-
 
 
 const Signup = () => {
@@ -106,13 +105,13 @@ const Signup = () => {
         if (values.email === '') setValues({...values, error: <Alert severity="error">Must enter a valid email</Alert>});
         if (values.acceptterms === false) setValues({...values, error: <Alert severity="error">Must accept Terms of Service and Privacy Policy</Alert>});
         handleSignUp();
-    }
+    };
 
     const handleSignUp = () => {
         profile.signup(values.email, values.firstname, values.sex, ('0' + (selectedDate.getMonth() + 1)).slice(-2)+'/'+('0' + selectedDate.getDate()).slice(-2)+'/'+selectedDate.getFullYear(), values.password, (newProfile) => {
             dispatch(setProfile(newProfile));
         });
-    }
+    };
 
     return (
         <Grid container direction="column" alignItems="flex-start" justify='center' spacing={5}>
@@ -126,41 +125,41 @@ const Signup = () => {
                         <FormControl className={classes.formControl}>
                             <FormHelperText>Sex*</FormHelperText>
                             <Select
-                            required
-                            value={values.sex}
-                            onChange={handleSex}
-                            displayEmpty
-                            className={classes.pickers}
+                                required
+                                value={values.sex}
+                                onChange={handleSex}
+                                displayEmpty
+                                className={classes.pickers}
                             >
-                            <MenuItem value={'Male'}>Male</MenuItem>
-                            <MenuItem value={'Female'}>Female</MenuItem>
-                            <MenuItem value={'None'}>Prefer not to say</MenuItem>
+                                <MenuItem value={'Male'}>Male</MenuItem>
+                                <MenuItem value={'Female'}>Female</MenuItem>
+                                <MenuItem value={'None'}>Prefer not to say</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>
 
                     <Grid item>
-                    <ThemeProvider theme={materialTheme}>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker
-                            label='Date of Birth'
-                            disableToolbar
-                            required
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                            className={classes.pickers}
-                            />
-                        </MuiPickersUtilsProvider>
-                    </ThemeProvider>
+                        <ThemeProvider theme={materialTheme}>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <KeyboardDatePicker
+                                    label='Date of Birth'
+                                    disableToolbar
+                                    required
+                                    variant="inline"
+                                    format="MM/dd/yyyy"
+                                    margin="normal"
+                                    id="date-picker-inline"
+                                    value={selectedDate}
+                                    onChange={handleDateChange}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change date',
+                                    }}
+                                    className={classes.pickers}
+                                />
+                            </MuiPickersUtilsProvider>
+                        </ThemeProvider>
                     </Grid>
-            </Grid>
+                </Grid>
             </Grid>
             <Grid item>
                 <Input

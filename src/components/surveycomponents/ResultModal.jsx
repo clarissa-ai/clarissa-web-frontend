@@ -47,8 +47,6 @@ const ResultModal = (props) => {
     };
 
     const classes = useStyles();
-
-    console.log(props.data);
     return (
         <Grid container className={classes.container} justify='center' alignItems='center'>
             <Grid container className={classes.formContainer} direction='row' spacing={1}>

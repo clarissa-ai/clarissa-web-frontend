@@ -13,9 +13,9 @@ const TopBar = (props) => {
     return <AppBar className={classes.container}>
         <Toolbar>
             <Grid container justify='flex-end' spacing={2}>
-            <Grid item>{props.children}</Grid>
+                <Grid item>{props.children}</Grid>
             </Grid>
         </Toolbar>
-    </AppBar>
-}
+    </AppBar>;
+};
 export default TopBar;
