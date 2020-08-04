@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
     close: {
         textTransform: 'none',
         width: 'fitContent',
+        backgroundColor: 'rgb(244, 109, 102)',
+        color: '#fff',
+        margin: '8px',
     },
 }));
 
@@ -165,7 +168,7 @@ const IllnessModal = (props) => {
         <Grid container className={classes.container} justify='center' alignItems='center' alignContent='center'>
             <Grid container className={classes.formContainer} direction='column' spacing={2}>
                 <Grid container justify='flex-end' >
-                    <Grid item><Button className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
+                    <Grid item><Button variant='contained' className={classes.close} onClick={() => props.onModalChange()}>Close</Button></Grid>
                 </Grid>
                 <Grid item>
                     <TextField

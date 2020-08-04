@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '4px',
         color: '#fff',
     },
-    toolbar: theme.mixins.toolbar,
 }));
 
 const DashboardPage = (props) => {
@@ -88,9 +87,6 @@ const DashboardPage = (props) => {
         setPastIllnessRender(pastIllnessRender + 1);
     }
 
-    //Calculate Bar Height
-    const [barHeight, setBarHeight] = useState();
-
     const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const profile = useSelector(profileSelector);
     const classes = useStyles();
@@ -130,28 +126,18 @@ const DashboardPage = (props) => {
         setModalIllnessID(num);
     };
 
-    const calcBarHeight = (node) => {
-        setBarHeight(node.offsetHeight);
-    }
 
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                <TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {
+                <TopBar><Button color='primary' variant="contained" style={{textTransform: 'none', marginLeft: 'auto',}} onClick={() => {
                     newIllnessModal(true); setModal(true);
-                }}>New Illness</Button></TopBar>
-                <div className={classes.toolbar} />
+                }}>New Illness</Button>
+                </TopBar>
+                
                 {showModal ? decideModalType() : null }
 
-                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{marginTop: barHeight}}>
-                    <Grid item>
-                        <TopBar ref={(node) => calcBarHeight(node)}>
-                            <Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => {
-                                newIllnessModal(true); 
-                                setModal(true);
-                                }}>New Illness</Button>
-                        </TopBar>
-                    </Grid>
+                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
 
                     <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem', marginTop: '1rem', height: '80vmin'}}>
                         <Grid container direction='column' spacing={2}>

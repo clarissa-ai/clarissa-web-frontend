@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
     },
     container: {
-        paddingTop: '0.5rem',
         background: '#EBEFF2',
         minHeight: '100vh',
         height: '100%',
@@ -27,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 'auto',
         paddingBottom: '0.5rem',
     },
-    toolbar: theme.mixins.toolbar,
 }));
 
 const DashboardPage = (props) => {
@@ -37,6 +35,7 @@ const DashboardPage = (props) => {
     const [analysis, setAnalysis] = useState(undefined);
     const [render, setRender] = useState(0);
     const [showModal, setModal] = useState([false, {}]);
+    const [title, setTitle] = useState();
 
     const profile = useSelector(profileSelector);
 
@@ -70,6 +69,8 @@ const DashboardPage = (props) => {
             .then((res) => {
                 setSymptoms(res.illness.symptoms);
                 setAnalysis(res.illness.analysis);
+                setTitle(res.illness.title);
+                console.log(res.illness.title);
             },
             (error) => {
                 console.log(error);
@@ -87,11 +88,14 @@ const DashboardPage = (props) => {
                 <Fade in timeout={500}>
                     <div className={classes.container}>
                         <TopBar>
-                            <ExportIllnessButton/>
-                            <EndIllnessButton incrstate={() => incrstate()}/>
+                                <Typography variant='h5' style={{color: '#334D6E'}}>{title}</Typography>
+                                <div>
+                                    <ExportIllnessButton/>
+                                    <EndIllnessButton incrstate={() => incrstate()}/>
+                                </div>
                         </TopBar>
                         <div className={classes.toolbar} />
-                        <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
+                        <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{paddingTop: '1rem'}}>
                             <Grid item xs={12} md={9} xl={8}>
                                 <Grid container direction='column' spacing={2}>
                                     <Grid item className={classes.greetingsContainer}>
@@ -99,11 +103,11 @@ const DashboardPage = (props) => {
                                     </Grid>
                                     <Grid item style={{height: '0vmin'}}>
                                         <Grid container direction='row' spacing={2}>
-                                            <Grid item style={{height: '55vmin', width: '50%'}}>
+                                            <Grid item style={{height: '50vmin', width: '50%'}}>
                                                 <Typography className={classes.title}>Symptoms</Typography>
                                                 <SymptomTile symptoms={symptoms} setModal={setModal}/>
                                             </Grid>
-                                            <Grid item style={{height: '55vmin', width: '50%'}}>
+                                            <Grid item style={{height: '50vmin', width: '50%'}}>
                                                 <Typography className={classes.title}>Analysis</Typography>
                                                 <ActiveAnalysis analysis={analysis}/>
                                             </Grid>
