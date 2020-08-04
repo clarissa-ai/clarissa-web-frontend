@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Button, Grid, makeStyles, TextField, ThemeProvider} from '@material-ui/core';
+import {Button, Grid, makeStyles, TextField, ThemeProvider, CircularProgress} from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import {createMuiTheme} from '@material-ui/core/styles';
@@ -59,6 +59,7 @@ const IllnessModal = (props) => {
     const [title, setTitle] = React.useState(props.title);
     const [startDate, setStartDate] = React.useState(props.dateStart);
     const [endDate, setEndDate] = React.useState(props.dateEnd);
+    const [loader, setLoader] = React.useState(false);
 
 
     const handleStartDate = (date) => {
@@ -74,6 +75,7 @@ const IllnessModal = (props) => {
     const history = useHistory();
 
     const createIllness = () => {
+        setLoader(true);
         fetch(`${API_LINK}/api/dashboard/create_illness`, {
             method: 'GET',
             credentials: 'include',
@@ -127,6 +129,7 @@ const IllnessModal = (props) => {
     };
 
     const updateIllness = () => {
+        setLoader(true);
         const id = props.idNum;
         const payload = {
             'illness_id': id,
@@ -219,8 +222,9 @@ const IllnessModal = (props) => {
                     </ThemeProvider></Grid>
                 }
 
-                <Grid container justify='center'>
+                <Grid container justify='center' alignItems='flex-end' spacing={1}>
                     <Grid item><Button className={classes.button} onClick={props.newIllness? createIllness : updateIllness}>Save</Button></Grid>
+                    <Grid item>{loader ? <CircularProgress size='1rem'/> : null}</Grid>
                 </Grid>
             </Grid>
         </Grid>
