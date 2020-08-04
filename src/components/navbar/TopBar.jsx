@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, AppBar, Toolbar, makeStyles} from '@material-ui/core';
+import {AppBar, Toolbar, makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
