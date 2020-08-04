@@ -44,7 +44,6 @@ const PastIllnessPage = (props) => {
 
     const useStyles = makeStyles((theme) => ({
         container: {
-            paddingTop: '1rem',
             background: '#EBEFF2',
             height: '100vh',
             maxHeight: 'inherit',
@@ -55,7 +54,6 @@ const PastIllnessPage = (props) => {
         link: {
             color: '#000',
         },
-        toolbar: theme.mixins.toolbar,
     }));
 
 
@@ -64,9 +62,9 @@ const PastIllnessPage = (props) => {
     return (
         <Fade in timeout={500}>
             <div className={classes.container}>
-                <TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none'}} href = '/active-illness'>View Active Illness</Button></TopBar>
+                <TopBar><Button color = 'primary' variant='contained' style = {{textTransform: 'none', marginLeft: 'auto',}} href = '/active-illness'>View Active Illness</Button></TopBar>
                 <div className={classes.toolbar} />
-                <Grid container direction = 'row' spacing = {0} justify='center' alignItems='stretch'>
+                <Grid container direction = 'row' spacing = {0} justify='center' alignItems='stretch' style={{paddingTop: '1rem'}}>
                     <Grid item xs={12} md={7} l={7} xl={7}>
                         <Grid container direction='column'>
                             <Grid item>

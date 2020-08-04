@@ -4,17 +4,18 @@ import {Grid, AppBar, Toolbar, makeStyles} from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     container: {
         background: '#fff',
-        boxShadow: 'none',
+        paddingRight: '1rem',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 }));
 
 const TopBar = (props) => {
     const classes = useStyles();
-    return <AppBar className={classes.container}>
-        <Toolbar>
-            <Grid container justify='flex-end' spacing={2}>
-                <Grid item>{props.children}</Grid>
-            </Grid>
+    return <AppBar position='relative' style={{boxShadow: 'none'}}>
+        <Toolbar className={classes.container}>
+               {props.children}
         </Toolbar>
     </AppBar>;
 };
