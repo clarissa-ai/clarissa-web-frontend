@@ -1,21 +1,22 @@
 import React from 'react';
-import {Grid, AppBar, Toolbar, makeStyles} from '@material-ui/core';
+import {AppBar, Toolbar, makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         background: '#fff',
-        boxShadow: 'none',
+        paddingRight: '1rem',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 }));
 
 const TopBar = (props) => {
     const classes = useStyles();
-    return <AppBar className={classes.container}>
-        <Toolbar>
-            <Grid container justify='flex-end'>
-            {props.children}
-            </Grid>
+    return <AppBar position='relative' style={{boxShadow: 'none'}}>
+        <Toolbar className={classes.container}>
+               {props.children}
         </Toolbar>
-    </AppBar>
-}
+    </AppBar>;
+};
 export default TopBar;

@@ -3,11 +3,11 @@ import {makeStyles, Card, CardContent} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        borderRadius: '4px',
-        background: '#fff',
-        padding: '1rem',
+        'borderRadius': '4px',
+        'background': '#fff',
+        'padding': '1rem',
         'overflow': 'scroll',
-        height: '80vmin',
+        'height': '80vmin',
         '&::-webkit-scrollbar': {
             width: '0.3em',
         },
@@ -31,15 +31,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IllnessDataCard = (props) => {
-
     const classes = useStyles();
 
     return (
         <Card className={classes.wrapper}>
             <CardContent className={classes.container}>
                 {props.children}
-            </CardContent> 
+            </CardContent>
         </Card>
     );
-}
+};
 export default IllnessDataCard;

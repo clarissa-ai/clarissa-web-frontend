@@ -3,7 +3,7 @@ import {makeStyles, Grid, Card, CardContent, Typography, Box} from '@material-ui
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        height: '80vmin',
+        'height': '80vmin',
         'overflow': 'scroll',
         '&::-webkit-scrollbar': {
             width: '0.3em',
@@ -37,7 +37,7 @@ const PastIllnessCard = (props) => {
     const classes = useStyles();
     return <Card className={classes.wrapper}>
         <CardContent className={classes.container}>
-            <div className = {classes.topContainer}> 
+            <div className = {classes.topContainer}>
                 <Typography variant='h6'><Box fontWeight='bold'> Past Illlnesses</Box></Typography>
                 <Typography variant='subtitle2' style = {{opacity: '.7'}}>View your logged illnesses</Typography>
             </div>
@@ -46,6 +46,6 @@ const PastIllnessCard = (props) => {
                 {props.children}
             </Grid>
         </CardContent>
-    </Card>
-}
+    </Card>;
+};
 export default PastIllnessCard;

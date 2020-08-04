@@ -1,6 +1,5 @@
 import React from 'react';
 import {Grid, Typography, makeStyles, Button, Box, Link} from '@material-ui/core';
-import {Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -33,11 +32,23 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
     },
     linkActive: {
-        color: '#fff'
+        color: '#fff',
     },
     link: {
         color: '#000',
-    }
+    },
+    title: {
+        width: '8rem',
+    },
+    date: {
+        width: '11rem',
+    },
+    active: {
+        width: '4rem',
+    },
+    symptoms: {
+        width: '8rem',
+    },
 }));
 
 const IllnessCard = (props) => {
@@ -46,21 +57,33 @@ const IllnessCard = (props) => {
     const parseDate = (dateString) => {
         const date = new Date(dateString);
         return date.getMonth()+1 +'/'+ date.getDate() +'/'+date.getFullYear();
-    }
+    };
 
-    return <Grid container direction='row' alignItems='center' justify='space-evenly' className={props.status? classes.activeContainer : classes.container}>
-        {/* <Grid item><Typography><Box fontWeight='bold'>{props.title}</Box></Typography></Grid> */}
-        <Grid item><Typography><Box fontWeight='bold'>{parseDate(props.dateStart)} - {parseDate(props.dateEndOrUpdated)}</Box></Typography></Grid>
+    return <Grid container direction='row' alignItems='center' justify='space-around' className={props.status ? classes.activeContainer : classes.container}>
+        <Grid item><Typography><Box fontWeight='bold' textOverflow="ellipsis" className={classes.title}>{props.title}</Box></Typography></Grid>
+        <Grid item><Typography><Box fontWeight='bold' className={classes.date}>{parseDate(props.dateStart)} - {parseDate(props.dateEndOrUpdated)}</Box></Typography></Grid>
         <Grid item>
-            <Typography><Box fontWeight='bold'>{props.status === true ? 'Active' : 'Closed'}</Box></Typography>
+            <Typography><Box fontWeight='bold' className={classes.active}>{props.status === true ? 'Active' : 'Closed'}</Box></Typography>
         </Grid>
-        <Grid item><Typography><Box fontWeight='bold'>{props.symptomcount} Symptoms</Box></Typography></Grid>
+        <Grid item><Typography><Box fontWeight='bold' className={classes.symptoms}>{props.symptomcount} Symptoms</Box></Typography></Grid>
         <Grid item>
-            <Button variant='outlined' className={props.status? classes.activeButton : classes.button}>
-                <Link className={props.status? classes.linkActive : classes.link} component={RouterLink} to={props.status? '/active-illness' : '/past-illnesses'}><Typography variant='subtitle2'><Box fontWeight='bold'>View</Box></Typography></Link>
+            <Button
+                variant='outlined'
+                className={props.status? classes.activeButton : classes.button}
+                href={props.status? '/active-illness' : '/past-illnesses'}>
+                View
             </Button>
         </Grid>
-    </Grid>
-}
+        <Grid item>
+            <Link className={props.status? classes.linkActive : classes.link}
+                onClick={() => {
+                    props.newIllnessFunction(false);
+                    props.modalFunction();
+                    props.setModalInfo(props.title, props.dateStart, props.dateEndOrUpdated);
+                    props.handleModalIllnessID(props.idNum);
+                }}>Edit</Link>
+        </Grid>
+    </Grid>;
+};
 
 export default IllnessCard;

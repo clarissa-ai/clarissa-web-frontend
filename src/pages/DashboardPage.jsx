@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {profileSelector} from 'redux/selectors';
-// import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
 import {Grid, Fade, Button, makeStyles, Typography, Box} from '@material-ui/core';
 import StatsCard from 'components/dashboard/StatsCard';
 import RecentIllness from 'components/dashboard/RecentIllness';
@@ -10,14 +9,12 @@ import TakeSurveyCard from 'components/dashboard/TakeSurveyCard';
 import TopBar from 'components/navbar/TopBar';
 import IllnessCard from 'components/dashboard/IllnessCard';
 import SurveyCard from 'components/dashboard/SurveyCard';
-import {useHistory} from 'react-router-dom';
-
+import IllnessModal from 'components/dashboard/IllnessModal';
 const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
     },
     container: {
-        paddingTop: '6rem',
         background: '#EBEFF2',
         height: '100vh',
     },
@@ -31,16 +28,68 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DashboardPage = (props) => {
-    const classes = useStyles();
-    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
+    // Functions here declared at the top in order to be used for modal state
+    const handleModal = () => {
+        setModal((showModal) => !showModal);
+    };
+
+    const setExistingIllness = (title, startDate, endDate) => {
+        setModalTitle(title);
+        setModalStartDate(startDate);
+        setModalEndDate(endDate);
+    };
+
+    const decideModalType = () => {
+        if (isModalForNewIllness) {
+            return <IllnessModal
+            title={modalTitle} 
+            dateStart={modalStartDate} 
+            dateEnd={modalEndDate}
+            newIllness={true} 
+            onModalChange={handleModal}
+            setModalInfo={setExistingIllness}
+            idNum={modalIllnessID}
+            rerenderPastIllness={rerenderPastIllness}/>
+        } else {
+            return <IllnessModal
+            title={modalTitle} 
+            dateStart={modalStartDate} 
+            dateEnd={modalEndDate}
+            newIllness={false} 
+            onModalChange={handleModal}
+            setModalInfo={setExistingIllness}
+            idNum={modalIllnessID}
+            rerenderPastIllness={rerenderPastIllness}/>
+        }
+    };
+
+    // Modal Fields for Existing Info
+    const [modalTitle, setModalTitle] = useState();
+    const [modalStartDate, setModalStartDate] = useState();
+    const [modalEndDate, setModalEndDate] = useState();
+    const [modalIllnessID, setModalIllnessID] = useState();
+
+    // Modal State
+    const [showModal, setModal] = useState(false);
+    const [isModalForNewIllness, setModalType] = useState(true);
+
+    // Info State
     const [dashData, setDash] = useState([]);
     const [activeSurveys, setActiveSurveys] = useState([]);
     const [completedSurveys, setCompletedSurveys] = useState([]);
     const [recentIllness, setrecentIllness] = useState([]);
     const [userName, setName] = useState('');
-    const history = useHistory();
 
+    // Update Past Illness
+    const [pastIllnessRender, setPastIllnessRender] = useState(1);
+
+    const rerenderPastIllness = () => {
+        setPastIllnessRender(pastIllnessRender + 1);
+    }
+
+    const apiLink = process.env.REACT_APP_ENDPOINT_BASE;
     const profile = useSelector(profileSelector);
+    const classes = useStyles();
 
     useEffect(()=> {
         if (!profile.authenticated) return;
@@ -63,34 +112,34 @@ const DashboardPage = (props) => {
 
         const userInfo = profile.userInfo;
         setName(userInfo.first_name);
-    }, [apiLink, profile]);
+    }, [apiLink, profile, modalTitle, pastIllnessRender]);
 
-    const createNewIllness = (event) => {
-        fetch(`${apiLink}/api/dashboard/create_illness`, {
-            method: 'GET',
-            credentials: 'include',
-        }).then((response) => {
-            if (!response.ok) {
-                console.log('Internal Error. Please contact support.');
-                return;
-            }
-            response.json().then((data) => {
-                const {status} = data;
-                if (status === 'success') {
-                    history.push('/active-illness');
-                }
-            });
-        });
+    const newIllnessModal = (condition) => {
+        if (!condition) { // Existing Illness Modal
+            setModalType(false);
+        } else { // Create new Illness Modal
+            setModalType(true);
+        }
     };
 
-    return (
-        <Fade in timeout={1000}>
-            <div className={classes.container}>
-                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch' style={{height: '70vh'}}>
-                    <Grid item><TopBar><Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={createNewIllness}>New Illness</Button></TopBar></Grid>
-                    {/* <Grid item><ResponsiveDrawer/></Grid> */}
+    const handleModalIllnessID = (num) => {
+        setModalIllnessID(num);
+    };
 
-                    <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem'}}>
+
+    return (
+        <Fade in timeout={500}>
+            <div className={classes.container}>
+                <TopBar><Button color='primary' variant="contained" style={{textTransform: 'none', marginLeft: 'auto',}} onClick={() => {
+                    newIllnessModal(true); setModal(true);
+                }}>New Illness</Button>
+                </TopBar>
+                
+                {showModal ? decideModalType() : null }
+
+                <Grid container direction='row' spacing={0} justify='center' alignItems='stretch' alignContent='stretch'>
+
+                    <Grid item xs={12} md={6} lg={7} xl={7} style={{marginLeft: '1rem', marginTop: '1rem', height: '80vmin'}}>
                         <Grid container direction='column' spacing={2}>
                             <Grid item>
                                 <div className={classes.greetingsContainer}>
@@ -101,19 +150,32 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <RecentIllness >
                                     {recentIllness.map((illness, index) => {
-                                        return <Grid item><IllnessCard key={index} title='' dateStart={illness.created_on} dateEndOrUpdated={illness.updated_on} status={illness.active} symptomcount={illness.symptom_count} /></Grid>
+                                        return <Grid item key={index}>
+                                            <IllnessCard
+                                                idNum={illness.id}
+                                                handleModalIllnessID={handleModalIllnessID}
+                                                newIllnessFunction={newIllnessModal}
+                                                modalFunction={handleModal}
+                                                setModalInfo={setExistingIllness}
+                                                key={index}
+                                                title={illness.title}
+                                                dateStart={illness.created_on}
+                                                dateEndOrUpdated={illness.updated_on}
+                                                status={illness.active}
+                                                symptomcount={illness.symptom_count}
+                                            /></Grid>;
                                     })}
                                 </RecentIllness>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={5} lg={4} xl={4} style={{marginLeft: '1rem', height: '70vh'}}>
+                    <Grid item xs={12} md={5} lg={4} xl={4} style={{marginLeft: '1rem', height: '70vh', marginTop: '1rem'}}>
                         <Grid container direction='column' spacing={2}>
                             <Grid item><StatsCard illnesscount={dashData.illness_count} symptomcount={dashData.symptom_count} visitcount={dashData.response_count}/></Grid>
                             <Grid item>
                                 <CompletedSurveys>
                                     {completedSurveys.map((completed_surveys, index) => {
-                                        return <Grid item><SurveyCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>
+                                        return <Grid item key={index}><SurveyCard key={index} title={completed_surveys.title} status={null} link={`/survey/${completed_surveys.id}`}/></Grid>;
                                     })}
                                 </CompletedSurveys>
                             </Grid>
@@ -121,7 +183,7 @@ const DashboardPage = (props) => {
                             <Grid item>
                                 <TakeSurveyCard>
                                     {activeSurveys.map((active_surveys, index) => {
-                                        return <Grid item key={index}><SurveyCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>
+                                        return <Grid item key={index}><SurveyCard title={active_surveys.title} link={`/survey/${active_surveys.id}`}/></Grid>;
                                     })}
                                 </TakeSurveyCard>
                             </Grid>

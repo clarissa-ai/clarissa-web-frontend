@@ -18,6 +18,6 @@ const TakeSurveyCard = (props) => {
     return <Grid container className={classes.container} direction='column'>
         <Grid item><Typography variant='h6'><Box fontWeight='bold' className={classes.label}>Take a Survey</Box></Typography></Grid>
         <Grid item>{props.children}</Grid>
-    </Grid>
-}
+    </Grid>;
+};
 export default TakeSurveyCard;

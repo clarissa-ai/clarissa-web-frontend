@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.08)',
         height: '100%',
         backgroundColor: '#FFF',
+        margin: '1rem 0',
     },
     textInput: {
         color: '#AEAEAE',
@@ -89,11 +90,12 @@ const SymptomLog = (props) => {
     const [timeout, sTimeout] = useState(null);
 
     const handleChange = (event) => {
-        setText(event.target.value);
+        const txt = event.target.value;
+        setText(txt);
         clearTimeout(timeout);
         sTimeout(setTimeout(() => {
             const result = {
-                'text': text,
+                'text': txt,
             };
             fetch(`${apiLink}/api/illness/check_symptoms`, {
                 method: 'POST',
@@ -173,34 +175,36 @@ const SymptomLog = (props) => {
     };
 
     const onSubmit = () => {
-        if (isLoaded) {
-            setIsLoaded(false);
-        }
-        let i = 0;
-        const symptoms = [];
-        while (i < illness.length) {
-            if (selected[i]) {
-                symptoms.push(illness[i]);
+        if (text !== '') {
+            if (isLoaded) {
+                setIsLoaded(false);
             }
-            i++;
+            let i = 0;
+            const symptoms = [];
+            while (i < illness.length) {
+                if (selected[i]) {
+                    symptoms.push(illness[i]);
+                }
+                i++;
+            }
+            fetch(`${apiLink}/api/illness/save_symptoms`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({symptoms}),
+            }).then((res) => {
+                res.json();
+            }).then(() => {
+                props.incrstate();
+                setIsLoaded(true);
+            });
+            setIllness([]);
+            setSelected([]);
+            setText('');
+            sTimeout(null);
         }
-        fetch(`${apiLink}/api/illness/save_symptoms`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({symptoms}),
-        }).then((res) => {
-            res.json();
-        }).then(() => {
-            props.incrstate();
-            setIsLoaded(true);
-        });
-        setIllness([]);
-        setSelected([]);
-        setText('');
-        sTimeout(null);
     };
 
     const displayIllnessName = (name) => {
@@ -223,50 +227,60 @@ const SymptomLog = (props) => {
         return <div>{error.message}</div>;
     } else {
         return (
-            <Card className={classes.container}>
-                <CardContent className={classes.content}>
-                    {/* Symptom Input */}
-                    <InputBase
-                        className={classes.textInput}
-                        multiline
-                        rows={2}
-                        placeholder="I have a fever, and a cough. I have also been feeling nauseous lately."
-                        fullWidth
-                        margin='none'
-                        value={text}
-                        onChange={handleChange}
-                    />
-                    <Divider/>
-                    <Grid><Typography style={{paddingTop: '10px'}}>Symptoms Recognized:</Typography></Grid>
-                    <Grid container spacing={2}>
-                        { illness.map((illness, index) => {
-                            return (
-                                <Grid item key={index}>
-                                    <Button classes={{root: classes.rootButton, label: classes.labelButton}} onClick={() => onButtonClick(index)}>
-                                        <Checkbox
-                                            checked={selected[index]}
-                                            className={classes.root}
-                                            disableRipple
-                                            color="default"
-                                            checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-                                            icon={<span className={classes.icon} />}
-                                            inputProps={{'aria-label': 'decorative checkbox'}}
-                                            {...props}
-                                        />
-                                        {displayIllnessName(illness.common_name)}
-                                    </Button>
+            <Grid container direction='column'>
+                <Grid item>
+                <Typography variant='subtitle1' className={classes.title}>
+                    Tell Clarissa how you are feeling.
+                </Typography>
+                </Grid>
+
+                <Grid item>
+                        <Card className={classes.container}>
+                        <CardContent className={classes.content}>
+                            {/* Symptom Input */}
+                            <InputBase
+                                className={classes.textInput}
+                                multiline
+                                rows={2}
+                                placeholder="I have a fever, and a cough. I have also been feeling nauseous lately."
+                                fullWidth
+                                margin='none'
+                                value={text}
+                                onChange={handleChange}
+                            />
+                            <Divider/>
+                            <Grid><Typography style={{paddingTop: '10px'}}>Symptoms Recognized:</Typography></Grid>
+                            <Grid container spacing={2}>
+                                { illness.map((illness, index) => {
+                                    return (
+                                        <Grid item key={index}>
+                                            <Button classes={{root: classes.rootButton, label: classes.labelButton}} onClick={() => onButtonClick(index)}>
+                                                <Checkbox
+                                                    checked={selected[index]}
+                                                    className={classes.root}
+                                                    disableRipple
+                                                    color="default"
+                                                    checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+                                                    icon={<span className={classes.icon} />}
+                                                    inputProps={{'aria-label': 'decorative checkbox'}}
+                                                    {...props}
+                                                />
+                                                {displayIllnessName(illness.common_name)}
+                                            </Button>
+                                        </Grid>
+                                    );
+                                })}
+                            </Grid>
+                            <Grid container justify='flex-end' style={{paddingTop: '10px'}}>
+                                {!isLoaded && <CircularProgress style={{color: '#47C594', margin: '5px'}} size={24}/>}
+                                <Grid item>
+                                    <Button size='small' className={classes.submitBtn} onClick={onSubmit} disabled={!isLoaded}>Save</Button>
                                 </Grid>
-                            );
-                        })}
-                    </Grid>
-                    <Grid container justify='flex-end' style={{paddingTop: '10px'}}>
-                        {!isLoaded && <CircularProgress style={{color: '#47C594', margin: '5px'}} size={24}/>}
-                        <Grid item>
-                            <Button size='small' className={classes.submitBtn} onClick={onSubmit} disabled={!isLoaded}>Save</Button>
-                        </Grid>
-                    </Grid>
-                </CardContent>
-            </Card>
+                            </Grid>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            </Grid>
         );
     }
 };

@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useSelector} from 'react-redux';
-import {profileSelector} from 'redux/selectors';
 import MainSurvey from 'components/surveycomponents/MainSurvey';
-import {Fade, Grid, Typography, Tab, makeStyles, Box, Tabs, Button} from '@material-ui/core';
+import {Fade, Grid, Typography, Tab, makeStyles, Box, Tabs} from '@material-ui/core';
 import ActiveSurveys from 'components/surveycomponents/ActiveSurveys';
 import ResultCard from 'components/surveycomponents/ResultCard';
 // import ResponsiveDrawer from 'components/navbar/ResponsiveDrawer';
-import ScreeningStart from 'components/misc/survey/ScreeningStart';
 import ResultModal from 'components/surveycomponents/ResultModal';
-import TopBar from 'components/navbar/TopBar';
 const useStyles = makeStyles((theme) => ({
     wrapper: {
         position: 'relative',
@@ -55,10 +51,7 @@ TabPanel.propTypes = {
 const SurveysPage = (props) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const [showSurvey, setShowSurvey] = React.useState([false, 0]);
     const [showModal, setModal] = React.useState([false, {}]);
-
-    const profile = useSelector(profileSelector);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -73,34 +66,21 @@ const SurveysPage = (props) => {
                 null}
             <Fade in timeout={1000}>
                 <Grid container direction='row' justify='center'>
-                    {/* <Grid item><ResponsiveDrawer/></Grid> */}
                     <Grid item className={classes.content} xs={12} md={9} xl={10}>
-                        {showSurvey ? (showSurvey[0] ?
-                            <div>
-                                <Grid item>
-                                    <TopBar>
-                                        <Button color='primary' variant="contained" style={{textTransform: 'none'}} onClick={() => setShowSurvey([false, 0])}>
-                                            Close
-                                        </Button>
-                                    </TopBar>
-                                    <ScreeningStart id={showSurvey[1]} email={profile.userInfo.email}/>
-                                </Grid>
-                            </div>:
-                            null) : null}
-                        {(!showSurvey[0]) ?
-                            <div>
-                                <Typography variant='h5' style={{padding: '2rem 0'}}><Box fontWeight='bold'>Featured</Box></Typography>
-                                <MainSurvey surveyClick={setShowSurvey}/>
-                            </div> : null}
-                        { (!showSurvey[0]) ?
-                            <Tabs value={value} onChange={handleChange} classes={{indicator: classes.tabBorder}}>
-                                <Tab label={<p className={classes.tabs}>Active Surveys</p>}/>
-                                <Tab label={<p className={classes.tabs}>Survey Results</p>}/>
-                            </Tabs> : null }
-                        { (!showSurvey[0]) ?
-                            <TabPanel value={value} index={0}>
-                                <ActiveSurveys surveyClick={setShowSurvey}/>
-                            </TabPanel> : null }
+
+                        <div>
+                            <Typography variant='h5' style={{padding: '2rem 0'}}><Box fontWeight='bold'>Featured</Box></Typography>
+                            <MainSurvey/>
+                        </div>
+
+                        <Tabs value={value} onChange={handleChange} classes={{indicator: classes.tabBorder}}>
+                            <Tab label={<p className={classes.tabs}>Active Surveys</p>}/>
+                            <Tab label={<p className={classes.tabs}>Survey Results</p>}/>
+                        </Tabs>
+
+                        <TabPanel value={value} index={0}>
+                            <ActiveSurveys/>
+                        </TabPanel>
 
                         <TabPanel value={value} index={1}>
                             <ResultCard setModal={setModal}/>
